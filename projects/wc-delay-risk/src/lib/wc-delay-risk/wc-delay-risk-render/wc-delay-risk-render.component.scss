@@ -1,0 +1,39 @@
+$color-value: #3d3d3d;
+.delay-risk {
+  margin-top: 40px;
+
+  .results {
+    display: block;
+  }
+
+  .delay-risk {
+    margin-top: 5px;
+  }
+
+  .divider {
+    margin-top: 10px;
+  }
+
+  .route {
+    color: #222;
+    font-weight: bold;
+  }
+
+  .duration {
+    color: $color-value;
+  }
+
+  .label {
+    color: $color-value;
+    margin-right: 5px;
+  }
+
+  .value {
+    color: $color-value;
+  }
+
+  .icon {
+    font-size: 1.5em;
+    color: $color-value;
+  }
+}

@@ -1,0 +1,33 @@
+<h2>Enter Weather Cloud Information</h2>
+
+<div *ngIf="WeatherCloudConfig">
+  <form [formGroup]="WCSolutionManageForm">
+    <mat-form-field class="mat-form-field-flex">
+      <input matInput placeholder="WC API Key" name="APIKey" formControlName="APIKey" />
+      <mat-hint *ngIf="WCSolutionManageForm.get('APIKey').hasError('required')">Enter an API Key</mat-hint>
+      <mat-error *ngIf="WCSolutionManageForm.get('APIKey').hasError('required')">APIKey is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-flex">
+      <input matInput placeholder="LBS Key" name="LBSKey" formControlName="LBSKey" />
+      <mat-hint *ngIf="WCSolutionManageForm.get('LBSKey').hasError('required')">Enter an LBS Key</mat-hint>
+      <mat-error *ngIf="WCSolutionManageForm.get('LBSKey').hasError('required')">LBSKey is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-flex">
+      <input matInput placeholder="Server URL" name="ServerURL" formControlName="ServerURL" />
+      <mat-hint *ngIf="WCSolutionManageForm.get('ServerURL').hasError('required')">Enter a server URL</mat-hint>
+      <mat-error *ngIf="WCSolutionManageForm.get('ServerURL').hasError('required')">Server URL is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-flex">
+      <input matInput placeholder="Variable Name" name="VariableNames" formControlName="VariableNames" />
+      <mat-hint *ngIf="WCSolutionManageForm.get('VariableNames').hasError('required')">Enter variable names</mat-hint>
+      <mat-error *ngIf="WCSolutionManageForm.get('VariableNames').hasError('required')">Variable names are required</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="Save()" [disabled]="!WCSolutionManageForm.valid">Save</button>
+  </form>
+</div>
+
+<mat-spinner *ngIf="Loading.Value"></mat-spinner>

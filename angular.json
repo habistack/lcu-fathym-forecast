@@ -1,0 +1,389 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "common": {
+      "root": "projects/common",
+      "sourceRoot": "projects/common/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/common/tsconfig.lib.json",
+            "project": "projects/common/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/common/src/test.ts",
+            "tsConfig": "projects/common/tsconfig.spec.json",
+            "karmaConfig": "projects/common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/common/tsconfig.lib.json",
+              "projects/common/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "departure-table": {
+      "root": "projects/departure-table",
+      "sourceRoot": "projects/departure-table/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/departure-table/tsconfig.lib.json",
+            "project": "projects/departure-table/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/departure-table/src/test.ts",
+            "tsConfig": "projects/departure-table/tsconfig.spec.json",
+            "karmaConfig": "projects/departure-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/departure-table/tsconfig.lib.json",
+              "projects/departure-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "weather-cloud-solution": {
+      "root": "projects/weather-cloud-solution",
+      "sourceRoot": "projects/weather-cloud-solution/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/weather-cloud-solution/tsconfig.lib.json",
+            "project": "projects/weather-cloud-solution/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/weather-cloud-solution/src/test.ts",
+            "tsConfig": "projects/weather-cloud-solution/tsconfig.spec.json",
+            "karmaConfig": "projects/weather-cloud-solution/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/weather-cloud-solution/tsconfig.lib.json",
+              "projects/weather-cloud-solution/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wc-search-form": {
+      "root": "projects/wc-search-form",
+      "sourceRoot": "projects/wc-search-form/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wc-search-form/tsconfig.lib.json",
+            "project": "projects/wc-search-form/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wc-search-form/src/test.ts",
+            "tsConfig": "projects/wc-search-form/tsconfig.spec.json",
+            "karmaConfig": "projects/wc-search-form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wc-search-form/tsconfig.lib.json",
+              "projects/wc-search-form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wc-route-map": {
+      "root": "projects/wc-route-map",
+      "sourceRoot": "projects/wc-route-map/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wc-route-map/tsconfig.lib.json",
+            "project": "projects/wc-route-map/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wc-route-map/src/test.ts",
+            "tsConfig": "projects/wc-route-map/tsconfig.spec.json",
+            "karmaConfig": "projects/wc-route-map/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wc-route-map/tsconfig.lib.json",
+              "projects/wc-route-map/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wc-demo-forge": {
+      "root": "projects/wc-demo-forge/",
+      "sourceRoot": "projects/wc-demo-forge/src",
+      "projectType": "application",
+      "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "C:\\Fathym\\Git\\Apps\\Forge\\Fathym.Forge.Web\\wwwroot\\marketing",
+            "index": "projects/wc-demo-forge/src/index.html",
+            "main": "projects/wc-demo-forge/src/main.ts",
+            "polyfills": "projects/wc-demo-forge/src/polyfills.ts",
+            "tsConfig": "projects/wc-demo-forge/tsconfig.app.json",
+            "assets": [
+              "projects/wc-demo-forge/src/favicon.ico",
+              "projects/wc-demo-forge/src/assets",
+              {
+                "glob": "package.json",
+                "input": "./",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/wc-demo-forge/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/wc-demo-forge/src/environments/environment.ts",
+                  "with": "projects/wc-demo-forge/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "wc-demo-forge:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "wc-demo-forge:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wc-demo-forge:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wc-demo-forge/src/test.ts",
+            "polyfills": "projects/wc-demo-forge/src/polyfills.ts",
+            "tsConfig": "projects/wc-demo-forge/tsconfig.spec.json",
+            "karmaConfig": "projects/wc-demo-forge/karma.conf.js",
+            "styles": [
+              "projects/wc-demo-forge/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/wc-demo-forge/src/favicon.ico",
+              "projects/wc-demo-forge/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wc-demo-forge/tsconfig.app.json",
+              "projects/wc-demo-forge/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wc-demo-forge-e2e": {
+      "root": "projects/wc-demo-forge-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/wc-demo-forge-e2e/protractor.conf.js",
+            "devServerTarget": "wc-demo-forge:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "wc-demo-forge:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/wc-demo-forge-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wc-delay-risk": {
+      "root": "projects/wc-delay-risk",
+      "sourceRoot": "projects/wc-delay-risk/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wc-delay-risk/tsconfig.lib.json",
+            "project": "projects/wc-delay-risk/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wc-delay-risk/src/test.ts",
+            "tsConfig": "projects/wc-delay-risk/tsconfig.spec.json",
+            "karmaConfig": "projects/wc-delay-risk/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wc-delay-risk/tsconfig.lib.json",
+              "projects/wc-delay-risk/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wc-forecast-plots": {
+      "root": "projects/wc-forecast-plots",
+      "sourceRoot": "projects/wc-forecast-plots/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wc-forecast-plots/tsconfig.lib.json",
+            "project": "projects/wc-forecast-plots/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wc-forecast-plots/src/test.ts",
+            "tsConfig": "projects/wc-forecast-plots/tsconfig.spec.json",
+            "karmaConfig": "projects/wc-forecast-plots/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wc-forecast-plots/tsconfig.lib.json",
+              "projects/wc-forecast-plots/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "common"
+}

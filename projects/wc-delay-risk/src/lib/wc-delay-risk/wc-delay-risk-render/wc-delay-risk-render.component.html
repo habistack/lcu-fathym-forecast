@@ -1,0 +1,21 @@
+<div *ngIf="RouteData && RouteData.length > 0" class="delay-risk">
+  <div *ngFor="let route of RouteData; index as i">
+    <mat-card class="divider">
+    <div class="results">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                <i class="fa fa-road icon"></i>
+                <span class="route">Route {{ i + 1 }}</span>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+              <i class="fa fa-clock-o icon"></i>
+              <span class="duration">{{ route.duration }}</span>
+            </div>
+        </div>
+        <div fxLayout="row" class="delay-risk">
+          <span class="label">Delay Risk: </span> <span class="value">{{ (StringToNumber(route.summary_delay_risk) | number : '1.2-2') || 'no data' }}</span>
+        </div>
+    </div>
+  </mat-card>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="map-container">
+    <i *ngIf="ShowIndicatorIcon" class="fa fa-pencil-square-o fa-3x type-indicator-icon" aria-hidden="true"></i>
+    <mat-progress-bar mode="indeterminate" *ngIf="IsLoading || !MapService.isLoaded"></mat-progress-bar>
+  <!-- <div class="map-overlay-select row">
+    <div ngbDropdown class="d-inline-block col-md-3">
+      <button class="btn btn-outline-primary" id="imageVarDropdown" ngbDropdownToggle>Select Image Type</button>
+      <div ngbDropdownMenu aria-labelledby="imageVarDropdown">
+	<button class="dropdown-item" *ngFor="let varName of imageVarNames" (click)="selectImage(varName)">{{varName}}</button>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <p>{{selectedValidTime}}</p>
+    </div>
+    <div class="col-md-8">
+      <mat-slider #imageSlider min="0" max="{{imageValidTimes.length}}" step="1"></mat-slider>
+    </div>
+  </div> -->
+  <div *ngIf="Config && MapService.isLoaded" fxFill>
+    <am-map
+      id="map"
+      #map
+	    [initialConfig]="Config"
+	    [_id]="'id'"
+	    (onMapClick)="MapClicked($event)"
+	    (loaded)="MapLoaded($event)"
+	    >
+    </am-map>
+  </div>
+</div>

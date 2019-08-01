@@ -1,0 +1,17 @@
+<form>
+  <mat-form-field class="mat-form-field-flex">
+    <input matInput placeholder="Origin" name="origin" [(ngModel)]="Details.Origin">
+  </mat-form-field>
+
+  <mat-form-field class="mat-form-field-flex">
+    <input matInput placeholder="Destination" name="destination" [(ngModel)]="Details.Destination">
+  </mat-form-field>
+
+  <mat-form-field class="mat-form-field-flex">
+    <input matInput placeholder="Departure Time" name="departTime" [(ngModel)]="Details.DepartureTime">
+  </mat-form-field>
+
+  <div class="push-out">
+    <mat-slide-toggle name="reactToSearch" [(ngModel)]="Details.ReactToSearch">React to Search?</mat-slide-toggle>
+  </div>
+</form>
