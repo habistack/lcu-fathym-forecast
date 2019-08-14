@@ -1,70 +1,34 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "skipLibCheck": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "@weather-cloud/common": [
-        "dist/common"
-      ],
-      "@weather-cloud/common/*": [
-        "dist/common/*"
-      ],
-      "@weather-cloud/lcu-el-departure-table": [
-        "dist/departure-table"
-      ],
-      "@weather-cloud/lcu-el-departure-table/*": [
-        "dist/departure-table/*"
-      ],
-      "@weather-cloud/lcu-sln-weather-cloud": [
-        "dist/weather-cloud-solution"
-      ],
-      "@weather-cloud/lcu-sln-weather-cloud/*": [
-        "dist/weather-cloud-solution/*"
-      ],
-      "@weather-cloud/lcu-el-wc-search-form": [
-        "dist/wc-search-form"
-      ],
-      "@weather-cloud/lcu-el-wc-search-form/*": [
-        "dist/wc-search-form/*"
-      ],
-      "@weather-cloud/lcu-el-wc-route-map": [
-        "dist/wc-route-map"
-      ],
-      "@weather-cloud/lcu-el-wc-route-map/*": [
-        "dist/wc-route-map/*"
-      ],
-      "@weather-cloud/lcu-el-wc-delay-risk": [
-        "dist/wc-delay-risk"
-      ],
-      "@weather-cloud/lcu-el-wc-delay-risk/*": [
-        "dist/wc-delay-risk/*"
-      ],
-      "@weather-cloud/lcu-el-wc-forecast-plots": [
-        "dist/wc-forecast-plots"
-      ],
-      "@weather-cloud/lcu-el-wc-forecast-plots/*": [
-        "dist/wc-forecast-plots/*"
-      ],
-      "@angular/*": [
-        "node_modules/@angular/*"
-      ]
-    }
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2015",
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"lib": [
+			"es2018",
+			"dom"
+		],
+		"paths": {
+			"@lowcodeunit/lcu-fathym-forecast-common": [
+				"dist/common"
+			],
+			"@lowcodeunit/lcu-fathym-forecast-common/*": [
+				"dist/common/*"
+			]
+		}
+	},
+	"angularCompilerOptions": {
+		"fullTemplateTypeCheck": true,
+		"strictInjectionParameters": true
+	}
 }
