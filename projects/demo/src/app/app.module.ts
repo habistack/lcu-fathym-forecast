@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataGridModule } from '@lowcodeunit/data-grid';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,8 @@ import { DashboardComponent } from './controls/dashboard/dashboard.component';
 import { LoggedInUserComponent } from './controls/logged-in-user/logged-in-user.component';
 import { DashboardAdminComponent } from './controls/dashboard-admin/dashboard-admin.component';
 import { DashboardNonAdminComponent } from './controls/dashboard-non-admin/dashboard-non-admin.component';
+import { DepartureTableComponent } from 'projects/common/src/lib/departure-table/departure-table.component';
+
 
 @NgModule({
   declarations: [
@@ -43,11 +46,13 @@ import { DashboardNonAdminComponent } from './controls/dashboard-non-admin/dashb
     DashboardComponent,
     LoggedInUserComponent,
     DashboardAdminComponent,
-    DashboardNonAdminComponent
+    DashboardNonAdminComponent,
+    DepartureTableComponent
   ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
+    DataGridModule,
     FlexLayoutModule,
     FathymSharedModule,
     MaterialModule,
