@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DataGridConfig, ColumnDefinition, DataGridFeatures } from '@lowcodeunit/data-grid';
+import { Component, OnInit, Injector } from '@angular/core';
+import { DataGridConfig, ColumnDefinition, DataGridFeatures, PipeConstants } from '@lowcodeunit/data-grid';
+import { WeatherCloudService } from '../services/departure-table.service';
+import { WeatherCloudConditionIcons } from '../utils/weather-conditions-icons.utils'
 
 @Component({
   selector: 'lcu-departure-table',
@@ -36,6 +38,7 @@ export class DepartureTableComponent implements OnInit {
    this._gridFeatures = val;
  }
  
+  protected apiKey: string = 'fathym';
    /**
     * String for continuation
     */
@@ -53,23 +56,29 @@ export class DepartureTableComponent implements OnInit {
  
    protected columnDefs: Array<ColumnDefinition> = [];
  
-  constructor() { }
+  constructor(
+    protected wcService: WeatherCloudService,
+  ) {}
 
   ngOnInit() {
 
+
     this.setGridParameters();
+
+    this.GridData();
   }
+
   protected setGridParameters(): void {
     this.columnDefs = [
       new ColumnDefinition(
-        'VtimesStart',
-        '',
-        true,
-        false,
-        false,
-        null,
-        null,
-        null
+        'VtimesStart', //columnType
+        'Departure Time', //header title
+        true, // show value
+        false, // show icon
+        false, // sortable
+        PipeConstants.PIPE_EPOCH, // use pipe
+        null, // icon function
+        null // action
          ),
       new ColumnDefinition(
         'TempMin',
@@ -77,8 +86,9 @@ export class DepartureTableComponent implements OnInit {
         true,
         true,
         false,
-        //PipeConstants.PIPE_TEMP_FAHRENHEIT,
-        //WeatherCloudConditionIcons
+        null,
+        WeatherCloudConditionIcons,
+        null
         ),
       new ColumnDefinition(
         'TempMax',
@@ -86,17 +96,19 @@ export class DepartureTableComponent implements OnInit {
         true,
         true,
         false,
-        //PipeConstants.PIPE_TEMP_FAHRENHEIT,
-        //WeatherCloudConditionIcons
+        PipeConstants.PIPE_TEMP_FAHRENHEIT,
+        WeatherCloudConditionIcons,
+        null
         ),
       new ColumnDefinition(
         'PrecipMax',
         'Precipitation',
-        false,
+        true,
         true,
         false,
         null,
-        //WeatherCloudConditionIcons
+        WeatherCloudConditionIcons,
+        null
       ),
       new ColumnDefinition(
         'WindSpdMax',
@@ -104,8 +116,9 @@ export class DepartureTableComponent implements OnInit {
         true,
         true,
         false,
-        //PipeConstants.PIPE_MPH,
-        //WeatherCloudConditionIcons
+        PipeConstants.PIPE_MPH,
+        WeatherCloudConditionIcons,
+        null
         ),
       new ColumnDefinition(
         'WindGustMax',
@@ -113,8 +126,9 @@ export class DepartureTableComponent implements OnInit {
         true,
         true,
         false,
-        //PipeConstants.PIPE_MPH,
-        //WeatherCloudConditionIcons
+        PipeConstants.PIPE_MPH,
+        WeatherCloudConditionIcons,
+        null
         )
     ];
 
@@ -144,5 +158,18 @@ export class DepartureTableComponent implements OnInit {
    */
   protected defaultGridConfig(): DataGridConfig {
     return new DataGridConfig(null, this.columnDefs);
+  }
+
+  protected GridData(): void {
+    const origin = "40.58897,-105.08246";
+    const destination = "40.3978,-105.0750";
+    const includeAlts = true;
+    const departTime = "1566503558";
+
+      this.GridParameters = new DataGridConfig(
+        this.wcService.GetDepartureTableData(this.apiKey, origin, destination, departTime, includeAlts),
+        this.columnDefs,
+        this.GridFeatures
+      );
   }
 }
