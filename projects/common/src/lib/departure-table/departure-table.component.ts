@@ -86,8 +86,8 @@ export class DepartureTableComponent implements OnInit {
         true,
         true,
         false,
-        null,
-        WeatherCloudConditionIcons,
+        PipeConstants.PIPE_TEMP_FAHRENHEIT,
+        null, //WeatherCloudConditionIcons,
         null
         ),
       new ColumnDefinition(
@@ -97,7 +97,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_TEMP_FAHRENHEIT,
-        WeatherCloudConditionIcons,
+        null, //WeatherCloudConditionIcons,
         null
         ),
       new ColumnDefinition(
@@ -107,7 +107,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         null,
-        WeatherCloudConditionIcons,
+        null, //WeatherCloudConditionIcons,
         null
       ),
       new ColumnDefinition(
@@ -117,7 +117,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_MPH,
-        WeatherCloudConditionIcons,
+        null, //WeatherCloudConditionIcons,
         null
         ),
       new ColumnDefinition(
@@ -127,7 +127,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_MPH,
-        WeatherCloudConditionIcons,
+        null, //WeatherCloudConditionIcons,
         null
         )
     ];
