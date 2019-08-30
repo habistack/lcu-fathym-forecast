@@ -24,7 +24,10 @@
 			],
 			"@lowcodeunit/lcu-fathym-forecast-common/*": [
 				"dist/common/*"
-			]
+			],
+			"@angular/*": [
+				"node_modules/@angular/*"
+			  ]
 		}
 	},
 	"angularCompilerOptions": {

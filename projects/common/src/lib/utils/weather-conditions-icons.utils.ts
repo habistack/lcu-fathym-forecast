@@ -1,8 +1,8 @@
-import { WeatherCloudModel } from './../models/wc.model';
+import { WeatherModel } from '../models/weather.model';
 
 export class WeatherCloudConditionIcons {
 
-  constructor(data: WeatherCloudModel, colType: string) {     
+  constructor(data: WeatherModel, colType: string) {
     switch (colType.toUpperCase()) {
       case 'TEMPMIN':
         return WeatherCloudConditionIcons.temperature(data.TempMin);
@@ -23,12 +23,12 @@ export class WeatherCloudConditionIcons {
 
   }
 
-  private static precipitationType(data: WeatherCloudModel): string {
+  private static precipitationType(data: WeatherModel): string {
     let icon: string = '';
     switch (data.PtypeMax) {
       case 0:
         icon = 'icon-no_value wc-icon-none';
-      break;
+        break;
       case 1:
         icon = WeatherCloudConditionIcons.rainType(data.PrecipMax);
         break;

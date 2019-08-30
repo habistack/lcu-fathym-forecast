@@ -1,19 +1,20 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders, HttpUrlEncodingCodec } from '@angular/common/http';
 import { map, retry, catchError } from 'rxjs/operators';
-import { WeatherCloudModel } from '../models/wc.model';
+import { WeatherModel } from '../models/weather.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
   })
-  export class WeatherCloudService {
+  export class DataServiceTrevors {
     //  Fields
     protected apiRoot: string = 'https://wxlb01.fathym.com';
     // tslint:disable-next-line:max-line-length
     protected forecastWrapper: string = 'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
-
+    protected techAccentAPI: string = 'https://fathym-forecast-int.azure-api.net/api/v0/api-variables';
+    protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
 
     constructor(protected http: HttpClient) {
 
@@ -51,15 +52,19 @@ import { of } from 'rxjs';
          console.warn('A destination must be set');
          return;
        }
+
+       let headers: HttpHeaders = new HttpHeaders();
+       headers = headers.set('Ocp-Apim-Subscription-Key', this.subscriptionKey);
    
        let httpParams = new HttpParams();
        httpParams = httpParams.append('origin', origin);
        httpParams = httpParams.append('destination', destination);
        httpParams = httpParams.append('includeAlts', String(includeAlts));
        httpParams = httpParams.append('departTime', departTime);
-       httpParams = httpParams.append('token', apiKey);
+       // httpParams = httpParams.append('token', apiKey);
+       httpParams = httpParams.append('Subscription-Key', this.subscriptionKey);
 
-       return this.http.get<any[]>(`${this.forecastWrapper}`, { params: httpParams }).pipe(
+       return this.http.get<any[]>(`${this.techAccentAPI}`, { params: httpParams, headers: headers }).pipe(
         map(res => {
           return res;
         })
