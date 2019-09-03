@@ -21,7 +21,7 @@ export class DataService {
   // tslint:disable-next-line:max-line-length
 
   protected forecastWrapper: string = 'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
-
+// https://wxlb01.fathym.com/route?origin=32.7499,-97.33034&destination=40.58897,-105.08246&includeAlts=true&token=fathym&var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
   protected wcConfig: WeatherCloudConfig;
 
   //  Properties
@@ -110,7 +110,19 @@ export class DataService {
     );
   }
 
+  public RouteData(): Observable<object> {
+    const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
 
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.append('Access-Control-Allow-Origin', '*');
+    httpHeaders = httpHeaders.append('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    httpHeaders = httpHeaders.append('Access-Control-Allow-Headers', 'Content-Type');
+
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('code', 'ShannonB');
+
+    return this.http.get(url, {headers: httpHeaders, params: httpParams });
+  }
   /**
    * Data returned from route search
    *

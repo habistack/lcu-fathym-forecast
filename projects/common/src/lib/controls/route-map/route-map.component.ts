@@ -238,6 +238,7 @@ export class RouteMapComponent {
   //  this.SearchModel = data;
   //  this.handleRoute();
   // });
+     // this.testRouteData();
    }
  
    //  API Methods
@@ -515,7 +516,14 @@ export class RouteMapComponent {
       */
      this.routeNames = [];
    }
- 
+
+   protected testRouteData(): void {
+     this.dataService.RouteData()
+     .subscribe((res) => {
+       console.log(res);
+    });
+   }
+
    protected handleRoute() {
      this.IsLoading = true;
  
