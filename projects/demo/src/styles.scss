@@ -3,7 +3,8 @@
 @import '../../../node_modules/@lcu-ide/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu-ide/common/assets/theming/fathym-default-theme';
 
-@import '../src/app/controls/flex-layout/flex-layout.component.scss';
+@import '../src/app/app.component.scss';
+
 @import './assets/themes/fathym-themes.scss';
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
@@ -37,7 +38,7 @@
 
 // for updating components with themes
 @mixin component-themes($theme) {
-  @include flex-layout-component-theme($theme);
+  // @include primary-component-theme($theme);
   // @include user-list-component-theme($theme);
   // @include side-nav-component-theme($theme);
 }
