@@ -9,7 +9,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
 import { RouteMapComponent } from './controls/route-map/route-map.component';
-// import { LoadMapService, AmModule } from '@acaisoft/angular-azure-maps';
+import { LoadMapService, AmModule } from '@acaisoft/angular-azure-maps';
+import { ToggleThemeUtil } from './utils/toggle-theme.utils';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RouteMapComponent } from './controls/route-map/route-map.component';
     MaterialModule,
     LcuSelectModule,
     ToastrModule.forRoot(),
+    AmModule
   ],
   exports: [
     DepartureTableComponent,

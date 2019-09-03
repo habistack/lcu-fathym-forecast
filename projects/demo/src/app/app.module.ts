@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
 import { SelectComponent } from '@lowcodeunit/lcu-select-common';
+import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 import { ToastrModule } from 'ngx-toastr';
 import {
   DepartureTableComponent,
@@ -17,6 +18,7 @@ import {
   ImageDateFormatPipe,
   RouteMapComponent
  } from '@lowcodeunit/lcu-fathym-forecast-common';
+ 
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {
     DepartureTableComponent,
     SearchFormComponent,
     SelectComponent,
-    RouteMapComponent
+    RouteMapComponent,
+    AtlasMapComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -39,7 +42,8 @@ import {
   ],
   providers: [
     DisplayDateFormatPipe,
-    ImageDateFormatPipe
+    ImageDateFormatPipe,
+    LoadMapService
 ],
   bootstrap: [AppComponent]
 })

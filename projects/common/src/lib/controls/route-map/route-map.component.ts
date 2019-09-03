@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { of } from 'rxjs/internal/observable/of';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 import { ToastrDisplayService } from '../../services/toastr-display.service';
 import { NotificationService } from '../../services/notification.service';
 import { ImageDateFormatPipe, DisplayDateFormatPipe } from '../../utils/pipes/wc-pipes';
@@ -13,6 +12,7 @@ import { DataService } from '../../services/data.service';
 import { WeatherCloudConfig } from '../../models/weather.config';
 import { SearchModel } from './../../models/search.model';
 import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils';
+import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 
 
 @Component({
@@ -143,7 +143,7 @@ export class RouteMapComponent {
  
    //  Constructors
    constructor(
-     // public MapService: LoadMapService,
+     public MapService: LoadMapService,
      protected dataService: DataService,
      protected displayDatePipe: DisplayDateFormatPipe,
      protected imageDatePipe: ImageDateFormatPipe,
@@ -184,17 +184,25 @@ export class RouteMapComponent {
  
   //    if (!this.WeatherCloudConfig) { return; }
  
-  //    this.Config = {
-  //      'subscription-key': this.WeatherCloudConfig.LBSKey,
-  //      interactive: true,
-  //      zoom: 5,
-  //      center: [-102.1, 39.5]
-  //    };
+      const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
+      const serverURL: string = 'https://wxlb01.fathym.com/route';
+
+    // public ServerURL?: string = 'https://wxlb01.fathym.com/route';
+    // public ServerURL?: string = 'http://fathymwx.westus.cloudapp.azure.com/blend/routefcst';
+    // public ServerURL?: string = 'https://azuremaps.fathym.com/route';
+    // public ServerURL?: string = 'https://cors.io/?http://wxcloud-hrrr.westus.cloudapp.azure.com';
+
+      this.Config = {
+       'subscription-key': lbsKey,
+       interactive: true,
+       zoom: 5,
+       center: [-102.1, 39.5]
+     };
  
-  //    this.MapService
-  //    .load()
-  //    .toPromise()
-  //    .then(() => {});
+      this.MapService
+     .load()
+     .toPromise()
+     .then(() => {});
  
   //    if (this.Slider) {
   //      this.Slider.input.subscribe(() => {
@@ -213,23 +221,23 @@ export class RouteMapComponent {
   //      //
   //  });
  
-   this.drawRegionToggleSubscription = this.notificationService.GeofenceDrawingStarted.subscribe(data => {
-     this.geofenceDrawingSetup(data);
-   });
+  //  this.drawRegionToggleSubscription = this.notificationService.GeofenceDrawingStarted.subscribe(data => {
+  //    this.geofenceDrawingSetup(data);
+  //  });
  
-   this.routeSubscription = this.notificationService.RouteChanged.subscribe(data => {
+  //  this.routeSubscription = this.notificationService.RouteChanged.subscribe(data => {
  
-   if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
+  //  if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
  
-   if (!data.IsSearching) {
-       this.clearRoutes();
-       this.notificationService.ClearForecastDetails();
-       return;
-   }
+  //  if (!data.IsSearching) {
+  //      this.clearRoutes();
+  //      this.notificationService.ClearForecastDetails();
+  //      return;
+  //  }
  
-   this.SearchModel = data;
-   this.handleRoute();
-  });
+  //  this.SearchModel = data;
+  //  this.handleRoute();
+  // });
    }
  
    //  API Methods
