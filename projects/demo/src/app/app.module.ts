@@ -8,26 +8,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
-import { SelectComponent } from '@lowcodeunit/lcu-select-common';
-import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
+// import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 import { ToastrModule } from 'ngx-toastr';
 import {
-  DepartureTableComponent,
-  SearchFormComponent,
   DisplayDateFormatPipe,
   ImageDateFormatPipe,
-  RouteMapComponent
+  LcuFathymForecastModule
  } from '@lowcodeunit/lcu-fathym-forecast-common';
- 
+import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DepartureTableComponent,
-    SearchFormComponent,
-    SelectComponent,
-    RouteMapComponent,
-    AtlasMapComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -35,10 +27,12 @@ import {
     DataGridModule,
     FlexLayoutModule,
     FathymSharedModule,
+    LcuFathymForecastModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AmModule
   ],
   providers: [
     DisplayDateFormatPipe,
