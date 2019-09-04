@@ -1,6 +1,6 @@
 {
   "name": "@habistack/lcu-fathym-forecast",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "scripts": {
     "build:common": "ng build common",
     "build:demo": "ng build demo --prod",
