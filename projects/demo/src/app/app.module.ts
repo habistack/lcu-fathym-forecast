@@ -14,7 +14,7 @@ import {
   DisplayDateFormatPipe,
   ImageDateFormatPipe,
   LcuFathymForecastModule
- } from '@lowcodeunit/lcu-fathym-forecast-common';
+ } from '@habistack/lcu-fathym-forecast-common';
 import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
 
 @NgModule({

@@ -1,6 +1,6 @@
 {
-  "name": "@lowcodeunit/lcu-fathym-forecast",
-  "version": "0.0.12",
+  "name": "@habistack/lcu-fathym-forecast",
+  "version": "0.0.13",
   "scripts": {
     "build:common": "ng build common",
     "build:demo": "ng build demo --prod",
@@ -43,10 +43,10 @@
     "@aspnet/signalr": "^1.1.4",
     "@beyerleinf/ngx-dnd": "^6.0.0-preview3",
     "@lcu-ide/common": "^0.20.7",
-    "@lowcodeunit-devkit/ng-lcu": "0.0.167",
-    "@lowcodeunit/data-grid": "^0.7.85",
-    "@lowcodeunit/lcu-file-uploader": "0.0.1",
-    "@lowcodeunit/lcu-select-common": "^0.4.7",
+    "@habistack-devkit/ng-lcu": "0.0.167",
+    "@habistack/data-grid": "^0.7.85",
+    "@habistack/lcu-file-uploader": "0.0.1",
+    "@habistack/lcu-select-common": "^0.4.7",
     "@webcomponents/custom-elements": "^1.2.1",
     "@webcomponents/webcomponentsjs": "^2.2.7",
     "core-js": "^2.6.1",

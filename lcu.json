@@ -1,7 +1,7 @@
 {
   "templates": {
     "repository": "lowcodeunit-devkit/lcu-cli-templates-core",
-    "scope": "@lowcodeunit",
+    "scope": "@habistack",
     "workspace": "lcu-fathym-forecast"
   },
   "config": {

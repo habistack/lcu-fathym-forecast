@@ -19,10 +19,10 @@
 			"dom"
 		],
 		"paths": {
-			"@lowcodeunit/lcu-fathym-forecast-common": [
+			"@habistack/lcu-fathym-forecast-common": [
 				"dist/common"
 			],
-			"@lowcodeunit/lcu-fathym-forecast-common/*": [
+			"@habistack/lcu-fathym-forecast-common/*": [
 				"dist/common/*"
 			],
 			"@angular/*": [
