@@ -113,15 +113,10 @@ export class DataService {
   public RouteData(): Observable<object> {
     const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
 
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.append('Access-Control-Allow-Origin', '*');
-    httpHeaders = httpHeaders.append('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    httpHeaders = httpHeaders.append('Access-Control-Allow-Headers', 'Content-Type');
-
     let httpParams = new HttpParams();
     httpParams = httpParams.append('code', 'ShannonB');
 
-    return this.http.get(url, {headers: httpHeaders, params: httpParams });
+    return this.http.get(url, { params: httpParams });
   }
   /**
    * Data returned from route search

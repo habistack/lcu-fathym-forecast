@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import { ToggleThemeUtil } from '@lowcodeunit/lcu-fathym-forecast-common';
+import { ToggleThemeUtil } from '@habistack/lcu-fathym-forecast-common';
 
 @Component({
   selector: 'lcu-root',
