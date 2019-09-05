@@ -20,7 +20,7 @@ import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps'
   templateUrl: './route-map.component.html',
   styleUrls: ['./route-map.component.scss']
 })
-export class RouteMapComponent {
+export class RouteMapComponent implements AfterViewInit {
 
    //  Fields
    protected dataSource: any;
@@ -162,12 +162,19 @@ export class RouteMapComponent {
    }
  
    //  Life Cycle
-   public ngOnInit(): void {
- 
-     setTimeout(() => {
-       this.initialSetup();
-     }, 500);
+   public ngAfterViewInit(): void {
+
+    setTimeout(() => {
+      this.initialSetup();
+    }, 2000);
    }
+
+  //  public ngOnInit(): void {
+ 
+  //    setTimeout(() => {
+  //      this.initialSetup();
+  //    }, 500);
+  //  }
  
    /**
     * Initial setup to get the map going
@@ -185,6 +192,12 @@ export class RouteMapComponent {
   //    if (!this.WeatherCloudConfig) { return; }
  
       const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
+      const serverURL: string = 'https://wxlb01.fathym.com/route';
+
+    // public ServerURL?: string = 'https://wxlb01.fathym.com/route';
+    // public ServerURL?: string = 'http://fathymwx.westus.cloudapp.azure.com/blend/routefcst';
+    // public ServerURL?: string = 'https://azuremaps.fathym.com/route';
+    // public ServerURL?: string = 'https://cors.io/?http://wxcloud-hrrr.westus.cloudapp.azure.com';
 
       this.Config = {
        'subscription-key': lbsKey,
@@ -196,7 +209,9 @@ export class RouteMapComponent {
       this.MapService
      .load()
      .toPromise()
-     .then(() => {});
+     .then((res) => {
+       console.log('MapService', res);
+     });
  
   //    if (this.Slider) {
   //      this.Slider.input.subscribe(() => {
@@ -205,38 +220,34 @@ export class RouteMapComponent {
   //       // this.setSliderTime(value);
   //      });
   //    }
-
-      this.loadDataSources();
-
-     // this.loadBlend();
-
-     // if (this.SearchModel) {
-      this.handleRoute();
-
-
-      setTimeout(() => {
-        this.testRouteData();
-      }, 1000);
-
-  // });
-
+ 
+  //    // this.loadDataSources();
+ 
+  //      // this.loadBlend();
+ 
+  //      // if (this.SearchModel) {
+  //      //   this.handleRoute();
+  //      //
+  //  });
+ 
   //  this.drawRegionToggleSubscription = this.notificationService.GeofenceDrawingStarted.subscribe(data => {
   //    this.geofenceDrawingSetup(data);
   //  });
-
-      this.routeSubscription = this.notificationService.RouteChanged.subscribe(data => {
-
-        if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
-
-        if (!data.IsSearching) {
-            this.clearRoutes();
-            this.notificationService.ClearForecastDetails();
-            return;
-        }
-
-        this.SearchModel = data;
-        this.handleRoute();
-        });
+ 
+  //  this.routeSubscription = this.notificationService.RouteChanged.subscribe(data => {
+ 
+  //  if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
+ 
+  //  if (!data.IsSearching) {
+  //      this.clearRoutes();
+  //      this.notificationService.ClearForecastDetails();
+  //      return;
+  //  }
+ 
+  //  this.SearchModel = data;
+  //  this.handleRoute();
+  // });
+      this.testRouteData();
    }
  
    //  API Methods
@@ -245,7 +256,7 @@ export class RouteMapComponent {
    }
  
    public MapLoaded(evt: Event) {
-     console.log('Map loaded', evt);
+     console.log('Map loaded', this.Maper);
    // this.loadBlend();
    }
  
@@ -307,7 +318,7 @@ export class RouteMapComponent {
      const points = [];
  
      let index = 0,
-       len = encoded.length;
+     len = encoded.length;
  
        let lat = 0,
        lng = 0;
@@ -514,16 +525,14 @@ export class RouteMapComponent {
       */
      this.routeNames = [];
    }
- 
+
    protected testRouteData(): void {
-    this.IsLoading = true;
-    this.dataService.RouteData()
-    .subscribe((res) => {
-      console.log('test route data', res);
-      this.handleTestRouteResponse(res);
-      this.IsLoading = false;
-   });
-  }
+     this.dataService.RouteData()
+     .subscribe((res) => {
+       console.log(res);
+       this.handleRouteResponse(res);
+    });
+   }
 
    protected handleRoute() {
      this.IsLoading = true;
@@ -561,30 +570,6 @@ export class RouteMapComponent {
          });
    }
  
-   protected testNewPoints(val: any): Array<any> {
-    const points = [];
-    // console.log('val', val);
-   // const pos = new atlas.data.Position(1, 1);
-
-    for (const point of val) {
-    points.push([point.lng, point.lat]);
-   }
-
-
-    return points;
-   }
-
-   protected handleTestRouteResponse(response: object) {
- 
-     const pointsArr: Array<Array<atlas.data.Position>> = [];
- 
-     const points = this.testNewPoints(response);
-
-     pointsArr.push(points);
-     console.log('points arrgh', pointsArr);
-     this.displayRoute(pointsArr);
-   }
-
    /**
     * Setup route points for creating route lines
     *
@@ -592,42 +577,57 @@ export class RouteMapComponent {
     */
    protected handleRouteResponse(response: object) {
  
-     if (!response['data'] || response['data'].length === 0) {
-       return;
-     }
+    //  if (!response['data'] || response['data'].length === 0) {
+    //    return;
+    //  }
  
      // update plot and delay risk data
-     this.notificationService.UpdateForecastPlotData(response);
+     // this.notificationService.UpdateForecastPlotData(response);
  
      const pointsArr: Array<Array<atlas.data.Position>> = [];
  
-     for (let i = 0; i < response['data'].length; i++) {
-       const element = response['data'][i];
-       this.FcstData = element;
-       this.ValidTimes = element['vtimes'];
+    //  for (let i = 0; i < response['data'].length; i++) {
+    //    const element = response['data'][i];
+    //    this.FcstData = element;
+    //    this.ValidTimes = element['vtimes'];
  
-      const points = this.decode(element['points']);
- 
-      pointsArr.push(points);
+       // const points = this.decode(element['points']);
+
+       // pointsArr.push(points);
        // console.log('points ', points);
  
-     }
-     console.log('pointsArr', pointsArr);
-     // this.displayRoute(pointsArr);
+     // }
+     const points = this.testNewPoints(response);
+
+     pointsArr.push(points);
+     this.displayRoute(pointsArr);
    }
  
-   protected loadDataSources() {
-    // const sub: Subscription = this.dataService.LoadDataSources().subscribe(dataSources => {
-    //    this.dataSources = dataSources;
+   // protected loadDataSources() {
+   //  const sub: Subscription = this.dataService.LoadDataSources().subscribe(dataSources => {
+   //     this.dataSources = dataSources;
  
-    //    console.log('dataSource ', this.dataSources);
+   //     console.log('dataSource ', this.dataSources);
  
-    //    this.selectDataSource(dataSources[2]);
-    // });
+   //     this.selectDataSource(dataSources[2]);
+   //  });
  
-    // sub.unsubscribe();
+     // sub.unsubscribe();
+   // }
+ 
+   protected testNewPoints(val: any): Array<any> {
+    const points = [];
+    // console.log('val', val);
+   // const pos = new atlas.data.Position(1, 1);
+
+    for (const point of val) {
+    points.push([point.lat, point.lng]);
    }
- 
+
+
+    return points;
+   }
+
    protected selectDataSource(dataSource) {
      this.dataSource = dataSource;
    }
