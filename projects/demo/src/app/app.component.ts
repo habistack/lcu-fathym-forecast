@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
 
   constructor(protected overlayContainer: OverlayContainer) {
     this.PageTitle = 'Angular Flex Layout';
-    this.Title = 'Fathym Forecast';
+    this.Title = 'Forecast';
     this.SubTitle = '';
     this.Icon = 'drive_eta';
   }

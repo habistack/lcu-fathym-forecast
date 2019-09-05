@@ -21,7 +21,14 @@ export class DataService {
   // tslint:disable-next-line:max-line-length
 
   protected forecastWrapper: string = 'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
-// https://wxlb01.fathym.com/route?origin=32.7499,-97.33034&destination=40.58897,-105.08246&includeAlts=true&token=fathym&var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
+
+// protected oldCallForRoutes: string 
+// https://wxlb01.fathym.com/route?
+// origin=32.7499,-97.33034&
+// destination=40.58897,-105.08246&
+// includeAlts=true&token=fathym&
+// var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
+
   protected wcConfig: WeatherCloudConfig;
 
   //  Properties
@@ -111,7 +118,7 @@ export class DataService {
   }
 
   public RouteData(): Observable<object> {
-    const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
+  const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
 
     let httpParams = new HttpParams();
     httpParams = httpParams.append('code', 'ShannonB');
@@ -124,23 +131,36 @@ export class DataService {
    * @param search object containing search information
    */
   public HandleRoute(search: SearchModel): Observable<object> {
-    const url = search.SearchDatasourceType.Host + search.SearchDatasourceType.URLPrefix + '/routefcst';
+    // const url = search.SearchDatasourceType.Host + search.SearchDatasourceType.URLPrefix + '/routefcst';
     // const url = search.SearchDatasourceType.Host;
 
+    // let httpParams = new HttpParams();
+    // httpParams = httpParams.append('origin', search.Origin);
+    // httpParams = httpParams.append('destination', search.Destination);
+    // httpParams = httpParams.append('departTime', search.DepartureTime);
+    // httpParams = httpParams.append('includeAlts', String(search.IncludeAlts || false));
+    // httpParams = httpParams.append('token', 'fathym');
+
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('origin', search.Origin);
-    httpParams = httpParams.append('destination', search.Destination);
-    httpParams = httpParams.append('departTime', search.DepartureTime);
-    httpParams = httpParams.append('includeAlts', String(search.IncludeAlts || false));
+    httpParams = httpParams.append('origin', '32.7499, -97.33034');
+    httpParams = httpParams.append('destination', '40.58897,-105.08246');
+    httpParams = httpParams.append('departTime', '1567621321');
+    httpParams = httpParams.append('includeAlts', 'false');
     httpParams = httpParams.append('token', 'fathym');
 
-    if (search.SearchDatasourceType.FcstCfg) {
-      httpParams = httpParams.append('fcst_cfg', search.SearchDatasourceType.FcstCfg);
-    }
+    // origin=32.7499,-97.33034&
+    // destination=40.58897,-105.08246&
+    // includeAlts=true&token=fathym&
+    // var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
 
-    if (search.SearchDatasourceType.VarNames) {
-      httpParams = httpParams.append('var_names', search.SearchDatasourceType.VarNames);
-    }
+    // if (search.SearchDatasourceType.FcstCfg) {
+    //   httpParams = httpParams.append('fcst_cfg', search.SearchDatasourceType.FcstCfg);
+    // }
+
+    // if (search.SearchDatasourceType.VarNames) {
+    //   httpParams = httpParams.append('var_names', search.SearchDatasourceType.VarNames);
+    // }
+    const url: string = 'https://wxlb01.fathym.com/route';
 
     return this.http.get(url, { params: httpParams });
   }
