@@ -46,7 +46,20 @@ export class RouteMapComponent {
     */
    @ViewChild('imageSlider', {static: false})
    public Slider: MatSlider;
+
+   /**
+    * Check if things are loaded
+    */
+   // tslint:disable-next-line:variable-name
+   private _isLoading = false;
+   public set IsLoading(val: boolean) {
+     this._isLoading = val;
+   }
  
+   public get IsLoading(): boolean {
+     return this._isLoading;
+   }
+
    /**
     * Position plot points for route(s)
     */
@@ -84,22 +97,18 @@ export class RouteMapComponent {
    public ImageVarNames: any[];
  
    /**
-    * Check if things are loaded
-    */
-   private _isLoading: boolean = false;
-   public set IsLoading(val: boolean) {
-     this._isLoading = val;
-   }
- 
-   public get IsLoading(): boolean {
-     return this._isLoading;
-   }
- 
-   /**
     * Loading class
     */
    // public Loading: Loading;
  
+   protected minLat: number;
+ 
+   protected minLong: number;
+
+   protected maxLat: number;
+
+   protected maxLong: number;
+
    /**
     * Class for search
     */
@@ -151,11 +160,19 @@ export class RouteMapComponent {
      protected toastrDisplayService: ToastrDisplayService
    ) {
  
-     this.dataSources = {};
- 
-     this.ImageValidTimes = [];
- 
-     this.ImageVarNames = [];
+      this.dataSources = {};
+
+      this.ImageValidTimes = [];
+
+      this.ImageVarNames = [];
+
+      this.minLat = 9999;
+
+      this.minLong = 9999;
+
+      this.maxLat = -9999;
+
+      this.maxLong = -9999;
  
      // this.Loading = new Loading();
  
@@ -173,30 +190,11 @@ export class RouteMapComponent {
     * Initial setup to get the map going
     */
    protected initialSetup(): void {
- 
-   // this.wcConfig.Loading.subscribe(loading => this.Loading.Set(loading));
-  //  this.wcConfig.Loading.subscribe(loading => this.IsLoading = loading);
- 
-  //  this.wcConfig.Context.subscribe(ctxt => {
-  //    this.WeatherCloudConfig = ctxt;
- 
-  //    console.log('map init, weatherCloudConfig', this.WeatherCloudConfig);
- 
-  //    if (!this.WeatherCloudConfig) { return; }
- 
+
       const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
 
-      this.Config = {
-       'subscription-key': lbsKey,
-       interactive: true,
-       zoom: 5,
-       center: [-102.1, 39.5]
-     };
- 
-      this.MapService
-     .load()
-     .toPromise()
-     .then(() => {});
+      this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5] };
+      this.MapService.load().toPromise().then(() => {});
  
   //    if (this.Slider) {
   //      this.Slider.input.subscribe(() => {
@@ -210,14 +208,11 @@ export class RouteMapComponent {
 
      // this.loadBlend();
 
-     // if (this.SearchModel) {
-      this.handleRoute();
-
-
+      if (this.SearchModel) {
       setTimeout(() => {
         this.testRouteData();
       }, 1000);
-
+    }
   // });
 
   //  this.drawRegionToggleSubscription = this.notificationService.GeofenceDrawingStarted.subscribe(data => {
@@ -226,7 +221,9 @@ export class RouteMapComponent {
 
       this.routeSubscription = this.notificationService.RouteChanged.subscribe(data => {
 
-        if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
+        // if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
+
+        if (!data) { return; }
 
         if (!data.IsSearching) {
             this.clearRoutes();
@@ -235,7 +232,7 @@ export class RouteMapComponent {
         }
 
         this.SearchModel = data;
-        this.handleRoute();
+        this.testRouteData();
         });
    }
  
@@ -302,59 +299,7 @@ export class RouteMapComponent {
  
      return [closest, ci]; // return the value
    }
- 
-   protected decode(encoded) {
-     const points = [];
- 
-     let index = 0,
-       len = encoded.length;
- 
-       let lat = 0,
-       lng = 0;
- 
-     while (index < len) {
-       let b,
-         shift = 0,
-         result = 0;
-       do {
-         b = encoded.charAt(index++).charCodeAt(0) - 63;
- 
-         result |= (b & 0x1f) << shift;
- 
-         shift += 5;
-       } while (b >= 0x20);
- 
-       let dlat = (result & 1) != 0 ? ~(result >> 1) : result >> 1;
- 
-       lat += dlat;
- 
-       shift = 0;
- 
-       result = 0;
- 
-       do {
-         b = encoded.charAt(index++).charCodeAt(0) - 63;
- 
-         result |= (b & 0x1f) << shift;
- 
-         shift += 5;
-       } while (b >= 0x20);
-       const dlng = (result & 1) != 0 ? ~(result >> 1) : result >> 1;
- 
-       lng += dlng;
- 
-       const llat = lat / 1e5;
- 
-       const llon = lng / 1e5;
- 
-       const pos = new atlas.data.Position(llon, llat);
- 
-       points.push(pos);
-     }
- 
-     return points;
-   }
- 
+
    /**
     * Create routes to display on the map
     *
@@ -362,9 +307,7 @@ export class RouteMapComponent {
     */
    protected displayRoute(pointsArr: Array<Array<atlas.data.Position>>) {
  
-      if (!this.Maper) {
-       return;
-      }
+      if (!this.Maper) { return; }
  
       this.Maper.map.events.add('ready', () => {
        console.log('map is ready and loaded - shannon ');
@@ -421,33 +364,22 @@ export class RouteMapComponent {
        const points = pointsArr[i];
        const decodedPath = points;
  
-       let min_lat = 9999;
- 
-       let min_lon = 9999;
- 
-       let max_lat = -9999;
- 
-       let max_lon = -9999;
- 
        for (let j = 0; j < decodedPath.length; j++) {
          const llat = decodedPath[j][1];
  
          const llon = decodedPath[j][0];
  
-         if (llat < min_lat) { min_lat = llat; }
+         if (llat < this.minLat) { this.minLat = llat; }
  
-         if (llat > max_lat) { max_lat = llat; }
+         if (llat > this.maxLat) { this.maxLat = llat; }
  
-         if (llon < min_lon) { min_lon = llon; }
+         if (llon < this.minLong) { this.minLong = llon; }
  
-         if (llon > max_lon) { max_lon = llon; }
+         if (llon > this.maxLong) { this.maxLong = llon; }
        }
  
-       const nn = decodedPath.length;
- 
-       const start = decodedPath[0];
- 
-       const end = decodedPath[nn - 1];
+       const start: atlas.data.Position = decodedPath[0];
+       const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
  
        /**
         * Set route start and end points
@@ -487,9 +419,9 @@ export class RouteMapComponent {
         // this.Maper.map.layers.add(line, 'labels');
        // /** */
  
-       const sw = new atlas.data.Position(min_lon - 0.75, min_lat - 0.75);
+       const sw = new atlas.data.Position(this.minLong - 0.75, this.minLat - 0.75);
  
-       const ne = new atlas.data.Position(max_lon + 0.75, max_lat + 0.75);
+       const ne = new atlas.data.Position(this.maxLong + 0.75, this.maxLat + 0.75);
  
        const bbox = new atlas.data.BoundingBox(sw, ne);
  
@@ -517,7 +449,7 @@ export class RouteMapComponent {
  
    protected testRouteData(): void {
     this.IsLoading = true;
-    this.dataService.RouteData()
+    this.dataService.RouteData(this.SearchModel)
     .subscribe((res) => {
       console.log('test route data', res);
       this.handleTestRouteResponse(res);
@@ -549,7 +481,7 @@ export class RouteMapComponent {
  
            this.toastrDisplayService.DisplayToastrSuccess('success');
            // this.wcRouteSearch.Search(res as RouteDataModel);
-           this.handleRouteResponse(res);
+           // this.handleRouteResponse(res);
          },
          err => {
            this.toastrDisplayService.DisplayToastrError('HTTP error');
@@ -606,9 +538,9 @@ export class RouteMapComponent {
        this.FcstData = element;
        this.ValidTimes = element['vtimes'];
  
-      const points = this.decode(element['points']);
+      // const points = this.decode(element['points']);
  
-      pointsArr.push(points);
+      // pointsArr.push(points);
        // console.log('points ', points);
  
      }

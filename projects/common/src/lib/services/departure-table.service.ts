@@ -15,6 +15,8 @@ import { of } from 'rxjs';
     protected forecastWrapper: string = 'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
     protected techAccentAPI: string = 'https://fathym-forecast-int.azure-api.net/api/v0/api-variables';
     protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
+    protected azureMapsKey: string = '';
+    protected forecastAPIKey: string = '';
 
     constructor(protected http: HttpClient) {
 
