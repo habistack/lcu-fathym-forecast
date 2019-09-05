@@ -18,8 +18,11 @@ import { HttpUrlEncoder } from '../utils/http/http-url-encoder.utils';
 export class DataService {
   //  Fields
   protected apiRoot: string = 'https://wxlb01.fathym.com';
-  // tslint:disable-next-line:max-line-length
+  protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
+  protected azureMapsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
+  protected forecastAPIKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
 
+  // tslint:disable-next-line:max-line-length
   protected forecastWrapper: string = 'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
 
 // protected oldCallForRoutes: string 
@@ -117,10 +120,14 @@ export class DataService {
     );
   }
 
-  public RouteData(): Observable<object> {
-  const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
+  public RouteData(search: SearchModel): Observable<object> {
+    const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
 
     let httpParams = new HttpParams();
+    httpParams = httpParams.append('origin', search.Origin);
+    httpParams = httpParams.append('destination', search.Destination);
+    httpParams = httpParams.append('azureMapsKey', this.azureMapsKey);
+    httpParams = httpParams.append('forecastAPIKey', this.forecastAPIKey);
     httpParams = httpParams.append('code', 'ShannonB');
 
     return this.http.get(url, { params: httpParams });
