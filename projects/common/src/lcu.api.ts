@@ -16,4 +16,5 @@ export * from './lib/controls/departure-table/departure-table.component';
 export * from './lib/controls/search-form/search-form.component';
 export * from './lib/controls/route-map/route-map.component';
 export * from './lib/controls/forecast-plot/forecast-plot.component';
+export * from './lib/controls/variable-data-plot/variable-data-plot.component';
 

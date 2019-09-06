@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataGridModule } from '@lowcodeunit/data-grid';
 import { ToastrModule } from 'ngx-toastr';
 import { AmModule } from '@acaisoft/angular-azure-maps';
+import { NvD3Module } from 'ng2-nvd3';
+import { DataGridModule } from '@lowcodeunit/data-grid';
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/wc-pipes';
 import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
@@ -12,6 +13,7 @@ import { DepartureTableComponent } from './controls/departure-table/departure-ta
 import { SearchFormComponent } from './controls/search-form/search-form.component';
 import { RouteMapComponent } from './controls/route-map/route-map.component';
 import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.component';
+import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
 // import { IrradiancePlot } from './controls/plots/irradiance-plot/irradiance-plot';
 // import { NumericPlot } from './controls/plots/numeric-plot/numeric-plot';
 // import { PotentialDelayRiskPlot } from './controls/plots/potential-delay-risk-plot/potential-delay-risk-plot';
@@ -31,7 +33,8 @@ import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.co
     RouteMapComponent,
     ForecastPlotComponent,
     DisplayDateFormatPipe,
-    ImageDateFormatPipe
+    ImageDateFormatPipe,
+    VariableDataPlotComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.co
     LcuSelectModule,
     ToastrModule.forRoot(),
     AmModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NvD3Module
   ],
   exports: [
     DepartureTableComponent,
@@ -52,13 +56,15 @@ import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.co
     SearchFormComponent,
     DisplayDateFormatPipe,
     ImageDateFormatPipe,
-    ForecastPlotComponent
+    ForecastPlotComponent,
+    VariableDataPlotComponent
   ],
   entryComponents: [
     DepartureTableComponent,
     SearchFormComponent,
     RouteMapComponent,
-    ForecastPlotComponent
+    ForecastPlotComponent,
+    VariableDataPlotComponent
   ],
   providers: [
     DisplayDateFormatPipe,
