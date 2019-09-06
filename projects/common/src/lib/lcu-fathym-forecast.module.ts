@@ -12,17 +12,17 @@ import { DepartureTableComponent } from './controls/departure-table/departure-ta
 import { SearchFormComponent } from './controls/search-form/search-form.component';
 import { RouteMapComponent } from './controls/route-map/route-map.component';
 import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.component';
-import { IrradiancePlot } from './controls/plots/irradiance-plot/irradiance-plot';
-import { NumericPlot } from './controls/plots/numeric-plot/numeric-plot';
-import { PotentialDelayRiskPlot } from './controls/plots/potential-delay-risk-plot/potential-delay-risk-plot';
-import { PotentialRoadStatePlot } from './controls/plots/potential-road-state_plot/potential-road-state-plot';
-import { PrecipitationPlot } from './controls/plots/precipitation-plot/precipitation-plot';
-import { SnowDepthPlot } from './controls/plots/snow-depth-plot/snow-depth-plot';
-import { TemperaturePlot } from './controls/plots/temperature-plot/temperature-plot';
-import { WindPlot } from './controls/plots/wind-plot/wind-plot';
-import { ElevationPlot } from './controls/plots/elevation-plot/elevation-plot';
-import { CrosswindPlot } from './controls/plots/crosswind-plot/crosswind-plot';
-import { CloudCoverPlot } from './controls/plots/cloud-cover-plot/cloud-cover-plot';
+// import { IrradiancePlot } from './controls/plots/irradiance-plot/irradiance-plot';
+// import { NumericPlot } from './controls/plots/numeric-plot/numeric-plot';
+// import { PotentialDelayRiskPlot } from './controls/plots/potential-delay-risk-plot/potential-delay-risk-plot';
+// import { PotentialRoadStatePlot } from './controls/plots/potential-road-state_plot/potential-road-state-plot';
+// import { PrecipitationPlot } from './controls/plots/precipitation-plot/precipitation-plot';
+// import { SnowDepthPlot } from './controls/plots/snow-depth-plot/snow-depth-plot';
+// import { TemperaturePlot } from './controls/plots/temperature-plot/temperature-plot';
+// import { WindPlot } from './controls/plots/wind-plot/wind-plot';
+// import { ElevationPlot } from './controls/plots/elevation-plot/elevation-plot';
+// import { CrosswindPlot } from './controls/plots/crosswind-plot/crosswind-plot';
+// import { CloudCoverPlot } from './controls/plots/cloud-cover-plot/cloud-cover-plot';
 
 @NgModule({
   declarations: [
@@ -31,18 +31,7 @@ import { CloudCoverPlot } from './controls/plots/cloud-cover-plot/cloud-cover-pl
     RouteMapComponent,
     ForecastPlotComponent,
     DisplayDateFormatPipe,
-    ImageDateFormatPipe,
-    CloudCoverPlot,
-    CrosswindPlot,
-    ElevationPlot,
-    IrradiancePlot,
-    NumericPlot,
-    PotentialDelayRiskPlot,
-    PotentialRoadStatePlot,
-    PrecipitationPlot,
-    SnowDepthPlot,
-    TemperaturePlot,
-    WindPlot
+    ImageDateFormatPipe
   ],
   imports: [
     CommonModule,
