@@ -12,8 +12,9 @@ import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
 import { RouteMapComponent } from './controls/route-map/route-map.component';
-import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.component';
+import { ForecastDataPlotComponent } from './controls/forecast-data-plot/forecast-data-plot.component';
 import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
+import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots.component';
 // import { IrradiancePlot } from './controls/plots/irradiance-plot/irradiance-plot';
 // import { NumericPlot } from './controls/plots/numeric-plot/numeric-plot';
 // import { PotentialDelayRiskPlot } from './controls/plots/potential-delay-risk-plot/potential-delay-risk-plot';
@@ -31,10 +32,12 @@ import { VariableDataPlotComponent } from './controls/variable-data-plot/variabl
     DepartureTableComponent,
     SearchFormComponent,
     RouteMapComponent,
-    ForecastPlotComponent,
+    ForecastDataPlotComponent,
     DisplayDateFormatPipe,
     ImageDateFormatPipe,
-    VariableDataPlotComponent
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent
   ],
   imports: [
     CommonModule,
@@ -56,15 +59,19 @@ import { VariableDataPlotComponent } from './controls/variable-data-plot/variabl
     SearchFormComponent,
     DisplayDateFormatPipe,
     ImageDateFormatPipe,
-    ForecastPlotComponent,
-    VariableDataPlotComponent
+    ForecastDataPlotComponent,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent
   ],
   entryComponents: [
     DepartureTableComponent,
     SearchFormComponent,
     RouteMapComponent,
-    ForecastPlotComponent,
-    VariableDataPlotComponent
+    ForecastDataPlotComponent,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent
   ],
   providers: [
     DisplayDateFormatPipe,
