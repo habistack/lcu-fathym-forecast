@@ -176,7 +176,7 @@
 
    END OF TERMS AND CONDITIONS
 
-   [ProjectName]
+   habistack/lcu-fathym-forecast
 
    Copyright 2019 Fathym, Inc.
 
