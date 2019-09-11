@@ -126,6 +126,7 @@ export class DataService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('origin', search.Origin);
     httpParams = httpParams.append('destination', search.Destination);
+    httpParams = httpParams.append('departAt', search.DepartureTime);
     httpParams = httpParams.append('azureMapsKey', this.azureMapsKey);
     httpParams = httpParams.append('forecastAPIKey', this.forecastAPIKey);
     httpParams = httpParams.append('code', 'ShannonB');

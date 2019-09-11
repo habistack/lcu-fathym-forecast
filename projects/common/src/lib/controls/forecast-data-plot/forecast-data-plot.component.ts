@@ -81,6 +81,9 @@ export class ForecastDataPlotComponent {
       });
     }
 
-    this.varPlots.map(x => x.Refresh());
+    this.varPlots.map((x) => {
+      console.log('plot', x);
+      x.Refresh();
+    });
   }
 }

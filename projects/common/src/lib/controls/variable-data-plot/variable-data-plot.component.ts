@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, Input, ViewChild } from '@angular/core';
 import { Plot } from '../plots/plots';
 
+declare let d3: any;
+
 @Component({
   selector: 'lcu-variable-data-plot',
   templateUrl: './variable-data-plot.component.html',
@@ -41,7 +43,15 @@ export class VariableDataPlotComponent implements OnInit {
     /**
      * chart data
      */
-    public ChartData: Array<any>;
+    private _chartData: Array<any>;
+    public set ChartData(val: Array<any>) {
+      // console.log('chart data', val);
+      this._chartData = val;
+    }
+  
+    public get ChartData(): Array<any> {
+      return this._chartData;
+    }
 
     /**
      * chart options
