@@ -513,7 +513,10 @@ export class RouteMapComponent {
      const points = this.testNewPoints(response);
 
      pointsArr.push(points);
-     console.log('points arrgh', pointsArr);
+
+     // update plot and delay risk data
+     this.notificationService.UpdateForecastPlotData(response);
+
      this.displayRoute(pointsArr);
    }
 

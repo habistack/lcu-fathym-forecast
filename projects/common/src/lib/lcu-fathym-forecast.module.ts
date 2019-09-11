@@ -2,36 +2,35 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataGridModule } from '@lowcodeunit/data-grid';
 import { ToastrModule } from 'ngx-toastr';
 import { AmModule } from '@acaisoft/angular-azure-maps';
+import { NvD3Module } from 'ng2-nvd3';
+
+import 'd3';
+import 'nvd3';
+
+import { DataGridModule } from '@lowcodeunit/data-grid';
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/wc-pipes';
 import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
 import { RouteMapComponent } from './controls/route-map/route-map.component';
-import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.component';
-// import { IrradiancePlot } from './controls/plots/irradiance-plot/irradiance-plot';
-// import { NumericPlot } from './controls/plots/numeric-plot/numeric-plot';
-// import { PotentialDelayRiskPlot } from './controls/plots/potential-delay-risk-plot/potential-delay-risk-plot';
-// import { PotentialRoadStatePlot } from './controls/plots/potential-road-state_plot/potential-road-state-plot';
-// import { PrecipitationPlot } from './controls/plots/precipitation-plot/precipitation-plot';
-// import { SnowDepthPlot } from './controls/plots/snow-depth-plot/snow-depth-plot';
-// import { TemperaturePlot } from './controls/plots/temperature-plot/temperature-plot';
-// import { WindPlot } from './controls/plots/wind-plot/wind-plot';
-// import { ElevationPlot } from './controls/plots/elevation-plot/elevation-plot';
-// import { CrosswindPlot } from './controls/plots/crosswind-plot/crosswind-plot';
-// import { CloudCoverPlot } from './controls/plots/cloud-cover-plot/cloud-cover-plot';
+import { ForecastDataPlotComponent } from './controls/forecast-data-plot/forecast-data-plot.component';
+import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
+import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots.component';
 
 @NgModule({
   declarations: [
     DepartureTableComponent,
     SearchFormComponent,
     RouteMapComponent,
-    ForecastPlotComponent,
+    ForecastDataPlotComponent,
     DisplayDateFormatPipe,
-    ImageDateFormatPipe
+    ImageDateFormatPipe,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +42,8 @@ import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.co
     LcuSelectModule,
     ToastrModule.forRoot(),
     AmModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NvD3Module
   ],
   exports: [
     DepartureTableComponent,
@@ -52,13 +52,19 @@ import { ForecastPlotComponent } from './controls/forecast-plot/forecast-plot.co
     SearchFormComponent,
     DisplayDateFormatPipe,
     ImageDateFormatPipe,
-    ForecastPlotComponent
+    ForecastDataPlotComponent,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent
   ],
   entryComponents: [
     DepartureTableComponent,
     SearchFormComponent,
     RouteMapComponent,
-    ForecastPlotComponent
+    ForecastDataPlotComponent,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent
   ],
   providers: [
     DisplayDateFormatPipe,
