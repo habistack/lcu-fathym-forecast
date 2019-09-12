@@ -81,24 +81,17 @@ export class ForecastPlotsComponent implements OnInit {
 
     this.PlotForecastData = response;
 
-    const plotArr: Array<any> = [];
-    Object.entries(response).forEach(itm => {
-      plotArr.push(itm[1]['values']);
+    const routePoints: Array<any> = [];
+    Object.entries(response.points).forEach(itm => {
+      routePoints.push({lng: itm[1]['lng'], lat: itm[1]['lat']});
       this.ValidTimes.push(itm[1]['absolute-seconds']);
     });
 
-    const surfaceTempArr: Array<any> = [];
 
-    for (const itm of plotArr) {
-      if (itm[0].var.level.toUpperCase() === 'SURFACE' && itm[0].var.name.toUpperCase() === 'TEMPERATURE') {
-        surfaceTempArr.push(itm[0].value);
-      }
-    }
+    Object.entries(response.forecast).forEach(itm => {
+      this.PlotForecastData.sfc_t = itm[1]['values'];
+    });
 
-    this.PlotForecastData.sfc_t = surfaceTempArr;
-
-    // this.ValidTimes = this.PlotForecastData['vtimes']; // for testing - shannon
-    // this.ValidTimes = response['valid_times'] || data['vtimes'] || response['data'][0]['valid_times']; // more hacking
     this.plot.Refresh();
   }
 
