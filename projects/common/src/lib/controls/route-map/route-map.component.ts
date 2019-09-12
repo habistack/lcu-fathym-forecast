@@ -498,7 +498,7 @@ export class RouteMapComponent {
     // console.log('val', val);
    // const pos = new atlas.data.Position(1, 1);
 
-    for (const point of val) {
+    for (const point of val.points) {
     points.push([point.lng, point.lat]);
    }
 

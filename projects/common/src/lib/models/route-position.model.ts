@@ -1,4 +1,16 @@
 export class RoutePosition {
-  public lat: number;
-  public lon: number;
+  /**
+   * Absolute time on the route
+   */
+  public AbsoluteSeconds: number;
+
+  /**
+   * Latitude point
+   */
+  public Lat: number;
+
+  /**
+   * Longitude point
+   */
+  public Lng: number;
 }
