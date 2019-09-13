@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ForecastDataPlotComponent } from '../forecast-data-plot/forecast-data-plot.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { NotificationService } from '../../services/notification.service';
+import { ForecastDataModel } from '../../models/forecast-data.model'
+import { TemperatureConversion } from '../../utils/conversion/temperature.conversion';
 
 @Component({
   selector: 'lcu-forecast-plots',
@@ -38,7 +40,7 @@ export class ForecastPlotsComponent implements OnInit {
       if (!data) {
         console.error('PlotDataSubscription - No data returned'); return;
       }
-      this.dataResponse(data);
+      this.dataResponse(this.convertForecastData(data));
       }
     );
 
@@ -65,31 +67,33 @@ export class ForecastPlotsComponent implements OnInit {
 	 *
 	 * @param response returned data
 	 */
-  protected dataResponse(response: any): void {
-
-    let data: object = {};
-
-    // data being returned from geofence search and route search has a different structure
-    // this should not be this way, but doing this for now - shannon
-    // if (response['data'][0]['data']) {
-    //   data = response['data'][0]['data'];
-    // } else {
-    //   data = response['data'][0];
-    // }
-
-    // const data = response['data'][0]['data'];
+  protected dataResponse(response: ForecastDataModel): void {
 
     this.PlotForecastData = response;
 
     const routePoints: Array<any> = [];
-    Object.entries(response.points).forEach(itm => {
-      routePoints.push({lng: itm[1]['lng'], lat: itm[1]['lat']});
-      this.ValidTimes.push(itm[1]['absolute-seconds']);
+
+    Object.entries(response.RoutePoints).forEach(itm => {
+      const item: any = itm[1];
+
+      routePoints.push(
+        {
+          lng: item.lng,
+          lat: item.lat
+        });
+
+      this.ValidTimes.push(item['absolute-seconds']);
     });
 
+    Object.entries(response.ForecastConditions).forEach(itm => {
+      const item: any = itm[1];
 
-    Object.entries(response.forecast).forEach(itm => {
-      this.PlotForecastData.sfc_t = itm[1]['values'];
+      if (item.name.toUpperCase() === 'TEMPERATURE' && item.level.toUpperCase() === 'SURFACE') {
+        this.PlotForecastData.sfc_t = [];
+        for (const temp of item.values) {
+          this.PlotForecastData.sfc_t.push(TemperatureConversion.KelvinToFahrenheit(temp));
+        }
+      }
     });
 
     this.plot.Refresh();
@@ -102,5 +106,19 @@ export class ForecastPlotsComponent implements OnInit {
   */
  protected clearPlots(): void {
   this.plot.Clear();
+ }
+
+ /**
+  * Convert forecast data
+  *
+  * @param data response data
+  */
+ protected convertForecastData(data: any): ForecastDataModel {
+
+  const forecastData: ForecastDataModel = new ForecastDataModel();
+  forecastData.ForecastConditions = data.forecast;
+  forecastData.RoutePoints = data.points;
+
+  return forecastData;
  }
 }

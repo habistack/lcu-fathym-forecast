@@ -13,6 +13,7 @@ export class NotificationService {
   public GeofenceDrawingStarted = new Subject<SearchModel>();
   public ForecastDetailsCleared = new Subject();
   public RouteChanged = new Subject<SearchModel>();
+  public ChartMouseChanged = new Subject<any>();
   // public GeofenceShapeCompleted = new Subject<any>();
 
   constructor() { }
@@ -47,6 +48,9 @@ export class NotificationService {
     this.DelayRiskDataChanged.next({ ...params });
   }
 
+  public OnChartMouseMove(params: any): void {
+    this.ChartMouseChanged.next({ ...params });
+  }
 
   // public CompleteGeofenceDrawing(params: any): void {
   //   this.GeofenceShapeCompleted.next({ ...params });

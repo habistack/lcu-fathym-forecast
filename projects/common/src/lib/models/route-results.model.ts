@@ -1,7 +1,8 @@
 import { RouteAddress } from './route-address.model';
-import { RoutePosition } from './route-position.model';
+import { RoutePointModel } from './route-point.model';
+
 
 export class RouteResultsModel {
     public address: RouteAddress;
-    public position: RoutePosition;
+    public position: RoutePointModel;
 }
