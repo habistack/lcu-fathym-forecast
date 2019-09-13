@@ -1,8 +1,8 @@
-export class RoutePosition {
+export class RoutePointModel {
   /**
    * Absolute time on the route
    */
-  public AbsoluteSeconds: number;
+  public AbsoluteSecond: number;
 
   /**
    * Latitude point

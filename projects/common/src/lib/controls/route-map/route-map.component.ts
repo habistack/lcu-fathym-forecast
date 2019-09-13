@@ -1,4 +1,4 @@
-import { Component, Injector, ViewChild, ViewChildren, ChangeDetectorRef, AfterViewInit, QueryList, OnInit } from '@angular/core';
+import { Component, Injector, ViewChild, ViewChildren, ChangeDetectorRef, AfterViewInit, QueryList, OnInit, OnDestroy } from '@angular/core';
 import { MatSlider } from '@angular/material';
 import { map } from 'rxjs/internal/operators/map';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -13,6 +13,7 @@ import { WeatherCloudConfig } from '../../models/weather.config';
 import { SearchModel } from './../../models/search.model';
 import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils';
 import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
+import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps'
   templateUrl: './route-map.component.html',
   styleUrls: ['./route-map.component.scss']
 })
-export class RouteMapComponent {
+export class RouteMapComponent implements OnInit, OnDestroy {
 
    //  Fields
    protected dataSource: any;
@@ -137,6 +138,8 @@ export class RouteMapComponent {
     * Listen for drawRegionToggle change
     */
    protected drawRegionToggleSubscription: Subscription;
+
+   protected chartMouseMovedSubsription: Subscription;
  
    /**
     * Configuration object for weather cloud
@@ -184,6 +187,20 @@ export class RouteMapComponent {
      setTimeout(() => {
        this.initialSetup();
      }, 500);
+
+     this.chartMouseMovedSubsription = this.notificationService.ChartMouseChanged.subscribe(
+      (data: ChartMouseMoveModel) => {
+        if (!data) {
+          console.error('mouse moved - No data returned'); return;
+        }
+        this.setCurrentMarker(data.Index);
+        this.setTimeFromChart(data.Value);
+        }
+      );
+   }
+
+   public ngOnDestroy(): void {
+     this.chartMouseMovedSubsription.unsubscribe();
    }
  
    /**
@@ -380,7 +397,8 @@ export class RouteMapComponent {
  
        const start: atlas.data.Position = decodedPath[0];
        const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
- 
+
+
        /**
         * Set route start and end points
         */
@@ -390,7 +408,7 @@ export class RouteMapComponent {
          name: 'routeStart'
        });
  
-       this.endMarker = new atlas.data.Feature(new atlas.data.Point(end));
+       this.endMarker = new atlas.data.Feature(new atlas.data.Point(end), {iconImage: 'pin-red'});
  
        this.Maper.map.addPins([this.endMarker], {
          name: 'routeEnd'
@@ -401,11 +419,6 @@ export class RouteMapComponent {
         */
        const line = new atlas.data.LineString(points);
        const fline = new atlas.data.Feature(line);
-       // const line = new atlas.layer.LineLayer(dataSource, routeName, {
-       //   strokeColor: routeColor,
-       //   strokeWidth: 4,
-       //   filter: ['==', '$type', 'LineString']
-       // });
  
        this.Maper.map.addLinestrings([fline], {
          name: routeName,
@@ -419,6 +432,8 @@ export class RouteMapComponent {
         // this.Maper.map.layers.add(line, 'labels');
        // /** */
  
+       
+
        const sw = new atlas.data.Position(this.minLong - 0.75, this.minLat - 0.75);
  
        const ne = new atlas.data.Position(this.maxLong + 0.75, this.maxLat + 0.75);
@@ -567,17 +582,39 @@ export class RouteMapComponent {
      this.dataSource = dataSource;
    }
  
-   protected setCurrentMarker(index) {
+   /**
+    * On chart mouse move add icon to route location
+    *
+    * @param index for route point
+    */
+   protected setCurrentMarker(index: number) {
      this.Maper.map.removeLayers(['currentMark']);
  
      const point = this.Route[index];
  
-     this.currentMarker = new atlas.data.Feature(new atlas.data.Point(point));
+     this.currentMarker = new atlas.data.Feature(new atlas.data.Point(point), {
+      //  title: 'Condition Point',
+      //  iconImage: 'pin-red'
+     });
  
      this.Maper.map.addPins([this.currentMarker], {
        name: 'currentMark'
      });
    }
+
+   /**
+    * On chart mouse move set time on route
+    * @param vtime absolute second time
+    */
+   protected setTimeFromChart(vtime: number) {
+    const cl = this.closest(this.ImageValidTimes, vtime);
+
+    const i = cl[1];
+
+    // this.Slider.value = i;
+
+   // this.setSliderTime(i);
+  }
  
    /**
     *
@@ -640,16 +677,6 @@ export class RouteMapComponent {
        this.IsLoading = false;
    });
    }
- 
-   // protected setTimeFromChart(vtime) {
-   //   const cl = this.closest(this.ImageValidTimes, vtime);
- 
-   //   const i = cl[1];
- 
-   //   this.Slider.value = i;
- 
-   //  // this.setSliderTime(i);
-   // }
  
    // protected setSliderTime (value: number) {
    //   if (value == null || this.ImageValidTimes.length <= value) {

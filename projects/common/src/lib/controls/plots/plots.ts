@@ -1,3 +1,4 @@
+import { ChartMouseMoveModel } from './../../models/chart-mouse-move.model';
 
 import { Output, EventEmitter } from '@angular/core';
 
@@ -95,13 +96,9 @@ export abstract class Plot {
           dispatch: {
             elementMousemove: function (me) {
               return function (e) {
-                const cls = me.closest(me.validTimes, e.pointXValue);
-                const cl = cls[0];
-                const i = cls[1];
-                me.chartMousemove.emit({
-                  index: i,
-                  value: cl
-                });
+                 const cls = me.closest(me.validTimes, e.pointXValue);
+                 const chartMouseModel: ChartMouseMoveModel = new ChartMouseMoveModel( me, cls[1], cls[0] );
+                 me.chartMousemove.emit(chartMouseModel);
               }
             }(this)
           }

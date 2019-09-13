@@ -36,14 +36,21 @@ export class TemperaturePlot extends Plot {
           if (val === null) { return '#0000dd'; }
 
           if (this.unitType.toUpperCase() === 'F') {
-            this.fahrenheit(val);
+            return this.fahrenheit(val);
           } else if (this.unitType.toUpperCase() === 'C') {
-            this.celsius(val);
+           return this.celsius(val);
+          } else if (this.unitType.toUpperCase() === 'K') {
+            return this.fahrenheit(val);
           }
 
-          return '#ffff00';
+         // return '#ffff00';
         }
 
+        /**
+         * set colors based of fahrenheit
+         *
+         * @param val fahrenheit value
+         */
         protected fahrenheit(val: number): string {
           if (val <= 32) { return '#0059d6'; }
           if (val > 32 && val <= 85) { return '#00dd00'; }
@@ -51,6 +58,11 @@ export class TemperaturePlot extends Plot {
           if (val > 95) { return '#ff0000'; }
         }
 
+        /**
+         * set colors based of celsius
+         *
+         * @param val celsius value
+         */
         protected celsius(val: number): string {
           if (val <= 0) { return '#0059d6'; }
           if (val > 0 && val <= 29) { return '#00dd00'; }
