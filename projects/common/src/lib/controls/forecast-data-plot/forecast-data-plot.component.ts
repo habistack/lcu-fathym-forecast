@@ -10,6 +10,7 @@ import { WindPlot } from '../plots/wind-plot/wind-plot';
 import { CrosswindPlot } from '../plots/crosswind-plot/crosswind-plot';
 import { ElevationPlot } from '../plots/elevation-plot/elevation-plot';
 import { NumericPlot } from '../plots/numeric-plot/numeric-plot';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'lcu-forecast-data-plot',
@@ -44,6 +45,8 @@ export class ForecastDataPlotComponent {
    */
   @ViewChildren(VariableDataPlotComponent) varPlots: QueryList<VariableDataPlotComponent>;
 
+constructor(protected notificationService: NotificationService) {}
+
   /**
    * array of plot
    */
@@ -62,7 +65,7 @@ export class ForecastDataPlotComponent {
    */
   public Refresh() {
     this.PlotConfigs = [
-      new TemperaturePlot('C', 'Forecast'),
+      new TemperaturePlot('F', 'Forecast'),
       new PotentialRoadStatePlot(null, ''),
       new PotentialDelayRiskPlot(null, ''),
       new PrecipitationPlot('mm/hr', 'Forecast'),
@@ -77,7 +80,7 @@ export class ForecastDataPlotComponent {
 
     for (const plot of this.PlotConfigs) {
       plot.chartMousemove.subscribe((e) => {
-        this.ChartMousemove.emit(e);
+        this.notificationService.OnChartMouseMove(e);
       });
     }
 
