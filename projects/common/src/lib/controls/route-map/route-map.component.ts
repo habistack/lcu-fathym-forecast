@@ -193,6 +193,9 @@ export class RouteMapComponent implements OnInit, OnDestroy {
         if (!data) {
           console.error('mouse moved - No data returned'); return;
         }
+        
+        console.log('data', data);
+
         this.setCurrentMarker(data.Index);
         this.setTimeFromChart(data.Value);
         }
@@ -408,7 +411,7 @@ export class RouteMapComponent implements OnInit, OnDestroy {
          name: 'routeStart'
        });
  
-       this.endMarker = new atlas.data.Feature(new atlas.data.Point(end), {iconImage: 'pin-red'});
+       this.endMarker = new atlas.data.Feature(new atlas.data.Point(end));
  
        this.Maper.map.addPins([this.endMarker], {
          name: 'routeEnd'
@@ -591,7 +594,9 @@ export class RouteMapComponent implements OnInit, OnDestroy {
      this.Maper.map.removeLayers(['currentMark']);
  
      const point = this.Route[index];
- 
+
+     if (!point) { return; }
+
      this.currentMarker = new atlas.data.Feature(new atlas.data.Point(point), {
       //  title: 'Condition Point',
       //  iconImage: 'pin-red'

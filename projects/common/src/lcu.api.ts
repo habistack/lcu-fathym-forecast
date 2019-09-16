@@ -7,6 +7,7 @@ export * from './lib/models/route-data.model';
 export * from './lib/models/route-point.model';
 export * from './lib/models/route-results.model';
 export * from './lib/models/chart-mouse-move.model';
+export * from './lib/models/chart-series.model';
 export * from './lib/models/route.model';
 export * from './lib/models/search.model';
 export * from './lib/models/weather.config';
