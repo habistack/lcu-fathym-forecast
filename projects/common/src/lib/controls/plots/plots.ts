@@ -71,13 +71,13 @@ export abstract class Plot {
         },
         forceY: this.getForceY(),
         useInteractiveGuideline: true,
-        callback: function (me) {
+        callback: function (currentPlot) {
           return function (chart) {
             if (!chart) { return; }
             const svg = d3.select(chart.container);
-            // let grad_id = me.title.replace(' ','');
-            const grad_id = me.title.replace(/ /g, '');
-            me.loadGradients(me, chart, svg, grad_id);
+            // let grad_id = currentPlot.title.replace(' ','');
+            const grad_id = currentPlot.title.replace(/ /g, '');
+            currentPlot.loadGradients(currentPlot, chart, svg, grad_id);
             svg.select('rect')
               .attr('fill', 'url(#' + grad_id + ')')
               .attr('patternTransform', 'tranlate(0,-30)')
@@ -94,11 +94,14 @@ export abstract class Plot {
         duration: 500,
         interactiveLayer: {
           dispatch: {
-            elementMousemove: function (me) {
-              return function (e) {
-                 const cls = me.closest(me.validTimes, e.pointXValue);
-                 const chartMouseModel: ChartMouseMoveModel = new ChartMouseMoveModel( me, cls[1], cls[0] );
-                 me.chartMousemove.emit(chartMouseModel);
+            elementMousemove: function (currentPlot) {
+              return (e) => {
+                 const cls = currentPlot.closest(currentPlot.validTimes, e.pointXValue);
+                // const cl = cls[0];
+                // const i = cls[1];
+                 const chartMouseModel: ChartMouseMoveModel = new ChartMouseMoveModel( cls, cls[1], cls[0] );
+                
+                currentPlot.chartMousemove.emit(chartMouseModel);
               }
             }(this)
           }
@@ -197,8 +200,8 @@ export abstract class Plot {
     return v;
   }
 
-  public loadGradients(me, chart, svg, gradientId): void {
-    const series = me.series;
+  public loadGradients(currentPlot, chart, svg, gradientId): void {
+    const series = currentPlot.series;
     const xDomain = chart.xAxis.domain();
     const xdiff = xDomain[1] - xDomain[0];
     const xmin = xDomain[0];
@@ -220,7 +223,7 @@ export abstract class Plot {
       for (const ser of series) {
         val[ser.key] = ser.values[i].y;
       }
-      const stopColor = me.getColor(val);
+      const stopColor = currentPlot.getColor(val);
       const stopPercent = (x - xmin) / xdiff;
 
       gradient.append('stop')

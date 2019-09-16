@@ -8,6 +8,7 @@ export class TemperatureConversion {
 
     /**
      * Convert fahrenheit to celsius
+     *
      * @param val fahrenheit value
      */
     public static FahrenheitToCelsius(val: number): number {
@@ -16,6 +17,7 @@ export class TemperatureConversion {
 
     /**
      * Convert fahrenheit to kelvin
+     *
      * @param val fahrenheit value
      */
     public static FahrenheitToKelvin(val: number): number {
@@ -24,6 +26,7 @@ export class TemperatureConversion {
 
     /**
      * Convert celsius to fahrenheit
+     *
      * @param val celsius value
      */
     public static CelsiusToFahrenheit(val: number): number {
@@ -32,6 +35,7 @@ export class TemperatureConversion {
 
     /**
      * Convert celsius to kelvin
+     *
      * @param val celsius value
      */
     public static CelsiusToKelvin(val: number): number {
@@ -40,6 +44,7 @@ export class TemperatureConversion {
 
     /**
      * Convert kelvin to fahrenheit
+     *
      * @param val kelvin value
      */
     public static KelvinToFahrenheit(val: number): number {
@@ -48,6 +53,7 @@ export class TemperatureConversion {
 
     /**
      * Convert kelvin to celsius
+     *
      * @param val kelvin value
      */
     public static KelvinToCelsius(val: number): number {
