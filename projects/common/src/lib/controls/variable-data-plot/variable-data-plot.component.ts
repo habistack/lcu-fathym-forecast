@@ -15,8 +15,16 @@ export class VariableDataPlotComponent implements OnInit {
    * forecast data
    */
     // tslint:disable-next-line:no-input-rename
+    private _forecastData: any;
     @Input('forecast-data')
-    public ForecastData: any;
+    public set ForecastData(val: any) {
+      console.log('variable data plot ForecastData', val);
+      this._forecastData = val;
+    }
+
+    public get ForecastData(): any {
+      return this._forecastData;
+    }
 
 
     /**
@@ -45,7 +53,7 @@ export class VariableDataPlotComponent implements OnInit {
      */
     private _chartData: Array<any>;
     public set ChartData(val: Array<any>) {
-      // console.log('chart data', val);
+      console.log('chart data', val);
       this._chartData = val;
     }
   

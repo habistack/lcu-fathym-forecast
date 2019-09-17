@@ -23,8 +23,16 @@ export class ForecastDataPlotComponent {
    * Forecast data
    */
   // tslint:disable-next-line:no-input-rename
-  @Input('forecast-data')
-  public ForecastData: any;
+  private _forecastData: any;
+    @Input('forecast-data')
+    public set ForecastData(val: any) {
+      console.log('forecast data plot ForecastData', val);
+      this._forecastData = val;
+    }
+
+    public get ForecastData(): any {
+      return this._forecastData;
+    }
 
 /**
  * valid times
@@ -79,13 +87,13 @@ constructor(protected notificationService: NotificationService) {}
     ];
 
     for (const plot of this.PlotConfigs) {
+
       plot.chartMousemove.subscribe((e) => {
         this.notificationService.OnChartMouseMove(e);
       });
     }
 
     this.varPlots.map((x) => {
-      console.log('plot', x);
       x.Refresh();
     });
   }
