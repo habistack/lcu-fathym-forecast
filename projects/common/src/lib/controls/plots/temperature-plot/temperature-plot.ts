@@ -10,11 +10,11 @@ export class TemperaturePlot extends Plot {
             title: 'Air Temp',
             color: '#0000dd'
           },
-          sfc_t: {
+          surfaceTemperature: {
             title: 'Surface Temp',
             color: '#dd00b4'
           },
-          road_temp: {
+          roadTemperature: {
             title: 'Road Surface Temp',
             color: '#222222'
           }/*,dewpt:{

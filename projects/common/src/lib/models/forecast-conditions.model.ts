@@ -1,13 +1,12 @@
-import { ForecastConditionModel } from './forecast-condition.model';
 
 export class ForecastConditionsModel {
     /**
-     * Forecast conditions
+     * Road temperature values
      */
-    public ForecastConditions: Array<ForecastConditionModel>;
+    public roadTemperature: Array<number>;
 
     /**
-     * Lat / Long points for route
+     * Surface temperature values
      */
-    public Points: Array<number>;
+    public surfaceTemperature: Array<number>;
 }

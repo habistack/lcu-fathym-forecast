@@ -5,10 +5,10 @@ export class ForecastDataModel {
     /**
      * Forecast weather conditions and values
      */
-    public ForecastConditions: Array<ForecastConditionsModel>;
+    public forecast: ForecastConditionsModel;
 
     /**
      * Route points and absolute seconds
      */
-    public RoutePoints: Array<RoutePointModel>;
+    public points: Array<RoutePointModel>;
 }
