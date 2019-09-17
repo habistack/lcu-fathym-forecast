@@ -3,7 +3,7 @@ import { ForecastDataPlotComponent } from '../forecast-data-plot/forecast-data-p
 import { Subscription } from 'rxjs/internal/Subscription';
 import { NotificationService } from '../../services/notification.service';
 import { ForecastDataModel } from '../../models/forecast-data.model'
-import { TemperatureConversion } from '../../utils/conversion/temperature.conversion';
+import { TemperatureConversion } from '@lcu-ide/common';
 
 @Component({
   selector: 'lcu-forecast-plots',
@@ -18,7 +18,7 @@ export class ForecastPlotsComponent implements OnInit {
   /**
    * Data for plot forecast
    */
-    public PlotForecastData: any;
+    public PlotForecastData: ForecastDataModel;
 
     /**
      * Different times along route
@@ -36,11 +36,11 @@ export class ForecastPlotsComponent implements OnInit {
  public ngOnInit() {
 
   this.forecastPlotDataSubsription = this.notificationService.ForecastPlotDataChanged.subscribe(
-    (data: any) => {
+    (data: ForecastDataModel) => {
       if (!data) {
         console.error('PlotDataSubscription - No data returned'); return;
       }
-      this.dataResponse(this.convertForecastData(data));
+      this.dataResponse(data);
       }
     );
 
@@ -71,30 +71,16 @@ export class ForecastPlotsComponent implements OnInit {
 
     this.PlotForecastData = response;
 
-    const routePoints: Array<any> = [];
-
-    Object.entries(response.RoutePoints).forEach(itm => {
-      const item: any = itm[1];
-
-      routePoints.push(
-        {
-          lng: item.lng,
-          lat: item.lat
-        });
-
-      this.ValidTimes.push(item['absolute-seconds']);
-    });
-
-    Object.entries(response.ForecastConditions).forEach(itm => {
-      const item: any = itm[1];
-
-      if (item.name.toUpperCase() === 'TEMPERATURE' && item.level.toUpperCase() === 'SURFACE') {
-        this.PlotForecastData.sfc_t = [];
-        for (const temp of item.values) {
-          this.PlotForecastData.sfc_t.push(TemperatureConversion.KelvinToFahrenheit(temp));
-        }
+    /** This is here for now, can be moved to a location where we change the temperature type at runtime - Shannon */
+    Object.entries(this.PlotForecastData.forecast).forEach(itm => {
+      for (let i = 0; i < itm[1].length; i++) {
+        itm[1][i] = TemperatureConversion.KelvinToFahrenheit(itm[1][i]);
       }
     });
+
+    for (const itm of this.PlotForecastData.points) {
+      this.ValidTimes.push(itm.absoluteSeconds);
+    }
 
     this.plot.Refresh();
   }
@@ -106,19 +92,5 @@ export class ForecastPlotsComponent implements OnInit {
   */
  protected clearPlots(): void {
   this.plot.Clear();
- }
-
- /**
-  * Convert forecast data
-  *
-  * @param data response data
-  */
- protected convertForecastData(data: any): ForecastDataModel {
-
-  const forecastData: ForecastDataModel = new ForecastDataModel();
-  forecastData.ForecastConditions = data.forecast;
-  forecastData.RoutePoints = data.points;
-
-  return forecastData;
  }
 }

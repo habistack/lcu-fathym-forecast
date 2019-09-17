@@ -2,7 +2,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataGridModule } from '@lowcodeunit/data-grid';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +23,6 @@ import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    DataGridModule,
     FlexLayoutModule,
     FathymSharedModule,
     LcuFathymForecastModule,

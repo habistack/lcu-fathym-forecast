@@ -12,7 +12,6 @@ export * from './lib/models/route.model';
 export * from './lib/models/search.model';
 export * from './lib/models/weather.config';
 export * from './lib/utils/weather-conditions-icons.utils';
-export * from './lib/utils/conversion/temperature.conversion';
 export * from './lib/utils/toggle-theme.utils';
 export * from './lib/utils/pipes/wc-pipes';
 export * from './lib/controls/departure-table/departure-table.component';

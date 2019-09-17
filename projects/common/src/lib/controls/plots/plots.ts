@@ -51,7 +51,7 @@ export abstract class Plot {
       return false;
     }
     for (const varName in this.requiredVars) {
-      if (varName in forecastData) {
+      if (varName in forecastData.forecast) {
         return true;
       }
     }
@@ -160,8 +160,8 @@ export abstract class Plot {
     for (let varName in this.requiredVars) {
       let varOptions = this.requiredVars[varName];
       let name = varOptions.title;
-      if (varName in forecastData) {
-        var varData = forecastData[varName];
+      if (varName in forecastData['forecast']) {
+        var varData = forecastData['forecast'][varName];
         var values = [];
         for (var i = 0; i < varData.length; i++) {
           var y = varData[i];
