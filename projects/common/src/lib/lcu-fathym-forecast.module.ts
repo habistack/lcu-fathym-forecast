@@ -11,7 +11,7 @@ import 'nvd3';
 
 import { DataGridModule } from '@lowcodeunit/data-grid';
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/wc-pipes';
-import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
+import { FathymSharedModule, MaterialModule } from '@lcu/common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
