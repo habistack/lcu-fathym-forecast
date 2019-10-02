@@ -1,6 +1,6 @@
 {
 	"name": "@habistack/lcu-fathym-forecast-lcu",
-	"version": "0.0.22",
+	"version": "0.0.27",
 	"peerDependencies": {
 		"@angular/common": "^8.1.3",
 		"@angular/core": "^8.1.3"
