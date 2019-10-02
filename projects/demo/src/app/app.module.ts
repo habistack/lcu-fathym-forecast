@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
+import { FathymSharedModule, MaterialModule } from '@lcu/common';
 // import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 import { ToastrModule } from 'ngx-toastr';
 import {
