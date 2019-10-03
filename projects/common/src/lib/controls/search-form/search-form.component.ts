@@ -180,11 +180,11 @@ export class SearchFormComponent implements OnInit {
    */
   public SearchTitle: string = 'Search Type';
 
-  public GeofenceChecked: boolean = false;
+  public GeofenceChecked: boolean;
 
-  public DepartureChecked: boolean = false;
+  public DepartureChecked: boolean;
 
-  public RouteChecked: boolean = false;
+  public RouteChecked: boolean;
 
   // public ConditionVariablesNameList: Array<object> = SearchConstants.VAR_NAMES_SELECT;
 
@@ -236,7 +236,7 @@ export class SearchFormComponent implements OnInit {
       SearchTypeControls: new FormGroup({
         checkSearchGeofence: new FormControl(false),
         checkSearchDepart: new FormControl(false),
-        checkSearchRoutes: new FormControl(false),
+        checkSearchRoutes: new FormControl(true),
       }, RequiredCheckedValidator()
     ),
     SearchConditions: new FormGroup({
@@ -258,7 +258,7 @@ export class SearchFormComponent implements OnInit {
         // switchMap(term => this.locationService.Search(term, this.WeatherCloudConfig.LBSKey)
         switchMap(term => this.locationService.Search(term, '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78')
         .pipe(
-          tap(() => { 
+          tap(() => {
             this.searchFailed = false;
           }),
         catchError(() => {
@@ -301,7 +301,11 @@ export class SearchFormComponent implements OnInit {
 
     // this.wcConfigCtx.Context.subscribe(ctxt => (this.WeatherCloudConfig = ctxt));
 
+    this.RouteChecked = this.SearchTypeRouteCheck.value;
+    this.DepartureChecked = this.SearchTypeDepartCheck.value;
+    this.GeofenceChecked = this.SearchTypeGeofenceCheck.value;
     this.defaultSelects();
+    this.updateSearchTitle();
   }
 
   public ngOnDestroy() {
