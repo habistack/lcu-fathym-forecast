@@ -28,13 +28,17 @@
   }
 }
 
-.nv-series {
-  cursor: pointer;
+.nv-legend {
+  transform: translate(20px, 5px);
 
-  .nv-legend-text {
+  .nv-series {
     cursor: pointer;
-    fill: white;
-    font-size: 12px;
+
+    .nv-legend-text {
+      cursor: pointer;
+      fill: white;
+      font-size: 12px;
+    }
   }
 }
 
