@@ -7,9 +7,7 @@
         <!-- <i class="fas fa-route"></i> -->
 <!--Search type checkboxes-->
         <mat-card>
-            <span class="title mb-10 dis-block"><i [ngClass]="(GeofenceChecked) ? 'fa fa-pencil-square-o fa-2x' : 'fa fa-search fa-2x' "></i>
-              {{ SearchTitle }}
-            </span>
+            <span class="title mb-10 dis-block"><i [ngClass]="(GeofenceChecked) ? 'fa fa-pencil-square-o fa-2x' : 'fa fa-search fa-2x' "></i> {{ SearchTitle }}</span>
           <mat-card-header>
             <!-- <mat-card-title><i class="fa fa-search fa-2x"></i> Search Type</mat-card-title>
             <mat-card-subtitle></mat-card-subtitle> -->
@@ -17,9 +15,8 @@
           <mat-card-content>
             <div fxLayout="row" fxLayoutGap="10px" formGroupName="SearchTypeControls">
               <mat-checkbox id="checkSearchRoutes" formControlName="checkSearchRoutes" color="primary" (change)="SearchTypeChanged($event)">Search Route(s)</mat-checkbox>
-              <!-- TODO: Once backend functionality is supported, remove below *ngIf="false" to display checkboxes -->
-              <mat-checkbox *ngIf="false" id="checkSearchDepart" formControlName="checkSearchDepart" color="primary" (change)="SearchTypeChanged($event)">Search Depart Risk</mat-checkbox>
-              <mat-checkbox *ngIf="false" id="checkSearchGeofence" formControlName="checkSearchGeofence" color="accent" (change)="SearchTypeChanged($event)">Create Geofence</mat-checkbox>
+              <mat-checkbox id="checkSearchDepart" formControlName="checkSearchDepart" color="primary" (change)="SearchTypeChanged($event)">Search Depart Risk</mat-checkbox>
+              <mat-checkbox id="checkSearchGeofence" formControlName="checkSearchGeofence" color="accent" (change)="SearchTypeChanged($event)">Create Geofence</mat-checkbox>
             </div>
             <mat-error class="mt-10" *ngIf="RouteInputForm.controls['SearchTypeControls'].hasError('requireCheckboxesToBeChecked')">
                 At least one checkbox is required

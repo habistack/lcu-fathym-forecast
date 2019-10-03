@@ -62,11 +62,11 @@ export abstract class Plot {
     const options = {
       chart: {
         type: 'lineChart',
-        height: 250,
+        height: 220,
         margin: {
           top: 20,
           right: 55,
-          bottom: 40,
+          bottom: 50,
           left: 55
         },
         forceY: this.getForceY(),
@@ -80,10 +80,8 @@ export abstract class Plot {
             currentPlot.loadGradients(currentPlot, chart, svg, grad_id);
             svg.select('rect')
               .attr('fill', 'url(#' + grad_id + ')')
-              .attr('patternTransform', 'translate(0,-30)')
+              .attr('patternTransform', 'tranlate(0,-30)')
               .style('opacity', 0.75);
-            svg.select('g')
-              .attr('fill', '#ffffff');
             chart.update();
           }
         }(this),
@@ -96,12 +94,15 @@ export abstract class Plot {
         duration: 500,
         interactiveLayer: {
           dispatch: {
-            elementMousemove: function(currentPlot) {
+            elementMousemove: function (currentPlot) {
               return (e) => {
-                const cls = currentPlot.closest(currentPlot.validTimes, e.pointXValue);
-                const chartMouseModel: ChartMouseMoveModel = new ChartMouseMoveModel( cls, cls[1], cls[0] );
+                 const cls = currentPlot.closest(currentPlot.validTimes, e.pointXValue);
+                // const cl = cls[0];
+                // const i = cls[1];
+                 const chartMouseModel: ChartMouseMoveModel = new ChartMouseMoveModel( cls, cls[1], cls[0] );
+                
                 currentPlot.chartMousemove.emit(chartMouseModel);
-              };
+              }
             }(this)
           }
         },
@@ -196,7 +197,7 @@ export abstract class Plot {
   }
 
   public getTickFormat(v: any): string {
-    return Math.round(v).toString();
+    return v;
   }
 
   public loadGradients(currentPlot, chart, svg, gradientId): void {
