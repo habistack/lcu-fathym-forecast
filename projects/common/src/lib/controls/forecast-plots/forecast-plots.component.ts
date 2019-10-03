@@ -3,7 +3,7 @@ import { ForecastDataPlotComponent } from '../forecast-data-plot/forecast-data-p
 import { Subscription } from 'rxjs/internal/Subscription';
 import { NotificationService } from '../../services/notification.service';
 import { ForecastDataModel } from '../../models/forecast-data.model'
-import { TemperatureConversion } from '@lcu-ide/common';
+import { TemperatureConversion } from '@lcu/common';
 
 @Component({
   selector: 'lcu-forecast-plots',
