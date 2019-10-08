@@ -1,5 +1,23 @@
-@import '../../../node_modules/@angular/material/prebuilt-themes/pink-bluegrey';
+// @import '../../../node_modules/@angular/material/prebuilt-themes/pink-bluegrey';
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../src/assets/themes/contrast-theme.scss';
+
+
+@mixin set-theme($theme) {
+  @include custom-theme($theme);
+
+  ::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: mat-color($primary);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: mat-color($accent);
+  }
+}
 
 /******************************************/
 /********* NVD3 Line Chart Styles *********/
@@ -73,3 +91,7 @@
   font-size: 12px !important;
   font-weight: bold;
 }
+
+@include set-theme($contrast-theme);
+
+
