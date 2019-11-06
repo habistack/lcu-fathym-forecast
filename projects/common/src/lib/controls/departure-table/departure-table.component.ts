@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { DataGridConfig, ColumnDefinition, DataGridFeatures, PipeConstants } from '@lowcodeunit/data-grid';
 
-import { WeatherCloudConditionIcons } from '../../utils/weather-conditions-icons.utils';
+import { FathymForecastConditionIcons } from '../../utils/weather-conditions-icons.utils';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -88,7 +88,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         null,
-        null, // WeatherCloudConditionIcons,
+        null, // FathymForecastConditionIcons,
         null
         ),
       new ColumnDefinition(
@@ -98,7 +98,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_TEMP_FAHRENHEIT,
-        null, // WeatherCloudConditionIcons,
+        null, // FathymForecastConditionIcons,
         null
         ),
       new ColumnDefinition(
@@ -108,7 +108,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         null,
-        null, // WeatherCloudConditionIcons,
+        null, // FathymForecastConditionIcons,
         null
       ),
       new ColumnDefinition(
@@ -118,7 +118,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_MPH,
-        null, // WeatherCloudConditionIcons,
+        null, // FathymForecastConditionIcons,
         null
         ),
       new ColumnDefinition(
@@ -128,7 +128,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_MPH,
-        null, // WeatherCloudConditionIcons,
+        null, // FathymForecastConditionIcons,
         null
         )
     ];

@@ -5,7 +5,7 @@ import { SearchModel } from '../models/search.model';
 
 import { HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { WeatherCloudConfig } from '../models/weather.config';
+import { FathymForecastConfig } from '../models/weather.config';
 import { RouteModel } from '../models/route.model';
 import { RouteResultsModel } from '../models/route-results.model';
 
@@ -15,7 +15,7 @@ import { RouteResultsModel } from '../models/route-results.model';
 })
 export class LocationSearchService {
 
-  public WeatherCloudConfig: WeatherCloudConfig;
+  public FathymForecastConfig: FathymForecastConfig;
 
   constructor(protected http: HttpClient) { }
 

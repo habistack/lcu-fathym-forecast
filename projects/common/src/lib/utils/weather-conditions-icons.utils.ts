@@ -1,23 +1,23 @@
 import { WeatherModel } from '../models/weather.model';
 
-export class WeatherCloudConditionIcons {
+export class FathymForecastConditionIcons {
 
   constructor(data: WeatherModel, colType: string) {
     switch (colType.toUpperCase()) {
       case 'TEMPMIN':
-        return WeatherCloudConditionIcons.temperature(data.TempMin);
+        return FathymForecastConditionIcons.temperature(data.TempMin);
         break;
       case 'TEMPMAX':
-        return WeatherCloudConditionIcons.temperature(data.TempMax);
+        return FathymForecastConditionIcons.temperature(data.TempMax);
         break;
       case 'PRECIPMAX': // **** precipMax does not correlate to percentage of chance ****
-        return WeatherCloudConditionIcons.precipitationType(data);
+        return FathymForecastConditionIcons.precipitationType(data);
         break;
       case 'WINDSPDMAX':
-        return WeatherCloudConditionIcons.windSpeed(data.WindSpdMax);
+        return FathymForecastConditionIcons.windSpeed(data.WindSpdMax);
         break;
       case 'WINDGUSTMAX':
-        return WeatherCloudConditionIcons.windGust(data.WindGustMax);
+        return FathymForecastConditionIcons.windGust(data.WindGustMax);
         break;
     }
 
@@ -30,13 +30,13 @@ export class WeatherCloudConditionIcons {
         icon = 'icon-no_value wc-icon-none';
         break;
       case 1:
-        icon = WeatherCloudConditionIcons.rainType(data.PrecipMax);
+        icon = FathymForecastConditionIcons.rainType(data.PrecipMax);
         break;
       case 2:
-        icon = WeatherCloudConditionIcons.mixedType(data.PrecipMax);
+        icon = FathymForecastConditionIcons.mixedType(data.PrecipMax);
         break;
       case 3:
-        icon = WeatherCloudConditionIcons.snowType(data.PrecipMax);
+        icon = FathymForecastConditionIcons.snowType(data.PrecipMax);
         break;
     }
 

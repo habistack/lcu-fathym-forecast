@@ -6,11 +6,11 @@ import { map, retry, catchError } from 'rxjs/operators';
 import { WeatherModel } from '../models/weather.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs';
-import { WeatherCloudConfig } from '../models/weather.config';
+import { FathymForecastConfig } from '../models/weather.config';
 import { SearchConstants } from '../constants/search.constants';
 import { SearchModel } from '../models/search.model';
 import { HttpUrlEncoder } from '../utils/http/http-url-encoder.utils';
-// import { WeatherCloudConfigContext } from '../contexts/wc-config.context';
+// import { FathymForecastConfigContext } from '../contexts/wc-config.context';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +32,12 @@ export class DataService {
 // includeAlts=true&token=fathym&
 // var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
 
-  protected wcConfig: WeatherCloudConfig;
+  protected wcConfig: FathymForecastConfig;
 
   //  Properties
 
   //  Constructors
-  // constructor(protected http: HttpClient, protected wcConfigCtxt: WeatherCloudConfigContext) {
+  // constructor(protected http: HttpClient, protected wcConfigCtxt: FathymForecastConfigContext) {
     constructor(protected http: HttpClient) {
     // this.wcConfigCtxt.Context.subscribe(res => {
     //   this.wcConfig = res;
