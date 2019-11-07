@@ -58,7 +58,7 @@ export class DepartureTableComponent implements OnInit {
    protected columnDefs: Array<ColumnDefinition> = [];
  
   constructor(
-    protected wcService: DataService,
+    protected ffService: DataService,
   ) {}
 
   ngOnInit() {
@@ -172,7 +172,7 @@ public DoubleClick(): void {
     const departTime = '1566503558';
 
     this.GridParameters = new DataGridConfig(
-        this.wcService.GetDepartureTableData(this.apiKey, origin, destination, departTime, includeAlts),
+        this.ffService.GetDepartureTableData(this.apiKey, origin, destination, departTime, includeAlts),
         this.columnDefs,
         this.GridFeatures
       );

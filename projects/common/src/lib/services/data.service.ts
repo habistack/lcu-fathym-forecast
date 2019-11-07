@@ -10,7 +10,7 @@ import { FathymForecastConfig } from '../models/weather.config';
 import { SearchConstants } from '../constants/search.constants';
 import { SearchModel } from '../models/search.model';
 import { HttpUrlEncoder } from '../utils/http/http-url-encoder.utils';
-// import { FathymForecastConfigContext } from '../contexts/wc-config.context';
+// import { FathymForecastConfigContext } from '../contexts/ff-config.context';
 
 @Injectable({
   providedIn: 'root'
@@ -32,24 +32,24 @@ export class DataService {
 // includeAlts=true&token=fathym&
 // var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
 
-  protected wcConfig: FathymForecastConfig;
+  protected ffConfig: FathymForecastConfig;
 
   //  Properties
 
   //  Constructors
-  // constructor(protected http: HttpClient, protected wcConfigCtxt: FathymForecastConfigContext) {
+  // constructor(protected http: HttpClient, protected ffConfigCtxt: FathymForecastConfigContext) {
     constructor(protected http: HttpClient) {
-    // this.wcConfigCtxt.Context.subscribe(res => {
-    //   this.wcConfig = res;
+    // this.ffConfigCtxt.Context.subscribe(res => {
+    //   this.ffConfig = res;
     // });
   }
 
   //  API Methods
   public Blend() {
-    if (this.wcConfig && this.wcConfig.ServerURL) {
+    if (this.ffConfig && this.ffConfig.ServerURL) {
       console.log('public Blend - need to uncomment this - shannon');
-     // const url = this.wcConfig.ServerURL + '/blend/times';
-     const url = this.wcConfig.ServerURL;
+     // const url = this.ffConfig.ServerURL + '/blend/times';
+     const url = this.ffConfig.ServerURL;
 
       return this.http.get(url).pipe(
         map(response => {
@@ -204,8 +204,8 @@ export class DataService {
         Host: 'http://fathymwx.westus.cloudapp.azure.com',
         VarNames: ''
        // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
-        // Host: (this.wcConfig ? this.wcConfig.ServerURL : ''),
-        // VarNames: (this.wcConfig ? this.wcConfig.VariableNames : ''),
+        // Host: (this.ffConfig ? this.ffConfig.ServerURL : ''),
+        // VarNames: (this.ffConfig ? this.ffConfig.VariableNames : ''),
       },
       {
         Name: SearchConstants.FORECAST_MODEL_GFS,
@@ -214,8 +214,8 @@ export class DataService {
         Host: 'http://fathymwx.westus.cloudapp.azure.com',
         VarNames: ''
        // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
-        // Host: (this.wcConfig ? this.wcConfig.ServerURL : ''),
-        // VarNames: (this.wcConfig ? this.wcConfig.VariableNames : ''),
+        // Host: (this.ffConfig ? this.ffConfig.ServerURL : ''),
+        // VarNames: (this.ffConfig ? this.ffConfig.VariableNames : ''),
       },
       {
         Name: SearchConstants.FORECAST_MODEL_BLEND,
@@ -224,8 +224,8 @@ export class DataService {
         Host: 'http://fathymwx.westus.cloudapp.azure.com',
         VarNames: ''
        // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
-        // Host: (this.wcConfig ? this.wcConfig.ServerURL : ''),
-        // VarNames: (this.wcConfig ? this.wcConfig.VariableNames : ''),
+        // Host: (this.ffConfig ? this.ffConfig.ServerURL : ''),
+        // VarNames: (this.ffConfig ? this.ffConfig.VariableNames : ''),
       },
       {
         Name: SearchConstants.FORECAST_MODEL_MWAVE,

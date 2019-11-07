@@ -18,7 +18,7 @@ import { RequiredCheckedValidator } from '../../utils/validators/required-checke
 import { SearchModel } from '../../models/search.model';
 import { RouteResultsModel } from '../../models/route-results.model';
 import { DataService } from '../../services/data.service';
-import { DisplayDateFormatPipe } from '../../utils/pipes/wc-pipes';
+import { DisplayDateFormatPipe } from '../../utils/pipes/ff-pipes';
 
 @Component({
   selector: 'lcu-search-form',
@@ -209,7 +209,7 @@ export class SearchFormComponent implements OnInit {
   constructor(
     protected injector: Injector,
     protected http: HttpClient,
-    protected wcSvc: DataService,
+    protected ffSvc: DataService,
     protected notificationService: NotificationService,
     protected toastrDisplayService: ToastrDisplayService,
     protected locationService: LocationSearchService,
@@ -297,9 +297,9 @@ export class SearchFormComponent implements OnInit {
   //  Life Cycle
   public ngOnInit(): void {
 
-    // this.wcConfigCtx.Loading.subscribe(loading => this.Loading.Set(loading));
+    // this.ffConfigCtx.Loading.subscribe(loading => this.Loading.Set(loading));
 
-    // this.wcConfigCtx.Context.subscribe(ctxt => (this.FathymForecastConfig = ctxt));
+    // this.ffConfigCtx.Context.subscribe(ctxt => (this.FathymForecastConfig = ctxt));
 
     this.RouteChecked = this.SearchTypeRouteCheck.value;
     this.DepartureChecked = this.SearchTypeDepartCheck.value;
@@ -322,7 +322,7 @@ export class SearchFormComponent implements OnInit {
    * Get Datasource types
    */
   public LoadDataSourceTypes() {
-    this.ForecastModelList = this.wcSvc.LoadDataSources();
+    this.ForecastModelList = this.ffSvc.LoadDataSources();
 
     this.ForecastModelConfig.Source = this.ForecastModelList;
 
