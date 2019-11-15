@@ -1,4 +1,4 @@
-export class WeatherCloudConfig {
+export class FathymForecastConfig {
   public APIKey: string;
 
   public LBSKey: string;

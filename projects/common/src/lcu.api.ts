@@ -13,7 +13,7 @@ export * from './lib/models/search.model';
 export * from './lib/models/weather.config';
 export * from './lib/utils/weather-conditions-icons.utils';
 export * from './lib/utils/toggle-theme.utils';
-export * from './lib/utils/pipes/wc-pipes';
+export * from './lib/utils/pipes/ff-pipes';
 export * from './lib/controls/departure-table/departure-table.component';
 export * from './lib/controls/search-form/search-form.component';
 export * from './lib/controls/route-map/route-map.component';

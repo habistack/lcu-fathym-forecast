@@ -7,9 +7,9 @@ import { of } from 'rxjs/internal/observable/of';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ToastrDisplayService } from '../../services/toastr-display.service';
 import { NotificationService } from '../../services/notification.service';
-import { ImageDateFormatPipe, DisplayDateFormatPipe } from '../../utils/pipes/wc-pipes';
+import { ImageDateFormatPipe, DisplayDateFormatPipe } from '../../utils/pipes/ff-pipes';
 import { DataService } from '../../services/data.service';
-import { WeatherCloudConfig } from '../../models/weather.config';
+import { FathymForecastConfig } from '../../models/weather.config';
 import { SearchModel } from './../../models/search.model';
 import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils';
 import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
@@ -142,9 +142,9 @@ export class RouteMapComponent implements OnInit, OnDestroy {
    protected chartMouseMovedSubsription: Subscription;
  
    /**
-    * Configuration object for weather cloud
+    * Configuration object for fathym forecast
     */
-   public WeatherCloudConfig: WeatherCloudConfig;
+   public FathymForecastConfig: FathymForecastConfig;
  
    /**
     * Class for drawing region shapes on the map
@@ -241,7 +241,7 @@ export class RouteMapComponent implements OnInit, OnDestroy {
 
       this.routeSubscription = this.notificationService.RouteChanged.subscribe(data => {
 
-        // if (!data || !this.WeatherCloudConfig && !this.WeatherCloudConfig.ServerURL) { return; }
+        // if (!data || !this.FathymForecastConfig && !this.FathymForecastConfig.ServerURL) { return; }
 
         if (!data) { return; }
 
@@ -498,7 +498,7 @@ export class RouteMapComponent implements OnInit, OnDestroy {
            this.IsLoading = false;
  
            this.toastrDisplayService.DisplayToastrSuccess('success');
-           // this.wcRouteSearch.Search(res as RouteDataModel);
+           // this.ffRouteSearch.Search(res as RouteDataModel);
            // this.handleRouteResponse(res);
          },
          err => {
@@ -696,14 +696,14 @@ export class RouteMapComponent implements OnInit, OnDestroy {
  
    //   const dateTime = new Date(validTime * 1000);
  
-   //   const dateStr = this.displayDatePipe.transform(dateTime, [this.WeatherCloudConfig.ForecastDisplayDateFormat]);
+   //   const dateStr = this.displayDatePipe.transform(dateTime, [this.FathymForecastConfig.ForecastDisplayDateFormat]);
  
    //   this.selectedValidTime = dateStr;
  
    //   if (this.SelectedVarName) {
-   //     const imageTimeStr = this.imageDatePipe.transform(dateTime, [this.WeatherCloudConfig.ForecastImageDateFormat]);
+   //     const imageTimeStr = this.imageDatePipe.transform(dateTime, [this.FathymForecastConfig.ForecastImageDateFormat]);
  
-   //     let url = this.WeatherCloudConfig.ServerURL + '/blend/tiled/' + this.SelectedVarName + '/' + imageTimeStr + '/{x}/{y}/{z}';
+   //     let url = this.FathymForecastConfig.ServerURL + '/blend/tiled/' + this.SelectedVarName + '/' + imageTimeStr + '/{x}/{y}/{z}';
  
    //     this.imageLayer = this.Maper.map.layers.add(
    //       new atlas.layer.TileLayer(
