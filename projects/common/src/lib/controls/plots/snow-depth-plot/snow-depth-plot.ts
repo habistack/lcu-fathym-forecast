@@ -3,7 +3,7 @@ import { Plot } from '../plots';
 export class SnowDepthPlot extends Plot {
     constructor(public units: string, public subTitle: string) {
       super('Snow Depth', {
-    snod: {
+      snowDepth: {
       title: 'Snow Depth',
       color: '#0000dd'
     },
@@ -23,9 +23,9 @@ export class SnowDepthPlot extends Plot {
       val = val['Snow Depth'];
 
       if (val === null) { return '#d8d8d8'; }
-      if (val === 1) { return '#00dd00'; }
-      if (val === 2) { return '#b760b7'; }
-      if (val >= 3) { return '#0000dd'; }
+      if (val < 2) { return '#00dd00'; }
+      if (val >= 2 && val<= 4) { return '#b760b7'; }
+      if (val >=4) { return '#0000dd'; }
 
       return '#ffffff';
     }

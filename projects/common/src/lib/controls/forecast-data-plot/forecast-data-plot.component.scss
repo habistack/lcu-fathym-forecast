@@ -34,3 +34,104 @@ h6 {
     }
   }
 }
+
+.condition-legend {
+  color: white;
+  padding: 5px;
+  width: 300px;
+
+  .condition-gradient-ttb {
+    background: rgb(0,221,0);
+    background: linear-gradient(0deg,  rgba(0,89,214,1) 0%, rgba(199,100,207,1)50%,  rgba(0,221,0,1)100%);
+    height: 100px;
+    width: 20px;
+  }
+
+  .condition-gradient-ltr {
+    background: rgb(0,221,0);
+    background: linear-gradient(270deg,  rgba(0,89,214,1) 0%, rgba(199,100,207,1)50%,  rgba(0,221,0,1)100%);
+    height: 10px;
+    width: 100%;
+  }
+
+  .condition-item {
+    .condition-name {
+      font-size: 12px;
+      font-variant: all-small-caps;
+      font-weight: bold;
+    }
+
+    .condition-value {
+      font-size: 8px;
+      font-style: italic;
+    }
+  }
+}
+
+.risk-legend {
+  color: white;
+  padding: 5px;
+  width: 300px;
+
+  .risk-gradient-ttb {
+    background: rgb(0,221,0);
+    background: linear-gradient(0deg, rgba(255,0,0,1) 0%,  rgba(255,255,0,1) 50%, rgb(0,221,0)100%);
+    height: 100px;
+    width: 20px;
+  }
+
+  .risk-gradient-ltr {
+    background: rgb(0,221,0);
+    background: linear-gradient(270deg, rgba(255,0,0,1) 0%,  rgba(255,255,0,1) 50%, rgb(0,221,0)100%);
+    height: 10px;
+    width: 100%;
+  }
+
+  .risk-item {
+    .risk-name {
+      font-size: 12px;
+      font-variant: all-small-caps;
+      font-weight: bold;
+    }
+
+    .risk-value {
+      font-size: 8px;
+      font-style: italic;
+    }
+  }
+}
+
+
+
+.road-cond-legend {
+  color: white;
+  padding: 5px;
+  width: 300px;
+
+  .road-cond-gradient-ttb {
+    background: rgb(0,221,0);
+    background: linear-gradient(0deg, #b80202 0%,  #670270 25%,#b760b7 50%,  #00dd00 75%, #ffffff 100%);
+    height: 100px;
+    width: 20px;
+  }
+
+  .road-cond-gradient-ltr {
+    background: rgb(0,221,0);
+    background: linear-gradient(270deg, #b80202 0%,  #670270 25%,#b760b7 50%,  #00dd00 75%, #ffffff 100%);
+    height: 10px;
+    width: 100%;
+  }
+
+  .road-cond-item {
+    .road-cond-name {
+      font-size: 12px;
+      font-variant: all-small-caps;
+      font-weight: bold;
+    }
+
+    .road-cond-value {
+      font-size: 8px;
+      font-style: italic;
+    }
+  }
+}

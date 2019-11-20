@@ -74,12 +74,12 @@ constructor(protected notificationService: NotificationService) {}
   public Refresh() {
     this.PlotConfigs = [
       new TemperaturePlot('F', 'Forecast'),
-      new PotentialRoadStatePlot(null, ''),
-      new PotentialDelayRiskPlot(null, ''),
+      new PotentialRoadStatePlot(null, 'Forecast'),
+      new PotentialDelayRiskPlot(null, 'Forecast'),
+      new CrosswindPlot(null, 'Forecsat'),
       new PrecipitationPlot('mm/hr', 'Forecast'),
       new SnowDepthPlot('mm', 'Forecast' ),
       new WindPlot('m/s', 'Forecast'),
-      new CrosswindPlot(null, ''),
       // new IrradiancePlot('watt/m^2'),
       // new CloudCoverPlot('%'),
       new ElevationPlot('ft', ''),
@@ -87,8 +87,11 @@ constructor(protected notificationService: NotificationService) {}
     ];
 
     for (const plot of this.PlotConfigs) {
+      // if(plot.hasData(this.ForecastData)){
+      console.log("plot: ", plot)
 
-      plot.chartMousemove.subscribe((e) => {
+      // }
+     plot.chartMousemove.subscribe((e) => {
         this.notificationService.OnChartMouseMove(e);
       });
     }

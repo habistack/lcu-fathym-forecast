@@ -11,4 +11,6 @@ export class ForecastConditionsModel {
      * Since the backend returns it as 'surfaceTemperature', we will leave the property name the same.
      */
     public surfaceTemperature: Array<number>;
+
+    public windSpeed: Array<number>;
 }

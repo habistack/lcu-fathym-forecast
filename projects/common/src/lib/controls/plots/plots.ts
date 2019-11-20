@@ -47,6 +47,7 @@ export abstract class Plot {
   }
 
   public hasData(forecastData: any): boolean {
+    // console.log("has data- forecastData: ", forecastData)
     if (!forecastData) {
       return false;
     }
@@ -153,9 +154,11 @@ export abstract class Plot {
   }
 
   public loadChartData(forecastData: object, validTimes: Array<number>): void {
+    console.log("forcast data in plots: ", forecastData)
     this.validTimes = validTimes;
     this.forecastData = forecastData;
     this.series = [];
+    console.log("required Vars = ", this.requiredVars)
     for (let varName in this.requiredVars) {
       let varOptions = this.requiredVars[varName];
       let name = varOptions.title;
@@ -179,11 +182,12 @@ export abstract class Plot {
           color: varOptions.color
         };
         this.series.push(chartData);
+        console.log("Chart Data in plots: ", chartData)
       }
     }
   }
 
-  public getColor(v: number): string {
+  public getColor(v: any): string {
     return '#ffffff';
   }
 

@@ -3,7 +3,7 @@ import { Plot } from '../plots';
 export class PotentialDelayRiskPlot extends Plot {
     constructor(public units: string, public subTitle: string) {
       super('Potential Delay Risk', {
-            delay_risk: {
+        routeDelayRisk: {
                 title: 'Potential Delay Risk',
                 color: '#0003dd'
             }
@@ -15,17 +15,12 @@ export class PotentialDelayRiskPlot extends Plot {
     getColor(val: number) {
         val = val['Potential Delay Risk'];
 
-        // if (!v) { return '#d8d8d8'; }
-        // if (v > -2 && v <= 1) { return '#00d300'}
-        // if (v > 1 && v <= 2) { return '#ffff00'}
-        // if (v > 2 && v <= 3 || v > 3) { return '#ff0000'}
         if (val === null) { return '#d8d8d8'; }
-        if (val === 0) { return '#ffffff'; }
-        if (val === 1) { return '#00dd00'; }
-        if (val === 2) { return '#b760b7'; }
-        if (val === 3) { return '#0000dd'; }
-        if (val === 4) { return '#dd00dd'; }
-        if (val === 5) { return '#008888'; }
+        if (val > -2 && val <= 1) { return '#00dd00'; }
+        if (val > 1 && val <= 2) { return '#bffc05'; }
+        if (val > 2 && val <= 3) { return '#ffff00'; }
+        if (val > 3 && val <= 4) { return '#fcb205'; }
+        if (val > 4) { return '#ff0000'; }
 
         return '#ffff00';
     }
@@ -35,7 +30,7 @@ export class PotentialDelayRiskPlot extends Plot {
     }
 
     getTickCount() {
-        return 8;
+        return 5;
     }
 
     /**
@@ -47,9 +42,11 @@ export class PotentialDelayRiskPlot extends Plot {
         const v = val;
 
         if (!v) { return; }
-        if (v > -2 && v <= 1) { return 'Slight'; }
-        if (v > 1 && v <= 2) { return 'Moderate'; }
-        if (v > 2 && v <= 3 || v > 3) { return 'Severe'; }
+        if (v > -2 && v <= 1) { return 'Normal'; }
+        if (v > 1 && v <= 2) { return 'Slight'; }
+        if (v > 2 && v <= 3) { return 'Moderate'; }
+        if (v > 3 && v <= 4) { return 'Heavy'; }
+        if (v > 4) { return 'Severe'; }
 
     }
 }

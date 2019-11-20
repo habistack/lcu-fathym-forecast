@@ -3,16 +3,16 @@ import { Plot } from '../plots';
 export class PrecipitationPlot extends Plot {
     constructor(public units:string, public subTitle: string) {
 	super('Precipitation', {
-	    prate: {
+	    precipitationRate: {
 			title: 'Precipitation Rate',
 			color: '#0000dd'
 		},
-		ptype: {
+		roadState: {
 			title: 'ptype'
 	    }}, units, subTitle);
     }
     getForceY() {
-	    return [0.0, 0.05];
+	    return [0.0, 1.0];
     }
 
     getColor(v: number) {
@@ -39,6 +39,18 @@ export class PrecipitationPlot extends Plot {
 			return '#0000dd';
 		}
 		return '#888888';
+	}
+
+	getTickCount() {
+        return 4;
     }
+
+	getTickFormat(v: number){
+		if (!v) { return; }
+		if(v <= 0) {return "None"}
+        if (v <= .5 ) { return 'Light'; }
+        if (v > 0.5 && v<=1 ) { return 'Moderate'; }
+        if (v > 1) { return 'Heavy'; }
+	}
 
 }

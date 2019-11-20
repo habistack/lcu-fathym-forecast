@@ -3,7 +3,7 @@ import { Plot } from '../plots';
 export class CrosswindPlot extends Plot {
     constructor(public units: string, subTitle?: string) {
   super('Crosswind Risk', {
-            crosswind: {
+            windDirection: {
                 title: 'Crosswind Risk Forecast',
                 color: '#222222'
             }

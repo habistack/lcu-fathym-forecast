@@ -14,6 +14,8 @@
           <div fxFlex="1 1 auto" class="margin-right-1 left-side-bar" ngClass.lt-md="margin-bottom-1">
             <lcu-search-form></lcu-search-form>
             <!-- INSERT GRAPHS HERE -->
+            <lcu-forecast-plots></lcu-forecast-plots>
+
           </div>
           <div fxFlex="1 1 70%" class="margin-right-1" ngClass.lt-md="margin-bottom-1" ngClass.sm="map-row-height">
             <lcu-route-map></lcu-route-map>
@@ -22,7 +24,8 @@
       </div>
       <!-- WHEN GRAPHS READY, REMOVE THE FOLLOWING GRAPH AND MOVE TO SIDE BAR ABOVE -->
       <div>
-        <lcu-forecast-plots></lcu-forecast-plots>
+          <lcu-forecast-plots></lcu-forecast-plots>
+
         <!-- <lcu-departure-table></lcu-departure-table> -->
       </div>
     </mat-card-content>
