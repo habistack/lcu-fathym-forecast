@@ -81,12 +81,10 @@ when switching from column to row the map container needs a height
     background-color: $color;
   }
 
- 
-
-
-
-  
-
+.left-side-bar {
+    max-height: 620px;
+    overflow-y: auto;
+}
   
 
 
