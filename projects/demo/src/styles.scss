@@ -39,9 +39,9 @@
     .value {
       padding-left: 5px;
 
-      &:after {
-        content: '\00b0'; // Adds degree symbol
-      }
+      // &:after {
+      //   content: '\00b0'; // Adds degree symbol to all content
+      // }
     }
   }
 }
