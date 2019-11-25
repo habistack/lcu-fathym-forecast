@@ -26,7 +26,7 @@ export class ForecastDataPlotComponent {
   private _forecastData: any;
     @Input('forecast-data')
     public set ForecastData(val: any) {
-      console.log('forecast data plot ForecastData', val);
+      // console.log('forecast data plot ForecastData', val);
       this._forecastData = val;
     }
 

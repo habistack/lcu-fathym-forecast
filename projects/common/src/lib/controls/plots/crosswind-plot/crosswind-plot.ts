@@ -23,7 +23,7 @@ export class CrosswindPlot extends Plot {
         if (val === 1) { return '#ffff00'; } //yellow
         if (val === 2) { return '#ff0000'; } //red
 
-        // return '#ffff00';
+        return '#ffff00';
     }
 
     getForceY() {

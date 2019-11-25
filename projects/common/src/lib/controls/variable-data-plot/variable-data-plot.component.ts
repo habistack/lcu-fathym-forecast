@@ -18,7 +18,8 @@ export class VariableDataPlotComponent implements OnInit {
     private _forecastData: any;
     @Input('forecast-data')
     public set ForecastData(val: any) {
-      console.log('variable data plot ForecastData', val);
+      // console.log('variable data plot ForecastData', val);
+    
       this._forecastData = val;
     }
 
@@ -53,7 +54,7 @@ export class VariableDataPlotComponent implements OnInit {
      */
     private _chartData: Array<any>;
     public set ChartData(val: Array<any>) {
-      console.log('chart data', val);
+      // console.log('chart data', val);
       this._chartData = val;
     }
   
