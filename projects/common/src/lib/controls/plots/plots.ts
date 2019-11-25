@@ -16,6 +16,8 @@ export abstract class Plot {
 
   public displayTitle: string;
 
+  // public test: nv.Chart;
+
 
   constructor(public title: string, public requiredVars: object, public units: string, public subTitle?: string) {
 
@@ -59,6 +61,9 @@ export abstract class Plot {
     return false;
   }
 
+  protected determineToolTip(){
+    return "mph";
+  }
   public getOptions(): object {
     const options = {
       chart: {
@@ -124,6 +129,9 @@ export abstract class Plot {
             return this.getTickFormat(x);
             // return d3.format('.02f')(x);
           }
+        },
+        tooltip:{
+
         }
       }
     };
@@ -154,11 +162,11 @@ export abstract class Plot {
   }
 
   public loadChartData(forecastData: object, validTimes: Array<number>): void {
-    console.log("forcast data in plots: ", forecastData)
+    // console.log("forcast data in plots: ", forecastData)
     this.validTimes = validTimes;
     this.forecastData = forecastData;
     this.series = [];
-    console.log("required Vars = ", this.requiredVars)
+    // console.log("required Vars = ", this.requiredVars)
     for (let varName in this.requiredVars) {
       let varOptions = this.requiredVars[varName];
       let name = varOptions.title;
@@ -182,7 +190,7 @@ export abstract class Plot {
           color: varOptions.color
         };
         this.series.push(chartData);
-        console.log("Chart Data in plots: ", chartData)
+        // console.log("Chart Data in plots: ", chartData)
       }
     }
   }

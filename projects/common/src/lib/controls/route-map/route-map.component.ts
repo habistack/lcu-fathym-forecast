@@ -195,8 +195,10 @@ export class RouteMapComponent implements OnInit, OnDestroy {
         }
         
         console.log('data', data);
-
+        // setTimeout(() => {
         this.setCurrentMarker(data.Index);
+      // }, 500);
+
         this.setTimeFromChart(data.Value);
         }
       );
@@ -591,8 +593,9 @@ export class RouteMapComponent implements OnInit, OnDestroy {
     * @param index for route point
     */
    protected setCurrentMarker(index: number) {
-     this.Maper.map.removeLayers(['currentMark']);
- 
+    // setTimeout(() => {     
+      this.Maper.map.removeLayers(['currentMark']);
+    // }, 50)
      const point = this.Route[index];
 
      if (!point) { return; }
@@ -601,10 +604,12 @@ export class RouteMapComponent implements OnInit, OnDestroy {
       //  title: 'Condition Point',
       //  iconImage: 'pin-red'
      });
- 
+
+    //  setTimeout(() => { 
      this.Maper.map.addPins([this.currentMarker], {
        name: 'currentMark'
      });
+    // }, 100)
    }
 
    /**

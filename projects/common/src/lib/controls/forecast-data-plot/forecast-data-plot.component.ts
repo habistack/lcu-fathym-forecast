@@ -88,7 +88,7 @@ constructor(protected notificationService: NotificationService) {}
 
     for (const plot of this.PlotConfigs) {
       // if(plot.hasData(this.ForecastData)){
-      console.log("plot: ", plot)
+      // console.log("plot: ", plot)
 
       // }
      plot.chartMousemove.subscribe((e) => {

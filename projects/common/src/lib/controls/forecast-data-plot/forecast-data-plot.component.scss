@@ -1,3 +1,6 @@
+@import '../../../assets/styles/tooltips.scss';
+
+@include tooltip("hey");
 h6 {
   margin-bottom: 5px;
 }

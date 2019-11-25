@@ -9,15 +9,7 @@ export class PotentialRoadStatePlot extends Plot {
             }
         }, units, subTitle);
     }
-//  "Dry"
-// "Wet"
-// "Snow"
-// "Freezing Rain"
-// "Ice"
-// "Hail"
-// "Snow and Ice"
-// "Freezing Rain and Ice"
-// "Hail and Ice"
+
     getColor(val: string) {
         val = val['Potential Road State']
 
@@ -58,7 +50,9 @@ export class PotentialRoadStatePlot extends Plot {
         if (val === "Snow and Ice") { return "Snow and Ice"; }
         if (val === "Freezing Rain and Ice") { return "Freezing Rain and Ice"; }
         if (val === "Hail and Ice") { return "Hail and Ice"; }
+    }
 
-
+    getTickCount(){
+        return 9;
     }
 }
