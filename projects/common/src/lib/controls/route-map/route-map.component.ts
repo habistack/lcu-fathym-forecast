@@ -208,8 +208,8 @@ export class RouteMapComponent implements OnInit, OnDestroy {
         }
 
         console.log('data', data);
-
         this.setCurrentMarker(data.Index);
+
         this.setTimeFromChart(data.Value);
       }
     );

@@ -19,10 +19,8 @@
   }
 }
 
-/******************************************/
-/********* NVD3 Line Chart Styles *********/
-/******************************************/
-.nvtooltip.xy-tooltip {
+@mixin tooltip($icon){
+  
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 5px;
@@ -40,11 +38,19 @@
       padding-left: 5px;
 
       // &:after {
-      //   content: '\00b0'; // Adds degree symbol to all content
+      //   content: $icon; // Adds degree symbol to all content
       // }
     }
   }
 }
+.nvtooltip.xy-tooltip {
+  @include tooltip(' mm')
+}
+
+/******************************************/
+/********* NVD3 Line Chart Styles *********/
+/******************************************/
+
 
 .nv-legend {
   transform: translate(20px, 5px);
@@ -91,6 +97,7 @@
   font-size: 12px !important;
   font-weight: bold;
 }
+
 
 @include set-theme($contrast-theme);
 

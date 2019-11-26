@@ -18,7 +18,8 @@ export class VariableDataPlotComponent implements OnInit {
     private _forecastData: any;
     @Input('forecast-data')
     public set ForecastData(val: any) {
-      console.log('variable data plot ForecastData', val);
+      // console.log('variable data plot ForecastData', val);
+    
       this._forecastData = val;
     }
 
@@ -53,7 +54,7 @@ export class VariableDataPlotComponent implements OnInit {
      */
     private _chartData: Array<any>;
     public set ChartData(val: Array<any>) {
-      console.log('chart data', val);
+      // console.log('chart data', val);
       this._chartData = val;
     }
   
@@ -72,9 +73,12 @@ export class VariableDataPlotComponent implements OnInit {
     public ShowPlots: boolean;
 
     ngOnInit() {
+        
         this.ShowPlots = true;
         this.Plot.setD3Plot(this.d3plot);
         this.Refresh();
+        // this.formatChartData();
+
     }
 
     /**
@@ -93,6 +97,20 @@ export class VariableDataPlotComponent implements OnInit {
         this.Plot.loadChartData(this.ForecastData, this.ValidTimes);
         this.Options = this.Plot.getOptions();
         this.ChartData = this.Plot.getChartData();
+
     }
+
+    // protected formatChartData():void{
+    //   console.log("key = ", this.ChartData[0].key)
+    //   if(this.ChartData[0].key === 'Wind Speed'){
+    //     console.log("chart data vals", this.ChartData[0].values)
+    //     this.ChartData[0].values.forEach(val =>{
+    //       // console.log("val = ", val)
+    //       // val.y= val.y.toString()+' mph'
+    //       // console.log(val.y)
+    //     })
+    //   }
+    //   this.ChartData
+    // }
 
 }

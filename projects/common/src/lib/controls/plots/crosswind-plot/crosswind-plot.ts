@@ -17,11 +17,11 @@ export class CrosswindPlot extends Plot {
      */
     getColor(val: number) {
         val = val['Crosswind Risk Forecast'];
-
+        // console.log("crosswind val = ", val)
         if (val === null) { return '#d8d8d8'; }
-        if (val === 0) { return '#00dd00'; }
-        if (val === 1) { return '#ffff00'; }
-        if (val === 2) { return '#ff0000'; }
+        if (val === 0) { return '#00dd00'; } //green
+        if (val === 1) { return '#ffff00'; } //yellow
+        if (val === 2) { return '#ff0000'; } //red
 
         return '#ffff00';
     }

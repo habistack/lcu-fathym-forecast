@@ -1,0 +1,78 @@
+
+@mixin tooltip($icon){
+    .nvtooltip.xy-tooltip {
+    
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+  
+    tbody {
+      .key {
+        text-align: right;
+  
+        &:after {
+          content: ':';
+        }
+      }
+  
+      .value {
+        padding-left: 5px;
+  
+        // &:after {
+        //   content: $icon; // Adds degree symbol to all content
+        // }
+      }
+    }
+  }
+  }
+ 
+  /******************************************/
+  /********* NVD3 Line Chart Styles *********/
+  /******************************************/
+  
+  
+  .nv-legend {
+    transform: translate(20px, 5px);
+  
+    .nv-series {
+      cursor: pointer;
+  
+      .nv-legend-text {
+        cursor: pointer;
+        fill: white;
+        font-size: 12px;
+      }
+    }
+  }
+  
+  .nv-groups {
+    .nv-group {
+      fill-opacity: 0 !important;
+      stroke-width: 2px !important;
+  
+      .nv-point {
+        display: none !important;
+      }
+    }
+  }
+  
+  .nv-y {
+    .nv-axis {
+      transform: translate(-5px, 0px);
+    }
+  }
+  
+  .nv-x {
+    .nv-axis {
+      transform: translate(0px, 5px);
+    }
+  }
+  
+  .tick text {
+    font-size: 12px !important;
+  }
+  
+  .nv-axisMaxMin {
+    font-size: 12px !important;
+    font-weight: bold;
+  }

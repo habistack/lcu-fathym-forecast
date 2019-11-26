@@ -9,28 +9,20 @@ export class PotentialRoadStatePlot extends Plot {
             }
         }, units, subTitle);
     }
-//  "Dry"
-// "Wet"
-// "Snow"
-// "Freezing Rain"
-// "Ice"
-// "Hail"
-// "Snow and Ice"
-// "Freezing Rain and Ice"
-// "Hail and Ice"
-    getColor(val: string) {
+
+    getColor(val: number) {
         val = val['Potential Road State']
 
         if (val === null) { return '#d8d8d8'; } //grey
-        if (val === "Dry") { return '#ffffff'; } //white
-        if (val === "Wet") { return '#00dd00'; }//lime
-        if (val === "Freezing Rain") { return '	#669866'; } //blue
-        if (val === "Snow") { return '#b760b7'; }//purple
-        if (val === "Snow and Ice") { return '#851A8E'; } //dark purple
-        if (val === "Freezing Rain and Ice") { return '#9F45A5'; }//light purple
-        if (val === "Ice") { return '#ff00ff'; }// dark purple
-        if (val === "Hail and Ice") { return '#80044B'; }//dark redish purple
-        if (val === "Hail") { return '#008888'; } //dark teal
+        if (val === 0) { return '#ffffff'; } //white
+        if (val === 1) { return '#00dd00'; }//lime
+        if (val === 2) { return '	#669866'; } //blue
+        if (val === 3) { return '#b760b7'; }//purple
+        if (val === 4) { return '#851A8E'; } //dark purple
+        if (val === 5) { return '#9F45A5'; }//light purple
+        if (val === 6) { return '#ff00ff'; }// dark purple
+        if (val === 7) { return '#80044B'; }//dark redish purple
+        if (val === 8) { return '#008888'; } //dark teal
 
 
         return '#ffff00';
@@ -47,18 +39,20 @@ export class PotentialRoadStatePlot extends Plot {
      * 
      * 
      */
-    getTickFormat(val: string) {
+    getTickFormat(val: number) {
 
-        if (val === "Dry") { return 'Dry'; }
-        if (val === "Wet") { return 'Wet'; }
-        if (val === "Snow") { return 'Snow'; }
-        if (val === "Freezing Rain") { return 'Freezing Rain'; }
-        if (val === "Ice") { return "Ice"; }
-        if (val === "Hail") { return "Hail"; }
-        if (val === "Snow and Ice") { return "Snow and Ice"; }
-        if (val === "Freezing Rain and Ice") { return "Freezing Rain and Ice"; }
-        if (val === "Hail and Ice") { return "Hail and Ice"; }
+        if (val === 0) { return 'Dry'; }
+        if (val === 1) { return 'Wet'; }
+        if (val === 2) { return 'Freezing Rain'; }
+        if (val === 3) { return 'Snow'; }
+        if (val === 4) { return "Snow and Ice"; }
+        if (val === 5) { return "Freezing Rain and Ice"; }
+        if (val === 6) { return "Ice"; }
+        if (val === 7) { return "Hail and Ice"; }
+        if (val === 8) { return "Hail"; }
+    }
 
-
+    getTickCount(){
+        return 2;
     }
 }

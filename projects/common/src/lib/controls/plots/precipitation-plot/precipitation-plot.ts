@@ -48,7 +48,7 @@ export class PrecipitationPlot extends Plot {
 	getTickFormat(v: number){
 		if (!v) { return; }
 		if(v <= 0) {return "None"}
-        if (v <= .5 ) { return 'Light'; }
+        if (v > 0 && v <= .5 ) { return 'Light'; }
         if (v > 0.5 && v<=1 ) { return 'Moderate'; }
         if (v > 1) { return 'Heavy'; }
 	}

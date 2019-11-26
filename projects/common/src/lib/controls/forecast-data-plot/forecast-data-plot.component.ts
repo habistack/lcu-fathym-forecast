@@ -26,7 +26,7 @@ export class ForecastDataPlotComponent {
   private _forecastData: any;
     @Input('forecast-data')
     public set ForecastData(val: any) {
-      console.log('forecast data plot ForecastData', val);
+      // console.log('forecast data plot ForecastData', val);
       this._forecastData = val;
     }
 
@@ -88,7 +88,7 @@ constructor(protected notificationService: NotificationService) {}
 
     for (const plot of this.PlotConfigs) {
       // if(plot.hasData(this.ForecastData)){
-      console.log("plot: ", plot)
+      // console.log("plot: ", plot)
 
       // }
      plot.chartMousemove.subscribe((e) => {
