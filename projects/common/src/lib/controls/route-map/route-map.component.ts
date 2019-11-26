@@ -386,12 +386,17 @@ export class RouteMapComponent implements OnInit, OnDestroy {
 
   protected getLayerFromIowaAPI(layer) {
     console.log(layer);
-    // if (layer === 'Radar reflectivity') {
-    //   this.Maper.map.layers.add(new atlas.layer.TileLayer({
-    //     tileUrl: 'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
-    //     tileSize: 256
-    //   }, 'maptiles'));
-    // }
+    let url;
+    if (layer.value === 'Radar reflectivity') {
+      url = 'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png';
+    } else if (layer.value === 'Radar precipitation') {
+      url = 'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/q2-n1p-900913/{z}/{x}/{y}.png';
+    }
+    let options = {
+      tileUrl: url,
+      tileSize: 256
+    }
+    this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
   }
 
   protected getLayerFromFathymAPI(layer) {
@@ -405,7 +410,7 @@ export class RouteMapComponent implements OnInit, OnDestroy {
   }
 
   protected getLayerFromAzure(layer) {
-
+    
   }
 
   public MapLoaded(evt: Event) {
