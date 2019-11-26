@@ -5,7 +5,7 @@ export class PrecipitationPlot extends Plot {
 	super('Precipitation', {
 	    precipitationRate: {
 			title: 'Precipitation Rate',
-			color: '#0000dd'
+			color: '#000000'
 		},
 		roadState: {
 			title: 'ptype'

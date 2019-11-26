@@ -5,7 +5,7 @@ export class SnowDepthPlot extends Plot {
       super('Snow Depth', {
       snowDepth: {
       title: 'Snow Depth',
-      color: '#0000dd'
+      color: '#000000'
     },
     d_snod: {
       title: 'Cumulative',
