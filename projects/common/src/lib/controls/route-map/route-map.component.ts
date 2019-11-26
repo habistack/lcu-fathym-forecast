@@ -283,76 +283,68 @@ export class RouteMapComponent implements OnInit, OnDestroy {
   }
 
   protected setUpLayers() {
-
-    this.pushRadarOptions();
-    this.pushFathymAPIOptions();
-    this.pushTerrainOptions();
-
+    this.getManifestJson().subscribe(res => {
+      this.manifestJson = res;
+      console.log(res)
+      this.pushRadarOptions();
+      this.pushFathymAPIOptions();
+      this.pushTerrainOptions();
+    });
   }
-
 
   protected pushFathymAPIOptions() {
-    // for (const key of this.manifestJson) {
-    //   if (key === 'CloudCover_EntireAtmosphere') {
-    //     this.layerOptions.push({
-    //       displayName: 'Forecast cloud',
-    //       value: 'CloudCover_EntireAtmosphere'
-    //     });
-    //   }
-    //   if (key === 'PrecipitationRate_Surface') {
-    //     this.layerOptions.push({
-    //       displayName: 'Forecast precipitation',
-    //       value: 'PrecipitationRate_Surface'
-    //     });
-    //   }
-    //   if (key === 'PrecipitationRate_Surface') {
-    //     this.layerOptions.push({
-    //       displayName: 'Forecast road condition',
-    //       value: 'Temperature_Surface'
-    //     });
-    //   }
-    //   if (key === 'Visibility_Surface') {
-    //     this.layerOptions.push({
-    //       displayName: 'Forecast visibility',
-    //       value: 'Visibility_Surface'
-    //     });
-    //   }
-    //   if (key === 'Wind_10Meters') {
-    //     this.layerOptions.push({
-    //       displayName: 'Forecast wind',
-    //       value: 'Wind_10Meters'
-    //     });
-    //   }
-    // }
+    if (this.manifestJson !== {}) {
+      Object.keys(this.manifestJson).forEach(key => {
+        if (key === 'CloudCover_EntireAtmosphere') {
+          this.layerOptions.push({
+            displayName: 'Forecast cloud',
+            value: 'CloudCover_EntireAtmosphere',
+            optionType: 'ff-api'
+          });
+        }
+        if (key === 'PrecipitationRate_Surface') {
+          this.layerOptions.push({
+            displayName: 'Forecast precipitation',
+            value: 'PrecipitationRate_Surface',
+            optionType: 'ff-api'
+          });
+        }
+        if (key === 'PrecipitationRate_Surface') {
+          this.layerOptions.push({
+            displayName: 'Forecast road condition',
+            value: 'Temperature_Surface',
+            optionType: 'ff-api'
+          });
+        }
+        if (key === 'Visibility_Surface') {
+          this.layerOptions.push({
+            displayName: 'Forecast visibility',
+            value: 'Visibility_Surface',
+            optionType: 'ff-api'
+          });
+        }
+        if (key === 'Wind_10Meters') {
+          this.layerOptions.push({
+            displayName: 'Forecast wind',
+            value: 'Wind_10Meters',
+            optionType: 'ff-api'
+          });
+        }
+      });
+    }
   }
 
-  // this.apiForecastValueConversions = [
-  //   { CloudCover_EntireAtmosphere: 'Forecast cloud' },
-  //   { PrecipitationRate_Surface: 'Forecast precipitation' },
-  //   { Temperature_Surface: 'Forecast road condition' },
-  //   { Visibility_Surface: 'Forecast visibility' },
-  //   { Wind_10Meters: 'Forecast wind' }
-  // ];
-
-  // this.getManifestJson().subscribe(res => {
-  //   this.manifestJson = res;
-  //   for (const key of Object.keys(this.manifestJson)) {
-  //     this.apiForecastValueConversions.forEach(forecast => {
-  //       if (forecast.hasOwnProperty(key)) {
-  //         this.layerOptions.push(forecast[key]);
-  //       }
-  //     });
-  //   }
-  // });
   protected pushRadarOptions() {
     this.layerOptions.push(
       {
         displayName: 'Radar precipitation',
-        value: 'Radar precipitation'
+        value: 'Radar precipitation',
+        optionType: 'ia-state'
       },
       {
         displayName: 'Radar reflectivity',
-        value: 'Radar reflectivity'
+        value: 'Radar reflectivity',
+        optionType: 'ia-state'
       }
     );
   }
@@ -361,16 +353,16 @@ export class RouteMapComponent implements OnInit, OnDestroy {
     this.layerOptions.push(
       {
         displayName: 'Toggle terrain',
-        value: 'Toggle terrain'
+        value: 'Toggle terrain',
+        optionType: 'ms-azure'
       },
       {
         displayName: 'Toggle map labels',
-        value: 'Toggle map labels'
+        value: 'Toggle map labels',
+        optionType: 'ms-azure'
       }
     );
   }
-
-
 
   protected getManifestJson() {
     let headers: HttpHeaders = new HttpHeaders();
@@ -383,10 +375,12 @@ export class RouteMapComponent implements OnInit, OnDestroy {
 
   public LayerChosen(layer) {
 
-    if (typeof layer === 'object') {
+    if (layer.optionType === 'ff-api') {
       this.getLayerFromFathymAPI(layer);
-    } else if (typeof layer === 'string') {
+    } else if (layer.optionType === 'ia-state') {
       this.getLayerFromIowaAPI(layer);
+    } else if (layer.optionType === 'ms-azure') {
+      this.getLayerFromAzure(layer);
     }
   }
 
@@ -402,12 +396,16 @@ export class RouteMapComponent implements OnInit, OnDestroy {
 
   protected getLayerFromFathymAPI(layer) {
     console.log(layer)
-    // const t = this.manifestJson[layer][0];
-    // this.Maper.map.layers.add(new atlas.layer.TileLayer({
-    //   tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
-    //   opacity: 0.7,
-    //   tileSize: 256
-    // }, 'maptiles'));
+    const t = this.manifestJson[layer.value][0];
+    this.Maper.map.layers.add(new atlas.layer.TileLayer({
+      tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
+      opacity: 0.7,
+      tileSize: 256
+    }, 'maptiles'));
+  }
+
+  protected getLayerFromAzure(layer) {
+
   }
 
   public MapLoaded(evt: Event) {
