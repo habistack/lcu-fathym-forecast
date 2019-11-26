@@ -12,3 +12,11 @@
     >
   </am-map>
 
+  <mat-form-field class="layer-dropdown">
+    <mat-label>Layers</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let layer of layerOptions" [value]="layer.displayName" (click)="LayerChosen(layer)">
+        {{ layer.displayName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
