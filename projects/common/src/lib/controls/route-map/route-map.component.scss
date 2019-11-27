@@ -32,10 +32,18 @@
     // color:#252525
   }
 
-  .layer-dropdown {
-    position: absolute;
+.layer-dropdown {
+  position: absolute;
     left: 35%;
     top: 65px;
-    background-color: rgba(rgb(255, 183, 183), 0.8);
+    padding: 2px;
+    z-index: 1;
+    background-color: rgba(255,183,183,.8);
     border-radius: 10px;
+}
+
+@media screen and (max-width: 960px) {
+  .layer-dropdown {
+    position: relative;
   }
+}

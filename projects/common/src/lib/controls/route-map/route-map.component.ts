@@ -288,7 +288,7 @@ export class RouteMapComponent implements OnInit, OnDestroy {
       console.log(res)
       this.pushRadarOptions();
       this.pushFathymAPIOptions();
-      this.pushTerrainOptions();
+      // this.pushTerrainOptions();
     });
   }
 
