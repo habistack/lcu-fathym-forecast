@@ -14,15 +14,15 @@ export class PotentialRoadStatePlot extends Plot {
         val = val['Potential Road State']
 
         if (val === null) { return '#d8d8d8'; } //grey
-        if (val === 0) { return '#ffffff'; } //white
-        if (val === 1) { return '#00dd00'; }//lime
-        if (val === 2) { return '	#669866'; } //blue
-        if (val === 3) { return '#b760b7'; }//purple
-        if (val === 4) { return '#851A8E'; } //dark purple
-        if (val === 5) { return '#9F45A5'; }//light purple
-        if (val === 6) { return '#ff00ff'; }// dark purple
-        if (val === 7) { return '#80044B'; }//dark redish purple
-        if (val === 8) { return '#008888'; } //dark teal
+        if (val === 0) { return '#ffffff'; } //white dry
+        if (val === 1) { return '#00dd00'; }//lime wet 
+        if (val === 2) { return '#669866'; } //puke green freezing rain
+        if (val === 3) { return '#b760b7'; }//purple snow
+        if (val === 4) { return '#8C338F'; } //dark purple snow and ice
+        if (val === 5) { return '#9F45A5'; }//light purple freezing rain and ice
+        if (val === 6) { return '#6F0475'; }// dark purple ice
+        if (val === 7) { return '#80044B'; }//dark redish purple hail and ice
+        if (val === 8) { return '#008888'; } //red hail
 
 
         return '#ffff00';
@@ -52,7 +52,7 @@ export class PotentialRoadStatePlot extends Plot {
         if (val === 8) { return "Hail"; }
     }
 
-    getTickCount(){
-        return 2;
-    }
+    // getTickCount(){
+    //     return 2;
+    // }
 }

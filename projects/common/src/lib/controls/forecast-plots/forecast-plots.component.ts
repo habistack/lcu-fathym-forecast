@@ -113,7 +113,6 @@ export class ForecastPlotsComponent implements OnInit {
             break;
         }
       }
-      console.log("item after: ", itm)
     }
     });
 
