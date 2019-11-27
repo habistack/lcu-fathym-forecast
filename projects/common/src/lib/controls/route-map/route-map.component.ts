@@ -22,7 +22,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './route-map.component.html',
   styleUrls: ['./route-map.component.scss']
 })
-export class RouteMapComponent implements OnInit, OnDestroy {
+export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //  Fields
   protected dataSource: any;
@@ -213,6 +213,7 @@ export class RouteMapComponent implements OnInit, OnDestroy {
         this.setTimeFromChart(data.Value);
       }
     );
+
   }
 
   public ngOnDestroy(): void {
@@ -297,35 +298,35 @@ export class RouteMapComponent implements OnInit, OnDestroy {
       Object.keys(this.manifestJson).forEach(key => {
         if (key === 'CloudCover_EntireAtmosphere') {
           this.layerOptions.push({
-            displayName: 'Forecast cloud',
+            displayName: 'Forecast Cloud Cover',
             value: 'CloudCover_EntireAtmosphere',
             optionType: 'ff-api'
           });
         }
         if (key === 'PrecipitationRate_Surface') {
           this.layerOptions.push({
-            displayName: 'Forecast precipitation',
+            displayName: 'Forecast Precipitation',
             value: 'PrecipitationRate_Surface',
             optionType: 'ff-api'
           });
         }
         if (key === 'PrecipitationRate_Surface') {
           this.layerOptions.push({
-            displayName: 'Forecast road condition',
+            displayName: 'Forecast Temperature',
             value: 'Temperature_Surface',
             optionType: 'ff-api'
           });
         }
         if (key === 'Visibility_Surface') {
           this.layerOptions.push({
-            displayName: 'Forecast visibility',
+            displayName: 'Forecast Visibility',
             value: 'Visibility_Surface',
             optionType: 'ff-api'
           });
         }
         if (key === 'Wind_10Meters') {
           this.layerOptions.push({
-            displayName: 'Forecast wind',
+            displayName: 'Forecast Wind',
             value: 'Wind_10Meters',
             optionType: 'ff-api'
           });
@@ -337,13 +338,13 @@ export class RouteMapComponent implements OnInit, OnDestroy {
   protected pushRadarOptions() {
     this.layerOptions.push(
       {
-        displayName: 'Radar precipitation',
-        value: 'Radar precipitation',
+        displayName: 'Radar Reflectivity',
+        value: 'Radar Reflectivity',
         optionType: 'ia-state'
       },
       {
-        displayName: 'Radar reflectivity',
-        value: 'Radar reflectivity',
+        displayName: 'Radar Precipitation',
+        value: 'Radar Precipitation',
         optionType: 'ia-state'
       }
     );
@@ -374,22 +375,23 @@ export class RouteMapComponent implements OnInit, OnDestroy {
   }
 
   public LayerChosen(layer) {
-
-    if (layer.optionType === 'ff-api') {
-      this.getLayerFromFathymAPI(layer);
-    } else if (layer.optionType === 'ia-state') {
-      this.getLayerFromIowaAPI(layer);
-    } else if (layer.optionType === 'ms-azure') {
-      this.getLayerFromAzure(layer);
+    if (layer) {
+      if (layer.optionType === 'ff-api') {
+        this.getLayerFromFathymAPI(layer);
+      } else if (layer.optionType === 'ia-state') {
+        this.getLayerFromIowaAPI(layer);
+      } else if (layer.optionType === 'ms-azure') {
+        this.getLayerFromAzure(layer);
+      }
     }
   }
 
   protected getLayerFromIowaAPI(layer) {
     console.log(layer);
     let url;
-    if (layer.value === 'Radar reflectivity') {
+    if (layer.value === 'Radar Reflectivity') {
       url = 'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png';
-    } else if (layer.value === 'Radar precipitation') {
+    } else if (layer.value === 'Radar Precipitation') {
       url = 'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/q2-n1p-900913/{z}/{x}/{y}.png';
     }
     let options = {
@@ -416,6 +418,12 @@ export class RouteMapComponent implements OnInit, OnDestroy {
   public MapLoaded(evt: Event) {
     console.log('Map loaded', evt);
     // this.loadBlend();
+  }
+
+  public DefaultLayer;
+  
+
+  ngAfterViewInit() {
   }
 
   /**
