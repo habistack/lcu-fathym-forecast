@@ -1,23 +1,23 @@
 import { WeatherModel } from '../models/weather.model';
 
-export class WeatherCloudConditionIcons {
+export class FathymForecastConditionIcons {
 
   constructor(data: WeatherModel, colType: string) {
     switch (colType.toUpperCase()) {
       case 'TEMPMIN':
-        return WeatherCloudConditionIcons.temperature(data.TempMin);
+        return FathymForecastConditionIcons.temperature(data.TempMin);
         break;
       case 'TEMPMAX':
-        return WeatherCloudConditionIcons.temperature(data.TempMax);
+        return FathymForecastConditionIcons.temperature(data.TempMax);
         break;
       case 'PRECIPMAX': // **** precipMax does not correlate to percentage of chance ****
-        return WeatherCloudConditionIcons.precipitationType(data);
+        return FathymForecastConditionIcons.precipitationType(data);
         break;
       case 'WINDSPDMAX':
-        return WeatherCloudConditionIcons.windSpeed(data.WindSpdMax);
+        return FathymForecastConditionIcons.windSpeed(data.WindSpdMax);
         break;
       case 'WINDGUSTMAX':
-        return WeatherCloudConditionIcons.windGust(data.WindGustMax);
+        return FathymForecastConditionIcons.windGust(data.WindGustMax);
         break;
     }
 
@@ -27,16 +27,16 @@ export class WeatherCloudConditionIcons {
     let icon: string = '';
     switch (data.PtypeMax) {
       case 0:
-        icon = 'icon-no_value wc-icon-none';
+        icon = 'icon-no_value ff-icon-none';
         break;
       case 1:
-        icon = WeatherCloudConditionIcons.rainType(data.PrecipMax);
+        icon = FathymForecastConditionIcons.rainType(data.PrecipMax);
         break;
       case 2:
-        icon = WeatherCloudConditionIcons.mixedType(data.PrecipMax);
+        icon = FathymForecastConditionIcons.mixedType(data.PrecipMax);
         break;
       case 3:
-        icon = WeatherCloudConditionIcons.snowType(data.PrecipMax);
+        icon = FathymForecastConditionIcons.snowType(data.PrecipMax);
         break;
     }
 
@@ -55,7 +55,7 @@ export class WeatherCloudConditionIcons {
     const heavy: boolean = this.isBetween(precipMax, 0.2125, 0.375);
     const extreme: boolean = precipMax > 0.375;
 
-    if (none) { return 'icon-no_value wc-icon-none'; }
+    if (none) { return 'icon-no_value ff-icon-none'; }
     if (light) { return 'icon-rain_light temperature-ok'; }
     if (med) { return 'icon-rain_medium temperature-warn'; }
     if (heavy) { return 'icon-rain_heavy temperature-alert'; }
@@ -70,7 +70,7 @@ export class WeatherCloudConditionIcons {
     const heavy: boolean = this.isBetween(precipMax, 0.1125, 0.275);
     const extreme: boolean = precipMax > 0.275;
 
-    if (none) { return 'icon-no_value wc-icon-none'; }
+    if (none) { return 'icon-no_value ff-icon-none'; }
     if (light) { return 'icon-rain_snow_mixed_light temperature-ok'; }
     if (med) { return 'icon-rain_snow_mixed_medium temperature-warn'; }
     if (heavy) { return 'icon-rain_snow_mixed_heavy temperature-alert'; }
@@ -85,7 +85,7 @@ export class WeatherCloudConditionIcons {
     const heavy: boolean = this.isBetween(precipMax, 0.08, 0.13);
     const extreme: boolean = precipMax > 0.13;
 
-    if (none) { return 'icon-no_value wc-icon-none'; }
+    if (none) { return 'icon-no_value ff-icon-none'; }
     if (light) { return 'icon-snow_light temperature-ok'; }
     if (med) { return 'icon-snow_medium temperature-warn'; }
     if (heavy) { return 'icon-snow_heavy temperature-alert'; }
@@ -99,7 +99,7 @@ export class WeatherCloudConditionIcons {
     const heavy: boolean = windSpdMax > 29 && windSpdMax < 40;
     const extreme: boolean = windSpdMax >= 40;
 
-    if (none) { return 'icon-no_value wc-icon-none'; }
+    if (none) { return 'icon-no_value ff-icon-none'; }
     if (light) { return 'icon-wind_light temperature-ok'; }
     if (med) { return 'icon-wind_medium temperature-warn'; }
     if (heavy) { return 'icon-wind_heavy temperature-alert'; }
@@ -113,7 +113,7 @@ export class WeatherCloudConditionIcons {
     const heavy: boolean = windGustMax > 29;
     const extreme: boolean = windGustMax >= 40;
 
-    if (none) { return 'icon-no_value wc-icon-none'; }
+    if (none) { return 'icon-no_value ff-icon-none'; }
     if (light) { return 'icon-wind_light temperature-ok'; }
     if (med) { return 'icon-wind_medium temperature-warn'; }
     if (heavy) { return 'icon-wind_heavy temperature-alert'; }

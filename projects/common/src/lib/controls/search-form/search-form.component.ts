@@ -7,7 +7,7 @@ import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap } f
 import { SearchConstants } from '../../constants/search.constants';
 import { DatasourceTypesModel } from '../../models/datasource-types.model';
 import { DepartureTimeModel } from '../../models/departure-time.model';
-import { WeatherCloudConfig } from '../../models/weather.config';
+import { FathymForecastConfig } from '../../models/weather.config';
 import { RouteModel } from '../../models/route.model';
 import { RouteDataModel } from '../../models/route-data.model';
 
@@ -18,7 +18,7 @@ import { RequiredCheckedValidator } from '../../utils/validators/required-checke
 import { SearchModel } from '../../models/search.model';
 import { RouteResultsModel } from '../../models/route-results.model';
 import { DataService } from '../../services/data.service';
-import { DisplayDateFormatPipe } from '../../utils/pipes/wc-pipes';
+import { DisplayDateFormatPipe } from '../../utils/pipes/ff-pipes';
 
 @Component({
   selector: 'lcu-search-form',
@@ -153,7 +153,7 @@ export class SearchFormComponent implements OnInit {
 
   public OriginOptions: string[];
 
-  public WeatherCloudConfig: WeatherCloudConfig;
+  public FathymForecastConfig: FathymForecastConfig;
 
   public RouteInputForm: FormGroup;
 
@@ -209,7 +209,7 @@ export class SearchFormComponent implements OnInit {
   constructor(
     protected injector: Injector,
     protected http: HttpClient,
-    protected wcSvc: DataService,
+    protected ffSvc: DataService,
     protected notificationService: NotificationService,
     protected toastrDisplayService: ToastrDisplayService,
     protected locationService: LocationSearchService,
@@ -255,7 +255,7 @@ export class SearchFormComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged(),
         tap(() => this.searching = true),
-        // switchMap(term => this.locationService.Search(term, this.WeatherCloudConfig.LBSKey)
+        // switchMap(term => this.locationService.Search(term, this.FathymForecastConfig.LBSKey)
         switchMap(term => this.locationService.Search(term, '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78')
         .pipe(
           tap(() => {
@@ -273,7 +273,7 @@ export class SearchFormComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged(),
         tap(() => this.searching = true),
-        // switchMap(term => this.locationService.Search(term, this.WeatherCloudConfig.LBSKey)
+        // switchMap(term => this.locationService.Search(term, this.FathymForecastConfig.LBSKey)
         switchMap(term => this.locationService.Search(term, '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78')
         .pipe(
           tap(() => this.searchFailed = false),
@@ -297,9 +297,9 @@ export class SearchFormComponent implements OnInit {
   //  Life Cycle
   public ngOnInit(): void {
 
-    // this.wcConfigCtx.Loading.subscribe(loading => this.Loading.Set(loading));
+    // this.ffConfigCtx.Loading.subscribe(loading => this.Loading.Set(loading));
 
-    // this.wcConfigCtx.Context.subscribe(ctxt => (this.WeatherCloudConfig = ctxt));
+    // this.ffConfigCtx.Context.subscribe(ctxt => (this.FathymForecastConfig = ctxt));
 
     this.RouteChecked = this.SearchTypeRouteCheck.value;
     this.DepartureChecked = this.SearchTypeDepartCheck.value;
@@ -322,7 +322,7 @@ export class SearchFormComponent implements OnInit {
    * Get Datasource types
    */
   public LoadDataSourceTypes() {
-    this.ForecastModelList = this.wcSvc.LoadDataSources();
+    this.ForecastModelList = this.ffSvc.LoadDataSources();
 
     this.ForecastModelConfig.Source = this.ForecastModelList;
 

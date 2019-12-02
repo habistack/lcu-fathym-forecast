@@ -3,7 +3,7 @@ import { Plot } from '../plots';
 export class WindPlot extends Plot {
     constructor(public units: string, subTitle: string) {
       super('Wind Speed', {
-          wspd: {
+          windSpeed: {
         title: 'Wind Speed',
         color: '#222222'
           },
