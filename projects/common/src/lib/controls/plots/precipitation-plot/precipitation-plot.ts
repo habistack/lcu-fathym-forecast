@@ -52,11 +52,9 @@ export class PrecipitationPlot extends Plot {
     // }
 
 	getTickFormat(v: number){
-		if (!v) { return; }
-		if(v <= 0) {return "None"}
-        if (v > 0 && v <= .5 ) { return 'Light'; }
-        if (v > 0.5 && v < 0.75 ) { return 'Moderate'; }
-        if (v >= 0.75) { return 'Heavy'; }
-	}
+		if (!v) { return "0.00 mm/hr"; }
+		let rate = v
+		if(v) {return rate + ' mm/hr'}
+	  }
 
 }

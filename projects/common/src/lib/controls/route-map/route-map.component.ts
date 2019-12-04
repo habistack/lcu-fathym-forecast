@@ -627,6 +627,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected testRouteData(): void {
     this.IsLoading = true;
+    console.log("getting called");
     this.dataService.RouteData(this.SearchModel)
       .subscribe((res) => {
         // console.log('test route data', res);

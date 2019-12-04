@@ -120,7 +120,7 @@ export abstract class Plot {
           }
         },
         yAxis: {
-          ticks: 6,
+          ticks: 5,
           // ticks: (y) => {
           // 	return this.getTickCount(y);
           // },

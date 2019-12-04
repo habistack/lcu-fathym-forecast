@@ -111,7 +111,7 @@ export class DataService {
     //     return data;
     //   })
     // );
-
+    // debugger;
     return this.http.get<any[]>(`${this.forecastWrapper}`, {headers: headers, params: httpParams })
     .pipe(
       map(res => {
@@ -126,7 +126,9 @@ export class DataService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('origin', search.Origin);
     httpParams = httpParams.append('destination', search.Destination);
-    httpParams = httpParams.append('departAt', search.DepartureTime);
+    httpParams = httpParams.append('departAt', search.DepartureTime);    
+    httpParams = httpParams.append('maxAlternatives', '3');    
+
     httpParams = httpParams.append('azureMapsKey', this.azureMapsKey);
     httpParams = httpParams.append('forecastAPIKey', this.forecastAPIKey);
     httpParams = httpParams.append('code', 'ShannonB');

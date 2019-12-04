@@ -30,6 +30,12 @@ export class SnowDepthPlot extends Plot {
       return '#ffffff';
     }
 
+    getTickFormat(v: number){
+      if (!v) { return '0.00 mm'; }
+      let depth = v.toFixed(2);
+      if(v) {return depth + ' mm'}
+    }
+
     getForceY() {
       return [0.0, 5];
     }

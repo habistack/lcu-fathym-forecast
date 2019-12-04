@@ -375,6 +375,10 @@ export class SearchFormComponent implements OnInit {
 
     if (this.RouteInputForm && this.RouteInputForm.get('SearchFormControls.includeAlts').value) {
       showAlternatives = this.RouteInputForm.get('SearchFormControls.includeAlts').value;
+      console.log('Show alts =', showAlternatives);
+      if(showAlternatives === true){
+        //TODO do something
+      }
     }
 
     if (this.DepartureTimes.value) {
@@ -553,7 +557,7 @@ export class SearchFormComponent implements OnInit {
    */
   public SearchRoutes(searchType: string): void {
    // const searching: boolean = this.isSearchingRoute = !this.isSearchingRoute;
-
+    console.log('search type = ', searchType);
       this.notificationService.SearchRoute(this.getFormValues(searchType), true);
   }
 

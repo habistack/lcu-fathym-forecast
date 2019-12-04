@@ -65,7 +65,7 @@ import { of } from 'rxjs';
        httpParams = httpParams.append('departTime', departTime);
        // httpParams = httpParams.append('token', apiKey);
        httpParams = httpParams.append('Subscription-Key', this.subscriptionKey);
-
+      //  debugger;
        return this.http.get<any[]>(`${this.techAccentAPI}`, { params: httpParams, headers: headers }).pipe(
         map(res => {
           return res;
