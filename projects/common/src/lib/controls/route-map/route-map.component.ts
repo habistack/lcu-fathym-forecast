@@ -207,7 +207,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
           console.error('mouse moved - No data returned'); return;
         }
 
-        console.log('data', data);
+        // console.log('data', data);
         this.setCurrentMarker(data.Index);
 
         this.setTimeFromChart(data.Value);
@@ -286,7 +286,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   protected setUpLayers() {
     this.getManifestJson().subscribe(res => {
       this.manifestJson = res;
-      console.log(res)
+      // console.log(res)
       this.pushRadarOptions();
       this.pushFathymAPIOptions();
       // this.pushTerrainOptions();
@@ -629,7 +629,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.IsLoading = true;
     this.dataService.RouteData(this.SearchModel)
       .subscribe((res) => {
-        console.log('test route data', res);
+        // console.log('test route data', res);
         this.handleTestRouteResponse(res);
         this.IsLoading = false;
       });

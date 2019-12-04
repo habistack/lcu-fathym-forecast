@@ -13,4 +13,12 @@ export class ForecastConditionsModel {
     public surfaceTemperature: Array<number>;
 
     public windSpeed: Array<number>;
+
+    public crosswindRisk: Array<number>;
+    public precipitationRate: Array<number>;
+    public roadState: Array<number>;
+    public routeDelayRisk: Array<number>;
+    public snowDepth: Array<number>;
+    public windDirection: Array<number>;
+
 }
