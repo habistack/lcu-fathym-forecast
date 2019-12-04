@@ -35,8 +35,16 @@ export class WindPlot extends Plot {
         }
 
         getForceY() {
-        return [0.0, 5];
+        return [0.0, 35];//5
       }
+      /**
+   * Formats the y-axis and tool tip
+   */
+  getTickFormat(v: number){
+    if (!v) { return '0 mph'; }
+    let speed = Math.round(v);
+    if(v) {return speed + ' mph'}
+  }
 
       /**
        * Check whether wind speed or gust is greater, then return color

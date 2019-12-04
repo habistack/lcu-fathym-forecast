@@ -18,10 +18,14 @@ export class CrosswindPlot extends Plot {
     getColor(val: number) {
         val = val['Crosswind Risk Forecast'];
         // console.log("crosswind val = ", val)
-        if (val === null) { return '#d8d8d8'; }
-        if (val >= 0 && val < 1) { return '#00dd00'; } //green
-        if (val >= 1 && val <2){ return '#ffff00'; } //yellow
-        if (val >= 2) { return '#ff0000'; } //red
+        // if (val === null) { return '#d8d8d8'; }
+        if (val <0.5) { return '#00dd00'; }
+        if (val >= 0.5 && val < 1 ) {return '#bffc05'}
+        if (val >= 1 && val < 1.5) { return '#ffff00'; }
+        if (val >= 1.5 && val < 2) { return '#fcb205'; }
+        if (val >= 2) { return '#ff0000'; }
+
+    
 
         return '#ffff00';
     }
@@ -36,10 +40,12 @@ export class CrosswindPlot extends Plot {
      * @param val crosswind value
      */
     getTickFormat(val: number) {
-
-        if (val >= 0 && val < 1) { return 'Low'; }
-        if (val >= 1 && val < 2) { return 'Medium'; }
-        if (val >= 2) { return 'High'; }
+// return val.toString();
+        if (val <0.5) { return 'Low'; }
+        if (val >= 0.5 && val < 1 ) {return 'Slight'}
+        if (val >= 1 && val < 1.5) { return 'Moderate'; }
+        if (val >= 1.5 && val < 2) { return 'High'; }
+        if (val >= 2) { return 'Severe'; }
 
     }
 }

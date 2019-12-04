@@ -51,6 +51,18 @@ export class TemperaturePlot extends Plot {
     // return '#ffff00';
   }
 
+  getForceY() {
+    return [0.0, 100];
+  }
+  /**
+   * Formats the y-axis and tool tip
+   */
+  getTickFormat(v: number){
+    if (!v) { return; }
+    let temp = Math.round(v);
+    if(v) {return temp + ' \u00B0'}
+  }
+
   /**
    * set colors based of fahrenheit
    *

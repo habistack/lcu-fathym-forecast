@@ -176,5 +176,6 @@ public DoubleClick(): void {
         this.columnDefs,
         this.GridFeatures
       );
+      console.log("grid params", this.GridParameters)
   }
 }
