@@ -303,17 +303,17 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
             optionType: 'ff-api'
           });
         }
-        if (key === 'PrecipitationRate_Surface') {
+        if (key === 'Precipitation_Surface') {
           this.layerOptions.push({
             displayName: 'Forecast Precipitation',
-            value: 'PrecipitationRate_Surface',
+            value: 'Precipitation_Surface',
             optionType: 'ff-api'
           });
         }
-        if (key === 'PrecipitationRate_Surface') {
+        if (key === 'Temperature_2Meters') {
           this.layerOptions.push({
             displayName: 'Forecast Temperature',
-            value: 'Temperature_Surface',
+            value: 'Temperature_2Meters',
             optionType: 'ff-api'
           });
         }
