@@ -4,6 +4,8 @@ import { NotificationService } from '../../services/notification.service';
 import { ForecastDataModel } from '../../models/forecast-data.model';
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { RoutePointModel } from '../../models/route-point.model';
+import { MatDialog } from '@angular/material';
+import { ForecastDetailsComponent } from '../forecast-details/forecast-details.component';
 
 @Component({
   selector: 'lcu-route-summarization',
@@ -29,7 +31,9 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   protected chartMouseMovedSubsription: Subscription;
   protected forecastRouteChangedSubscription: Subscription;
 
-  constructor(protected notificationService: NotificationService) {
+  constructor(
+    protected notificationService: NotificationService,
+    public dialog: MatDialog) {
     this.DisplaySummarization = false;
   }
 
@@ -55,13 +59,14 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
         }
         this.ChartPointDetails = data;
         const forecast = this.AllData.forecast;
+        const cpdIdx = this.ChartPointDetails.Index;
         // assign point summary properties for when user moves mouse on the graph:
-        this.DelayRisk = this.roundToTwoDecimals(forecast.routeDelayRisk[this.ChartPointDetails.Index]);
-        this.RoadTemp = this.roundToTwoDecimals(forecast.roadTemperature[this.ChartPointDetails.Index]) + ' F';
-        this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[this.ChartPointDetails.Index]) + ' F';
-        // this.Elevation = forecast.roadTemperature[this.ChartPointDetails.Index]; // assign this when elevation comes back
-        this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[this.ChartPointDetails.Index]) + ' mph';
-        this.Precipitation = this.roundToTwoDecimals(forecast.precipitationRate[this.ChartPointDetails.Index]) + ' in/hr';
+        this.DelayRisk = this.roundToTwoDecimals(forecast.routeDelayRisk[cpdIdx]);
+        this.RoadTemp = this.roundToTwoDecimals(forecast.roadTemperature[cpdIdx]) + ' F';
+        this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[cpdIdx]) + ' F';
+        // this.Elevation = forecast.roadTemperature[cpdIdx]; // assign this when elevation comes back
+        this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[cpdIdx]) + ' mph';
+        this.Precipitation = this.roundToTwoDecimals(forecast.precipitationRate[cpdIdx]) + ' in/hr';
       }
     );
   }
@@ -75,7 +80,9 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   }
 
   public OpenDetailsModal() {
-    alert('details modal!')
+    this.dialog.open(ForecastDetailsComponent, {
+      width: '80%'
+    });
   }
 
   protected calculateRouteDuration(): void {

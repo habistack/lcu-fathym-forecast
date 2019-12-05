@@ -20,6 +20,7 @@ import { ForecastDataPlotComponent } from './controls/forecast-data-plot/forecas
 import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
 import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots.component';
 import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
+import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RouteSummarizationComponent } from './controls/route-summarization/rout
     VariableDataPlotComponent,
     ForecastPlotsComponent,
     ForecastDataPlotComponent,
-    RouteSummarizationComponent
+    RouteSummarizationComponent,
+    ForecastDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +69,8 @@ import { RouteSummarizationComponent } from './controls/route-summarization/rout
     ForecastDataPlotComponent,
     VariableDataPlotComponent,
     ForecastPlotsComponent,
-    ForecastDataPlotComponent
+    ForecastDataPlotComponent,
+    ForecastDetailsComponent
   ],
   providers: [
     DisplayDateFormatPipe,
