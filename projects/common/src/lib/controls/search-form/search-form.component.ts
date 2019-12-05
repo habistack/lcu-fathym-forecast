@@ -557,7 +557,7 @@ export class SearchFormComponent implements OnInit {
    */
   public SearchRoutes(searchType: string): void {
    // const searching: boolean = this.isSearchingRoute = !this.isSearchingRoute;
-    console.log('search type = ', searchType);
+    // console.log('search type = ', searchType);
       this.notificationService.SearchRoute(this.getFormValues(searchType), true);
   }
 
