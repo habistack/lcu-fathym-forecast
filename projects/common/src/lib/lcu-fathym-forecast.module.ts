@@ -19,6 +19,7 @@ import { RouteMapComponent } from './controls/route-map/route-map.component';
 import { ForecastDataPlotComponent } from './controls/forecast-data-plot/forecast-data-plot.component';
 import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
 import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots.component';
+import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots
     ImageDateFormatPipe,
     VariableDataPlotComponent,
     ForecastPlotsComponent,
-    ForecastDataPlotComponent
+    ForecastDataPlotComponent,
+    RouteSummarizationComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots
     ForecastDataPlotComponent,
     VariableDataPlotComponent,
     ForecastPlotsComponent,
-    ForecastDataPlotComponent
+    ForecastDataPlotComponent,
+    RouteSummarizationComponent
   ],
   entryComponents: [
     DepartureTableComponent,
