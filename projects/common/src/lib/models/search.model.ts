@@ -4,7 +4,7 @@ export class SearchModel {
 
   public Destination: string;
 
-  public IncludeAlts: boolean;
+  public IncludeAlts: string;
 
   public IsSearching: boolean;
 
@@ -18,7 +18,7 @@ export class SearchModel {
               origin: string,
               destination: string,
               departTime: string,
-              includeAlts: boolean,
+              includeAlts: string,
               searchType: string,
               searchDatasourceType: DatasourceTypesModel) {
     this.DepartureTime = departTime;

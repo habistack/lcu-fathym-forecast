@@ -29,7 +29,8 @@ export class PotentialRoadStatePlot extends Plot {
     }
 
     getForceY() {
-      return [0.0, 8];
+      return [0.0,8];
+    //   return ["Dry", "Wet", "Snow", "Ice", "Hail"]
     }
 
     /**

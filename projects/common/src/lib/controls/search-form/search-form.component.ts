@@ -358,7 +358,7 @@ export class SearchFormComponent implements OnInit {
   protected getFormValues(searchType: string): SearchModel {
     let origin: string = '';
     let destination: string = '';
-    let showAlternatives: boolean = false;
+    let showAlternatives: string = 'false';
     let departTime: string = '';
 
     if (this.RouteInputForm && this.Origin.value) {
@@ -376,7 +376,7 @@ export class SearchFormComponent implements OnInit {
     if (this.RouteInputForm && this.RouteInputForm.get('SearchFormControls.includeAlts').value) {
       showAlternatives = this.RouteInputForm.get('SearchFormControls.includeAlts').value;
       console.log('Show alts =', showAlternatives);
-      if(showAlternatives === true){
+      if(showAlternatives === "true"){
         //TODO do something
       }
     }

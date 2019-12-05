@@ -127,7 +127,7 @@ export class DataService {
     httpParams = httpParams.append('origin', search.Origin);
     httpParams = httpParams.append('destination', search.Destination);
     httpParams = httpParams.append('departAt', search.DepartureTime);    
-    httpParams = httpParams.append('maxAlternatives', '3');    
+    httpParams = httpParams.append('includeAlts', search.IncludeAlts);    
 
     httpParams = httpParams.append('azureMapsKey', this.azureMapsKey);
     httpParams = httpParams.append('forecastAPIKey', this.forecastAPIKey);
