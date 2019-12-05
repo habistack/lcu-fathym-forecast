@@ -26,7 +26,7 @@ export class PotentialDelayRiskPlot extends Plot {
     }
 
     getForceY() {
-       return [0.0, 4.0];
+       return [0.0, 3];
     }
 
     // getTickCount(val: number) {
@@ -40,13 +40,12 @@ export class PotentialDelayRiskPlot extends Plot {
      * @param val delay risk value
      */
     getTickFormat(v: number) {
-        
+        // return v.toString();
         if (!v) { return 'Normal'; }
         if (v >=0 && v < 1) { return 'Normal'; }
         if (v >= 1 && v < 2) { return 'Slight'; }
         if (v >= 2 && v < 3) { return 'Moderate'; }
         if (v >= 3 && v < 4) { return 'Heavy'; }
-        if (v >= 4) { return 'Severe'; }
-
+        if (v = 4) { return 'Severe'; }
     }
 }
