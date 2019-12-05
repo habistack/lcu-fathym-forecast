@@ -61,6 +61,14 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public get IsLoading(): boolean {
     return this._isLoading;
   }
+/**
+ * The list of routes a user can select from
+ */
+  public Routes: Array<any>;
+/**
+ * the default route selected
+ */
+  public DefaultRoute: any;
 
   /**
    * Position plot points for route(s)
@@ -188,6 +196,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.maxLong = -9999;
 
+
     // this.Loading = new Loading();
 
     this.setUpLayers();
@@ -196,6 +205,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //  Life Cycle
   public ngOnInit(): void {
+    this.Routes = new Array<any>();
 
     setTimeout(() => {
       this.initialSetup();
@@ -499,8 +509,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
      */
     const routeProps: Array<object> = [
       { strokeColor: '#0000CD', strokeWidth: 5 },
-      { strokeColor: '#6842f4', strokeWidth: 4 },
-      { strokeColor: '#60060b', strokeWidth: 3 }];
+      { strokeColor: '#00FF00', strokeWidth: 5 },
+      { strokeColor: '#FF007F', strokeWidth: 5 }];
 
     /**
      * Remove any routes on the map
@@ -518,7 +528,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     //  */
     // this.routeNames = [];
 
-    for (let i = 0; i < pointsArr.length; i++) {
+    for (let i = pointsArr.length-1; i >=0; i--) {
 
       /**
        * Set new data source to the map
@@ -542,8 +552,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
        * Points to plot
        */
       const points = pointsArr[i];
+      // console.log("points here: ", points)
       const decodedPath = points;
-
       for (let j = 0; j < decodedPath.length; j++) {
         const llat = decodedPath[j][1];
 
@@ -557,6 +567,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if (llon > this.maxLong) { this.maxLong = llon; }
       }
+    
 
       const start: atlas.data.Position = decodedPath[0];
       const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
@@ -627,10 +638,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected testRouteData(): void {
     this.IsLoading = true;
-    console.log("getting called");
     this.dataService.RouteData(this.SearchModel)
       .subscribe((res) => {
-        // console.log('test route data', res);
+        console.log('test route data', res);
         this.handleTestRouteResponse(res);
         this.IsLoading = false;
       });
@@ -674,29 +684,62 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected testNewPoints(val: any): Array<any> {
     const points = [];
-    // console.log('val', val);
+    // console.log('val.routes', val.routes);
     // const pos = new atlas.data.Position(1, 1);
-
-    for (const point of val.points) {
-      points.push([point.lng, point.lat]);
-    }
-
-
+  for (const point of val.points) {
+    points.push([point.lng, point.lat]);
+  }
+  
     return points;
   }
 
-  protected handleTestRouteResponse(response: object) {
+  protected handleTestRouteResponse(response: any) {
 
     const pointsArr: Array<Array<atlas.data.Position>> = [];
 
-    const points = this.testNewPoints(response);
+    // const points = this.testNewPoints(response.routes[0]);
+    this.Routes = new Array<any>();
 
-    pointsArr.push(points);
+    response.routes.forEach(route =>{
+    
+      this.Routes.push(route);
+      let points = this.testNewPoints(route);
+      pointsArr.push(points);
+
+    })
+    this.formatRoutes();
+    // pointsArr.push(points);
+    // console.log('pontsArr: ',pointsArr)
+    this.DefaultRoute= this.Routes[0];
 
     // update plot and delay risk data
-    this.notificationService.UpdateForecastPlotData(response);
-
+    this.notificationService.UpdateForecastPlotData(this.DefaultRoute);
+// console.log('response: ',response)
     this.displayRoute(pointsArr);
+  }
+
+  protected formatRoutes():void{
+    
+    let i =0;
+    this.Routes.forEach(route =>{
+      i++;
+      route.displayName = "Route "+ i.toString();
+      if(i === 1){
+        route.color='#0000CD';
+      }
+      if(i === 2){
+        route.color='#00FF00';
+      }
+      if(i === 3){
+        route.color='#FF007F';
+      }
+    })
+    console.log("routes= ", this.Routes)
+  }
+
+  public RouteChosen(route: any): void{
+    this.DefaultRoute = route;
+    this.notificationService.UpdateForecastPlotData(this.DefaultRoute);
   }
 
   /**

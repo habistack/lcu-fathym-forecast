@@ -41,9 +41,23 @@
   background-color: rgba(rgb(161, 161, 161), 0.9);
   border-radius: 10px;
 }
-
 @media screen and (max-width: 960px) {
   .layer-dropdown {
     position: relative;
+  }
+}
+.route-dropdown {
+  position: absolute;
+  right: 3.2%;
+  top: 70px;
+  padding: 2px;
+  z-index: 1;
+  background-color: rgba(rgb(161, 161, 161), 0.9);
+  border-radius: 10px;
+}
+@media screen and (max-width: 960px) {
+  .route-dropdown {
+    position: relative;
+    left: 56%;
   }
 }

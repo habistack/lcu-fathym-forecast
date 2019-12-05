@@ -106,11 +106,15 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   }
 
   protected roundToTwoDecimals(n: number): string {
+    if(n){
     return n.toFixed(2);
+    }
   }
 
   protected roundToFourDecimals(n: number): string {
+    if(n){
     return n.toFixed(4);
+    }
   }
 
 }
