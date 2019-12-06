@@ -74,7 +74,7 @@ export class ForecastPlotsComponent implements OnInit {
     this.PlotForecastData = response;
 
     // console.log("plot forecastdata after", this.PlotForecastData)
-debugger;
+// debugger;
     /** This is here for now, can be moved to a location where we change the temperature type at runtime - Shannon */
     Object.entries(this.PlotForecastData.forecast).forEach(itm => {
       // console.log("item: ", itm);
@@ -118,17 +118,22 @@ debugger;
             itm[1][i] = 8;
             break;
           default:
-            console.log("data doesnt exist");
+            // console.log("data doesnt exist");
             break;
         }
       }
     }
     });
-
+    /**
+     * reset ValidTimes
+     */
+    if(this.ValidTimes.length>0){
+      this.ValidTimes = new Array<number>();
+    }
     for (const itm of this.PlotForecastData.points) {
       this.ValidTimes.push(itm.absoluteSeconds);
     }
-
+    // console.log("time:", this.ValidTimes);
     this.plot.Refresh();
   }
 
