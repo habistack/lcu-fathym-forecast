@@ -69,16 +69,24 @@ export class ForecastPlotsComponent implements OnInit {
     * @param response returned data
     */
   protected dataResponse(response: ForecastDataModel): void {
-
+    console.log("plot forecastdata before", this.PlotForecastData)
+// debugger;
     this.PlotForecastData = response;
+
+    console.log("plot forecastdata after", this.PlotForecastData)
+debugger;
     /** This is here for now, can be moved to a location where we change the temperature type at runtime - Shannon */
     Object.entries(this.PlotForecastData.forecast).forEach(itm => {
       // console.log("item: ", itm);
       if (itm[0] === 'surfaceTemperature' || itm[0] === 'roadTemperature') {
+        if(itm[1][0] > 200){
         for (let i = 0; i < itm[1].length; i++) {
           itm[1][i] = TemperatureConversion.KelvinToFahrenheit(itm[1][i]);
         }
       }
+    }
+      console.log("plot forecastdata after temp conversion", this.PlotForecastData)
+
       if (itm[0] === 'roadState') { 
       for (let i = 0; i < itm[1].length; i++) {
         switch (itm[1][i]) {
