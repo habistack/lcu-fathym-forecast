@@ -69,11 +69,11 @@ export class ForecastPlotsComponent implements OnInit {
     * @param response returned data
     */
   protected dataResponse(response: ForecastDataModel): void {
-    console.log("plot forecastdata before", this.PlotForecastData)
+    // console.log("plot forecastdata before", this.PlotForecastData)
 // debugger;
     this.PlotForecastData = response;
 
-    console.log("plot forecastdata after", this.PlotForecastData)
+    // console.log("plot forecastdata after", this.PlotForecastData)
 debugger;
     /** This is here for now, can be moved to a location where we change the temperature type at runtime - Shannon */
     Object.entries(this.PlotForecastData.forecast).forEach(itm => {
@@ -85,7 +85,7 @@ debugger;
         }
       }
     }
-      console.log("plot forecastdata after temp conversion", this.PlotForecastData)
+      // console.log("plot forecastdata after temp conversion", this.PlotForecastData)
 
       if (itm[0] === 'roadState') { 
       for (let i = 0; i < itm[1].length; i++) {
