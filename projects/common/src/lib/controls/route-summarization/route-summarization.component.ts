@@ -43,8 +43,9 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
         if (!data) {
           console.error('PlotDataSubscription - No data returned'); return;
         }
+        // debugger;
         this.AllData = data;
-        this.RouteName = 'Temp Route Name';
+        this.RouteName = this.AllData.displayName;
         this.calculateRouteDuration();
         this.calculateAverageDelayRisk();
         this.DisplaySummarization = true;
@@ -60,13 +61,15 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
         this.ChartPointDetails = data;
         const forecast = this.AllData.forecast;
         const cpdIdx = this.ChartPointDetails.Index;
-        // assign point summary properties for when user moves mouse on the graph:
-        this.DelayRisk = this.roundToTwoDecimals(forecast.routeDelayRisk[cpdIdx]);
-        this.RoadTemp = this.roundToTwoDecimals(forecast.roadTemperature[cpdIdx]) + ' F';
-        this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[cpdIdx]) + ' F';
-        // this.Elevation = forecast.roadTemperature[cpdIdx]; // assign this when elevation comes back
-        this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[cpdIdx]) + ' mph';
-        this.Precipitation = this.roundToTwoDecimals(forecast.precipitationRate[cpdIdx]) + ' in/hr';
+        if (this.ChartPointDetails.Index !== -1) {
+          // assign point summary properties for when user moves mouse on the graph:
+          this.DelayRisk = this.roundToTwoDecimals(forecast.routeDelayRisk[cpdIdx]);
+          this.RoadTemp = this.roundToTwoDecimals(forecast.roadTemperature[cpdIdx]) + ' F';
+          this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[cpdIdx]) + ' F';
+          // this.Elevation = forecast.roadTemperature[cpdIdx]; // assign this when elevation comes back
+          this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[cpdIdx]) + ' mph';
+          this.Precipitation = this.roundToTwoDecimals(forecast.precipitationRate[cpdIdx]) + ' in/hr';
+        }
       }
     );
   }
@@ -81,7 +84,8 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
 
   public OpenDetailsModal() {
     this.dialog.open(ForecastDetailsComponent, {
-      width: '80%'
+      width: '80%',
+      data: { allData: this.AllData }
     });
   }
 
@@ -106,14 +110,20 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   }
 
   protected roundToTwoDecimals(n: number): string {
-    if(n){
-    return n.toFixed(2);
+    if (n === 0) {
+      return '0';
+    }
+    if (n) {
+      return n.toFixed(2);
     }
   }
 
   protected roundToFourDecimals(n: number): string {
-    if(n){
-    return n.toFixed(4);
+    if (n === 0) {
+      return '0';
+    }
+    if (n) {
+      return n.toFixed(4);
     }
   }
 
