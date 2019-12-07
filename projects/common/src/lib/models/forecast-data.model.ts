@@ -11,4 +11,9 @@ export class ForecastDataModel {
      * Route points and absolute seconds
      */
     public points: Array<RoutePointModel>;
+
+    /**
+     * The display name of the current route
+     */
+    public displayName?: string;
 }
