@@ -124,6 +124,7 @@ export class ForecastPlotsComponent implements OnInit {
       }
     }
     });
+    
     /**
      * reset ValidTimes
      */

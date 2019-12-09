@@ -1,4 +1,4 @@
-import { Component, Injector, ViewChild, ViewChildren, ChangeDetectorRef, AfterViewInit, QueryList, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { MatSlider } from '@angular/material';
 import { map } from 'rxjs/internal/operators/map';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -15,6 +15,7 @@ import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils
 import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RouteInfoModel } from '../../models/route-info.model';
 
 
 @Component({
@@ -64,11 +65,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 /**
  * The list of routes a user can select from
  */
-  public Routes: Array<any>;
+  public Routes: Array<RouteInfoModel>;
 /**
  * the default route selected
  */
-  public DefaultRoute: any;
+  public DefaultRoute: RouteInfoModel;
 
   /**
    * Position plot points for route(s)
@@ -205,7 +206,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //  Life Cycle
   public ngOnInit(): void {
-    this.Routes = new Array<any>();
+    this.Routes = new Array<RouteInfoModel>();
 
     setTimeout(() => {
       this.initialSetup();
@@ -218,7 +219,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
         // console.log('data', data);
-        this.setCurrentMarker(data.Index);
+        // setInterval(() => {
+          this.setCurrentMarker(data.Index);
+
+        // }, 50)
 
         this.setTimeFromChart(data.Value);
       }
@@ -282,9 +286,25 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //  API Methods
   public MapClicked(evt: atlas.data.Position) {
+
+    // console.log(evt)
+    //determine the route selected only if there is more than 1 route
+    if(this.Routes.length >1){
+    this.determineRoute(evt);
+    }
     // this.mapClick.emit(e);console.log(this.Maper)
   }
-
+  protected determineRoute(coords: atlas.data.Position){
+    this.Routes.forEach(route =>{
+      route.pointsArr.forEach(point =>{
+        
+        if(point[0].toFixed(1) === coords[0].toFixed(1) && point[1].toFixed(1) === coords[1].toFixed(1)){
+        // console.log("match");
+        this.RouteChosen(route);
+        }
+      })
+    })
+  }
   protected makeMaptileOptions(layerStr, t) {
     return {
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layerStr}/${t}/{z}/{x}/{y}.png`,
@@ -495,7 +515,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    *
    * @param pointsArr array of all points that make up routes
    */
-  protected displayRoute(pointsArr: Array<Array<atlas.data.Position>>) {
+  // protected displayRoute(pointsArr: Array<Array<atlas.data.Position>>) {
+    protected displayRoute(routes: Array<RouteInfoModel>) {
+      // console.log("display routes: ", routes);
 
     if (!this.Maper) { return; }
 
@@ -507,15 +529,21 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
      * Colors for route lines
      * TODO: make this dynamic for unknown number of routes
      */
-    const routeProps: Array<object> = [
-      { strokeColor: '#0000CD', strokeWidth: 5 },
-      { strokeColor: '#00FF00', strokeWidth: 5 },
-      { strokeColor: '#FF007F', strokeWidth: 5 }];
+    // const routeProps: Array<object> = [
+    //   { strokeColor: '#0000CD', strokeWidth: 5 },
+    //   { strokeColor: '#00FF00', strokeWidth: 5 },
+    //   { strokeColor: '#FF007F', strokeWidth: 5 }];
 
     /**
      * Remove any routes on the map
      */
     this.clearRoutes();
+
+    /**
+     * Removes any Markers on the map
+     */
+    this.Maper.map.removeLayers(['currentMark']);
+    
     // if (this.routeNames && this.routeNames.length > 0) {
     //   for (let i = 0; i < this.routeNames.length; i++) {
     //     this.Maper.map.removeLayers([this.routeNames[i]]);
@@ -527,8 +555,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     //  * Clear routeNames array
     //  */
     // this.routeNames = [];
+    routes.forEach(route=>{
 
-    for (let i = pointsArr.length-1; i >=0; i--) {
+    // console.log("route name = ", route.displayName);
+    // for (let i = route.pointsArr.length-1; i >=0; i--) {
+      // for (let i = 0; i <route.pointsArr.length; i++) {
 
       /**
        * Set new data source to the map
@@ -539,25 +570,32 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       /**
        * Build route names
        */
-      const routeName: string = 'routeLine' + String(i);
+      const routeName= route.displayName;
       this.routeNames.push(routeName);
 
       /**
        * Set colors for each route line
        */
-      const routeColor: string = routeProps[i]['strokeColor'];
-      const routeWidth: number = routeProps[i]['strokeWidth'];
+      
+      // const routeColor: string = routeProps[i]['strokeColor'];
+      // const routeWidth: number = routeProps[i]['strokeWidth'];
+
+      const routeColor: string = route.color;
+      // console.log('route color: ', route.color);
+      const routeWidth: number = 5;
 
       /**
        * Points to plot
        */
-      const points = pointsArr[i];
+      const points = route.pointsArr;
       // console.log("points here: ", points)
       const decodedPath = points;
       for (let j = 0; j < decodedPath.length; j++) {
         const llat = decodedPath[j][1];
+        // console.log("llat: ", llat);
 
         const llon = decodedPath[j][0];
+        // console.log("llon: ", llon);
 
         if (llat < this.minLat) { this.minLat = llat; }
 
@@ -619,7 +657,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
       this.Route = points;
-    }
+    // }
+  })
+
   }
 
   protected clearRoutes(): void {
@@ -681,7 +721,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
           this.IsLoading = false;
         });
   }
-
+/**
+ * convert the points to only coords
+ * @param val 
+ */
   protected testNewPoints(val: any): Array<any> {
     const points = [];
     // console.log('val.routes', val.routes);
@@ -692,55 +735,120 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   
     return points;
   }
-
+/**
+ * 
+ * Sets up the map with routes initially based on @param response from the search form
+ */
   protected handleTestRouteResponse(response: any) {
 
-    const pointsArr: Array<Array<atlas.data.Position>> = [];
-
-    // const points = this.testNewPoints(response.routes[0]);
-    this.Routes = new Array<any>();
+    this.Routes = new Array<RouteInfoModel>();
 
     response.routes.forEach(route =>{
-    
       this.Routes.push(route);
+      //convert the points to only coords
       let points = this.testNewPoints(route);
-      pointsArr.push(points);
 
+      //assign the route its own array of coords
+      this.Routes[this.Routes.indexOf(route)].pointsArr = points;
+
+      this.calculateDelayRisk(route);
     })
+    
+    
+    this.DefaultRoute = this.determineDefaultRoute();
     this.formatRoutes();
-    // pointsArr.push(points);
-    // console.log('pontsArr: ',pointsArr)
-    this.DefaultRoute= this.Routes[0];
-
+    this.moveSelectedRouteToEnd();
     // update plot and delay risk data
     this.notificationService.UpdateForecastPlotData(this.DefaultRoute);
-// console.log('response: ',response)
-    this.displayRoute(pointsArr);
-  }
+    this.displayRoute(this.Routes);
 
+  }
+/**gives route a name and color */
   protected formatRoutes():void{
-    
     let i =0;
     this.Routes.forEach(route =>{
       i++;
       route.displayName = "Route "+ i.toString();
-      if(i === 1){
-        route.color='#0000CD';
+      if(route.selectedRoute === true){
+        route.color = '#0000CD'
       }
-      if(i === 2){
-        route.color='#00FF00';
-      }
-      if(i === 3){
-        route.color='#FF007F';
+      else{
+        route.color="gray"
       }
     })
     console.log("routes= ", this.Routes)
   }
+/**
+ * calculates the delay risk for the given route
+ * @param route 
+ */
+  protected calculateDelayRisk(route: any){
+    let riskSum:number = 0;
+     route.forecast.routeDelayRisk.forEach(risk=>{
+        riskSum+=risk;
+     })
+     let delayRiskAvg = riskSum/(route.forecast.routeDelayRisk.length);
+     route.avgDelayRisk = delayRiskAvg.toFixed(4);
+    //  console.log("route: ", route);
+  }
+/**
+ * determines the default route based on delay risk
+ */
+  protected determineDefaultRoute(): RouteInfoModel{
+    let dRoute= this.Routes[0];
+    this.Routes.forEach(route=>{
+      if(route.avgDelayRisk <= dRoute.avgDelayRisk){
+        dRoute.selectedRoute=false;
+        dRoute = route;
+        route.selectedRoute=true;
+      }
+      else{
+        route.selectedRoute=false;
+      }
+    })
+    // this.Route = dRoute.pointsArr;
 
-  public RouteChosen(route: any): void{
+    return dRoute;
+  }
+/**
+ * Changes the previous selected route to false and changes the defaultRoute to the given route alson assigning color
+ * @param route 
+ */
+  protected changeSelectedRoute(route: RouteInfoModel){
+    this.Routes.forEach(route=>{
+      if(route.selectedRoute === true){
+        route.selectedRoute = false;
+        route.color = 'gray';
+      }
+    });
+    route.color = "#0000CD";
+    route.selectedRoute = true;
     this.DefaultRoute = route;
+  }
+/**
+ * moves the selected route to the end of the array so it appears on top of all other routes
+ */
+  protected moveSelectedRouteToEnd(){
+    let tempRoute: RouteInfoModel;
+    this.Routes.forEach(route=>{
+      if(route.selectedRoute === true){
+        tempRoute = route;
+        this.Routes.splice(this.Routes.indexOf(route),1);
+      }
+    })
+    this.Routes.push(tempRoute);
+  }
+/**
+ * When the user selects a new route to show data for
+ * @param route 
+ */
+  public RouteChosen(route: RouteInfoModel): void{
+    this.changeSelectedRoute(route);
+    this.moveSelectedRouteToEnd();
+    this.displayRoute(this.Routes);
     this.notificationService.UpdateForecastPlotData(this.DefaultRoute);
   }
+
 
   /**
    * Setup route points for creating route lines
@@ -795,7 +903,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    * @param index for route point
    */
   protected setCurrentMarker(index: number) {
-    this.Maper.map.removeLayers(['currentMark']);
+    // setInterval(() => {
+      this.Maper.map.removeLayers(['currentMark']);
+
+    // }, 500)
 
     const point = this.Route[index];
 

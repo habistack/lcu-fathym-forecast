@@ -103,6 +103,7 @@ export abstract class Plot {
         interactiveLayer: {
           dispatch: {
             elementMousemove: function(currentPlot) {
+              // console.log("current plot:", currentPlot)
               return (e) => {
                 const cls = currentPlot.closest(currentPlot.validTimes, e.pointXValue);
                 const chartMouseModel: ChartMouseMoveModel = new ChartMouseMoveModel( cls, cls[1], cls[0] );
