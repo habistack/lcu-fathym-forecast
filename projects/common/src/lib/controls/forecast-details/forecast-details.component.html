@@ -1,3 +1,21 @@
-<p>
-  forecast-details works!
-</p>
+<mat-dialog-content>
+  <h3>{{ RouteDisplayName }}</h3>
+  <!-- <button (click)="ToggleMetric()">Metric</button>
+  <button (click)="ToggleStandard()">Standard</button> -->
+  <mat-button-toggle-group (change)="ToggleMeasurementUnit(group.value)" [value]="SelectedUnitSystem"
+    #group="matButtonToggleGroup">
+    <mat-button-toggle value="Metric">
+      <span>Metric</span>
+    </mat-button-toggle>
+    <mat-button-toggle value="English">
+      <span>English</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <button class="json-download-button" mat-raised-button (click)="ExportToJson()">Download as JSON</button>
+  <!-- <lcu-forecast-plots></lcu-forecast-plots> -->
+  <!-- <lcu-forecast-data-plot #ForecastDataPlotComponent [forecast-data]="PlotForecastData" [valid-times]="ValidTimes"></lcu-forecast-data-plot> -->
+  <div *ngFor="let config of PlotConfigs">
+    <lcu-variable-data-plot [valid-times]="ValidTimes" [forecast-data]="ForecastData" [plot]="config">
+    </lcu-variable-data-plot>
+  </div>
+</mat-dialog-content>
