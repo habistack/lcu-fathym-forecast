@@ -98,6 +98,9 @@
   font-weight: bold;
 }
 
+.nvtooltip {
+  z-index: 1000;
+}
 
 @include set-theme($contrast-theme);
 

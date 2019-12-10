@@ -60,7 +60,7 @@ export class PrecipitationPlot extends Plot {
 	getTickFormat(v: number) {
 		if (!v) { return `0.00 ${this.unitDisplay}`; }
 		let rate = v
-		if (v) { return rate + ` ${this.unitDisplay}` }
+		if (v) { return rate + ` ${this.unitDisplay}`; }
 	}
 
 }
