@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { TemperaturePlot } from '../plots/temperature-plot/temperature-plot';
 import { PotentialRoadStatePlot } from '../plots/potential-road-state_plot/potential-road-state-plot';
 import { PotentialDelayRiskPlot } from '../plots/potential-delay-risk-plot/potential-delay-risk-plot';
@@ -22,12 +22,20 @@ export class ForecastDetailsComponent implements OnInit {
   public SelectedUnitSystem;
   public RouteDisplayName;
 
-  constructor(protected notificationService: NotificationService, @Inject(MAT_DIALOG_DATA) public passedData: any) {
+  constructor(
+    protected notificationService: NotificationService,
+    @Inject(MAT_DIALOG_DATA) public passedData: any,
+    protected dialogRef: MatDialogRef<ForecastDetailsComponent>
+  ) {
     this.setForecastData();
   }
 
   ngOnInit() {
 
+  }
+
+  public CloseModal() {
+    this.dialogRef.close();
   }
 
   public ToggleMeasurementUnit(val) {
@@ -42,32 +50,6 @@ export class ForecastDetailsComponent implements OnInit {
     }
   }
 
-  protected convertFtoC(val) {
-    const newVal = (val - 32) * 5 / 9;
-    return newVal;
-  }
-
-  protected convertCtoF(val) {
-    const newVal = val * 9 / 5 + 32;
-    return newVal;
-  }
-
-  protected convertINtoMM(val) {
-    return val * 25.4;
-  }
-
-  protected convertMMtoIN(val) {
-    return val * 0.03937008;
-  }
-
-  protected convertMlPHourToMePSec(val) {
-    return val / 2.237;
-  }
-
-  protected convertMePSecToMlPHour(val) {
-    return val * 2.237;
-  }
-
   protected setForecastData() {
     this.ForecastData = { forecast: this.passedData.allData.forecast };
     this.ValidTimes = [];
@@ -77,16 +59,6 @@ export class ForecastDetailsComponent implements OnInit {
     console.log(this.ForecastData);
     this.RouteDisplayName = this.passedData.allData.displayName;
     this.setInitialDataToMetric();
-
-    this.PlotConfigs = [
-      new TemperaturePlot('C', 'Forecast'),
-      new PotentialRoadStatePlot(null, 'Forecast'),
-      new PotentialDelayRiskPlot(null, 'Forecast'),
-      new CrosswindPlot(null, 'Forecast'),
-      new PrecipitationPlot('mm/hr', 'Forecast', 'mm/hr'),
-      new SnowDepthPlot('m', 'Forecast'),
-      new WindPlot('m/s', 'Forecast'),
-    ];
   }
 
   protected setInitialDataToMetric() {
@@ -98,6 +70,16 @@ export class ForecastDetailsComponent implements OnInit {
     this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
       return this.convertFtoC(x);
     });
+
+    this.PlotConfigs = [
+      new TemperaturePlot('C', 'Forecast'),
+      new PotentialRoadStatePlot(null, 'Forecast'),
+      new PotentialDelayRiskPlot(null, 'Forecast'),
+      new CrosswindPlot(null, 'Forecast'),
+      new PrecipitationPlot('mm', 'Forecast', 'mm'),
+      new SnowDepthPlot('m', 'Forecast', 'm'),
+      new WindPlot('m/s', 'Forecast', 'm/s'),
+    ];
   }
 
   protected setForecastDataToMetric() {
@@ -112,44 +94,46 @@ export class ForecastDetailsComponent implements OnInit {
     });
     this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
       return this.convertMlPHourToMePSec(x);
-    })
-
-    
+    });
+    this.ForecastData.forecast.snowDepth = this.ForecastData.forecast.snowDepth.map(x => {
+      return this.convertINToM(x);
+    });
 
     this.PlotConfigs = [
       new TemperaturePlot('C', 'Forecast'), // add metric measurements to end
       new PotentialRoadStatePlot(null, 'Forecast'),
       new PotentialDelayRiskPlot(null, 'Forecast'),
       new CrosswindPlot(null, 'Forecast'),
-      new PrecipitationPlot('mm/hr', 'Forecast', 'mm/hr'),
-      new SnowDepthPlot('m', 'Forecast'),
+      new PrecipitationPlot('mm', 'Forecast', 'mm'),
+      new SnowDepthPlot('m', 'Forecast', 'm'),
       new WindPlot('m/s', 'Forecast', 'm/s'),
     ];
   }
 
   protected setForecastDataToEnglish() {
-      this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
-        return this.convertCtoF(x);
-      });
-      this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
-        return this.convertCtoF(x);
-      });
-      this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
-        return this.convertINtoMM(x);
-      })
-      this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
-        return this.convertMePSecToMlPHour(x);
-      });
-
-      
+    this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
+      return this.convertCtoF(x);
+    });
+    this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
+      return this.convertCtoF(x);
+    });
+    this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+      return this.convertMMtoIN(x);
+    })
+    this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
+      return this.convertMePSecToMlPHour(x);
+    });
+    this.ForecastData.forecast.snowDepth = this.ForecastData.forecast.snowDepth.map(x => {
+      return this.convertMToIN(x);
+    });
 
     this.PlotConfigs = [
       new TemperaturePlot('F', 'Forecast'), // add english measurements to end
       new PotentialRoadStatePlot(null, 'Forecast'),
       new PotentialDelayRiskPlot(null, 'Forecast'),
       new CrosswindPlot(null, 'Forecast'),
-      new PrecipitationPlot('in/hr', 'Forecast', 'mm/hr'),
-      new SnowDepthPlot('in', 'Forecast'),
+      new PrecipitationPlot('in', 'Forecast', 'in'),
+      new SnowDepthPlot('in', 'Forecast', 'in'),
       new WindPlot('mph', 'Forecast', 'mph'),
     ];
   }
@@ -172,6 +156,38 @@ export class ForecastDetailsComponent implements OnInit {
     }
   }
 
+  protected convertFtoC(val) {
+    const newVal = (val - 32) * 5 / 9;
+    return newVal;
+  }
 
+  protected convertCtoF(val) {
+    const newVal = val * 9 / 5 + 32;
+    return newVal;
+  }
+
+  protected convertINtoMM(val) {
+    return val * 25.4;
+  }
+
+  protected convertMMtoIN(val) {
+    return val * 0.03937008;
+  }
+
+  protected convertMlPHourToMePSec(val) {
+    return val === 0 ? 0 : val / 2.237;
+  }
+
+  protected convertMePSecToMlPHour(val) {
+    return val * 2.237;
+  }
+
+  protected convertINToM(val) {
+    return val === 0 ? 0 : val / 39.37;
+  }
+
+  protected convertMToIN(val) {
+    return val * 39.37;
+  }
 
 }
