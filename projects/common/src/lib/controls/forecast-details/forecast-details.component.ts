@@ -23,78 +23,23 @@ export class ForecastDetailsComponent implements OnInit {
   public RouteDisplayName;
 
   constructor(protected notificationService: NotificationService, @Inject(MAT_DIALOG_DATA) public passedData: any) {
-    this.ForecastData = { forecast: this.passedData.allData.forecast };
-    this.ValidTimes = [];
-    this.passedData.allData.points.forEach(x => {
-      this.ValidTimes.push(x.absoluteSeconds);
-    });
-    console.log(this.ForecastData);
-    this.RouteDisplayName = this.passedData.allData.displayName;
-
-    this.PlotConfigs = [
-      new TemperaturePlot('F', 'Forecast'),
-      new PotentialRoadStatePlot(null, 'Forecast'),
-      new PotentialDelayRiskPlot(null, 'Forecast'),
-      new CrosswindPlot(null, 'Forecast'),
-      new PrecipitationPlot('mm/hr', 'Forecast'),
-      new SnowDepthPlot('mm', 'Forecast'),
-      new WindPlot('m/s', 'Forecast'),
-    ];
+    this.setForecastData();
   }
 
   ngOnInit() {
-    this.SelectedUnitSystem = 'English';
+
   }
 
   public ToggleMeasurementUnit(val) {
     this.SelectedUnitSystem = val;
-    console.log('selected unit: ', this.SelectedUnitSystem);
 
     if (this.SelectedUnitSystem === 'Metric') {
-      console.log('converting to Metric...')
-      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
-      this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
-        return this.convertFtoC(x);
-      });
-      this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
-        return this.convertFtoC(x);
-      });
-      this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
-        return this.convertINtoMM(x);
-      })
-      this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
-        return this.convertMlPHourToMePSec(x);
-      })
-      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
+      this.setForecastDataToMetric();
     }
 
     if (this.SelectedUnitSystem === 'English') {
-      console.log('converting to English...');
-      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
-      this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
-        return this.convertCtoF(x);
-      });
-      this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
-        return this.convertCtoF(x);
-      });
-      this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
-        return this.convertINtoMM(x);
-      })
-      this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
-        return this.convertMePSecToMlPHour(x);
-      });
-      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
+      this.setForecastDataToEnglish();
     }
-
-    this.PlotConfigs = [
-      new TemperaturePlot('C', 'Forecast'),
-      new PotentialRoadStatePlot(null, 'Forecast'),
-      new PotentialDelayRiskPlot(null, 'Forecast'),
-      new CrosswindPlot(null, 'Forecast'),
-      new PrecipitationPlot('mm/hr', 'Forecast'),
-      new SnowDepthPlot('mm', 'Forecast'),
-      new WindPlot('m/s', 'Forecast'),
-    ];
   }
 
   protected convertFtoC(val) {
@@ -121,6 +66,92 @@ export class ForecastDetailsComponent implements OnInit {
 
   protected convertMePSecToMlPHour(val) {
     return val * 2.237;
+  }
+
+  protected setForecastData() {
+    this.ForecastData = { forecast: this.passedData.allData.forecast };
+    this.ValidTimes = [];
+    this.passedData.allData.points.forEach(x => {
+      this.ValidTimes.push(x.absoluteSeconds);
+    });
+    console.log(this.ForecastData);
+    this.RouteDisplayName = this.passedData.allData.displayName;
+    this.setInitialDataToMetric();
+
+    this.PlotConfigs = [
+      new TemperaturePlot('C', 'Forecast'),
+      new PotentialRoadStatePlot(null, 'Forecast'),
+      new PotentialDelayRiskPlot(null, 'Forecast'),
+      new CrosswindPlot(null, 'Forecast'),
+      new PrecipitationPlot('mm/hr', 'Forecast', 'mm/hr'),
+      new SnowDepthPlot('m', 'Forecast'),
+      new WindPlot('m/s', 'Forecast'),
+    ];
+  }
+
+  protected setInitialDataToMetric() {
+    this.SelectedUnitSystem = 'Metric';
+    // temp data comes in Fahrenheit but everything else comes in metric, so initally, set the outlier to metric
+    this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
+      return this.convertFtoC(x);
+    });
+    this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
+      return this.convertFtoC(x);
+    });
+  }
+
+  protected setForecastDataToMetric() {
+    this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
+      return this.convertFtoC(x);
+    });
+    this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
+      return this.convertFtoC(x);
+    });
+    this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+      return this.convertINtoMM(x);
+    });
+    this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
+      return this.convertMlPHourToMePSec(x);
+    })
+
+    
+
+    this.PlotConfigs = [
+      new TemperaturePlot('C', 'Forecast'), // add metric measurements to end
+      new PotentialRoadStatePlot(null, 'Forecast'),
+      new PotentialDelayRiskPlot(null, 'Forecast'),
+      new CrosswindPlot(null, 'Forecast'),
+      new PrecipitationPlot('mm/hr', 'Forecast', 'mm/hr'),
+      new SnowDepthPlot('m', 'Forecast'),
+      new WindPlot('m/s', 'Forecast', 'm/s'),
+    ];
+  }
+
+  protected setForecastDataToEnglish() {
+      this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
+        return this.convertCtoF(x);
+      });
+      this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
+        return this.convertCtoF(x);
+      });
+      this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+        return this.convertINtoMM(x);
+      })
+      this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
+        return this.convertMePSecToMlPHour(x);
+      });
+
+      
+
+    this.PlotConfigs = [
+      new TemperaturePlot('F', 'Forecast'), // add english measurements to end
+      new PotentialRoadStatePlot(null, 'Forecast'),
+      new PotentialDelayRiskPlot(null, 'Forecast'),
+      new CrosswindPlot(null, 'Forecast'),
+      new PrecipitationPlot('in/hr', 'Forecast', 'mm/hr'),
+      new SnowDepthPlot('in', 'Forecast'),
+      new WindPlot('mph', 'Forecast', 'mph'),
+    ];
   }
 
   public ExportToJson() {
