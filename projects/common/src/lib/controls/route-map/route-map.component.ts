@@ -756,25 +756,20 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     
     
     this.DefaultRoute = this.determineDefaultRoute();
-    this.formatRoutes();
+    this.changeSelectedRoute(this.DefaultRoute);
+    this.nameRoutes();
     this.moveSelectedRouteToEnd();
     // update plot and delay risk data
     this.notificationService.UpdateForecastPlotData(this.DefaultRoute);
     this.displayRoute(this.Routes);
 
   }
-/**gives route a name and color */
-  protected formatRoutes():void{
+/**gives route a name  */
+  protected nameRoutes():void{
     let i =0;
     this.Routes.forEach(route =>{
       i++;
       route.displayName = "Route "+ i.toString();
-      if(route.selectedRoute === true){
-        route.color = '#0000CD'
-      }
-      else{
-        route.color="gray"
-      }
     })
     console.log("routes= ", this.Routes)
   }
@@ -806,7 +801,6 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         route.selectedRoute=false;
       }
     })
-    // this.Route = dRoute.pointsArr;
 
     return dRoute;
   }
@@ -815,10 +809,13 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
  * @param route 
  */
   protected changeSelectedRoute(route: RouteInfoModel){
-    this.Routes.forEach(route=>{
-      if(route.selectedRoute === true){
-        route.selectedRoute = false;
-        route.color = 'gray';
+    this.Routes.forEach(r=>{
+      if(r.selectedRoute === true){
+        r.selectedRoute = false;
+        r.color = 'gray';
+      }
+      else if(r.selectedRoute === false || !r.selectedRoute){
+        r.color = 'gray';
       }
     });
     route.color = "#0000CD";
