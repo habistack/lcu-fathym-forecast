@@ -8,8 +8,6 @@ import { CrosswindPlot } from '../plots/crosswind-plot/crosswind-plot';
 import { PrecipitationPlot } from '../plots/precipitation-plot/precipitation-plot';
 import { SnowDepthPlot } from '../plots/snow-depth-plot/snow-depth-plot';
 import { WindPlot } from '../plots/wind-plot/wind-plot';
-import { ElevationPlot } from '../plots/elevation-plot/elevation-plot';
-import { NumericPlot } from '../plots/numeric-plot/numeric-plot';
 
 @Component({
   selector: 'lcu-forecast-details',
@@ -30,6 +28,7 @@ export class ForecastDetailsComponent implements OnInit {
     this.passedData.allData.points.forEach(x => {
       this.ValidTimes.push(x.absoluteSeconds);
     });
+    console.log(this.ForecastData);
     this.RouteDisplayName = this.passedData.allData.displayName;
 
     this.PlotConfigs = [
@@ -49,33 +48,43 @@ export class ForecastDetailsComponent implements OnInit {
 
   public ToggleMeasurementUnit(val) {
     this.SelectedUnitSystem = val;
-    console.log('selected unit: ', this.SelectedUnitSystem)
-    
+    console.log('selected unit: ', this.SelectedUnitSystem);
+
     if (this.SelectedUnitSystem === 'Metric') {
       console.log('converting to Metric...')
+      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
       this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
         return this.convertFtoC(x);
       });
       this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
         return this.convertFtoC(x);
       });
-      console.log('after conversion to metric: ', this.ForecastData.forecast.surfaceTemperature)
-      console.log('after conversion to metric: ', this.ForecastData.forecast.roadTemperature)
+      this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+        return this.convertINtoMM(x);
+      })
+      this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
+        return this.convertMlPHourToMePSec(x);
+      })
+      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
     }
 
     if (this.SelectedUnitSystem === 'English') {
-      console.log('converting to English...')
+      console.log('converting to English...');
+      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
       this.ForecastData.forecast.surfaceTemperature = this.ForecastData.forecast.surfaceTemperature.map(x => {
         return this.convertCtoF(x);
       });
       this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
         return this.convertCtoF(x);
       });
-      console.log('after conversion to English: ', this.ForecastData.forecast.surfaceTemperature)
-      console.log('after conversion to English: ', this.ForecastData.forecast.roadTemperature)
+      this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+        return this.convertINtoMM(x);
+      })
+      this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
+        return this.convertMePSecToMlPHour(x);
+      });
+      console.log('windspeed: ', this.ForecastData.forecast.windSpeed)
     }
-
-    
 
     this.PlotConfigs = [
       new TemperaturePlot('C', 'Forecast'),
@@ -96,6 +105,22 @@ export class ForecastDetailsComponent implements OnInit {
   protected convertCtoF(val) {
     const newVal = val * 9 / 5 + 32;
     return newVal;
+  }
+
+  protected convertINtoMM(val) {
+    return val * 25.4;
+  }
+
+  protected convertMMtoIN(val) {
+    return val * 0.03937008;
+  }
+
+  protected convertMlPHourToMePSec(val) {
+    return val / 2.237;
+  }
+
+  protected convertMePSecToMlPHour(val) {
+    return val * 2.237;
   }
 
   public ExportToJson() {
