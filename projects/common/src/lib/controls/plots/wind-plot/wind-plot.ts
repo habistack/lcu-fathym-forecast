@@ -1,7 +1,11 @@
 import { Plot } from '../plots';
 
 export class WindPlot extends Plot {
-    constructor(public units: string, subTitle: string) {
+
+	protected unitDisplay: string;
+	protected defaultUnitDisplay: string = 'm/s';
+
+    constructor(public units: string, subTitle: string, unitOverride?: string) {
       super('Wind Speed', {
           windSpeed: {
         title: 'Wind Speed',
@@ -11,6 +15,7 @@ export class WindPlot extends Plot {
         title: 'Gust',
         color: '#0000dd'
           }}, units, subTitle);
+		this.unitDisplay = unitOverride ? unitOverride : this.defaultUnitDisplay;
         }
 
       /**
@@ -41,9 +46,9 @@ export class WindPlot extends Plot {
    * Formats the y-axis and tool tip
    */
   getTickFormat(v: number){
-    if (!v) { return '0 mph'; }
+		if (!v) { return `0.00 ${this.unitDisplay}`; }
     let speed = Math.round(v);
-    if(v) {return speed + ' mph'}
+		if (v) { return speed + ` ${this.unitDisplay}` }
   }
 
       /**
