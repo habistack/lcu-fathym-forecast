@@ -1,5 +1,5 @@
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-// @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 
 
@@ -11,6 +11,10 @@
   @include fathym-branding($theme);
   @include theme-extras($theme); 
 
+  .mat-dialog-container{
+    background-color: mat-color(map-get($theme, primary), A700);
+
+  }
   .mat-card {
     background-color: mat-color(map-get($theme, primary), 50);
   }
