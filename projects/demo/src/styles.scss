@@ -15,19 +15,7 @@
     background-color: mat-color(map-get($theme, primary), A700);
 
   }
-  .mat-card {
-    background-color: mat-color(map-get($theme, primary), 50);
-  }
-  .mat-input-element {
-    caret-color: mat-color(map-get($theme, primary), A700);
-  }
- 
-  // .mat-form-field-underline{
-  //   background-color: mat-color(map-get($theme, primary), A700) !important;
-  // }
-  .mat-form-field-ripple{
-    background-color: mat-color(map-get($theme, primary), A700) !important;
-  }
+
   .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
     background-color: mat-color(map-get($theme, primary), A700) !important;
   }
