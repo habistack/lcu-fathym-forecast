@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import { ToggleThemeUtil } from '@habistack/lcu-fathym-forecast-common';
+
+
 
 @Component({
   selector: 'lcu-root',
@@ -50,7 +51,7 @@ export class AppComponent implements OnInit {
    * Set default theme
    */
   protected resetTheme(): void {
-    this.changeTheme('flipper-theme');
+    this.changeTheme('theme');
   }
 
   /**
@@ -61,11 +62,11 @@ export class AppComponent implements OnInit {
   protected changeTheme(val: string): void {
     this.SelectedTheme = val;
 
-    const element: HTMLElement = this.overlayContainer.getContainerElement();
-    const classList: DOMTokenList = element.classList;
+    // const element: HTMLElement = this.overlayContainer.getContainerElement();
+    // const classList: DOMTokenList = element.classList;
 
-    const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
-    classList.add(ToggleThemeUtil.Toggle(element.classList, val));
+    // const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
+    // classList.add(ToggleThemeUtil.Toggle(element.classList, val));
 
     // update favicon when theme changes
     // this.changeFavicon(this.SelectedTheme);

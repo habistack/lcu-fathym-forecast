@@ -1,5 +1,5 @@
 #route-summarization-container {
-    background-color: rgb(66, 66, 66);
+    /* background-color: rgb(66, 66, 66); */
     margin-top: 5px;
     border-radius: 5px;
     padding: 5px;
@@ -7,5 +7,5 @@
 }
 
 #forecast-details-button { /* TODO: change this to use our theme when we change out css for scss */
-    background-color: #ef4351;
+    /* background-color: #ef4351; */
 }
