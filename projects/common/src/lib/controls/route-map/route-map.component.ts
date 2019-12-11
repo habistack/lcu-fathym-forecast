@@ -234,6 +234,27 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.chartMouseMovedSubsription.unsubscribe();
   }
 
+  protected setUpDefaultLayer() {
+    const mapperPromise = new Promise((resolve, reject) => {
+      let intervalCount;
+      const mapperInterval = setInterval(() => {
+        if (this.Maper) {
+          resolve();
+          clearInterval(mapperInterval);
+        }
+        intervalCount++;
+        if (intervalCount > 10) {
+          clearInterval(mapperInterval);
+        }
+      }, 1000);
+    });
+
+    mapperPromise.then(() => {
+      this.LayerChosen(this.layerOptions[0]);
+      this.DefaultLayer = this.layerOptions[0].displayName;
+    });
+  }
+
   /**
    * Initial setup to get the map going
    */
@@ -447,6 +468,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public MapLoaded(evt: Event) {
     console.log('Map loaded', evt);
+    this.setUpDefaultLayer();
     // this.loadBlend();
   }
 
