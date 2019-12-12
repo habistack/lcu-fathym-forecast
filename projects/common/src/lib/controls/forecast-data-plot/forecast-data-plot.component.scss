@@ -3,12 +3,14 @@
 @include tooltip("hey");
 h6 {
   margin-bottom: 5px;
+  margin-left:40px;
 }
 
 .temp-legend {
   color: white;
   padding: 5px;
   width: 300px;
+  margin-left:35px;
 
   .temp-gradient-ttb {
     background: rgb(0,221,0);
@@ -42,6 +44,7 @@ h6 {
   color: white;
   padding: 5px;
   width: 300px;
+  margin-left:35px;
 
   .condition-gradient-ttb {
     background: rgb(0,221,0);
@@ -75,6 +78,7 @@ h6 {
   color: white;
   padding: 5px;
   width: 300px;
+  margin-left:35px;
 
   .risk-gradient-ttb {
     background: rgb(0,221,0);
@@ -110,6 +114,7 @@ h6 {
   color: white;
   padding: 5px;
   width: 300px;
+  margin-left:35px;
 
   .road-cond-gradient-ttb {
     background: rgb(0,221,0);
@@ -144,6 +149,7 @@ h6 {
   color: white;
   padding: 5px;
   width: 300px;
+  margin-left:35px;
 
   .precip-gradient-ttb {
     background: rgb(0,221,0);

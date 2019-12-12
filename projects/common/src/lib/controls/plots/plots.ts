@@ -71,9 +71,9 @@ export abstract class Plot {
         height: 250,
         margin: {
           top: 20,
-          right: 55,
+          right: 80,
           bottom: 40,
-          left: 55
+          left: 82
         },
         forceY: this.getForceY(),
         useInteractiveGuideline: true,

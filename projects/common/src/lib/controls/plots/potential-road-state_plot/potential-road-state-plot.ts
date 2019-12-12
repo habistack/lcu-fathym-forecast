@@ -29,7 +29,7 @@ export class PotentialRoadStatePlot extends Plot {
     }
 
     getForceY() {
-      return [0.0,8];
+      return [0.0,1,3,6,8];
     //   return ["Dry", "Wet", "Snow", "Ice", "Hail"]
     }
 
@@ -42,14 +42,14 @@ export class PotentialRoadStatePlot extends Plot {
      */
     getTickFormat(val: number) {
 
-        if (val === 0) { return 'Dry'; }
-        if (val === 1) { return 'Wet'; }
-        if (val === 2) { return 'Freezing Rain'; }
-        if (val === 3) { return 'Snow'; }
-        if (val === 4) { return "Snow and Ice"; }
-        if (val === 5) { return "Freezing Rain and Ice"; }
+        if (val === 0) { return "Dry"; }
+        if (val === 1) { return "Wet"; }
+        if (val === 2) { return "Freezing Rain"; }
+        if (val === 3) { return "Snow"; }
+        if (val === 4) { return "Snow & Ice"; }
+        if (val === 5) { return "Freezing Rain & Ice"; }
         if (val === 6) { return "Ice"; }
-        if (val === 7) { return "Hail and Ice"; }
+        if (val === 7) { return "Hail & Ice"; }
         if (val === 8) { return "Hail"; }
     }
 
