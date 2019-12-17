@@ -26,7 +26,7 @@ export class PotentialDelayRiskPlot extends Plot {
     }
 
     getForceY() {
-       return [0.0, 3];
+       return [0.0, 4];
     }
 
     // getTickCount(val: number) {

@@ -89,7 +89,7 @@ export abstract class Plot {
               .attr('patternTransform', 'translate(0,-30)')
               .style('opacity', 0.75);
             svg.select('g')
-              .attr('fill', '#ffffff');
+              .attr('fill', '#000000');
             chart.update();
           }
         }(this),
