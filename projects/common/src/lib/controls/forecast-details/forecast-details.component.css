@@ -1,3 +1,7 @@
 .json-download-button {
     margin-left: 30px;
 }
+
+::ng-deep .nvtooltip {
+    z-index: 10000 !important;
+}
