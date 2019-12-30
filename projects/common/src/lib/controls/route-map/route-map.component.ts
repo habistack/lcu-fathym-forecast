@@ -438,7 +438,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   protected getLayerFromIowaAPI(layer) {
-    console.log(layer);
+    // console.log(layer);
     let url;
     // if (layer.value === 'Radar Reflectivity') {
     url = 'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png';
@@ -453,7 +453,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   protected getLayerFromFathymAPI(layer) {
-    console.log(layer)
+    // console.log(layer)
     const t = this.manifestJson[layer.value][0];
     this.Maper.map.layers.add(new atlas.layer.TileLayer({
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
@@ -467,7 +467,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public MapLoaded(evt: Event) {
-    console.log('Map loaded', evt);
+    // console.log('Map loaded', evt);
     this.setUpDefaultLayer();
     // this.loadBlend();
   }
@@ -544,7 +544,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.Maper) { return; }
 
     this.Maper.map.events.add('ready', () => {
-      console.log('map is ready and loaded - shannon ');
+      // console.log('map is ready and loaded - shannon ');
     });
 
     /**
