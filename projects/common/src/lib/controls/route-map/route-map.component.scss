@@ -62,3 +62,14 @@
     left: 1%;
   }
 }
+
+.out-of-bounds-message {
+  color: red;
+  background-color: rgba(rgb(161, 161, 161), 0.9);
+  position: absolute;
+  z-index: 1;
+  margin-top: 70px;
+  margin-left: 5px;
+  padding: 3px;
+  border-radius: 5px;
+}

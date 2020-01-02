@@ -30,6 +30,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected dataSources: any;
 
+  protected currentForecastLayer: any;
+
   //  Properties
 
   /**
@@ -172,6 +174,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected apiForecastValueConversions: any = [];
 
+  protected currentTimeValue: number;
+  protected currentTimeIndex: number;
+  public OutOfBoundsMessage: string;
+  public ShowLayerTimeOutOfBoundsMessage: boolean;
+
   //  Constructors
   constructor(
     public MapService: LoadMapService,
@@ -182,6 +189,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     protected toastrDisplayService: ToastrDisplayService,
     protected http: HttpClient
   ) {
+
+    this.ShowLayerTimeOutOfBoundsMessage = false;
 
     this.dataSources = {};
 
@@ -225,6 +234,41 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         // }, 50)
 
         this.setTimeFromChart(data.Value);
+
+
+        if (this.currentForecastLayer) {
+          let closestTimeIndex = 0;
+          const timeInterval = this.manifestJson[this.currentForecastLayer.value][1] - this.manifestJson[this.currentForecastLayer.value][0];
+          // find the closest index in the manifest times to the current time in the data and send in that index
+          // closestTimeIndex = this.manifestJson[this.currentForecastLayer.value].findIndex(val => val > data.Value);
+          closestTimeIndex = this.manifestJson[this.currentForecastLayer.value].findIndex(val => Math.abs(val - data.Value) < (timeInterval / 2));
+          if ((this.currentTimeIndex !== closestTimeIndex) && (closestTimeIndex >= 0)) {
+            this.getLayerFromFathymAPI(this.currentForecastLayer, closestTimeIndex);
+          }
+          if ((closestTimeIndex < 0) && (this.currentTimeIndex !== closestTimeIndex)) {
+            let utcSeconds = this.manifestJson[this.currentForecastLayer.value][this.manifestJson[this.currentForecastLayer.value].length - 1];
+            const lastDateTime = new Date(0);
+            lastDateTime.setUTCSeconds(utcSeconds);
+            this.getLayerFromFathymAPI(this.currentForecastLayer, this.manifestJson[this.currentForecastLayer.value].length - 1)
+          }
+          if (closestTimeIndex < 0) {
+            let utcSeconds = this.manifestJson[this.currentForecastLayer.value][this.manifestJson[this.currentForecastLayer.value].length - 1];
+            
+            // determine time difference: current mouse point - last known mousepoint on manifest
+            const secDiff = data.Value - utcSeconds;
+
+            const hourDiff = Math.floor(secDiff / 60 / 60);
+            const minDiff = Math.floor(secDiff / 60 - (hourDiff * 60));
+
+            const timeDifferenceString = `${hourDiff} hr ${minDiff} min`;
+
+            this.OutOfBoundsMessage = `No maptiles available for that precise time. Nearest available forecast time: ${timeDifferenceString} earlier.`;
+
+          }
+          this.currentTimeIndex = closestTimeIndex;
+          this.ShowLayerTimeOutOfBoundsMessage = closestTimeIndex < 0 && this.currentForecastLayer;
+        }
+
       }
     );
 
@@ -428,6 +472,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public LayerChosen(layer) {
     if (layer) {
       if (layer.optionType === 'ff-api') {
+        this.currentForecastLayer = layer;
+      } else {
+        this.currentForecastLayer = null;
+      }
+      if (layer.optionType === 'ff-api') {
         this.getLayerFromFathymAPI(layer);
       } else if (layer.optionType === 'ia-state') {
         this.getLayerFromIowaAPI(layer);
@@ -452,9 +501,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
   }
 
-  protected getLayerFromFathymAPI(layer) {
-    // console.log(layer)
-    const t = this.manifestJson[layer.value][0];
+  protected getLayerFromFathymAPI(layer, timeIndex?: number) {
+    const t = timeIndex ? this.manifestJson[layer.value][timeIndex] : this.manifestJson[layer.value][0];
     this.Maper.map.layers.add(new atlas.layer.TileLayer({
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
       opacity: 0.7,
