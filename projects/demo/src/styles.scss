@@ -2,6 +2,10 @@
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 
+@import '../../../node_modules/nvd3/build/nv.d3.css';
+.nvd3 .nv-background {
+  fill-opacity: 1 !important;
+}
 
 @mixin theme-setup($theme) {
   .theme {
@@ -70,19 +74,6 @@
   .nv-group {
     fill-opacity: 0 !important;
     stroke-width: 2px !important;
-    .nv-point {
-      display: none !important;
-    }
-  }
-}
-.nv-y {
-  .nv-axis {
-    transform: translate(-5px, 0px);
-  }
-}
-.nv-x {
-  .nv-axis {
-    transform: translate(0px, 5px);
   }
 }
 .tick text {
