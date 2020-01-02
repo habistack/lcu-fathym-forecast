@@ -6,6 +6,7 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
+<p *ngIf="ShowLayerTimeOutOfBoundsMessage" class="out-of-bounds-message">{{ OutOfBoundsMessage }}</p>
 
 <mat-form-field *ngIf="Routes.length > 1" class="route-dropdown">
   <mat-label>{{DefaultRoute.displayName}}</mat-label>
