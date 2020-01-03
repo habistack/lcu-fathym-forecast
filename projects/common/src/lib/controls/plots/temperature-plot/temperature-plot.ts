@@ -52,7 +52,7 @@ export class TemperaturePlot extends Plot {
   }
 
   getForceY() {
-    return [0.0, 100];
+    return [0.0, 150];
   }
   /**
    * Formats the y-axis and tool tip
