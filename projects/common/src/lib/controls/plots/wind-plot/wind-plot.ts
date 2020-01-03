@@ -72,9 +72,10 @@ export class WindPlot extends Plot {
       }
 
       protected windSpeed(windSpdMax: number): string {
+        // console.log("wind speed = ", windSpdMax)
         const none: boolean = windSpdMax === 0;
         const low: boolean = windSpdMax <= 16;
-        const warn: boolean = windSpdMax < 16 && windSpdMax <= 27;
+        const warn: boolean = windSpdMax > 16 && windSpdMax <= 27;
         const alert: boolean = windSpdMax > 27;
 
         if (none) { return '#fff'; }
