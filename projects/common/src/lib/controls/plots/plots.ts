@@ -71,12 +71,14 @@ export abstract class Plot {
         height: 250,
         margin: {
           top: 20,
-          right: 80,
+          right: 50,
           bottom: 40,
           left: 82
         },
-        forceY: this.getForceY(),
         useInteractiveGuideline: true,
+        dispatch:{},
+        forceY: this.getForceY(),
+        
         callback: function (currentPlot) {
           return function (chart) {
             if (!chart) { return; }
@@ -112,9 +114,9 @@ export abstract class Plot {
             }(this)
           }
         },
-        legend: function () {
-          return [['#00dd00', '#b760b7', '#0000dd'], ['Wet', 'Mix', 'Frozen']];
-        },
+        // legend: function () {
+        //   return [['#00dd00', '#b760b7', '#0000dd'], ['Wet', 'Mix', 'Frozen']];
+        // },
         xAxis: {
           tickFormat: (x) => {
             return d3.time.format('%a %H:%M')(new Date(x * 1000));
@@ -131,9 +133,7 @@ export abstract class Plot {
             // return d3.format('.02f')(x);
           }
         },
-        tooltip:{
-
-        }
+        
       }
     };
     return options;

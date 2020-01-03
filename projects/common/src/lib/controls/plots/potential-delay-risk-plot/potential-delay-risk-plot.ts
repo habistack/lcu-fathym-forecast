@@ -29,10 +29,10 @@ export class PotentialDelayRiskPlot extends Plot {
        return [0.0, 4];
     }
 
-    // getTickCount(val: number) {
-    //     console.log('val=', val);
-    //     return 5;
-    // }
+    getTickCount() {
+        // console.log('val=', val);
+        return 4;
+    }
 
     /**
      * Assign yAxis label (left side of chart), based off road state value
@@ -46,6 +46,7 @@ export class PotentialDelayRiskPlot extends Plot {
         if (v >= 1 && v < 2) { return 'Slight'; }
         if (v >= 2 && v < 3) { return 'Moderate'; }
         if (v >= 3 && v < 4) { return 'Heavy'; }
-        if (v = 4) { return 'Severe'; }
+        if (v >= 4 && v < 5) { return 'Severe'; }
+        if(v >= 5) {return 'Extreme'}
     }
 }
