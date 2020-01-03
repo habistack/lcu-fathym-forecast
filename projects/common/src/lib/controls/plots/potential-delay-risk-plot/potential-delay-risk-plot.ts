@@ -20,18 +20,20 @@ export class PotentialDelayRiskPlot extends Plot {
         if (val >= 1 && val < 2) { return '#bffc05'; }
         if (val >= 2 && val < 3) { return '#ffff00'; }
         if (val >= 3 && val < 4) { return '#fcb205'; }
-        if (val >= 4) { return '#ff0000'; }
+        if (val >= 4 && val < 5) { return '#ff0000'; }
+        if(val >= 5) {return '#6e0000'}
+
 
         return '#ffff00';
     }
 
     getForceY() {
-       return [0.0, 4];
+       return [0.0, 5];
     }
 
     getTickCount() {
         // console.log('val=', val);
-        return 4;
+        return 5;
     }
 
     /**

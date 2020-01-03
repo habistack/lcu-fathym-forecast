@@ -123,17 +123,17 @@ class="precip-legend" fxLayout="column">
 
      <!-- Delay Risk Legend-->
      <div *ngIf="config.title === 'Potential Delay Risk'"
-     class="risk-legend" fxLayout="column">
-       <div class="risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
-       <div class="risk-items" fxLayout="row" fxLayoutAlign="space-between">
-         <div class="risk-item" fxLayout="column" fxLayoutAlign="center center">
-           <span class="risk-name">Normal</span>
+     class="delay-risk-legend" fxLayout="column">
+       <div class="delay-risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+       <div class="delay-risk-items" fxLayout="row" fxLayoutAlign="space-between">
+         <div class="delay-risk-item" fxLayout="column" fxLayoutAlign="center center">
+           <span class="delay-risk-name">Normal</span>
          </div>
-         <div class="risk-item" fxLayout="column" fxLayoutAlign="center center">
-           <span class="risk-name">Moderate</span>
+         <div class="delay-risk-item" fxLayout="column" fxLayoutAlign="center center">
+           <span class="delay-risk-name">Heavy</span>
          </div>
-         <div class="risk-item" fxLayout="column" fxLayoutAlign="center center">
-           <span class="risk-name">Severe</span>
+         <div class="delay-risk-item" fxLayout="column" fxLayoutAlign="center center">
+           <span class="delay-risk-name">Extreme</span>
          </div>
        </div>
      </div>
