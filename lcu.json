@@ -14,7 +14,7 @@
 			}
 		},
 		"elements": {},
-		"flux": {},
+		"data-flow": {},
 		"dependencies": {}
 	}
 }
