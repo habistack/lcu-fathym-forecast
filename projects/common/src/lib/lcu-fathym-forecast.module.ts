@@ -21,6 +21,7 @@ import { VariableDataPlotComponent } from './controls/variable-data-plot/variabl
 import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots.component';
 import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
 import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
+import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ForecastDetailsComponent } from './controls/forecast-details/forecast-d
     ForecastPlotsComponent,
     ForecastDataPlotComponent,
     RouteSummarizationComponent,
-    ForecastDetailsComponent
+    ForecastDetailsComponent,
+    LcuFathymForecastFathymForecastElementComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { ForecastDetailsComponent } from './controls/forecast-details/forecast-d
     VariableDataPlotComponent,
     ForecastPlotsComponent,
     ForecastDataPlotComponent,
-    RouteSummarizationComponent
+    RouteSummarizationComponent,
+    LcuFathymForecastFathymForecastElementComponent
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -70,7 +73,8 @@ import { ForecastDetailsComponent } from './controls/forecast-details/forecast-d
     VariableDataPlotComponent,
     ForecastPlotsComponent,
     ForecastDataPlotComponent,
-    ForecastDetailsComponent
+    ForecastDetailsComponent,
+    LcuFathymForecastFathymForecastElementComponent
   ],
   providers: [
     DisplayDateFormatPipe,

@@ -8,7 +8,11 @@
 		"ff": [
 			"ff/lcu-fathym-forecast.lcu.js"
 		],
-		"solutions": {},
+		"solutions": {
+			"fathym-forecast-manager": {
+				"element": "lcu-fathym-forecast-fathym-forecast-element"
+			}
+		},
 		"elements": {},
 		"flux": {},
 		"dependencies": {}

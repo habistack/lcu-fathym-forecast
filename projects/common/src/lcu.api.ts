@@ -22,3 +22,4 @@ export * from './lib/controls/variable-data-plot/variable-data-plot.component';
 export * from './lib/controls/forecast-plots/forecast-plots.component';
 export * from './lib/controls/route-summarization/route-summarization.component';
 export * from './lib/services/notification.service';
+export * from './lib/elements/fathym-forecast/fathym-forecast.component';
