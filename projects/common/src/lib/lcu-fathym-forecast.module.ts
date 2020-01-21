@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AmModule } from '@acaisoft/angular-azure-maps';
 import { NvD3Module } from 'ng2-nvd3';
+import { LcuChartsModule } from '@lowcodeunit/lcu-charts-common';
 
 import 'd3';
 import 'nvd3';
@@ -49,7 +50,8 @@ import { LcuFathymForecastFathymForecastElementComponent } from './elements/fath
     ToastrModule.forRoot(),
     AmModule,
     FlexLayoutModule,
-    NvD3Module
+    NvD3Module,
+    LcuChartsModule
   ],
   exports: [
     DepartureTableComponent,
