@@ -22,6 +22,7 @@ import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots
 import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
 import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
 import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
+import { LcuChartsModule} from '@lowcodeunit/lcu-charts-common';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LcuFathymForecastFathymForecastElementComponent } from './elements/fath
     ToastrModule.forRoot(),
     AmModule,
     FlexLayoutModule,
-    NvD3Module
+    NvD3Module,
+    LcuChartsModule
   ],
   exports: [
     DepartureTableComponent,
