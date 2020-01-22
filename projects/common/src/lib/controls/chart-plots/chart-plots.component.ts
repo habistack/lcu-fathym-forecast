@@ -66,7 +66,7 @@ export class ChartPlotsComponent implements OnInit {
   private curves: any;
   private fitContainer: boolean = false;
   private height: number = 225;
-  private width: number = 450;
+  private width: number = 350;
 
   public ChartData: any = [];
 
@@ -102,6 +102,9 @@ export class ChartPlotsComponent implements OnInit {
       'default': shape.curveLinear
     };
     this.curve = this.curves[this.curveType];
+    if (!this.fitContainer) {
+      this.applyDimensions();
+    }
     this.forecastPlotDataSubsription = this.notificationService.ForecastPlotDataChanged.subscribe(
       (data: ForecastDataModel) => {
         if (!data) {
@@ -198,15 +201,29 @@ export class ChartPlotsComponent implements OnInit {
 
   protected convertData() {
     console.log(this.ForecastData);
-    this.ChartData = [{name: 'Surface Temp', series: []}];
+    this.ChartData = [
+      {name: 'Surface Temp', series: []},
+      {name: 'Road Temp', series: []}
+    ];
     this.ForecastData.forecast.surfaceTemperature.forEach((temp, idx) => {
       this.ChartData[0].series.push(
         {
           value: TemperatureConversion.KelvinToFahrenheit(temp),
-          name: new Date(this.ForecastData.points[idx].absoluteSeconds)
+          // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
+          name: new Date(this.ForecastData.points[idx].absoluteSeconds * 1000)
         }
-      )
-    })
+      );
+    });
+    this.ForecastData.forecast.roadTemperature.forEach((temp, idx) => {
+      this.ChartData[1].series.push(
+        {
+          value: TemperatureConversion.KelvinToFahrenheit(temp),
+          // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
+          name: new Date(this.ForecastData.points[idx].absoluteSeconds * 1000)
+        }
+      );
+    });
+    console.log('DATA AFTER CONVERT: ', this.ChartData);
     // this.ChartData = [
     //   {
     //     name: 'Air Temp',
