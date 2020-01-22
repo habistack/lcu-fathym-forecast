@@ -43,13 +43,13 @@ export class ChartPlotsComponent implements OnInit {
   public xScaleMax: any;
   public xScaleMin: any;
   public yAxisLabel: string = 'Temperature (F)';
-  public yScaleMax: number = 100;
+  // public yScaleMax: number = 100;
   public yScaleMin: number;
   public yUnits: string = '\u00B0';
   public backgroundGradientConfigs: any[] = [];
   public showPercentage: boolean = false;
-  public yAxisTickFormatting = this.FormatYAxisTicks.bind(this);
-  public yAxisTicks: Array<any> = [0, 30, 50, 100];
+  // public yAxisTickFormatting = this.FormatYAxisTicks.bind(this);
+  // public yAxisTicks: Array<any> = [0, 30, 50, 100];
   public xAxisIsDate: boolean = true;
   public xAxisDateFormat: DateFormatModel = {
     DayOfWeek: true,
@@ -80,7 +80,6 @@ export class ChartPlotsComponent implements OnInit {
       // weatherData
     });
     this.setColorScheme('cool');
-    // this.setBackgroundGradientConfigs();
   }
 
   ngOnInit() {
@@ -126,19 +125,37 @@ export class ChartPlotsComponent implements OnInit {
     // now send it back to the tooltip to manually show that vertical line
   }
 
-  public FormatYAxisTicks(value: any) {
+  public FormatTempYAxisTicks(value: any) {
     if (value <= 0) {
       return "Freezing";
     }
     if (value > 0 && value <= 32) {
       return "Cold";
     }
-    if (value > 32 && value <= 70) {
+    if (value > 32 && value <= 50) {
+      return "Cool"
+    }
+      
+    if (value > 50 && value <= 70) {
       return "Warm";
     }
-    if (value > 70) {
+    if (value > 70 && value <=100) {
       return "Hot";
     }
+    if(value > 100){
+      return "Spicy"
+    }
+  }
+  public FormatRoadStateYAxisTicks(val: any) {
+    if (val === 0) { return "Dry"; }
+    if (val === 1) { return "Wet"; }
+    if (val === 2) { return "Freezing Rain"; }
+    if (val === 3) { return "Snow"; }
+    if (val === 4) { return "Snow & Ice"; }
+    if (val === 5) { return "Freezing Rain & Ice"; }
+    if (val === 6) { return "Ice"; }
+    if (val === 7) { return "Hail & Ice"; }
+    if (val === 8) { return "Hail"; }
   }
 
   protected setBackgroundGradientConfigs(backgroundMarker: any) {
@@ -173,7 +190,7 @@ export class ChartPlotsComponent implements OnInit {
         });
       }
     });
-    // console.log("color configs", this.backgroundGradientConfigs)
+    console.log("color configs", backgroundGradient)
     return backgroundGradient;
   }
 
@@ -211,11 +228,19 @@ export class ChartPlotsComponent implements OnInit {
     this.Charts = new Array<any>();
     console.log(this.ForecastData);
     this.ChartData = {
+      name: "Road Temperature",
       displayData:[
         {name: 'Surface Temp', series: []},
         {name: 'Road Temp', series: []}
       ],
-      chartGradient: []
+      chartGradient: [],
+      YtickFormat: this.FormatTempYAxisTicks.bind(this),
+      yAxisTicks:  [0, 30,70, 100, 120],
+      yScaleMax:120,
+      yScaleMin:0
+
+
+
     }
 
     this.ForecastData.forecast.surfaceTemperature.forEach((temp, idx) => {
@@ -237,14 +262,20 @@ export class ChartPlotsComponent implements OnInit {
       );
     });
     this.ChartData.chartGradient = this.setBackgroundGradientConfigs(this.ChartData.displayData[0].series)
-    console.log('DATA AFTER CONVERT: ', this.ChartData);
 
     this.Charts.push(this.ChartData);
 
-    let roadChartData = {displayData:[
+    let roadChartData = {
+      name: "Road State",
+      displayData:[
       {name: 'Road State', series: []}
     ],
-    chartGradient: []
+    chartGradient: [],
+    YtickFormat: this.FormatRoadStateYAxisTicks.bind(this),
+    yAxisTicks:  [0,1,3,4,6,8],
+    yScalemax: 10,
+    yScaleMin:0
+
   }
     this.ForecastData.forecast.roadState.forEach((state, idx) => {
       roadChartData.displayData[0].series.push(
@@ -258,6 +289,8 @@ export class ChartPlotsComponent implements OnInit {
     roadChartData.chartGradient = this.setBackgroundGradientConfigs(roadChartData.displayData[0].series)
 
     this.Charts.push(roadChartData);
+    console.log('DATA AFTER CONVERT: ', this.Charts);
+
 
     // this.ChartData = [
     //   {
