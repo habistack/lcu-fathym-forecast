@@ -23,6 +23,7 @@ import { RouteSummarizationComponent } from './controls/route-summarization/rout
 import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
 import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
 import { LcuChartsModule} from '@lowcodeunit/lcu-charts-common';
+import { ChartPlotsComponent } from './controls/chart-plots/chart-plots.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LcuChartsModule} from '@lowcodeunit/lcu-charts-common';
     ForecastDataPlotComponent,
     RouteSummarizationComponent,
     ForecastDetailsComponent,
-    LcuFathymForecastFathymForecastElementComponent
+    LcuFathymForecastFathymForecastElementComponent,
+    ChartPlotsComponent
   ],
   imports: [
     CommonModule,
