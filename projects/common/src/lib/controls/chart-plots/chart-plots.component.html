@@ -24,7 +24,7 @@
   [tooltipDisabled]="tooltipDisabled"
   [trimXAxisTicks]="trimXAxisTicks"
   [trimYAxisTicks]="trimYAxisTicks"
-  [units]="yUnits"
+  [units]="chart.yUnits"
   [view]="view"
   [xAxisDateFormat]="xAxisDateFormat"
   [xAxisIsDate]="xAxisIsDate"
@@ -36,20 +36,26 @@
   [yAxisTickFormatting]="chart.YtickFormat"
   [yAxisTicks]="chart.yAxisTicks"
   [yAxis]="showYAxis"
+  [dims]="dims"
   [yScaleMax]="chart.yScaleMax"
   [yScaleMin]="chart.yScaleMin"
   [forceManualXHover]="ManualHover"
+  [formatTooltip]="chart.formatTooltip"
   (activate)="activate($event)"
   (deactivate)="deactivate($event)"
   (HoveredVerticalChange)="hoveredVerticalChange($event)"
   (legendLabelClick)="onLegendLabelClick($event)"
   (select)="select($event)"
   >
-  <!-- 
+  <!-- [xAxisHeight]="xAxisHeight"
+  [yAxisWidth]= "yAxisWidth"
               -->
   <ng-template #tooltipTemplate let-model="model">
-    <div class="tooltip-item">
-        {{model.series}}: {{model.value}}{{yUnits}}
+    <div class="tooltip-item" *ngIf="!chart.formatTooltip">
+        {{model.series}}: {{model.value}}{{chart.yUnits}}
     </div>
+    <div class="tooltip-item" *ngIf="chart.formatTooltip">
+      {{model.series}}: {{chart.YtickFormat(model.value)}}
+  </div>
   </ng-template>
 </lcu-charts-line-chart-simple>

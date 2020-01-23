@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForecastDataModel } from '../../models/forecast-data.model';
 import { NotificationService } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
-import { DateFormatModel, colorSets } from '@lowcodeunit/lcu-charts-common';
+import { DateFormatModel, colorSets, ViewDimensions } from '@lowcodeunit/lcu-charts-common';
 import * as shape from 'd3-shape';
 import { TemperatureConversion } from '@lcu/common';
 
@@ -43,9 +43,10 @@ export class ChartPlotsComponent implements OnInit {
   public xScaleMax: any;
   public xScaleMin: any;
   public yAxisLabel: string = 'Temperature (F)';
+  
   // public yScaleMax: number = 100;
-  public yScaleMin: number;
-  public yUnits: string = '\u00B0';
+  // public yScaleMin: number;
+  // public yUnits: string = '\u00B0';
   public backgroundGradientConfigs: any[] = [];
   public showPercentage: boolean = false;
   // public yAxisTickFormatting = this.FormatYAxisTicks.bind(this);
@@ -61,13 +62,14 @@ export class ChartPlotsComponent implements OnInit {
   };
   public ForecastData: any;
   public Charts: Array<any>;
+  public dims: ViewDimensions= {width:300, height: 200, xOffset:80}
 
   private colorSets: any;
   private curveType: string = 'Linear';
   private curves: any;
   private fitContainer: boolean = false;
-  private height: number = 225;
-  private width: number = 350;
+  private height: number = 300;
+  private width: number = 400;
 
   public ChartData: any = [];
 
@@ -158,7 +160,7 @@ export class ChartPlotsComponent implements OnInit {
     if (val === 8) { return "Hail"; }
   }
 
-  protected setBackgroundGradientConfigs(backgroundMarker: any) {
+  protected setBackgroundGradientConfigsTemp(backgroundMarker: any) {
     // console.log("weather data:", this.weatherData)
     // console.log("scheme:", this.schemeType)
     let backgroundGradient = new Array<any>();
@@ -190,7 +192,76 @@ export class ChartPlotsComponent implements OnInit {
         });
       }
     });
-    console.log("color configs", backgroundGradient)
+    // console.log("color configs", backgroundGradient)
+    return backgroundGradient;
+  }
+
+  protected setBackgroundGradientConfigsRoadState(backgroundMarker: any) {
+    // console.log("weather data:", this.weatherData)
+    // console.log("scheme:", this.schemeType)
+    let backgroundGradient = new Array<any>();
+
+    // const backgroundMarker = this.ChartData[0].series;
+
+
+
+    backgroundMarker.forEach((ser, idx) => {
+      const idxPercentage = idx * 100 / backgroundMarker.length;
+      if (ser.value === 0) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#ffffff'
+        });
+      } else if (ser.value ===1 ) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#00dd00'
+        });
+      } 
+      else if (ser.value === 2) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#669866'
+        });
+      }
+      else if (ser.value === 3) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#b760b7'
+        });
+      }else if (ser.value === 4) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#8C338F'
+        });
+      }else if (ser.value === 5) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#9F45A5'
+        });
+      }else if (ser.value === 6) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#6F0475'
+        });
+      }else if (ser.value === 7) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#80044B'
+        });
+      }else if (ser.value === 8) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#008888'
+        });
+      }else {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: 'grey'
+        });
+      }
+    });
+    // console.log("color configs", backgroundGradient)
     return backgroundGradient;
   }
 
@@ -226,7 +297,7 @@ export class ChartPlotsComponent implements OnInit {
 
   protected convertData() {
     this.Charts = new Array<any>();
-    console.log(this.ForecastData);
+    // console.log(this.ForecastData);
     this.ChartData = {
       name: "Road Temperature",
       displayData:[
@@ -235,19 +306,16 @@ export class ChartPlotsComponent implements OnInit {
       ],
       chartGradient: [],
       YtickFormat: this.FormatTempYAxisTicks.bind(this),
-      yAxisTicks:  [0, 30,70, 100, 120],
+      yAxisTicks:  [0,30,70,100,120],
       yScaleMax:120,
-      yScaleMin:0
-
-
-
+      yScaleMin:0,
+      yUnits:'\u00B0'
     }
 
     this.ForecastData.forecast.surfaceTemperature.forEach((temp, idx) => {
       this.ChartData.displayData[0].series.push(
         {
           value: TemperatureConversion.KelvinToFahrenheit(temp),
-          // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
           name: new Date(this.ForecastData.points[idx].absoluteSeconds * 1000)
         }
       );
@@ -256,12 +324,11 @@ export class ChartPlotsComponent implements OnInit {
       this.ChartData.displayData[1].series.push(
         {
           value: TemperatureConversion.KelvinToFahrenheit(temp),
-          // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
           name: new Date(this.ForecastData.points[idx].absoluteSeconds * 1000)
         }
       );
     });
-    this.ChartData.chartGradient = this.setBackgroundGradientConfigs(this.ChartData.displayData[0].series)
+    this.ChartData.chartGradient = this.setBackgroundGradientConfigsTemp(this.ChartData.displayData[0].series)
 
     this.Charts.push(this.ChartData);
 
@@ -272,9 +339,11 @@ export class ChartPlotsComponent implements OnInit {
     ],
     chartGradient: [],
     YtickFormat: this.FormatRoadStateYAxisTicks.bind(this),
-    yAxisTicks:  [0,1,3,4,6,8],
-    yScalemax: 10,
-    yScaleMin:0
+    yAxisTicks:  [0,1,3,6,8],
+    yScaleMax: 8,
+    yScaleMin:0,
+    yUnits:'',
+    formatTooltip: true
 
   }
     this.ForecastData.forecast.roadState.forEach((state, idx) => {
@@ -286,10 +355,10 @@ export class ChartPlotsComponent implements OnInit {
         }
       );
     });
-    roadChartData.chartGradient = this.setBackgroundGradientConfigs(roadChartData.displayData[0].series)
+    roadChartData.chartGradient = this.setBackgroundGradientConfigsRoadState(roadChartData.displayData[0].series)
 
     this.Charts.push(roadChartData);
-    console.log('DATA AFTER CONVERT: ', this.Charts);
+    // console.log('DATA AFTER CONVERT: ', this.Charts);
 
 
     // this.ChartData = [
