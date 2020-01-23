@@ -6,7 +6,7 @@ h6 {
     color: black;
     padding: 5px;
     width: 300px;
-    margin-left: 35px;
+    margin-left: 80px;
   }
   .temp-legend .temp-gradient-ttb {
     background: #0d0;
@@ -89,7 +89,7 @@ h6 {
     color: black;
     padding: 5px;
     width: 300px;
-    margin-left: 35px;
+    margin-left: 80px;
   }
   .risk-legend .risk-gradient-ttb {
     background: #0d0;
@@ -116,7 +116,7 @@ h6 {
     color: black;
     padding: 5px;
     width: 300px;
-    margin-left: 35px;
+    margin-left: 80px;
   }
   .road-cond-legend .road-cond-gradient-ttb {
     background: #0d0;
