@@ -44,7 +44,7 @@
     "@beyerleinf/ngx-dnd": "^6.0.0-preview3",
     "@lcu/common": "^0.79.363",
     "@lowcodeunit/data-grid": "^0.7.85",
-    "@lowcodeunit/lcu-charts-common": "^0.2.9-integration",
+    "@lowcodeunit/lcu-charts-common": "^0.2.13-integration    ",
     "@lowcodeunit/lcu-select-common": "^0.4.7",
     "@webcomponents/custom-elements": "^1.2.1",
     "@webcomponents/webcomponentsjs": "^2.2.7",

@@ -1,5 +1,4 @@
 
-
 <div *ngFor="let chart of Charts">
 
   <!-- Temperature -->
@@ -53,57 +52,61 @@
   </div>
 
   <lcu-charts-line-chart-simple
-    class="chart-container"
-    [animations]="animations"
-    [autoScale]="autoScale"
-    [backgroundGradientConfigs]="chart.chartGradient"
-    [curve]="curve"
-    [gradient]="gradient"
-    [legendPosition]="legendPosition"
-    [legendTitle]="legendTitle"
-    [legend]="showLegend"
-    [maxXAxisTickLength]="maxXAxisTickLength"
-    [maxYAxisTickLength]="maxYAxisTickLength"
-    [rangeFillOpacity]="rangeFillOpacity"
-    [results]="chart.displayData"
-    [rotateXAxisTicks]="rotateXAxisTicks"
-    [roundDomains]="roundDomains"
-    [schemeType]="schemeType"
-    [scheme]="colorScheme"
-    [showGridLines]="showGridLines"
-    [showPercentage]="showPercentage"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [timeline]="timeline"
-    [tooltipDisabled]="tooltipDisabled"
-    [trimXAxisTicks]="trimXAxisTicks"
-    [trimYAxisTicks]="trimYAxisTicks"
-    [units]="yUnits"
-    [view]="view"
-    [xAxisDateFormat]="xAxisDateFormat"
-    [xAxisIsDate]="xAxisIsDate"
-    [xAxisLabel]="xAxisLabel"
-    [xAxis]="showXAxis"
-    [xScaleMax]="xScaleMax"
-    [xScaleMin]="xScaleMin"
-    [yAxisLabel]="yAxisLabel"
-    [yAxisTickFormatting]="chart.YtickFormat"
-    [yAxisTicks]="chart.yAxisTicks"
-    [yAxis]="showYAxis"
-    [yScaleMax]="chart.yScaleMax"
-    [yScaleMin]="chart.yScaleMin"
-    [forceManualXHover]="ManualHover"
-    (activate)="activate($event)"
-    (deactivate)="deactivate($event)"
-    (HoveredVerticalChange)="hoveredVerticalChange($event)"
-    (legendLabelClick)="onLegendLabelClick($event)"
-    (select)="select($event)"
+  class="chart-container"
+  [animations]="animations"
+  [autoScale]="autoScale"
+  [backgroundGradientConfigs]="chart.chartGradient"
+  [curve]="curve"
+  [gradient]="gradient"
+  [legendPosition]="legendPosition"
+  [legendTitle]="legendTitle"
+  [legend]="showLegend"
+  [maxXAxisTickLength]="maxXAxisTickLength"
+  [maxYAxisTickLength]="maxYAxisTickLength"
+  [rangeFillOpacity]="rangeFillOpacity"
+  [results]="chart.displayData"
+  [rotateXAxisTicks]="rotateXAxisTicks"
+  [roundDomains]="roundDomains"
+  [schemeType]="schemeType"
+  [scheme]="colorScheme"
+  [showGridLines]="showGridLines"
+  [showPercentage]="showPercentage"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [timeline]="timeline"
+  [tooltipDisabled]="tooltipDisabled"
+  [trimXAxisTicks]="trimXAxisTicks"
+  [trimYAxisTicks]="trimYAxisTicks"
+  [units]="chart.yUnits"
+  [view]="view"
+  [xAxisDateFormat]="xAxisDateFormat"
+  [xAxisIsDate]="xAxisIsDate"
+  [xAxisLabel]="xAxisLabel"
+  [xAxis]="showXAxis"
+  [xScaleMax]="xScaleMax"
+  [xScaleMin]="xScaleMin"
+  [yAxisLabel]="yAxisLabel"
+  [yAxisTickFormatting]="chart.YtickFormat"
+  [yAxisTicks]="chart.yAxisTicks"
+  [yAxis]="showYAxis"
+  [dims]="dims"
+  [yScaleMax]="chart.yScaleMax"
+  [yScaleMin]="chart.yScaleMin"
+  [forceManualXHover]="ManualHover"
+  [formatTooltip]="chart.formatTooltip"
+  (activate)="activate($event)"
+  (deactivate)="deactivate($event)"
+  (HoveredVerticalChange)="hoveredVerticalChange($event)"
+  (legendLabelClick)="onLegendLabelClick($event)"
+  (select)="select($event)"
   >
-
-    <ng-template #tooltipTemplate let-model="model">
-      <div class="tooltip-item">
-          {{model.series}}: {{model.value}}{{yUnits}}
-      </div>
-    </ng-template>
-  </lcu-charts-line-chart-simple>
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="tooltip-item" *ngIf="!chart.formatTooltip">
+        {{model.series}}: {{model.value}}{{chart.yUnits}}
+    </div>
+    <div class="tooltip-item" *ngIf="chart.formatTooltip">
+      {{model.series}}: {{chart.YtickFormat(model.value)}}
+  </div>
+  </ng-template>
+</lcu-charts-line-chart-simple>
 </div>
