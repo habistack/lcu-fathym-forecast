@@ -7,7 +7,7 @@ export class PrecipitationPlot extends Plot {
 
 	constructor(public units: string, public subTitle: string, unitOverride?: string) {
 		super('Precipitation', {
-			precipitationRate: {
+			precipitationRateMillisHr: {
 				title: 'Precipitation Rate',
 				color: '#000000'
 			},
@@ -18,7 +18,7 @@ export class PrecipitationPlot extends Plot {
 		this.unitDisplay = unitOverride ? unitOverride : this.defaultUnitDisplay;
 	}
 	getForceY() {
-		return [0.0, 2.0];
+		return [0.0, 20.0];
 	}
 
 	getColor(v: number) {

@@ -68,7 +68,7 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
           this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[cpdIdx]) + ' F';
           // this.Elevation = forecast.roadTemperature[cpdIdx]; // assign this when elevation comes back
           this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[cpdIdx]) + ' mph';
-          this.Precipitation = this.roundToTwoDecimals(forecast.precipitationRate[cpdIdx]) + ' in/hr';
+          this.Precipitation = this.roundToTwoDecimals(this.convertMMtoIN(forecast.precipitationRateMillisHr[cpdIdx])) + ' in/hr';
         }
       }
     );
@@ -125,6 +125,10 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
     if (n) {
       return n.toFixed(4);
     }
+  }
+
+  protected convertMMtoIN(val) {
+    return val * 0.03937008;
   }
 
 }
