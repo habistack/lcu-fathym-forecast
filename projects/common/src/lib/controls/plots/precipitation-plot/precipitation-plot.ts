@@ -18,7 +18,7 @@ export class PrecipitationPlot extends Plot {
 		this.unitDisplay = unitOverride ? unitOverride : this.defaultUnitDisplay;
 	}
 	getForceY() {
-		return [0.0, 20.0];
+		return [0.0, 2.0];
 	}
 
 	getColor(v: number) {
@@ -59,8 +59,8 @@ export class PrecipitationPlot extends Plot {
 
 	getTickFormat(v: number) {
 		if (!v) { return `0.00 ${this.unitDisplay}`; }
-		let rate = v
-		if (v) { return rate + ` ${this.unitDisplay}`; }
+		let rate = v;
+		if (v) { return Math.round(rate) + ` ${this.unitDisplay}`; }
 	}
 
 }
