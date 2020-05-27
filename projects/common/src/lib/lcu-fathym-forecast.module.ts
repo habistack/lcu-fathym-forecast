@@ -22,6 +22,8 @@ import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots
 import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
 import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
 import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
+import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
+import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics/analytics.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { LcuFathymForecastFathymForecastElementComponent } from './elements/fath
     ForecastDataPlotComponent,
     RouteSummarizationComponent,
     ForecastDetailsComponent,
-    LcuFathymForecastFathymForecastElementComponent
+    LcuFathymForecastFathymForecastElementComponent,
+    LcuFathymForecastApiKeysElementComponent,
+    LcuFathymForecastAnalyticsElementComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +67,9 @@ import { LcuFathymForecastFathymForecastElementComponent } from './elements/fath
     ForecastPlotsComponent,
     ForecastDataPlotComponent,
     RouteSummarizationComponent,
-    LcuFathymForecastFathymForecastElementComponent
+    LcuFathymForecastFathymForecastElementComponent,
+    LcuFathymForecastApiKeysElementComponent,
+    LcuFathymForecastAnalyticsElementComponent
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -74,7 +80,9 @@ import { LcuFathymForecastFathymForecastElementComponent } from './elements/fath
     ForecastPlotsComponent,
     ForecastDataPlotComponent,
     ForecastDetailsComponent,
-    LcuFathymForecastFathymForecastElementComponent
+    LcuFathymForecastFathymForecastElementComponent,
+    LcuFathymForecastApiKeysElementComponent,
+    LcuFathymForecastAnalyticsElementComponent
   ],
   providers: [
     DisplayDateFormatPipe,

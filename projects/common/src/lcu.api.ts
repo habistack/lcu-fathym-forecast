@@ -23,3 +23,5 @@ export * from './lib/controls/forecast-plots/forecast-plots.component';
 export * from './lib/controls/route-summarization/route-summarization.component';
 export * from './lib/services/notification.service';
 export * from './lib/elements/fathym-forecast/fathym-forecast.component';
+export * from './lib/elements/api-keys/api-keys.component';
+export * from './lib/elements/analytics/analytics.component';
