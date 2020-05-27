@@ -4,7 +4,7 @@ import { NotificationService } from '../../services/notification.service';
 import { ForecastDataModel } from '../../models/forecast-data.model';
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { RoutePointModel } from '../../models/route-point.model';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ForecastDetailsComponent } from '../forecast-details/forecast-details.component';
 
 @Component({

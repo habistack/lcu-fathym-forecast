@@ -28,9 +28,7 @@
 			"@angular/*": [
 				"node_modules/@angular/*"
 			  ]
-		},
-		"noImplicitAny": true,
-		"suppressImplicitAnyIndexErrors": true
+		}
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
