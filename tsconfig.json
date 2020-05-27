@@ -7,10 +7,10 @@
 		"declaration": false,
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
-		"module": "es2015",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"importHelpers": true,
-		"target": "es5",
+		"target": "es2015",
 		"typeRoots": [
 			"node_modules/@types"
 		],
@@ -28,10 +28,14 @@
 			"@angular/*": [
 				"node_modules/@angular/*"
 			  ]
-		}
+		},
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
-		"strictInjectionParameters": true
+		"strictInjectionParameters": true,
+		"enableIvy": false,
+		"strictTemplates": true
 	}
 }
