@@ -24,6 +24,7 @@ import { ForecastDetailsComponent } from './controls/forecast-details/forecast-d
 import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
 import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics/analytics.component';
+import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
 
 @NgModule({
   declarations: [
@@ -86,14 +87,15 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
   ],
   providers: [
     DisplayDateFormatPipe,
-    ImageDateFormatPipe
+    ImageDateFormatPipe,
+    FathymForecastStateContext
   ]
 })
 export class LcuFathymForecastModule {
   // static forRoot(): LcuFathymForecastModule {
   //   return {
   //     ngModule: LcuFathymForecastModule,
-  //     providers: [DisplayDateFormatPipe, ImageDateFormatPipe]
+  //     providers: []
   //   };
   // }
  }

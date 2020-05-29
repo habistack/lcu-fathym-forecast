@@ -42,11 +42,11 @@ export class AppModule implements DoBootstrap {
       SelectorLcuFathymForecastFathymForecastElement,
       cfgMgr
     );
-  
+
 		const apiKeys = createCustomElement(LcuFathymForecastApiKeysElementComponent, { injector: this.injector });
 
 		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, apiKeys);
-	
+
 		const analytics = createCustomElement(LcuFathymForecastAnalyticsElementComponent, { injector: this.injector });
 
 		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT, analytics);

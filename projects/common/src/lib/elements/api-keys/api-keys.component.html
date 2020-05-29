@@ -1,5 +1,21 @@
 <div class="spread">
   <h2>Fathym Forecast API Keys</h2>
 
+  <ng-container *ngIf="!State.HasAccess">
+    <h3>
+      You do not currently have access to the Fathym Forecast, please visisit:
+    </h3>
 
+    <a mat-raised-button color="primary" href="/billing/forecast">
+      Get your Fathym Forecast License Now
+    </a>
+  </ng-container>
+
+  <ng-container *ngIf="State.HasAccess">
+    <h3>Use the following keys to connect with the Fathym Forecast API:</h3>
+
+    <mat-form-field *ngFor="let apiKeyType of APIKeyTypes">
+      <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
+    </mat-form-field>
+  </ng-container>
 </div>
