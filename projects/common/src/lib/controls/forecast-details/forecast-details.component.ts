@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TemperaturePlot } from '../plots/temperature-plot/temperature-plot';
 import { PotentialRoadStatePlot } from '../plots/potential-road-state_plot/potential-road-state-plot';
 import { PotentialDelayRiskPlot } from '../plots/potential-delay-risk-plot/potential-delay-risk-plot';
