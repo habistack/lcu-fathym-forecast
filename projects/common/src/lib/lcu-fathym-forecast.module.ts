@@ -89,7 +89,7 @@ export class LcuFathymForecastModule {
   // static forRoot(): LcuFathymForecastModule {
   //   return {
   //     ngModule: LcuFathymForecastModule,
-  //     providers: [DisplayDateFormatPipe, ImageDateFormatPipe]
+  //     providers: []
   //   };
   // }
  }

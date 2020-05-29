@@ -16,6 +16,7 @@ export class ForecastConditionsModel {
 
     public crosswindRisk: Array<number>;
     public precipitationRate: Array<number>;
+    public precipitationRateMillisHr: Array<number>;
     public roadState: Array<number>;
     public routeDelayRisk: Array<number>;
     public snowDepth: Array<number>;

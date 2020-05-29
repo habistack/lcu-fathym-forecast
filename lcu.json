@@ -11,6 +11,12 @@
 		"solutions": {
 			"fathym-forecast-manager": {
 				"element": "lcu-fathym-forecast-fathym-forecast-element"
+			},
+			"api-keys": {
+				"element": "lcu-fathym-forecast-api-keys-element"
+			},
+			"analytics": {
+				"element": "lcu-fathym-forecast-analytics-element"
 			}
 		},
 		"elements": {},

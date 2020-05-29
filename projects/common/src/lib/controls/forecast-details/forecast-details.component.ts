@@ -89,7 +89,7 @@ export class ForecastDetailsComponent implements OnInit {
     this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
       return this.convertFtoC(x);
     });
-    this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+    this.ForecastData.forecast.precipitationRateMillisHr = this.ForecastData.forecast.precipitationRateMillisHr.map(x => {
       return this.convertINtoMM(x);
     });
     this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {
@@ -117,7 +117,7 @@ export class ForecastDetailsComponent implements OnInit {
     this.ForecastData.forecast.roadTemperature = this.ForecastData.forecast.roadTemperature.map(x => {
       return this.convertCtoF(x);
     });
-    this.ForecastData.forecast.precipitationRate = this.ForecastData.forecast.precipitationRate.map(x => {
+    this.ForecastData.forecast.precipitationRateMillisHr = this.ForecastData.forecast.precipitationRateMillisHr.map(x => {
       return this.convertMMtoIN(x);
     })
     this.ForecastData.forecast.windSpeed = this.ForecastData.forecast.windSpeed.map(x => {

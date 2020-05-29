@@ -7,7 +7,7 @@ export class PrecipitationPlot extends Plot {
 
 	constructor(public units: string, public subTitle: string, unitOverride?: string) {
 		super('Precipitation', {
-			precipitationRate: {
+			precipitationRateMillisHr: {
 				title: 'Precipitation Rate',
 				color: '#000000'
 			},
@@ -59,8 +59,8 @@ export class PrecipitationPlot extends Plot {
 
 	getTickFormat(v: number) {
 		if (!v) { return `0.00 ${this.unitDisplay}`; }
-		let rate = v
-		if (v) { return rate + ` ${this.unitDisplay}`; }
+		let rate = v;
+		if (v) { return Math.round(rate) + ` ${this.unitDisplay}`; }
 	}
 
 }
