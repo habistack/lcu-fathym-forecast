@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FathymSharedModule, MaterialModule } from '@lcu/common';
+import { FathymSharedModule, MaterialModule, LCUServiceSettings } from '@lcu/common';
 // import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
 import { ToastrModule } from 'ngx-toastr';
 import {
@@ -15,6 +15,7 @@ import {
   LcuFathymForecastModule
  } from '@habistack/lcu-fathym-forecast-common';
 import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,11 @@ import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
   providers: [
     DisplayDateFormatPipe,
     ImageDateFormatPipe,
-    LoadMapService
+    LoadMapService,
+    {
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    }
 ],
   bootstrap: [AppComponent]
 })
