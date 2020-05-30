@@ -1,0 +1,30 @@
+<div *ngIf="DisplaySummarization" fxLayout="column" id="route-summarization-container" color="accent">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <p>{{ RouteName }}</p>
+    <p>{{ RouteDuration }}</p>
+  </div>
+  <div fxLayout="column" class="chart-summarization-data">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span>Average delay risk:</span><span>{{ AverageDelayRisk }}</span>
+    </div>
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between"> add back in if they want it
+      <span>Point delay risk:</span><span>{{ DelayRisk }}</span>
+    </div> -->
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span>Road temp:</span><span>{{ RoadTemp }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span>Air temp:</span><span>{{ AirTemp }}</span>
+    </div>
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between"><span>Elev:</span><span>{{ Elevation }}</span></div> -->
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span>Wind Speed:</span><span>{{ WindSpeed }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span>Precip:</span><span>{{ Precipitation }}</span>
+    </div>
+    <button id="forecast-details-button" mat-raised-button color="primary" (click)="OpenDetailsModal()">Forecast Details</button>
+  </div>
+
+
+</div>

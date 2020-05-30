@@ -1,14 +1,26 @@
 {
-  "templates": {
-    "repository": "lowcodeunit-devkit/lcu-cli-templates-core",
-    "scope": "@lowcodeunit",
-    "workspace": "lcu-fathym-forecast"
-  },
-  "config": {
-    "wc": ["wc/lcu-fathym-forecast.lcu.js"],
-    "solutions": {},
-    "elements": {},
-    "flux": {},
-    "dependencies": {}
-  }
+	"templates": {
+		"repository": "lowcodeunit-devkit/lcu-cli-templates-core",
+		"scope": "@habistack",
+		"workspace": "lcu-fathym-forecast"
+	},
+	"config": {
+		"wc": [
+			"wc/lcu-fathym-forecast.lcu.js"
+		],
+		"solutions": {
+			"fathym-forecast-manager": {
+				"element": "lcu-fathym-forecast-fathym-forecast-element"
+			},
+			"api-keys": {
+				"element": "lcu-fathym-forecast-api-keys-element"
+			},
+			"analytics": {
+				"element": "lcu-fathym-forecast-analytics-element"
+			}
+		},
+		"elements": {},
+		"data-flow": {},
+		"dependencies": {}
+	}
 }

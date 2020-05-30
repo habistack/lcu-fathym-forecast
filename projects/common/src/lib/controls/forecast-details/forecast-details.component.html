@@ -1,0 +1,22 @@
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <h3>{{ RouteDisplayName }}</h3>
+    <button mat-raised-button (click)="CloseModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-button-toggle-group (change)="ToggleMeasurementUnit(group.value)" [value]="SelectedUnitSystem"
+    #group="matButtonToggleGroup">
+    <mat-button-toggle value="Metric">
+      <span>Metric</span>
+    </mat-button-toggle>
+    <mat-button-toggle value="English">
+      <span>English</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <button class="json-download-button" mat-raised-button (click)="ExportToJson()">Download as JSON</button>
+  <div *ngFor="let config of PlotConfigs">
+    <lcu-variable-data-plot [valid-times]="ValidTimes" [forecast-data]="ForecastData" [plot]="config">
+    </lcu-variable-data-plot>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,135 @@
+<mat-card class="form-container" fxFlex>
+  <form
+    fxLayout="column"
+    fxLayoutGap="10px"
+    [formGroup]="RouteInputForm"
+    novalidate>
+        <!-- <i class="fas fa-route"></i> -->
+<!--Search type checkboxes-->
+        <mat-card>
+            <span class="title mb-10 dis-block"><i [ngClass]="(GeofenceChecked) ? 'fa fa-pencil-square-o fa-2x' : 'fa fa-search fa-2x' "></i>
+              {{ SearchTitle }}
+            </span>
+          <mat-card-header>
+            <!-- <mat-card-title><i class="fa fa-search fa-2x"></i> Search Type</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle> -->
+          </mat-card-header>
+          <mat-card-content>
+            <div fxLayout="row" fxLayoutGap="10px" formGroupName="SearchTypeControls">
+              <mat-checkbox id="checkSearchRoutes" formControlName="checkSearchRoutes"  (change)="SearchTypeChanged($event)">Search Route(s)</mat-checkbox>
+              <!-- TODO: Once backend functionality is supported, remove below *ngIf="false" to display checkboxes -->
+              <mat-checkbox *ngIf="false" id="checkSearchDepart" formControlName="checkSearchDepart" color="primary" (change)="SearchTypeChanged($event)">Search Depart Risk</mat-checkbox>
+              <mat-checkbox *ngIf="false" id="checkSearchGeofence" formControlName="checkSearchGeofence" color="accent" (change)="SearchTypeChanged($event)">Create Geofence</mat-checkbox>
+            </div>
+            <mat-error class="mt-10" *ngIf="RouteInputForm.controls['SearchTypeControls'].hasError('requireCheckboxesToBeChecked')">
+                At least one checkbox is required
+            </mat-error>
+          </mat-card-content>
+        </mat-card>
+
+        <div formGroupName="SearchFormControls" fxLayout="column">
+          <mat-form-field>
+            <input type="text"
+              matInput
+              [placeholder]="Origin.invalid || Origin.disabled ? 'Origin' : ''"
+              formControlName="origin"
+              [matAutocomplete]="origin">
+            <mat-hint *ngIf="Origin.valid">Selected Origin</mat-hint>
+            <mat-error *ngIf="Origin.hasError('required')">Origin is required</mat-error>
+            <mat-error *ngIf="Origin.hasError('invalidOriginPosition')">Invalid origin</mat-error>
+          </mat-form-field>
+
+          <mat-autocomplete
+          #origin="matAutocomplete"
+          [displayWith]="DisplayResults"
+          (optionSelected)='DisplayResults($event.option.value)'>
+            <mat-option *ngFor="let origin of (OriginRoute | async)?.results" [value]="origin">
+              <span>{{ origin.address.freeformAddress }}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+
+      <div formGroupName="SearchFormControls" fxLayout="column">
+        <mat-form-field>
+          <input type="text"
+            matInput
+           [placeholder]="Destination.invalid || Destination.disabled ? 'Destination' : ''"
+            formControlName="destination"
+            [matAutocomplete]="destination">
+          <mat-hint *ngIf="Destination.valid">Selected Destination</mat-hint>
+          <mat-error *ngIf="Destination.hasError('required')">Destination is required</mat-error>
+          <mat-error *ngIf="Destination.hasError('invalidDestinationPosition')">Invalid destination</mat-error>
+        </mat-form-field>
+
+        <mat-autocomplete
+          #destination="matAutocomplete"
+          [displayWith]="DisplayResults"
+          (optionSelected)='DisplayResults($event.option.value)'
+          class="mb-10">
+          <mat-option *ngFor="let destination of (DestinationRoute | async)?.results" [value]="destination">
+            <span>{{ destination.address.freeformAddress }}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <!--Departure Times-->
+      <div formGroupName="SearchConditions" fxLayout="column">
+        <mat-dialog-content fxLayout="column" style="width:100%;">
+          <lcu-select
+            formControlName="departureTimes"
+            [Config]="DepartureTimeConfig"
+            [Placeholder]="DepartureTimes.invalid ? 'Select Departure Time' : ''">
+          </lcu-select>
+          <mat-hint *ngIf="DepartureTimes.valid">Selected Departure Time</mat-hint>
+          <mat-error *ngIf="DepartureTimes.hasError('required')">A departure time is required</mat-error>
+        </mat-dialog-content>
+      </div>
+
+      <!--using lcu-select-->
+      <div formGroupName="SearchConditions" fxLayout="column" fxFlex>
+        <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
+            <mat-dialog-content fxLayout="column">
+          <lcu-select
+            formControlName="conditionVariables"
+            [Config]="ConditionsConfig"
+            [Placeholder]="ConditionVariableNames.invalid ? 'Select Condition Variables' : ''">
+          </lcu-select>
+          <mat-hint *ngIf="ConditionVariableNames.valid">Selected Condition Variables</mat-hint>
+          <mat-error *ngIf="ConditionVariableNames.hasError('required') && ConditionVariableNames.value">Condition variables are required</mat-error>
+        </mat-dialog-content>
+      </div>
+
+      <div formGroupName="SearchFormControls" fxLayout="column" fxFlex>
+        <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
+            <mat-dialog-content fxLayout="column">
+          <lcu-select
+            formControlName="forecastModelType"
+            [Config]="ForecastModelConfig"
+            [Placeholder]="ForecastModelType.invalid ? 'Select Forecast Model' : ''">
+          </lcu-select>
+          <mat-hint *ngIf="ForecastModelType.valid">Selected Forecast Model</mat-hint>
+          <mat-error *ngIf="ForecastModelType.hasError('required')">A forecast model is required</mat-error>
+        </mat-dialog-content>
+      </div>
+
+        <div fxLayout="column" fxLayoutGap="5px" class="mb-10" formGroupName="SearchFormControls">
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-slide-toggle color="primary" name="includeAlts" formControlName="includeAlts">
+                Include Alternative Routes
+            </mat-slide-toggle>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="10px" class="mt-10">
+          <div formGroupName="SearchFormControls" fxLayout="row" fxLayoutGap="10px">
+          </div>
+
+        </div>
+        <div class="mt-10" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+            <button mat-raised-button color="primary" [disabled]="DisableSearchButton()" (click)="Search()" >Search</button>
+            <button mat-raised-button color="accent" [disabled]="DisableClearButton()" (click)="ClearSearchForm()">Clear</button>
+        </div>
+  </form>
+
+</mat-card>
+

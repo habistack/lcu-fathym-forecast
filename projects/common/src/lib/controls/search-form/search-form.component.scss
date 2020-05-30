@@ -1,0 +1,25 @@
+$color-value: #3d3d3d;
+$m-10: 10px;
+
+.mt-10 {
+  margin-top: $m-10;
+}
+
+.mb-10 {
+  margin-bottom: $m-10;
+}
+
+.form-container {
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.dis-block {
+  display: block;
+}
