@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+=======
+import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
+>>>>>>> integration
 import { MatSlider } from '@angular/material/slider';
 import { map } from 'rxjs/internal/operators/map';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -37,8 +41,13 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Map component
    */
-  @ViewChild('map', { static: false })
   public Maper: AtlasMapComponent;
+  @ViewChild('map', {read: ElementRef, static: true })
+  public set map(val: AtlasMapComponent) {
+    if (val && (this.Config && this.MapService.isLoaded)) {
+      this.Maper = val;
+    }
+  }
 
   /**
    * Plot component
@@ -214,7 +223,16 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   //  Life Cycle
+  public ngAfterViewInit(): void {
+    
+  }
+
   public ngOnInit(): void {
+    this.getGoing();
+  }
+
+  
+  protected getGoing(): void {
     this.Routes = new Array<RouteInfoModel>();
 
     setTimeout(() => {
@@ -306,9 +324,15 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
 
-    this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5] };
+    this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
+                    'subscriptionKey': lbsKey,
+                    authOptions: {
+                    'authType': 'subscriptionKey',
+                    'subscriptionKey': lbsKey
+                  }
+   };
+    
     this.MapService.load().toPromise().then(() => { });
-
     //    if (this.Slider) {
     //      this.Slider.input.subscribe(() => {
     //        const value = this.Slider.value;
@@ -353,7 +377,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public MapClicked(evt: atlas.data.Position) {
 
     // console.log(evt)
-    //determine the route selected only if there is more than 1 route
+    // determine the route selected only if there is more than 1 route
     if (this.Routes.length > 1) {
       this.determineRoute(evt);
     }
@@ -364,7 +388,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       route.pointsArr.forEach(point => {
 
         if (point[0].toFixed(1) === coords[0].toFixed(1) && point[1].toFixed(1) === coords[1].toFixed(1)) {
-          // console.log("match");
+          // console.log('match');
           this.RouteChosen(route);
         }
       })
@@ -515,16 +539,17 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public MapLoaded(evt: Event) {
-    // console.log('Map loaded', evt);
-    this.setUpDefaultLayer();
-    // this.loadBlend();
+    if (this.Maper && this.MapService.isLoaded) {
+      console.log('Map loaded', evt);
+      this.setUpDefaultLayer();
+      // this.loadBlend();
+    } else {
+      setTimeout(() => this.MapLoaded(evt), 400);
+    }
   }
 
   public DefaultLayer;
 
-
-  ngAfterViewInit() {
-  }
 
   /**
    * Callback function that passes back created points
@@ -587,9 +612,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   // protected displayRoute(pointsArr: Array<Array<atlas.data.Position>>) {
   protected displayRoute(routes: Array<RouteInfoModel>) {
-    // console.log("display routes: ", routes);
+    // console.log('display routes: ', routes);
 
-    if (!this.Maper) { return; }
+    if (!this.Maper || !this.Maper.map) { return; }
 
     this.Maper.map.events.add('ready', () => {
       // console.log('map is ready and loaded - shannon ');
@@ -627,7 +652,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     // this.routeNames = [];
     routes.forEach(route => {
 
-      // console.log("route name = ", route.displayName);
+      // console.log('route name = ', route.displayName);
       // for (let i = route.pointsArr.length-1; i >=0; i--) {
       // for (let i = 0; i <route.pointsArr.length; i++) {
 
@@ -658,14 +683,14 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
        * Points to plot
        */
       const points = route.pointsArr;
-      // console.log("points here: ", points)
+      // console.log('points here: ', points)
       const decodedPath = points;
       for (let j = 0; j < decodedPath.length; j++) {
         const llat = decodedPath[j][1];
-        // console.log("llat: ", llat);
+        // console.log('llat: ', llat);
 
         const llon = decodedPath[j][0];
-        // console.log("llon: ", llon);
+        // console.log('llon: ', llon);
 
         if (llat < this.minLat) { this.minLat = llat; }
 
@@ -839,9 +864,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     let i = 0;
     this.Routes.forEach(route => {
       i++;
-      route.displayName = "Route " + i.toString();
+      route.displayName = 'Route ' + i.toString();
     })
-    console.log("routes= ", this.Routes)
+    console.log('routes= ', this.Routes)
   }
   /**
    * calculates the delay risk for the given route
@@ -854,7 +879,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     })
     let delayRiskAvg = riskSum / (route.forecast.routeDelayRisk.length);
     route.avgDelayRisk = delayRiskAvg.toFixed(4);
-    //  console.log("route: ", route);
+    //  console.log('route: ', route);
   }
   /**
    * determines the default route based on delay risk
@@ -888,7 +913,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         r.color = 'gray';
       }
     });
-    route.color = "#0000CD";
+    route.color = '#0000CD';
     route.selectedRoute = true;
     this.DefaultRoute = route;
   }

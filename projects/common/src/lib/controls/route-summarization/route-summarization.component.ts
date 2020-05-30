@@ -4,8 +4,13 @@ import { NotificationService } from '../../services/notification.service';
 import { ForecastDataModel } from '../../models/forecast-data.model';
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { RoutePointModel } from '../../models/route-point.model';
+<<<<<<< HEAD
 import { MatDialog } from '@angular/material/dialog';
+=======
+
+>>>>>>> integration
 import { ForecastDetailsComponent } from '../forecast-details/forecast-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'lcu-route-summarization',
