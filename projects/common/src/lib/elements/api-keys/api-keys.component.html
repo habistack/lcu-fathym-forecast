@@ -1,4 +1,4 @@
-<div class="spread">
+<div class="spread" *ngIf="!State.Loading">
   <h2>Fathym Forecast API Keys</h2>
 
   <ng-container *ngIf="!State.HasAccess">
@@ -14,8 +14,14 @@
   <ng-container *ngIf="State.HasAccess">
     <h3>Use the following keys to connect with the Fathym Forecast API:</h3>
 
-    <mat-form-field *ngFor="let apiKeyType of APIKeyTypes">
-      <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
-    </mat-form-field>
+    <div class="spread" *ngFor="let apiKeyType of APIKeyTypes">
+      <mat-form-field class="mat-full-width">
+        <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
+      </mat-form-field>
+    </div>
   </ng-container>
+</div>
+
+<div class="spread" *ngIf="State.Loading">
+  <mat-spinner></mat-spinner>
 </div>

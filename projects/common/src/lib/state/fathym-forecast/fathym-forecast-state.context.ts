@@ -39,17 +39,15 @@ export class FathymForecastStateContext extends StateContext<FathymForecastState
   }
 
   //  Helpers
-  protected callRefresh() {}
-
   protected defaultValue() {
     return { Loading: true } as FathymForecastState;
   }
 
   protected loadStateKey(): string {
-    return 'billing';
+    return 'manage';
   }
 
   protected loadStateName(): string {
-    return 'usermanagement';
+    return 'fathymforecast';
   }
 }
