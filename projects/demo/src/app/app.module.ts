@@ -28,7 +28,6 @@ import { environment } from '../environments/environment';
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment),
     },
-    FathymForecastStateContext,
   ],
   bootstrap: [AppComponent],
   exports: [LcuFathymForecastModule],

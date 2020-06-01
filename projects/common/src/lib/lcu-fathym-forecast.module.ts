@@ -6,24 +6,33 @@ import { LcuService } from './services/lcu.service';
 import { LcuComponent } from './controls/lcu/lcu.component';
 import { LcuDirective } from './directives/lcu.directive';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
+import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
 
 @NgModule({
-  declarations: [LcuComponent, LcuDirective, LcuFathymForecastApiKeysElementComponent],
+  declarations: [
+    LcuComponent,
+    LcuDirective,
+    LcuFathymForecastApiKeysElementComponent,
+  ],
   imports: [
     FathymSharedModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
   ],
-  exports: [LcuComponent, LcuDirective, LcuFathymForecastApiKeysElementComponent],
-  entryComponents: [LcuFathymForecastApiKeysElementComponent]
+  exports: [
+    LcuComponent,
+    LcuDirective,
+    LcuFathymForecastApiKeysElementComponent,
+  ],
+  entryComponents: [LcuFathymForecastApiKeysElementComponent],
 })
 export class LcuFathymForecastModule {
   static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
-      providers: [LcuService]
+      providers: [FathymForecastStateContext],
     };
   }
 }

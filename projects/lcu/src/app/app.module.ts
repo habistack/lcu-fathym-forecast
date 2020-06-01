@@ -24,7 +24,6 @@ import { createCustomElement } from '@angular/elements';
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment),
     },
-    FathymForecastStateContext,
   ],
   exports: [LcuFathymForecastModule],
 })
