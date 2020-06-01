@@ -1,19 +1,10 @@
 import { NgModule, DoBootstrap, Injector } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu/common';
 import { environment } from '../environments/environment';
-import {
-  LcuFathymForecastModule,
-  LcuFathymForecastFathymForecastElementComponent,
-  SelectorLcuFathymForecastFathymForecastElement, 
-  LcuFathymForecastApiKeysElementComponent, 
-  SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, 
-  LcuFathymForecastAnalyticsElementComponent, 
-  SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT
-} from '@habistack/lcu-fathym-forecast-common';
+import { LcuFathymForecastModule, LcuFathymForecastRoutingElementComponent, SELECTOR_LCU_FATHYM_FORECAST_ROUTING_ELEMENT, LcuFathymForecastApiKeysElementComponent, SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, LcuFathymForecastAnalyticsElementComponent, SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT } from '@habistack/lcu-fathym-forecast-common';
+import { createCustomElement } from '@angular/elements';
 
 @NgModule({
   declarations: [],
@@ -21,7 +12,7 @@ import {
     BrowserModule,
     BrowserAnimationsModule,
     FathymSharedModule,
-    LcuFathymForecastModule
+    LcuFathymForecastModule.forRoot()
   ],
   providers: [
     {
@@ -32,25 +23,17 @@ import {
   exports: [LcuFathymForecastModule]
 })
 export class AppModule implements DoBootstrap {
-  //  Constructors
-  constructor(protected injector: Injector) {}
+	constructor(protected injector: Injector) {}
 
-  //  Life Cycle
-  public ngDoBootstrap() {
-    const cfgMgr = createCustomElement(
-      LcuFathymForecastFathymForecastElementComponent,
-      { injector: this.injector }
-    );
+	public ngDoBootstrap() {
+		const routing = createCustomElement(LcuFathymForecastRoutingElementComponent, { injector: this.injector });
 
-    customElements.define(
-      SelectorLcuFathymForecastFathymForecastElement,
-      cfgMgr
-    );
-
+		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_ROUTING_ELEMENT, routing);
+	
 		const apiKeys = createCustomElement(LcuFathymForecastApiKeysElementComponent, { injector: this.injector });
 
 		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, apiKeys);
-
+	
 		const analytics = createCustomElement(LcuFathymForecastAnalyticsElementComponent, { injector: this.injector });
 
 		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT, analytics);
