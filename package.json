@@ -23,7 +23,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "npx-build-plus:copy-assets": "node projects/lcu/copy-wc-polyfill.js"
+    "npx-build-plus:copy-assets": "node projects/lcu/copy-wc-polyfill.js",
+    "upgrade9": "npm run upgrade9:angular && npm run upgrade9:auditfix && npm run upgrade9:lcu && npm run upgrade9:addons",
+    "upgrade9:angular": "ng update @angular/cli @angular/core && npm i @angular/cdk@latest @angular/material@latest @angular/flex-layout@latest",
+    "upgrade9:auditfix": "npm audit fix",
+    "upgrade9:lcu": "npm i @lcu/common@1.1.31-angular-9 @lcu/cli@latest",
+    "upgrade9:addons": "npm i @types/node@latest @webcomponents/custom-elements@latest @webcomponents/webcomponentsjs@latest codelyzer@latest ngx-build-plus@latest rxjs@latest ng-packagr@latest terser@4.6.3 --save"
   },
   "private": false,
   "dependencies": {
