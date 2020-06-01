@@ -3,7 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu/common';
 import { environment } from '../environments/environment';
-import { LcuFathymForecastModule, LcuFathymForecastApiKeysElementComponent, SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT } from '@habistack/lcu-fathym-forecast-common';
+import {
+  LcuFathymForecastModule,
+  LcuFathymForecastApiKeysElementComponent,
+  SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
+  FathymForecastStateContext,
+} from '@habistack/lcu-fathym-forecast-common';
 import { createCustomElement } from '@angular/elements';
 
 @NgModule({
@@ -12,22 +17,29 @@ import { createCustomElement } from '@angular/elements';
     BrowserModule,
     BrowserAnimationsModule,
     FathymSharedModule,
-    LcuFathymForecastModule.forRoot()
+    LcuFathymForecastModule.forRoot(),
   ],
   providers: [
     {
       provide: LCUServiceSettings,
-      useValue: FathymSharedModule.DefaultServiceSettings(environment)
-    }
+      useValue: FathymSharedModule.DefaultServiceSettings(environment),
+    },
+    FathymForecastStateContext,
   ],
-  exports: [LcuFathymForecastModule]
+  exports: [LcuFathymForecastModule],
 })
 export class AppModule implements DoBootstrap {
-	constructor(protected injector: Injector) {}
+  constructor(protected injector: Injector) {}
 
-	public ngDoBootstrap() {
-		const apiKeys = createCustomElement(LcuFathymForecastApiKeysElementComponent, { injector: this.injector });
+  public ngDoBootstrap() {
+    const apiKeys = createCustomElement(
+      LcuFathymForecastApiKeysElementComponent,
+      { injector: this.injector }
+    );
 
-		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, apiKeys);
-	}
+    customElements.define(
+      SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
+      apiKeys
+    );
+  }
 }

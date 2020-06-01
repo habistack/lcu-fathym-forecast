@@ -4,6 +4,7 @@ import {
   FathymForecastState,
   UsageStateTypes,
 } from '../../state/fathym-forecast/fathym-forecast.state';
+import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
 
 export class LcuFathymForecastApiKeysElementState {}
 
@@ -31,7 +32,8 @@ export class LcuFathymForecastApiKeysElementComponent
 
   //  Constructors
   constructor(
-    protected injector: Injector // protected forecastCtxt: FathymForecastStateContext
+    protected injector: Injector,
+    protected forecastCtxt: FathymForecastStateContext
   ) {
     super(injector);
   }
@@ -40,21 +42,13 @@ export class LcuFathymForecastApiKeysElementComponent
   public ngOnInit() {
     super.ngOnInit();
 
-    // this.forecastCtxt.Context.subscribe((state) => {
-    this.State = {
-      APIKeys: {
-        Primary: 'asdfasdf',
-        Secondary: 'asdfazxcvqwet',
-      },
-      HasAccess: true,
-      Loading: false,
-      UsageState: UsageStateTypes.Active,
-    }; // state;
+    this.forecastCtxt.Context.subscribe((state) => {
+      this.State = state;
 
-    if (this.State) {
-      this.stateChanged();
-    }
-    // });
+      if (this.State) {
+        this.stateChanged();
+      }
+    });
   }
 
   //  API Methods
