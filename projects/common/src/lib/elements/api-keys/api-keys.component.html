@@ -16,12 +16,7 @@
 
     <div class="spread" *ngFor="let apiKeyType of APIKeyTypes">
       <mat-form-field class="mat-full-width">
-        <input
-          matInput
-          [placeholder]="apiKeyType"
-          [value]="State.APIKeys[apiKeyType]"
-          disabled
-        />
+        <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
       </mat-form-field>
     </div>
   </ng-container>

@@ -9,14 +9,8 @@
 			"wc/lcu-fathym-forecast.lcu.js"
 		],
 		"solutions": {
-			"routing": {
-				"element": "lcu-fathym-forecast-routing-element"
-			},
 			"api-keys": {
 				"element": "lcu-fathym-forecast-api-keys-element"
-			},
-			"analytics": {
-				"element": "lcu-fathym-forecast-analytics-element"
 			}
 		},
 		"elements": {},
