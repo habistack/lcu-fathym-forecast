@@ -11,6 +11,7 @@ import {
   SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
   LcuFathymForecastAnalyticsElementComponent,
   SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT,
+  FathymForecastStateContext,
 } from '@habistack/lcu-fathym-forecast-common';
 import { createCustomElement } from '@angular/elements';
 
@@ -23,6 +24,7 @@ import { createCustomElement } from '@angular/elements';
     LcuFathymForecastModule.forRoot(),
   ],
   providers: [
+    FathymForecastStateContext,
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment),
