@@ -7,6 +7,7 @@ import { LcuComponent } from './controls/lcu/lcu.component';
 import { LcuDirective } from './directives/lcu.directive';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
 import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forec
   imports: [
     FathymSharedModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
@@ -32,7 +34,7 @@ export class LcuFathymForecastModule {
   static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
-      providers: [FathymForecastStateContext],
+      providers: [],
     };
   }
 }

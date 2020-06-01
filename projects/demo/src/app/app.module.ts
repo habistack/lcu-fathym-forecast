@@ -10,6 +10,7 @@ import { DocumentationComponent } from './controls/documentation/documentation.c
 import { LcuDocumentationModule } from '@lowcodeunit/lcu-documentation-common';
 import { LcuFathymForecastModule, FathymForecastStateContext } from '@habistack/lcu-fathym-forecast-common';
 import { environment } from '../environments/environment';
+import { LazyElementModule } from '@lowcodeunit/lazy-element';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, DocumentationComponent],
@@ -20,10 +21,12 @@ import { environment } from '../environments/environment';
     FathymSharedModule,
     MaterialModule,
     FlexLayoutModule,
+    LazyElementModule,
     LcuDocumentationModule.forRoot(),
     LcuFathymForecastModule.forRoot(),
   ],
   providers: [
+    FathymForecastStateContext,
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment),
