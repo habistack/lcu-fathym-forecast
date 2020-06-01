@@ -34,7 +34,7 @@ export class LcuFathymForecastModule {
   static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
-      providers: [],
+      providers: [FathymForecastStateContext],
     };
   }
 }
