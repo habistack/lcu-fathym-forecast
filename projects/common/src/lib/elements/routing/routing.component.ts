@@ -2,6 +2,7 @@ import { Component, OnInit, Injector, ElementRef, ViewChild } from '@angular/cor
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { Subscription } from 'rxjs';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { NotificationService } from '../../services/notification.service';
 
 export class LcuFathymForecastRoutingElementState {}
 
