@@ -8,12 +8,14 @@ import { LcuDirective } from './directives/lcu.directive';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
 import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
 import { RouterModule } from '@angular/router';
+import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 
 @NgModule({
   declarations: [
     LcuComponent,
     LcuDirective,
     LcuFathymForecastApiKeysElementComponent,
+    LcuFathymForecastRoutingElementComponent,
   ],
   imports: [
     FathymSharedModule,
@@ -27,8 +29,9 @@ import { RouterModule } from '@angular/router';
     LcuComponent,
     LcuDirective,
     LcuFathymForecastApiKeysElementComponent,
+    LcuFathymForecastRoutingElementComponent,
   ],
-  entryComponents: [LcuFathymForecastApiKeysElementComponent],
+  entryComponents: [LcuFathymForecastApiKeysElementComponent, LcuFathymForecastRoutingElementComponent],
 })
 export class LcuFathymForecastModule {
   static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {

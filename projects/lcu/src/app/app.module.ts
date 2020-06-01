@@ -7,7 +7,7 @@ import {
   LcuFathymForecastModule,
   LcuFathymForecastApiKeysElementComponent,
   SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
-  FathymForecastStateContext,
+  FathymForecastStateContext, LcuFathymForecastRoutingElementComponent, SELECTOR_LCU_FATHYM_FORECAST_ROUTING_ELEMENT,
 } from '@habistack/lcu-fathym-forecast-common';
 import { createCustomElement } from '@angular/elements';
 import { RouterModule, ActivatedRoute } from '@angular/router';
@@ -41,5 +41,9 @@ export class AppModule implements DoBootstrap {
       SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
       apiKeys
     );
-  }
+  
+		const routing = createCustomElement(LcuFathymForecastRoutingElementComponent, { injector: this.injector });
+
+		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_ROUTING_ELEMENT, routing);
+	}
 }

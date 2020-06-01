@@ -11,6 +11,9 @@
 		"solutions": {
 			"api-keys": {
 				"element": "lcu-fathym-forecast-api-keys-element"
+			},
+			"routing": {
+				"element": "lcu-fathym-forecast-routing-element"
 			}
 		},
 		"elements": {},
