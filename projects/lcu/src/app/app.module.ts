@@ -10,14 +10,13 @@ import {
   FathymForecastStateContext,
 } from '@habistack/lcu-fathym-forecast-common';
 import { createCustomElement } from '@angular/elements';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 
 @NgModule({
   declarations: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule,
     FathymSharedModule,
     LcuFathymForecastModule.forRoot(),
   ],
