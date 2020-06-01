@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
-=======
 import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
->>>>>>> integration
 import { MatSlider } from '@angular/material/slider';
 import { map } from 'rxjs/internal/operators/map';
 import { catchError } from 'rxjs/internal/operators/catchError';
