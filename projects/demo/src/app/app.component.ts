@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LcuUtils } from '@habistack/lcu-fathym-forecast-common';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ThemeColorPickerService } from '@lcu/common';
 
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.Title = LcuUtils.upperLcu(this.Title);
     this.resetTheme();
     this.setThemes();
   }

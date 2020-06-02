@@ -3,14 +3,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { FathymSharedModule, MaterialModule } from '@lcu/common';
+import { DataGridModule } from '@lowcodeunit/data-grid';
+import { LcuChartsModule } from '@lowcodeunit/lcu-charts-common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
+import { LoadMapService } from '@acaisoft/angular-azure-maps';
 import { ToastrModule } from 'ngx-toastr';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
 import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { RouteMapComponent } from './controls/route-map/route-map.component';
-import { DataGridModule } from '@lowcodeunit/data-grid';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
 import { ForecastDataPlotComponent } from './controls/forecast-data-plot/forecast-data-plot.component';
 import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
@@ -19,7 +21,6 @@ import { RouteSummarizationComponent } from './controls/route-summarization/rout
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/ff-pipes';
 import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
 import { ChartPlotsComponent } from './controls/chart-plots/chart-plots.component';
-import { LcuChartsModule } from '@lowcodeunit/lcu-charts-common';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { LcuChartsModule } from '@lowcodeunit/lcu-charts-common';
   ],
   providers: [
     DisplayDateFormatPipe,
-    ImageDateFormatPipe
+    ImageDateFormatPipe,
+    LoadMapService,
   ],
 })
 export class LcuFathymForecastModule {
