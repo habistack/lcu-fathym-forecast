@@ -19,9 +19,10 @@
 			"@habistack/lcu-fathym-forecast-common": [
 				"dist/common/common",
 				"dist/common"
-			]
+      ],
+      "@angular/*": [ "node_modules/@angular/*"]
 		},
-		"noImplicitAny": true,
+		"noImplicitAny": false,
 		"suppressImplicitAnyIndexErrors": true
 	},
 	"angularCompilerOptions": {
