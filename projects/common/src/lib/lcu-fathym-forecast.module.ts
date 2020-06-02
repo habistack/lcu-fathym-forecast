@@ -5,22 +5,22 @@ import { FathymSharedModule, MaterialModule } from '@lcu/common';
 import { LcuService } from './services/lcu.service';
 import { LcuComponent } from './controls/lcu/lcu.component';
 import { LcuDirective } from './directives/lcu.directive';
-import { FathymForecastStateContext } from './state/fathym-forecast-state.context';
-import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
-import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics/analytics.component';
+import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
+import { RouterModule } from '@angular/router';
+import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 
 @NgModule({
   declarations: [
     LcuComponent,
     LcuDirective,
-    LcuFathymForecastRoutingElementComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent,
   ],
   imports: [
     FathymSharedModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
@@ -28,15 +28,10 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
   exports: [
     LcuComponent,
     LcuDirective,
-    LcuFathymForecastRoutingElementComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastAnalyticsElementComponent,
-  ],
-  entryComponents: [
     LcuFathymForecastRoutingElementComponent,
-    LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastAnalyticsElementComponent,
   ],
+  entryComponents: [LcuFathymForecastApiKeysElementComponent, LcuFathymForecastRoutingElementComponent],
 })
 export class LcuFathymForecastModule {
   static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
