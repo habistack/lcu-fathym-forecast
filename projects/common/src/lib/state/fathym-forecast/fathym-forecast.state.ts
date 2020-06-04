@@ -3,6 +3,8 @@ import { Status } from '@lcu/common';
 export class FathymForecastState {
   public APIKeys?: { [name: string]: string };
 
+  public APISiteURL?: string;
+
   public HasAccess?: boolean;
 
   public Loading?: boolean;
