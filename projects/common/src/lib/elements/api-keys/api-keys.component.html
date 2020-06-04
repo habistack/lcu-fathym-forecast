@@ -19,6 +19,14 @@
         <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
       </mat-form-field>
     </div>
+
+    <div class="spread">
+      <h4>Visit our developer portal for more information on the API, and to try it out against your new keys.</h4>
+
+      <a mat-raised-button color="accent" [href]="State.APISiteURL" target="_blank">
+        Developer Portal
+      </a>
+    </div>
   </ng-container>
 </div>
 
