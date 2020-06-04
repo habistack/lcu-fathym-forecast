@@ -14,6 +14,12 @@
   <ng-container *ngIf="State.HasAccess">
     <h3>Use the following keys to connect with the Fathym Forecast API:</h3>
 
+    <div class="spread">
+      <mat-form-field class="mat-full-width">
+        <input matInput [placeholder]="Forecast Client ID" [value]="State.ForecastClientID" disabled />
+      </mat-form-field>
+    </div>
+
     <div class="spread" *ngFor="let apiKeyType of APIKeyTypes">
       <mat-form-field class="mat-full-width">
         <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
