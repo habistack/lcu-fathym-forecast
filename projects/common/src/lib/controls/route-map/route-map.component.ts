@@ -12,7 +12,7 @@ import { DataService } from '../../services/data.service';
 import { FathymForecastConfig } from '../../models/weather.config';
 import { SearchModel } from './../../models/search.model';
 import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils';
-import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
+import { LoadMapService, LcuMapsAzureMapElementComponent } from '@lowcodeunit/lcu-maps-common';
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouteInfoModel } from '../../models/route-info.model';
@@ -37,9 +37,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Map component
    */
-  public Maper: AtlasMapComponent;
+  public Maper: LcuMapsAzureMapElementComponent;
   @ViewChild('map', {read: ElementRef, static: true })
-  public set map(val: AtlasMapComponent) {
+  public set map(val: LcuMapsAzureMapElementComponent) {
     if (val && (this.Config && this.MapService.isLoaded)) {
       this.Maper = val;
     }

@@ -1,13 +1,11 @@
+import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { AmModule } from '@acaisoft/angular-azure-maps';
-// import { NvD3Module } from 'ng2-nvd3';
 
 import 'd3';
-// import 'nvd3';
 
 import { DataGridModule } from '@lowcodeunit/data-grid';
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/ff-pipes';
@@ -43,7 +41,7 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastFathymForecastElementComponent,
     ChartPlotsComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastAnalyticsElementComponent
+    LcuFathymForecastAnalyticsElementComponent,
   ],
   imports: [
     CommonModule,
@@ -54,10 +52,9 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     MaterialModule,
     LcuSelectModule,
     ToastrModule.forRoot(),
-    AmModule,
     FlexLayoutModule,
-    // NvD3Module,
-    LcuChartsModule
+    LcuChartsModule,
+    LcuMapsModule.forRoot()
   ],
   exports: [
     DepartureTableComponent,
@@ -94,10 +91,10 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
   ]
 })
 export class LcuFathymForecastModule {
-  // static forRoot(): LcuFathymForecastModule {
-  //   return {
-  //     ngModule: LcuFathymForecastModule,
-  //     providers: []
-  //   };
-  // }
+  static forRoot(): LcuFathymForecastModule {
+    return {
+      ngModule: LcuFathymForecastModule,
+      providers: [LoadMapService]
+    };
+  }
  }

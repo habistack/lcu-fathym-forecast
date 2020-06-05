@@ -1,4 +1,4 @@
-import { AtlasMapComponent } from '@acaisoft/angular-azure-maps';
+import { LcuMapsAzureMapElementComponent } from '@lowcodeunit/lcu-maps-common';
 
 // keep this external so we can reach it from within event handlers
 let activeShape: atlas.Shape;
@@ -45,7 +45,7 @@ export class GeofenceDrawingTool {
      * @param drawingEndedCallback Function that is called when a drawing has been completed.
      *
      */
-    constructor(mapComp: AtlasMapComponent, beforeLayer: atlas.layer.Layer, drawingEndedCallback: Function) {
+    constructor(mapComp: LcuMapsAzureMapElementComponent, beforeLayer: atlas.layer.Layer, drawingEndedCallback: Function) {
 
       if (!mapComp || !mapComp.map) { return; }
 

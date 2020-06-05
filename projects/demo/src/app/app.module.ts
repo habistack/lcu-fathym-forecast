@@ -14,7 +14,7 @@ import {
   ImageDateFormatPipe,
   LcuFathymForecastModule
  } from '@habistack/lcu-fathym-forecast-common';
-import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
+// import { AmModule, LoadMapService } from '@acaisoft/angular-azure-maps';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -31,12 +31,10 @@ import { environment } from '../environments/environment';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    AmModule
   ],
   providers: [
     DisplayDateFormatPipe,
     ImageDateFormatPipe,
-    LoadMapService,
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)

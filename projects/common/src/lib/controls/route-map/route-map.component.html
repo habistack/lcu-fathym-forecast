@@ -24,7 +24,7 @@
 <div *ngIf="Config && MapService.isLoaded">
   <!-- <pre>MapService.isLoaded: {{MapService.isLoaded | json}}</pre>
   <pre>Config: {{Config | json}}</pre> -->
-  <am-map
+  <!-- <am-map
     fxFill
     id="map"
     #map
@@ -33,5 +33,16 @@
     (onMapClick)="MapClicked($event)"
     (loaded)="MapLoaded($event)"
     >
-  </am-map>
+  </am-map> -->
+  <lcu-maps-azure-map-element
+    fxFill
+    id="map"
+    #map
+    [initial-config]="Config"
+    [id]="'id'"
+    (on-map-click)="MapClicked($event)"
+    (loaded)="MapLoaded($event)"
+  >
+
+  </lcu-maps-azure-map-element>
 </div>
