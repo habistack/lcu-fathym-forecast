@@ -38,9 +38,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    * Map component
    */
   public Maper: LcuMapsAzureMapElementComponent;
-  @ViewChild('map', {read: ElementRef, static: true })
+  @ViewChild('map', { read: ElementRef, static: true })
   public set map(val: LcuMapsAzureMapElementComponent) {
     if (val && (this.Config && this.MapService.isLoaded)) {
+      debugger;
       this.Maper = val;
     }
   }
@@ -320,12 +321,15 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
 
+    // this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
+    //                 'subscriptionKey': lbsKey,
+    //                 authOptions: {
+    //                 'authType': 'subscriptionKey',
+    //                 'subscriptionKey': lbsKey
+    //               }
     this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
                     'subscriptionKey': lbsKey,
-                    authOptions: {
-                    'authType': 'subscriptionKey',
-                    'subscriptionKey': lbsKey
-                  }
+                    
    };
     
     this.MapService.load().toPromise().then(() => { });
@@ -534,7 +538,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  public MapLoaded(evt: Event) {
+  public MapLoaded(evt?: Event) {
+    debugger;
     if (this.Maper && this.MapService.isLoaded) {
       console.log('Map loaded', evt);
       this.setUpDefaultLayer();
