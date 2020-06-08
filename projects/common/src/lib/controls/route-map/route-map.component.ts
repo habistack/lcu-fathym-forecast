@@ -135,7 +135,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public selectedValidTime = '';
 
-  public SelectedVarName = null;
+  public SelectedVarName: any = null;
 
   /**
    * Route starting marker
@@ -174,7 +174,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   // protected toggleTerrainOptions: Array<string> = ['Toggle terrain', 'Toggle map labels']
   protected techAccentAPI: string = 'https://fathym-forecast-int.azure-api.net/api/v0/maptile-manifest';
   protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
-  protected manifestJson;
+  protected manifestJson: any;
 
   public ShowIndicatorIcon: boolean;
 
@@ -295,7 +295,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected setUpDefaultLayer() {
     const mapperPromise = new Promise((resolve, reject) => {
-      let intervalCount;
+      let intervalCount: any;
       const mapperInterval = setInterval(() => {
         if (this.Maper) {
           resolve();
@@ -394,7 +394,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     })
   }
-  protected makeMaptileOptions(layerStr, t) {
+  protected makeMaptileOptions(layerStr: any, t: any) {
     return {
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layerStr}/${t}/{z}/{x}/{y}.png`,
       opacity: 0.7,
@@ -493,7 +493,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       }));
   }
 
-  public LayerChosen(layer) {
+  public LayerChosen(layer: any) {
     if (layer) {
       if (layer.optionType === 'ff-api') {
         this.currentForecastLayer = layer;
@@ -510,7 +510,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  protected getLayerFromIowaAPI(layer) {
+  protected getLayerFromIowaAPI(layer: any) {
     // console.log(layer);
     let url;
     // if (layer.value === 'Radar Reflectivity') {
@@ -525,7 +525,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
   }
 
-  protected getLayerFromFathymAPI(layer, timeIndex?: number) {
+  protected getLayerFromFathymAPI(layer: any, timeIndex?: number) {
     const t = timeIndex ? this.manifestJson[layer.value][timeIndex] : this.manifestJson[layer.value][0];
     this.Maper.map.layers.add(new atlas.layer.TileLayer({
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
@@ -534,7 +534,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 'maptiles'));
   }
 
-  protected getLayerFromAzure(layer) {
+  protected getLayerFromAzure(layer: any) {
 
   }
 
@@ -589,7 +589,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   //  Helpers
-  protected closest(arr, closestTo) {
+  protected closest(arr: any, closestTo: any) {
     let closest = Math.max.apply(null, arr); // Get the highest number in arr in case it match nothing.
 
     let ci = -1;
@@ -839,7 +839,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.Routes = new Array<RouteInfoModel>();
 
-    response.routes.forEach(route => {
+    response.routes.forEach((route: any) => {
       this.Routes.push(route);
       //convert the points to only coords
       let points = this.testNewPoints(route);
@@ -986,7 +986,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     // sub.unsubscribe();
   }
 
-  protected selectDataSource(dataSource) {
+  protected selectDataSource(dataSource: any) {
     this.dataSource = dataSource;
   }
 
@@ -1036,7 +1036,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   protected geofenceDrawingSetup(data: SearchModel): void {
 
     if (!this.geofenceDrawingTool) {
-      this.geofenceDrawingTool = new GeofenceDrawingTool(this.Maper, 'null', (param) => {
+      this.geofenceDrawingTool = new GeofenceDrawingTool(this.Maper, 'null', (param: any) => {
         this.geofenceDrawingCallback(param, data);
       });
     }
@@ -1078,10 +1078,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         // })
       )
       .subscribe(
-        res => {
+        (res: any) => {
           this.notificationService.UpdateForecastPlotData(res);
         },
-        err => {
+        (err: any) => {
           this.toastrDisplayService.DisplayToastrError('HTTP error');
           console.log('HTTP Error', err);
         },
@@ -1124,5 +1124,5 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   //       )
   //     );
   //   }
-  //}
+  // }
 }

@@ -1,0 +1,56 @@
+<!-- <nvd3 #d3plot *ngIf="ShowPlots" [options]="Options" [data]="ChartData"></nvd3> -->
+<lcu-charts-line-chart-simple
+        class="chart-container"
+        [animations]="animations"
+        [autoScale]="autoScale"
+        [backgroundGradientConfigs]="backgroundGradientConfigs"
+        [curve]="curve"
+        [gradient]="gradient"
+        [legendPosition]="legendPosition"
+        [legendTitle]="legendTitle"
+        [legend]="showLegend"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        [rangeFillOpacity]="rangeFillOpacity"
+        [results]="weatherData"
+        [rotateXAxisTicks]="rotateXAxisTicks"
+        [roundDomains]="roundDomains"
+        [schemeType]="schemeType"
+        [scheme]="colorScheme"
+        [showGridLines]="showGridLines"
+        [showPercentage]="showPercentage"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [timeline]="timeline"
+        [tooltipDisabled]="tooltipDisabled"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [units]="yUnits"
+        [view]="view"
+        [xAxisDateFormat]="xAxisDateFormat"
+        [xAxisIsDate]="xAxisIsDate"
+        [xAxisLabel]="xAxisLabel"
+        [xAxis]="showXAxis"
+        [xScaleMax]="xScaleMax"
+        [xScaleMin]="xScaleMin"
+        [yAxisLabel]="yAxisLabel"
+        [yAxisTickFormatting]="yAxisTickFormatting"
+        [yAxisTicks]="yAxisTicks"
+        [yAxis]="showYAxis"
+        [yScaleMax]="yScaleMax"
+        [yScaleMin]="yScaleMin"
+        [forceManualXHover]="ManualHover"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+        (HoveredVerticalChange)="hoveredVerticalChange($event)"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        (select)="select($event)"
+       >
+       <!-- 
+                   -->
+        <ng-template #tooltipTemplate let-model="model">
+          <div class="tooltip-item">
+              {{model.series}}: {{model.value}}{{yUnits}}
+          </div>
+        </ng-template>
+      </lcu-charts-line-chart-simple>

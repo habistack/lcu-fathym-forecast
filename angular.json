@@ -14,11 +14,6 @@
           "options": {
             "tsConfig": "projects/common/tsconfig.lib.json",
             "project": "projects/common/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/common/tsconfig.lib.prod.json"
-            }
           }
         },
         "test": {
@@ -62,7 +57,7 @@
             "main": "projects/lcu/src/main.ts",
             "polyfills": "projects/lcu/src/polyfills.ts",
             "tsConfig": "projects/lcu/tsconfig.app.json",
-            "aot": true,
+            "aot": false,
             "assets": [
               "projects/lcu/src/favicon.ico",
               {
@@ -80,15 +75,7 @@
               "projects/lcu/src/styles.scss"
             ],
             "scripts": [
-              "node_modules/@webcomponents/custom-elements/src/native-shim.js",
-              {
-                "bundleName": "polyfill-webcomp-es5",
-                "input": "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"
-              },
-              {
-                "bundleName": "polyfill-webcomp",
-                "input": "node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce-pf.js"
-              }
+              "node_modules/@webcomponents/custom-elements/src/native-shim.js"
             ]
           },
           "configurations": {
@@ -104,9 +91,17 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -190,7 +185,7 @@
             "main": "projects/demo/src/main.ts",
             "polyfills": "projects/demo/src/polyfills.ts",
             "tsConfig": "projects/demo/tsconfig.app.json",
-            "aot": true,
+            "aot": false,
             "assets": [
               "projects/demo/src/favicon.ico",
               "projects/demo/src/assets",
@@ -198,8 +193,7 @@
                 "glob": "package.json",
                 "input": "./projects/demo/",
                 "output": "/"
-              },
-              "projects/demo/src/docs"
+              }
             ],
             "styles": [
               "projects/demo/src/styles.scss"
@@ -219,9 +213,17 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -289,6 +291,6 @@
   },
   "defaultProject": "lcu",
   "cli": {
-    "analytics": "7ddce8cf-0eaf-43e4-8fb9-cd263a8b4b17"
+    "analytics": "676ecb18-1cf3-4690-a477-c8838fbd80e0"
   }
 }
