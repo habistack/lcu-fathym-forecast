@@ -3,6 +3,8 @@ import { Status } from '@lcu/common';
 export class FathymForecastState {
   public APIKeys?: { [name: string]: string };
 
+  public APISiteURL?: string;
+
   public HasAccess?: boolean;
 
   public Loading?: boolean;
@@ -12,9 +14,9 @@ export class FathymForecastState {
 }
 
 export enum UsageStateTypes {
-  Active = "Active",
-  Inactive = "Inactive",
-  Overage = "Overage",
-  Revoked = "Revoked",
-  Warning = "Warning",
+  Active = 'Active',
+  Inactive = 'Inactive',
+  Overage = 'Overage',
+  Revoked = 'Revoked',
+  Warning = 'Warning',
 }

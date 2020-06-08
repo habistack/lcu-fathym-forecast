@@ -3,7 +3,7 @@
 
   <ng-container *ngIf="!State.HasAccess">
     <h3>
-      You do not currently have access to the Fathym Forecast, please visisit:
+      You do not currently have access to the Fathym Forecast, please visit:
     </h3>
 
     <a mat-raised-button color="primary" href="/billing/forecast">
@@ -18,6 +18,14 @@
       <mat-form-field class="mat-full-width">
         <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
       </mat-form-field>
+    </div>
+
+    <div class="spread">
+      <h4>Visit our developer portal for more information on the API, and to try it out against your new keys.</h4>
+
+      <a mat-raised-button color="accent" [href]="State.APISiteURL" target="_blank">
+        Developer Portal
+      </a>
     </div>
   </ng-container>
 </div>
