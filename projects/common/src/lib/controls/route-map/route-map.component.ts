@@ -38,10 +38,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    * Map component
    */
   public Maper: LcuMapsAzureMapElementComponent;
-  @ViewChild('map', { read: ElementRef, static: true })
+
+  @ViewChild('map')
   public set map(val: LcuMapsAzureMapElementComponent) {
     if (val && (this.Config && this.MapService.isLoaded)) {
-      debugger;
       this.Maper = val;
     }
   }
