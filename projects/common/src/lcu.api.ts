@@ -25,3 +25,4 @@ export * from './lib/services/notification.service';
 export * from './lib/elements/fathym-forecast/fathym-forecast.component';
 export * from './lib/elements/api-keys/api-keys.component';
 export * from './lib/elements/analytics/analytics.component';
+export * from './lib/elements/routing/routing.component';

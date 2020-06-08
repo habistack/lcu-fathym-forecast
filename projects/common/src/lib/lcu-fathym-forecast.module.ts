@@ -1,3 +1,4 @@
+import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,6 +43,7 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ChartPlotsComponent,
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     RouteSummarizationComponent,
     LcuFathymForecastFathymForecastElementComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastAnalyticsElementComponent
+    LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -83,7 +86,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ForecastDetailsComponent,
     LcuFathymForecastFathymForecastElementComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastAnalyticsElementComponent
+    LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent
   ],
   providers: [
     DisplayDateFormatPipe,
