@@ -21,6 +21,7 @@
 
 <i *ngIf="ShowIndicatorIcon" class="fa fa-pencil-square-o fa-3x type-indicator-icon" aria-hidden="true"></i>
 <mat-progress-bar mode="indeterminate" *ngIf="IsLoading || !MapService.isLoaded"></mat-progress-bar>
+<<<<<<< HEAD
 <div *ngIf="Config && MapService.isLoaded">
   <!-- <pre>MapService.isLoaded: {{MapService.isLoaded | json}}</pre>
   <pre>Config: {{Config | json}}</pre> -->
@@ -35,3 +36,16 @@
     >
   </am-map> -->
 </div>
+=======
+
+  <lcu-maps-azure-map-element
+    fxFill
+    id="map"
+    #map
+    *ngIf="Config && MapService.isLoaded"
+    [initial-config]="Config"
+    [id]="'id'"
+    (on-map-click)="MapClicked($event)"
+    (Loaded)="MapLoaded($event)">
+  </lcu-maps-azure-map-element>
+>>>>>>> integration

@@ -87,6 +87,7 @@ export class SearchConstants {
     public static readonly FORECAST_DISPLAY_DATE_FORMAT: string = 'EEE h aa'; // Fri 9 AM
 
     public static readonly CONDITION_CONFIG = {
+<<<<<<< HEAD
       MultiSelect: {
         DefaultSelectAll: true,
         Enable: true,
@@ -94,6 +95,15 @@ export class SearchConstants {
       },
       DisplayProperty: 'Key',
       Source:
+=======
+      'MultiSelect': {
+        'DefaultSelectAll': true,
+        'Enable': true,
+        'SelectAll': true
+      },
+      'DisplayProperty': 'Key',
+      'Source':
+>>>>>>> integration
         [
           {Key: 'Air Temperature', Value: 't'},
           {Key: 'Surface Temp', Value: 'sfc_t'},
@@ -111,6 +121,7 @@ export class SearchConstants {
     };
 
     public static readonly DEPARTURE_TIMES_CONFIG = {
+<<<<<<< HEAD
       MultiSelect: {
         DefaultSelectAll: false,
         Enable: false,
@@ -118,10 +129,20 @@ export class SearchConstants {
       },
       DisplayProperty: 'DisplayDate',
       Source: [] as any
+=======
+      'MultiSelect': {
+        'DefaultSelectAll': false,
+        'Enable': false,
+        'SelectAll': false
+      },
+      'DisplayProperty': 'DisplayDate',
+      'Source': []
+>>>>>>> integration
 
     };
 
     public static readonly FORECAST_MODEL_CONFIG = {
+<<<<<<< HEAD
       MultiSelect: {
         DefaultSelectAll: false,
         Enable: false,
@@ -129,6 +150,15 @@ export class SearchConstants {
       },
       DisplayProperty: 'Name',
       Source: [] as any
+=======
+      'MultiSelect': {
+        'DefaultSelectAll': false,
+        'Enable': false,
+        'SelectAll': false
+      },
+      'DisplayProperty': 'Name',
+      'Source': []
+>>>>>>> integration
 
     };
   }

@@ -1,10 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
-import {
-  FathymForecastState,
-  UsageStateTypes,
-} from '../../state/fathym-forecast/fathym-forecast.state';
 import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
+import { FathymForecastState } from '../../state/fathym-forecast/fathym-forecast.state';
 
 export class LcuFathymForecastApiKeysElementState {}
 

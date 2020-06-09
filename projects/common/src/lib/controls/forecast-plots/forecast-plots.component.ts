@@ -36,7 +36,11 @@ export class ForecastPlotsComponent implements OnInit {
   public ngOnInit() {
     this.clearPlots();
     this.forecastPlotDataSubsription = this.notificationService.ForecastPlotDataChanged.subscribe(
+<<<<<<< HEAD
       (data) => {
+=======
+      (data: ForecastDataModel) => {
+>>>>>>> integration
         if (!data) {
           console.error('PlotDataSubscription - No data returned'); return;
         }
@@ -57,7 +61,11 @@ export class ForecastPlotsComponent implements OnInit {
   public ngOnDestroy() {
 
     if (this.forecastPlotDataSubsription) { this.forecastPlotDataSubsription.unsubscribe(); }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> integration
     // if (this.geofenceDrawingClearedeSubscription) { this.geofenceDrawingClearedeSubscription.unsubscribe(); }
   }
 
@@ -87,7 +95,11 @@ export class ForecastPlotsComponent implements OnInit {
     }
       // console.log("plot forecastdata after temp conversion", this.PlotForecastData)
 
+<<<<<<< HEAD
       if (itm[0] === 'roadState') {
+=======
+      if (itm[0] === 'roadState') { 
+>>>>>>> integration
       for (let i = 0; i < itm[1].length; i++) {
         switch (itm[1][i]) {
           case 'Dry':
@@ -124,7 +136,11 @@ export class ForecastPlotsComponent implements OnInit {
       }
     }
     });
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> integration
     /**
      * reset ValidTimes
      */

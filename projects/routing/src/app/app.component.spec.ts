@@ -16,6 +16,7 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
+<<<<<<< HEAD
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
@@ -32,4 +33,9 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to demo!');
   });
+=======
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+>>>>>>> integration
 });

@@ -12,7 +12,11 @@ import { DataService } from '../../services/data.service';
 import { FathymForecastConfig } from '../../models/weather.config';
 import { SearchModel } from './../../models/search.model';
 import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils';
+<<<<<<< HEAD
 import { LoadMapService, AtlasMapComponent } from '@acaisoft/angular-azure-maps';
+=======
+import { LoadMapService, LcuMapsAzureMapElementComponent } from '@lowcodeunit/lcu-maps-common';
+>>>>>>> integration
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouteInfoModel } from '../../models/route-info.model';
@@ -37,9 +41,16 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Map component
    */
+<<<<<<< HEAD
   public Maper: AtlasMapComponent;
   @ViewChild('map', {read: ElementRef, static: true })
   public set map(val: AtlasMapComponent) {
+=======
+  public Maper: LcuMapsAzureMapElementComponent;
+
+  @ViewChild('map')
+  public set map(val: LcuMapsAzureMapElementComponent) {
+>>>>>>> integration
     if (val && (this.Config && this.MapService.isLoaded)) {
       this.Maper = val;
     }
@@ -134,7 +145,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public selectedValidTime = '';
 
+<<<<<<< HEAD
   public SelectedVarName = null;
+=======
+  public SelectedVarName: any = null;
+>>>>>>> integration
 
   /**
    * Route starting marker
@@ -173,7 +188,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   // protected toggleTerrainOptions: Array<string> = ['Toggle terrain', 'Toggle map labels']
   protected techAccentAPI: string = 'https://fathym-forecast-int.azure-api.net/api/v0/maptile-manifest';
   protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
+<<<<<<< HEAD
   protected manifestJson;
+=======
+  protected manifestJson: any;
+>>>>>>> integration
 
   public ShowIndicatorIcon: boolean;
 
@@ -294,7 +313,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   protected setUpDefaultLayer() {
     const mapperPromise = new Promise((resolve, reject) => {
+<<<<<<< HEAD
       let intervalCount;
+=======
+      let intervalCount: any;
+>>>>>>> integration
       const mapperInterval = setInterval(() => {
         if (this.Maper) {
           resolve();
@@ -320,12 +343,24 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
 
+<<<<<<< HEAD
     this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
                     'subscriptionKey': lbsKey,
                     authOptions: {
                     'authType': 'subscriptionKey',
                     'subscriptionKey': lbsKey
                   }
+=======
+    // this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
+    //                 'subscriptionKey': lbsKey,
+    //                 authOptions: {
+    //                 'authType': 'subscriptionKey',
+    //                 'subscriptionKey': lbsKey
+    //               }
+    this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
+                    'subscriptionKey': lbsKey,
+                    
+>>>>>>> integration
    };
     
     this.MapService.load().toPromise().then(() => { });
@@ -390,7 +425,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     })
   }
+<<<<<<< HEAD
   protected makeMaptileOptions(layerStr, t) {
+=======
+  protected makeMaptileOptions(layerStr: any, t: any) {
+>>>>>>> integration
     return {
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layerStr}/${t}/{z}/{x}/{y}.png`,
       opacity: 0.7,
@@ -489,7 +528,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       }));
   }
 
+<<<<<<< HEAD
   public LayerChosen(layer) {
+=======
+  public LayerChosen(layer: any) {
+>>>>>>> integration
     if (layer) {
       if (layer.optionType === 'ff-api') {
         this.currentForecastLayer = layer;
@@ -506,7 +549,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+<<<<<<< HEAD
   protected getLayerFromIowaAPI(layer) {
+=======
+  protected getLayerFromIowaAPI(layer: any) {
+>>>>>>> integration
     // console.log(layer);
     let url;
     // if (layer.value === 'Radar Reflectivity') {
@@ -521,7 +568,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
   }
 
+<<<<<<< HEAD
   protected getLayerFromFathymAPI(layer, timeIndex?: number) {
+=======
+  protected getLayerFromFathymAPI(layer: any, timeIndex?: number) {
+>>>>>>> integration
     const t = timeIndex ? this.manifestJson[layer.value][timeIndex] : this.manifestJson[layer.value][0];
     this.Maper.map.layers.add(new atlas.layer.TileLayer({
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
@@ -530,11 +581,20 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 'maptiles'));
   }
 
+<<<<<<< HEAD
   protected getLayerFromAzure(layer) {
 
   }
 
   public MapLoaded(evt: Event) {
+=======
+  protected getLayerFromAzure(layer: any) {
+
+  }
+
+  public MapLoaded(evt?: Event) {
+    debugger;
+>>>>>>> integration
     if (this.Maper && this.MapService.isLoaded) {
       console.log('Map loaded', evt);
       this.setUpDefaultLayer();
@@ -584,7 +644,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   //  Helpers
+<<<<<<< HEAD
   protected closest(arr, closestTo) {
+=======
+  protected closest(arr: any, closestTo: any) {
+>>>>>>> integration
     let closest = Math.max.apply(null, arr); // Get the highest number in arr in case it match nothing.
 
     let ci = -1;
@@ -834,7 +898,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.Routes = new Array<RouteInfoModel>();
 
+<<<<<<< HEAD
     response.routes.forEach(route => {
+=======
+    response.routes.forEach((route: any) => {
+>>>>>>> integration
       this.Routes.push(route);
       //convert the points to only coords
       let points = this.testNewPoints(route);
@@ -981,7 +1049,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     // sub.unsubscribe();
   }
 
+<<<<<<< HEAD
   protected selectDataSource(dataSource) {
+=======
+  protected selectDataSource(dataSource: any) {
+>>>>>>> integration
     this.dataSource = dataSource;
   }
 
@@ -1031,7 +1103,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   protected geofenceDrawingSetup(data: SearchModel): void {
 
     if (!this.geofenceDrawingTool) {
+<<<<<<< HEAD
       this.geofenceDrawingTool = new GeofenceDrawingTool(this.Maper, 'null', (param) => {
+=======
+      this.geofenceDrawingTool = new GeofenceDrawingTool(this.Maper, 'null', (param: any) => {
+>>>>>>> integration
         this.geofenceDrawingCallback(param, data);
       });
     }
@@ -1073,10 +1149,17 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         // })
       )
       .subscribe(
+<<<<<<< HEAD
         res => {
           this.notificationService.UpdateForecastPlotData(res);
         },
         err => {
+=======
+        (res: any) => {
+          this.notificationService.UpdateForecastPlotData(res);
+        },
+        (err: any) => {
+>>>>>>> integration
           this.toastrDisplayService.DisplayToastrError('HTTP error');
           console.log('HTTP Error', err);
         },
@@ -1119,5 +1202,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   //       )
   //     );
   //   }
+<<<<<<< HEAD
   //}
 }
+=======
+  // }
+}
+>>>>>>> integration

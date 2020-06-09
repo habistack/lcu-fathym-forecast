@@ -43,7 +43,11 @@ export class ChartPlotsComponent implements OnInit {
   public xScaleMax: any;
   public xScaleMin: any;
   public yAxisLabel: string = 'Temperature (F)';
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> integration
   // public yScaleMax: number = 100;
   // public yScaleMin: number;
   // public yUnits: string = '\u00B0';
@@ -76,7 +80,11 @@ export class ChartPlotsComponent implements OnInit {
   protected forecastPlotDataSubsription: Subscription;
 
   constructor(protected notificationService: NotificationService) {
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> integration
     Object.assign(this, {
       colorSets,
       // weatherData
@@ -108,7 +116,11 @@ export class ChartPlotsComponent implements OnInit {
       this.applyDimensions();
     }
     this.forecastPlotDataSubsription = this.notificationService.ForecastPlotDataChanged.subscribe(
+<<<<<<< HEAD
       (data) => {
+=======
+      (data: ForecastDataModel) => {
+>>>>>>> integration
         if (!data) {
           console.error('PlotDataSubscription - No data returned'); return;
         }
@@ -137,7 +149,11 @@ export class ChartPlotsComponent implements OnInit {
     if (value > 32 && value <= 50) {
       return "Cool"
     }
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> integration
     if (value > 50 && value <= 70) {
       return "Warm";
     }
@@ -179,7 +195,11 @@ export class ChartPlotsComponent implements OnInit {
           offset: idxPercentage,
           color: 'yellow'
         });
+<<<<<<< HEAD
       }
+=======
+      } 
+>>>>>>> integration
       else if (ser.value > 32) {
         backgroundGradient.push({
           offset: idxPercentage,
@@ -217,7 +237,11 @@ export class ChartPlotsComponent implements OnInit {
           offset: idxPercentage,
           color: '#00dd00'
         });
+<<<<<<< HEAD
       }
+=======
+      } 
+>>>>>>> integration
       else if (ser.value === 2) {
         backgroundGradient.push({
           offset: idxPercentage,

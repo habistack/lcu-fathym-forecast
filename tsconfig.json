@@ -11,19 +11,32 @@
 		"moduleResolution": "node",
 		"importHelpers": true,
 		"target": "es2015",
+		"typeRoots": [
+			"node_modules/@types"
+		],
 		"lib": [
 			"es2018",
 			"dom"
 		],
 		"paths": {
 			"@habistack/lcu-fathym-forecast-common": [
-				"dist/common/common",
 				"dist/common"
+<<<<<<< HEAD
       ],
       "@angular/*": [ "node_modules/@angular/*"]
 		},
 		"noImplicitAny": false,
 		"suppressImplicitAnyIndexErrors": true
+=======
+			],
+			"@habistack/lcu-fathym-forecast-common/*": [
+				"dist/common/*"
+			],
+			"@angular/*": [
+				"node_modules/@angular/*"
+			  ]
+		}
+>>>>>>> integration
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
