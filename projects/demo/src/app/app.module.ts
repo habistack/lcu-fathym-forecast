@@ -20,7 +20,8 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,8 +32,7 @@ import { environment } from '../environments/environment';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
-    DocumentationComponent
+    ToastrModule.forRoot()
   ],
   providers: [
     DisplayDateFormatPipe,
