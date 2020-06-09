@@ -1,3 +1,4 @@
+import { LazyElementModule } from '@lowcodeunit/lazy-element';
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
 import { NgModule } from '@angular/core';
@@ -56,7 +57,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ToastrModule.forRoot(),
     FlexLayoutModule,
     LcuChartsModule,
-    LcuMapsModule.forRoot()
+    LcuMapsModule.forRoot(),
+    LazyElementModule.forRoot()
   ],
   exports: [
     DepartureTableComponent,
