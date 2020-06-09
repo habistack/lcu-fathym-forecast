@@ -1,3 +1,4 @@
+import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -31,6 +32,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    DocumentationComponent
   ],
   providers: [
     DisplayDateFormatPipe,
