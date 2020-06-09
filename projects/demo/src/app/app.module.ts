@@ -1,3 +1,4 @@
+import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,8 @@ import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
