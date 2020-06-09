@@ -87,6 +87,7 @@ export class DepartureTableComponent implements OnInit {
         true,
         true,
         false,
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/common/src/lib/departure-table/departure-table.component.ts
         PipeConstants.PIPE_TEMP_FAHRENHEIT,
         null, //WeatherCloudConditionIcons,
@@ -94,6 +95,10 @@ export class DepartureTableComponent implements OnInit {
         null,
         null, // FathymForecastConditionIcons,
 >>>>>>> integration:projects/common/src/lib/controls/departure-table/departure-table.component.ts
+=======
+        null,
+        null, // FathymForecastConditionIcons,
+>>>>>>> integration
         null
         ),
       new ColumnDefinition(
@@ -103,11 +108,15 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_TEMP_FAHRENHEIT,
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/common/src/lib/departure-table/departure-table.component.ts
         null, //WeatherCloudConditionIcons,
 =======
         null, // FathymForecastConditionIcons,
 >>>>>>> integration:projects/common/src/lib/controls/departure-table/departure-table.component.ts
+=======
+        null, // FathymForecastConditionIcons,
+>>>>>>> integration
         null
         ),
       new ColumnDefinition(
@@ -117,11 +126,15 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         null,
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/common/src/lib/departure-table/departure-table.component.ts
         null, //WeatherCloudConditionIcons,
 =======
         null, // FathymForecastConditionIcons,
 >>>>>>> integration:projects/common/src/lib/controls/departure-table/departure-table.component.ts
+=======
+        null, // FathymForecastConditionIcons,
+>>>>>>> integration
         null
       ),
       new ColumnDefinition(
@@ -131,11 +144,15 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_MPH,
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/common/src/lib/departure-table/departure-table.component.ts
         null, //WeatherCloudConditionIcons,
 =======
         null, // FathymForecastConditionIcons,
 >>>>>>> integration:projects/common/src/lib/controls/departure-table/departure-table.component.ts
+=======
+        null, // FathymForecastConditionIcons,
+>>>>>>> integration
         null
         ),
       new ColumnDefinition(
@@ -145,11 +162,15 @@ export class DepartureTableComponent implements OnInit {
         true,
         false,
         PipeConstants.PIPE_MPH,
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/common/src/lib/departure-table/departure-table.component.ts
         null, //WeatherCloudConditionIcons,
 =======
         null, // FathymForecastConditionIcons,
 >>>>>>> integration:projects/common/src/lib/controls/departure-table/departure-table.component.ts
+=======
+        null, // FathymForecastConditionIcons,
+>>>>>>> integration
         null
         )
     ];

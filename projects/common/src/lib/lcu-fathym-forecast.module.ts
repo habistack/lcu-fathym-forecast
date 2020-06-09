@@ -1,43 +1,104 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FathymSharedModule, MaterialModule } from '@lcu/common';
-import { LcuService } from './services/lcu.service';
-import { LcuComponent } from './controls/lcu/lcu.component';
-import { LcuDirective } from './directives/lcu.directive';
-import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
-import { FathymForecastStateContext } from './state/fathym-forecast/fathym-forecast-state.context';
-import { RouterModule } from '@angular/router';
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
+import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
+import 'd3';
+
+import { DataGridModule } from '@lowcodeunit/data-grid';
+import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/ff-pipes';
+import { FathymSharedModule, MaterialModule } from '@lcu/common';
+import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
+import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
+import { SearchFormComponent } from './controls/search-form/search-form.component';
+import { RouteMapComponent } from './controls/route-map/route-map.component';
+import { ForecastDataPlotComponent } from './controls/forecast-data-plot/forecast-data-plot.component';
+import { VariableDataPlotComponent } from './controls/variable-data-plot/variable-data-plot.component';
+import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots.component';
+import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
+import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
+import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
+import { LcuChartsModule} from '@lowcodeunit/lcu-charts-common';
+import { ChartPlotsComponent } from './controls/chart-plots/chart-plots.component';
+import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
+import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics/analytics.component';
 
 @NgModule({
   declarations: [
-    LcuComponent,
-    LcuDirective,
+    DepartureTableComponent,
+    SearchFormComponent,
+    RouteMapComponent,
+    ForecastDataPlotComponent,
+    DisplayDateFormatPipe,
+    ImageDateFormatPipe,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent,
+    RouteSummarizationComponent,
+    ForecastDetailsComponent,
+    LcuFathymForecastFathymForecastElementComponent,
+    ChartPlotsComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastRoutingElementComponent,
+    LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent
   ],
   imports: [
+    CommonModule,
+    DataGridModule,
     FathymSharedModule,
     FormsModule,
-    RouterModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     MaterialModule,
+    LcuSelectModule,
+    ToastrModule.forRoot(),
+    FlexLayoutModule,
+    LcuChartsModule,
+    LcuMapsModule.forRoot()
   ],
   exports: [
-    LcuComponent,
-    LcuDirective,
+    DepartureTableComponent,
+    RouteMapComponent,
+    DataGridModule,
+    SearchFormComponent,
+    DisplayDateFormatPipe,
+    ImageDateFormatPipe,
+    ForecastDataPlotComponent,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent,
+    RouteSummarizationComponent,
+    LcuFathymForecastFathymForecastElementComponent,
     LcuFathymForecastApiKeysElementComponent,
-    LcuFathymForecastRoutingElementComponent,
+    LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent
   ],
-  entryComponents: [LcuFathymForecastApiKeysElementComponent, LcuFathymForecastRoutingElementComponent],
+  entryComponents: [
+    DepartureTableComponent,
+    SearchFormComponent,
+    RouteMapComponent,
+    ForecastDataPlotComponent,
+    VariableDataPlotComponent,
+    ForecastPlotsComponent,
+    ForecastDataPlotComponent,
+    ForecastDetailsComponent,
+    LcuFathymForecastFathymForecastElementComponent,
+    LcuFathymForecastApiKeysElementComponent,
+    LcuFathymForecastAnalyticsElementComponent,
+    LcuFathymForecastRoutingElementComponent
+  ],
+  providers: [
+    DisplayDateFormatPipe,
+    ImageDateFormatPipe
+  ]
 })
 export class LcuFathymForecastModule {
-  static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
+  static forRoot(): LcuFathymForecastModule {
     return {
       ngModule: LcuFathymForecastModule,
-      providers: [FathymForecastStateContext],
+      providers: [LoadMapService]
     };
   }
-}
+ }
