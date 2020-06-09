@@ -2,13 +2,16 @@
 import { FathymForecastState } from './fathym-forecast.state';
 import { StateContext, Status } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
+import { forkJoin, combineLatest } from 'rxjs';
+import { Router, ActivationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FathymForecastStateContext extends StateContext<
-  FathymForecastState
-> {
+export class FathymForecastStateContext extends StateContext<FathymForecastState> {
   //  Fields
 
   //  Properties
@@ -29,7 +32,7 @@ export class FathymForecastStateContext extends StateContext<
   public GenerateAPIKeys(keyType: string) {
     this.Execute({
       Arguments: {
-        KeyType: keyType,
+        KeyType: keyType
       },
       Type: 'GenerateAPIKeys',
     });
