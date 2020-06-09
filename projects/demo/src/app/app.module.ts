@@ -1,3 +1,4 @@
+import { LazyElementModule } from '@lowcodeunit/lazy-element';
 import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +35,8 @@ import { environment } from '../environments/environment';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LazyElementModule.forRoot()
   ],
   providers: [
     DisplayDateFormatPipe,
