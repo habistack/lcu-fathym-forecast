@@ -1,5 +1,5 @@
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
-import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
+import { LoadMapService } from '@lowcodeunit/lcu-maps-common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -56,7 +56,7 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ToastrModule.forRoot(),
     FlexLayoutModule,
     LcuChartsModule,
-    LcuMapsModule.forRoot()
+    // LcuMapsModule.forRoot()
   ],
   exports: [
     DepartureTableComponent,
@@ -74,7 +74,7 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
-    LcuMapsModule
+    // LcuMapsModule
   ],
   entryComponents: [
     DepartureTableComponent,

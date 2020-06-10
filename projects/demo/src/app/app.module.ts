@@ -1,4 +1,3 @@
-import { LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
 import { LazyElementModule } from '@lowcodeunit/lazy-element';
 import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
@@ -31,7 +30,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     AppRoutingModule,
     FlexLayoutModule,
-    LcuMapsModule,
+    FathymSharedModule,
     LcuFathymForecastModule.forRoot(),
     MaterialModule,
     FormsModule,
