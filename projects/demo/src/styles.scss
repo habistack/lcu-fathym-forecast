@@ -83,4 +83,4 @@
   font-size: 12px !important;
   font-weight: bold;
 }
-@include theme-setup(fathym-ivy-theme());
+@include theme-setup(fathym-ivy-theme(true));
