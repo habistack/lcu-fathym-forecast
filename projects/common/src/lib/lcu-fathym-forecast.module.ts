@@ -73,7 +73,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastFathymForecastElementComponent,
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
-    LcuFathymForecastRoutingElementComponent
+    LcuFathymForecastRoutingElementComponent,
+    LcuMapsModule
   ],
   entryComponents: [
     DepartureTableComponent,
