@@ -1,6 +1,6 @@
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -96,7 +96,7 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
   ]
 })
 export class LcuFathymForecastModule {
-  static forRoot(): LcuFathymForecastModule {
+  static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
       providers: [LoadMapService]
