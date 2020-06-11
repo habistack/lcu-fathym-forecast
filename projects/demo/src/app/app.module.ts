@@ -1,4 +1,4 @@
-// import { LazyElementModule } from '@lowcodeunit/lazy-element';
+import { LazyElementModule } from '@lowcodeunit/lazy-element';
 import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,12 +31,12 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     FlexLayoutModule,
     FathymSharedModule,
-    LcuFathymForecastModule.forRoot(),
+    LcuFathymForecastModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    // LazyElementModule.forRoot()
+    LazyElementModule.forRoot()
   ],
   providers: [
     DisplayDateFormatPipe,
