@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LazyElementConfig } from '@lowcodeunit/lazy-element';
+// import { LazyElementConfig } from '@lowcodeunit/lazy-element';
 
 @Component({
   selector: 'lcu-home',
@@ -7,14 +7,14 @@ import { LazyElementConfig } from '@lowcodeunit/lazy-element';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public Config: LazyElementConfig;
+  // public Config: LazyElementConfig;
 
   constructor() {}
 
   public ngOnInit(): void {
-    this.Config = {
-      Assets: ['/assets/lcu-fathym-forecast.lcu.js'],
-      ElementName: 'lcu-fathym-forecast-api-keys-element'
-    };
+    // this.Config = {
+    //   Assets: ['/assets/lcu-fathym-forecast.lcu.js'],
+    //   ElementName: 'lcu-fathym-forecast-api-keys-element'
+    // };
   }
 }
