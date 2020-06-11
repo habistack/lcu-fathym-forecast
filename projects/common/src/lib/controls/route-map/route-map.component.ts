@@ -12,7 +12,7 @@ import { DataService } from '../../services/data.service';
 import { FathymForecastConfig } from '../../models/weather.config';
 import { SearchModel } from './../../models/search.model';
 import { GeofenceDrawingTool } from '../../utils/map/geofence-drawing-tool.utils';
-import { LoadMapService, LcuMapsAzureMapElementComponent } from '@lowcodeunit/lcu-maps-common';
+// import { LoadMapService, LcuMapsAzureMapElementComponent } from '@lowcodeunit/lcu-maps-common';
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouteInfoModel } from '../../models/route-info.model';

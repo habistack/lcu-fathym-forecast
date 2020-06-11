@@ -3,7 +3,8 @@ export class RouteInfoModel{
 
     public color: string;
 
-    public pointsArr: Array<atlas.data.Position>;
+    // public pointsArr: Array<atlas.data.Position>;
+    public pointsArr: Array<any>;
 
     public avgDelayRisk: number;
 

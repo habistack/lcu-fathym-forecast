@@ -50,7 +50,6 @@
     "@lowcodeunit/data-grid": "1.1.6-angular-9",
     "@lowcodeunit/lazy-element": "0.0.13",
     "@lowcodeunit/lcu-charts-common": "^1.7.6",
-    "@lowcodeunit/lcu-maps-common": "^1.1.13-fix-map-not-loading",
     "@lowcodeunit/lcu-select-common": "^1.1.13-angular-9",
     "@types/d3": "^5.7.2",
     "@webcomponents/custom-elements": "^1.4.1",
