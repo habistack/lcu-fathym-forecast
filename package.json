@@ -46,7 +46,7 @@
 		"@angular/router": "~9.0.7",
 		"@aspnet/signalr": "^1.1.4",
 		"@beyerleinf/ngx-dnd": "^6.0.0-preview3",
-		"@lcu/common": "^1.39.159",
+		"@lcu/common": "^1.41.188",
 		"@lowcodeunit/data-grid": "1.1.6-angular-9",
 		"@lowcodeunit/lazy-element": "0.0.13",
 		"@lowcodeunit/lcu-charts-common": "^1.7.6",

@@ -10,7 +10,7 @@ import 'd3';
 
 import { DataGridModule } from '@lowcodeunit/data-grid';
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/ff-pipes';
-import { FathymSharedModule, MaterialModule } from '@lcu/common';
+import { FathymSharedModule, MaterialModule, DirectiveModule } from '@lcu/common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
@@ -56,7 +56,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ToastrModule.forRoot(),
     FlexLayoutModule,
     LcuChartsModule,
-    LcuMapsModule.forRoot()
+    LcuMapsModule.forRoot(),
+    DirectiveModule
   ],
   exports: [
     DepartureTableComponent,
@@ -74,7 +75,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
-    LcuMapsModule
+    LcuMapsModule,
+    DirectiveModule
   ],
   entryComponents: [
     DepartureTableComponent,

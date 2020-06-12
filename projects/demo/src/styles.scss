@@ -1,40 +1,33 @@
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+// @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+@import '../../../node_modules/@lcu/common/assets/theming/common-theme';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+
+$global-theme: fathym-ivy-theme(true);
+$background: map-get(map-get($global-theme, 'background'), 'background');
+$logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
+// @warn #{$global-theme};
+
+@mixin primary-logo($logo, $theme, $opacity) {
+  .primary-logo {
+    background-image: fathym-logo($logo, $logo-color, $opacity);
+    background-size: 40px;
+  }
+  
+}
+
+@include theme-setup($global-theme, false);
+@include primary-logo(thinky-circle, $global-theme, 1);
+
+body {
+  background-color: $background;
+}
 
 // @import '../../../node_modules/nvd3/build/nv.d3.css';
 .nvd3 .nv-background {
   fill-opacity: 1 !important;
 }
 
-@mixin theme-setup($theme) {
-  .theme {
-    @include primary-logo(thinky-circle, $theme, 1);
-  }
-  @include angular-material-theme($theme);
-  @include fathym-branding($theme);
-  @include theme-extras($theme); 
-
-  .mat-dialog-container{
-    background-color: mat-color(map-get($theme, primary), A700);
-
-  }
-  .mat-checkbox-background{
-    background-color: black !important;
-  }
-
-  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
-    background-color: mat-color(map-get($theme, primary), A700) !important;
-  }
-}
-@mixin primary-logo($logo, $theme, $opacity) {
-  .primary-logo {
-  //@extend .header-background;
-    background-image: fathym-logo($logo, black, $opacity);
-    background-size: 40px;
-  }
-  
-}
 
 
 /******************************************/
@@ -84,4 +77,3 @@
   font-size: 12px !important;
   font-weight: bold;
 }
-@include theme-setup(fathym-ivy-theme(true));
