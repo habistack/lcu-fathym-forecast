@@ -100,7 +100,7 @@ export class LcuFathymForecastModule {
 =======
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -110,7 +110,7 @@ import 'd3';
 
 import { DataGridModule } from '@lowcodeunit/data-grid';
 import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/ff-pipes';
-import { FathymSharedModule, MaterialModule } from '@lcu/common';
+import { FathymSharedModule, MaterialModule, DirectiveModule } from '@lcu/common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
@@ -156,7 +156,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ToastrModule.forRoot(),
     FlexLayoutModule,
     LcuChartsModule,
-    LcuMapsModule.forRoot()
+    LcuMapsModule.forRoot(),
+    DirectiveModule
   ],
   exports: [
     DepartureTableComponent,
@@ -173,7 +174,9 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastFathymForecastElementComponent,
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
-    LcuFathymForecastRoutingElementComponent
+    LcuFathymForecastRoutingElementComponent,
+    LcuMapsModule,
+    DirectiveModule
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -195,11 +198,15 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
   ]
 })
 export class LcuFathymForecastModule {
-  static forRoot(): LcuFathymForecastModule {
+  static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
       providers: [LoadMapService]
     };
   }
+<<<<<<< HEAD
+ }
+>>>>>>> integration
+=======
  }
 >>>>>>> integration
