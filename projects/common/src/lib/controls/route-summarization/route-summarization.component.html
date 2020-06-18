@@ -1,4 +1,4 @@
-<div *ngIf="DisplaySummarization" fxLayout="column" id="route-summarization-container" color="accent">
+<div *ngIf="DisplaySummarization" fxLayout="column" id="route-summarization-container" lcuThemeColor="primary">
   <div fxLayout="row" fxLayoutAlign="space-between">
     <p>{{ RouteName }}</p>
     <p>{{ RouteDuration }}</p>
@@ -23,8 +23,8 @@
     <div fxLayout="row" fxLayoutAlign="space-between">
       <span>Precip:</span><span>{{ Precipitation }}</span>
     </div>
-    <button id="forecast-details-button" mat-raised-button color="primary" (click)="OpenDetailsModal()">Forecast Details</button>
+    <button id="forecast-details-button" mat-raised-button color="accent" (click)="OpenDetailsModal()">Forecast Details</button>
   </div>
-
+  
 
 </div>
