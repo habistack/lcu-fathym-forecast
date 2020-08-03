@@ -42,6 +42,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('map')
   public set map(val: LcuMapsAzureMapElementComponent) {
     if (val && (this.Config && this.MapService.isLoaded)) {
+      debugger;
       this.Maper = val;
     }
   }
@@ -319,7 +320,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   protected initialSetup(): void {
 
-    const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
+    // const lbsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
+    const lbsKey: string = 'MSrrKthFlRDpZE_OEEAn2Mlya4Qw7Fy_2zxU3G8YF10';
 
     // this.Config = { 'subscription-key': lbsKey, interactive: true, zoom: 5, center: [-102.1, 39.5],
     //                 'subscriptionKey': lbsKey,
