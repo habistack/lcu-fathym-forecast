@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -98,6 +99,9 @@ export class LcuFathymForecastModule {
   }
 }
 =======
+=======
+import { CssThemeService } from './css-theme/css-theme.service';
+>>>>>>> integration
 import { LcuFathymForecastRoutingElementComponent } from './elements/routing/routing.component';
 import { LoadMapService, LcuMapsModule } from '@lowcodeunit/lcu-maps-common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
@@ -125,6 +129,10 @@ import { LcuChartsModule} from '@lowcodeunit/lcu-charts-common';
 import { ChartPlotsComponent } from './controls/chart-plots/chart-plots.component';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
 import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics/analytics.component';
+import { CSSThemeModule } from './css-theme/css-theme.module';
+import { lightTheme } from './css-theme/light-theme';
+import { darkTheme } from './css-theme/dark-theme';
+import { CssThemeComponent } from './components/css-theme.component';
 
 @NgModule({
   declarations: [
@@ -143,7 +151,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     ChartPlotsComponent,
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
-    LcuFathymForecastRoutingElementComponent
+    LcuFathymForecastRoutingElementComponent,
+    CssThemeComponent
   ],
   imports: [
     CommonModule,
@@ -157,7 +166,11 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     FlexLayoutModule,
     LcuChartsModule,
     LcuMapsModule.forRoot(),
-    DirectiveModule
+    DirectiveModule,
+    CSSThemeModule.forRoot({
+      themes: [lightTheme, darkTheme],
+      active: 'light'
+    })
   ],
   exports: [
     DepartureTableComponent,
@@ -176,7 +189,8 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
     LcuMapsModule,
-    DirectiveModule
+    DirectiveModule,
+    CssThemeComponent
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -190,11 +204,13 @@ import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics
     LcuFathymForecastFathymForecastElementComponent,
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
-    LcuFathymForecastRoutingElementComponent
+    LcuFathymForecastRoutingElementComponent,
+    CssThemeComponent
   ],
   providers: [
     DisplayDateFormatPipe,
-    ImageDateFormatPipe
+    ImageDateFormatPipe,
+    CssThemeService
   ]
 })
 export class LcuFathymForecastModule {
