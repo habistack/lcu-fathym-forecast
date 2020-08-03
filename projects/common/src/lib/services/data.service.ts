@@ -19,7 +19,7 @@ export class DataService {
   //  Fields
   protected apiRoot: string = 'https://wxlb01.fathym.com';
   protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
-  protected azureMapsKey: string = '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78';
+  protected azureMapsKey: string = 'MSrrKthFlRDpZE_OEEAn2Mlya4Qw7Fy_2zxU3G8YF10';
   protected forecastAPIKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
 
   // tslint:disable-next-line:max-line-length
