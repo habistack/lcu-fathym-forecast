@@ -256,7 +256,7 @@ export class SearchFormComponent implements OnInit {
         distinctUntilChanged(),
         tap(() => this.searching = true),
         // switchMap(term => this.locationService.Search(term, this.FathymForecastConfig.LBSKey)
-        switchMap(term => this.locationService.Search(term, '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78')
+        switchMap(term => this.locationService.Search(term, 'MSrrKthFlRDpZE_OEEAn2Mlya4Qw7Fy_2zxU3G8YF10')
         .pipe(
           tap(() => {
             this.searchFailed = false;
@@ -274,7 +274,7 @@ export class SearchFormComponent implements OnInit {
         distinctUntilChanged(),
         tap(() => this.searching = true),
         // switchMap(term => this.locationService.Search(term, this.FathymForecastConfig.LBSKey)
-        switchMap(term => this.locationService.Search(term, '4SnPOVldyLX7qlZocZBTSA4TKMq8EQJuURinOs0Wl78')
+        switchMap(term => this.locationService.Search(term, 'MSrrKthFlRDpZE_OEEAn2Mlya4Qw7Fy_2zxU3G8YF10')
         .pipe(
           tap(() => this.searchFailed = false),
         catchError(() => {
