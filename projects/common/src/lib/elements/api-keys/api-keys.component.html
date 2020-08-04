@@ -16,12 +16,33 @@
 
     <div class="spread" *ngFor="let apiKeyType of APIKeyTypes">
       <mat-form-field class="mat-full-width">
-        <input matInput [placeholder]="apiKeyType" [value]="State.APIKeys[apiKeyType]" disabled />
+        <input
+          matInput
+          [placeholder]="apiKeyType"
+          [value]="State.APIKeys[apiKeyType]"
+          disabled
+        />
       </mat-form-field>
     </div>
   </ng-container>
-</div>
 
+  <div class="spread">
+    <h4>
+      Visit our developer portal for more information on the API, and to try it
+      out against your new keys.
+    </h4>
+
+    <a
+      mat-raised-button
+      color="accent"
+      [href]="State.APISiteURL"
+      target="_blank"
+    >
+      Developer Portal
+    </a>
+  </div>
+</div>
+<!-- <app-css-theme></app-css-theme> -->
 <div class="spread" *ngIf="State.Loading">
   <mat-spinner></mat-spinner>
 </div>
