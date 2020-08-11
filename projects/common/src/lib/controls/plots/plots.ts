@@ -1,8 +1,12 @@
 import { ChartMouseMoveModel } from './../../models/chart-mouse-move.model';
 
-import { Output, EventEmitter } from '@angular/core';
+import { Output, EventEmitter, Directive, Component, Inject } from '@angular/core';
 
 declare let d3: any;
+
+@Component({
+  template: ''
+})
 
 export abstract class Plot {
 
@@ -19,7 +23,10 @@ export abstract class Plot {
   // public test: nv.Chart;
 
 
-  constructor(public title: string, public requiredVars: object, public units: string, public subTitle?: string) {
+  constructor(@Inject(String) public title: string,
+              @Inject(Object) public requiredVars: object,
+              @Inject(String) public units: string,
+              @Inject(String) public subTitle?: string) {
 
     const sub: string = (!subTitle || subTitle !== 'null' || subTitle !== null) ? subTitle : '';
 
