@@ -4,9 +4,9 @@ import { Output, EventEmitter, Directive, Component, Inject } from '@angular/cor
 
 declare let d3: any;
 
-@Component({
-  template: ''
-})
+// @Component({
+//   template: ''
+// })
 
 export abstract class Plot {
 
@@ -23,10 +23,10 @@ export abstract class Plot {
   // public test: nv.Chart;
 
 
-  constructor(@Inject(String) public title: string,
-              @Inject(Object) public requiredVars: object,
-              @Inject(String) public units: string,
-              @Inject(String) public subTitle?: string) {
+  constructor(public title: string,
+              public requiredVars: object,
+              public units: string,
+              public subTitle?: string) {
 
     const sub: string = (!subTitle || subTitle !== 'null' || subTitle !== null) ? subTitle : '';
 
