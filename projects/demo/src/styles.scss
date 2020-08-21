@@ -12,6 +12,10 @@
 * Or, can call create-theme and pass in your own palatte colors
 */
 $global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
+$primary: map-get($global-theme, primary);
+$accent: map-get($global-theme, accent);
+$warn: map-get($global-theme, warn);
+
 $background: map-get(map-get($global-theme, 'background'), 'background');
 $logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
 
