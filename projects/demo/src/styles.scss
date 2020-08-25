@@ -3,8 +3,6 @@
 // @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 @import '../../../node_modules/@lcu/common/assets/theming/common-theme';
 
-
-
 /**
 * Can select a predefined theme
 */
@@ -29,7 +27,7 @@ $logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
   
 }
 
-@include theme-setup($global-theme, false);
+// @include theme-setup($global-theme, false);
 @include primary-logo(thinky-circle, $global-theme, 1);
 
 body {
