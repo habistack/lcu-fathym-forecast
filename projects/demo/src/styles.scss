@@ -27,7 +27,7 @@ $logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
   
 }
 
-// @include theme-setup($global-theme, false);
+@include theme-setup($global-theme, false);
 @include primary-logo(thinky-circle, $global-theme, 1);
 
 body {
