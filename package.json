@@ -50,7 +50,7 @@
 		"@lowcodeunit/data-grid": "^1.1.19-8193-angular-10",
 		"@lowcodeunit/lazy-element": "^1.1.22-8193-angular-10",
 		"@lowcodeunit/lcu-charts-common": "1.7.32-8193-angular-10",
-		"@lowcodeunit/lcu-maps-common": "^1.3.29",
+		"@lowcodeunit/lcu-maps-common": "1.3.31-8193-angular-10",
 		"@lowcodeunit/lcu-select-common": "1.1.24-8193-angular-10",
 		"@types/d3": "^5.7.2",
 		"@webcomponents/custom-elements": "^1.4.1",
