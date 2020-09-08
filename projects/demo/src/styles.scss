@@ -1,17 +1,21 @@
-@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+// @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+// @import '../../../node_modules/@lcu/common/assets/styles/branding/theme-colors/fathym-ivy-brand';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 @import '../../../node_modules/@lcu/common/assets/theming/common-theme';
-@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
-@import '../../../node_modules/@lcu/common/assets/styles/branding/theme-colors/fathym-ivy-brand';
 
 /**
 * Can select a predefined theme
 */
-// $global-theme: fathym-ivy-theme(true);
+$global-theme: fathym-ivy-theme(true);
 
 /**
 * Or, can call create-theme and pass in your own palatte colors
 */
-$global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
+// $global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
+$primary: map-get($global-theme, primary);
+$accent: map-get($global-theme, accent);
+$warn: map-get($global-theme, warn);
+
 $background: map-get(map-get($global-theme, 'background'), 'background');
 $logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
 
