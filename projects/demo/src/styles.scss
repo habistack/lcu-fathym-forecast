@@ -6,12 +6,12 @@
 /**
 * Can select a predefined theme
 */
-// $global-theme: fathym-ivy-theme(true);
+$global-theme: fathym-ivy-theme(true);
 
 /**
 * Or, can call create-theme and pass in your own palatte colors
 */
-$global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
+// $global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
 $primary: map-get($global-theme, primary);
 $accent: map-get($global-theme, accent);
 $warn: map-get($global-theme, warn);
