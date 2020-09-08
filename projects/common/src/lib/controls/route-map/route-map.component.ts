@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { MatSlider } from '@angular/material/slider';
-import { map } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { of } from 'rxjs/internal/observable/of';
