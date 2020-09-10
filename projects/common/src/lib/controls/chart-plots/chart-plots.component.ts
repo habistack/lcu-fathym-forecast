@@ -145,7 +145,7 @@ export class ChartPlotsComponent implements OnInit {
       return "Hot";
     }
     if(value > 100){
-      return "Extremely Hot"
+      return "Very Hot"
     }
   }
   public FormatRoadStateYAxisTicks(val: any) {
