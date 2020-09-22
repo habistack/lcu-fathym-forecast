@@ -206,17 +206,17 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   protected FormatPrecipitationRateYAxisTicks(val: any){
-    return val;
+    return val + " " + this.precipMeasurmentPerHour;
   }
 
 
   protected FormatSnowDepthYAxisTicks(val: any){
-    return val;
+    return val + " " + this.precipMeasurment;
 
   }
 
   protected FormatWindSpeedYAxisTicks(val: any){
-    return val +  this.speedMeasurement;
+    return val +  " " + this.speedMeasurement;
   }
 
 
