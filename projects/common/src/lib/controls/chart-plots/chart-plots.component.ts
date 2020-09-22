@@ -178,7 +178,6 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   public FormatDelayRiskTooltip(val: any){
-    // console.log("calling delay risk tooltip formatting: ", val)
     if (val >= 0 && val < 1) { return "None"; }
     if (val >= 1 && val < 2) { return "Normal"; }
     if (val >= 2 && val < 3) { return "Slight"; }
@@ -198,7 +197,6 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   public FormatCrosswindRiskTooltip(val: any){
-    // console.log("calling cw Tooltip: ", val);
     if (val >= 0 && val < 0.50) { return "Low"; }
     if (val >= 0.50 && val < 1.0) { return "Slight"; }
     if (val >= 1.0 && val < 1.5) { return "Moderate"; }
@@ -210,31 +208,16 @@ export class ChartPlotsComponent implements OnInit {
     return val;
   }
 
-  // public FormatPrecipitationRateTooltip(val: any){
-  //   return val + " " + this.precipMeasurment;
-  // }
 
   protected FormatSnowDepthYAxisTicks(val: any){
     return val;
 
   }
 
-  // public FormatSnowDepthTooltip(val: any){
-  //   if(val){
-  //     return val + " " + this.precipMeasurment;
-  //   }
-  //   else{
-  //     return 0 + " " + this.precipMeasurment;
-
-  //   }
-  // }
 
   protected setBackgroundGradientConfigsTemp(backgroundMarker: any) {
-    // console.log("weather data:", this.weatherData)
-    // console.log("scheme:", this.schemeType)
+    
     let backgroundGradient = new Array<any>();
-
-    // const backgroundMarker = this.ChartData[0].series;
 
     backgroundMarker.forEach((ser, idx) => {
       const idxPercentage = idx * 100 / backgroundMarker.length;
@@ -261,18 +244,12 @@ export class ChartPlotsComponent implements OnInit {
         });
       }
     });
-    // console.log("color configs", backgroundGradient)
     return backgroundGradient;
   }
 
   protected setBackgroundGradientConfigsRoadState(backgroundMarker: any) {
-    // console.log("weather data:", this.weatherData)
-    // console.log("scheme:", this.schemeType)
+    
     let backgroundGradient = new Array<any>();
-
-    // const backgroundMarker = this.ChartData[0].series;
-
-
 
     backgroundMarker.forEach((ser, idx) => {
       const idxPercentage = idx * 100 / backgroundMarker.length;
@@ -386,7 +363,6 @@ export class ChartPlotsComponent implements OnInit {
         });
       }
     });
-    // console.log("color configs", backgroundGradient)
     return backgroundGradient;
   }
 
@@ -394,7 +370,6 @@ export class ChartPlotsComponent implements OnInit {
     let backgroundGradient = new Array<any>();
 
     backgroundMarker.forEach((ser, idx) => {
-      // console.log("delay risk: ", ser)
       const idxPercentage = idx * 100 / backgroundMarker.length;
       if (ser.value === 0 || ser.value <.50) {
         backgroundGradient.push({
@@ -419,7 +394,6 @@ export class ChartPlotsComponent implements OnInit {
         });
       }
     });
-    // console.log("color configs", backgroundGradient)
     return backgroundGradient;
   }
 
@@ -427,7 +401,6 @@ export class ChartPlotsComponent implements OnInit {
     let backgroundGradient = new Array<any>();
 
     backgroundMarker.forEach((ser, idx) => {
-      // console.log("precip rate: ", ser)
       const idxPercentage = idx * 100 / backgroundMarker.length;
 
       if (ser.value === null || !ser.value) {
@@ -491,7 +464,6 @@ export class ChartPlotsComponent implements OnInit {
     let backgroundGradient = new Array<any>();
 
     backgroundMarker.forEach((ser, idx) => {
-      // console.log("snow depth: ", ser)
       const idxPercentage = idx * 100 / backgroundMarker.length;
 
     if(ser.val === null){
