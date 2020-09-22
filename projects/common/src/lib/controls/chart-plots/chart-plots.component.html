@@ -80,25 +80,18 @@
   </div>
 
   <!-- Crosswind Risk -->
-  <div *ngIf="chart.name === 'Crosswind Risk'" class="legend" fxLayout="column">
+  <div *ngIf="chart.name === 'Crosswind Risk' || chart.name === 'Wind Speed'" class="legend" fxLayout="column">
     <p>{{chart.name}}</p>
     <div class="risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
     <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
       <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
         <span class="legend-label-name">Low</span>
       </div>
-      <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-        <span class="legend-label-name">Slight</span>
-      </div> -->
+      
       <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
         <span class="legend-label-name">Moderate</span>
       </div>
-      <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-        <span class="legend-label-name">Heavy</span>
-      </div> -->
-      <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-        <span class="legend-label-name">Severe</span>
-      </div> -->
+      
       <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
         <span class="legend-label-name">Severe</span>
       </div>

@@ -42,6 +42,7 @@ export class ChartPlotsComponent implements OnInit {
   public view: any[];
   public precipMeasurmentPerHour: string = 'mm/hr';
   public precipMeasurment: string = 'mm';
+  public speedMeasurement: string ='mph'
   // public weatherData: any[];
   public xAxisLabel: string = 'Time';
   public xScaleMax: any;
@@ -214,6 +215,10 @@ export class ChartPlotsComponent implements OnInit {
 
   }
 
+  protected FormatWindSpeedYAxisTicks(val: any){
+    return val +  this.speedMeasurement;
+  }
+
 
   protected setBackgroundGradientConfigsTemp(backgroundMarker: any) {
     
@@ -374,23 +379,28 @@ export class ChartPlotsComponent implements OnInit {
       if (ser.value === 0 || ser.value <.50) {
         backgroundGradient.push({
           offset: idxPercentage,
-          color: '#0d0'
+          color: '#0d0' //green
         });
       } 
       else if (ser.value >= .50 && ser.value < 1.00) {
         backgroundGradient.push({
           offset: idxPercentage,
-          color: '#ff0'
+          color: '#87ef00' //yellow-green
         });
       }else if (ser.value > 1.00 && ser.value < 1.50 ) {
         backgroundGradient.push({
           offset: idxPercentage,
-          color: '#f00'
+          color: '#ff0' //yellow
+        });
+      }else if (ser.value > 1.50 && ser.value < 2.00 ) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#ff9900' //orange
         });
       }else {
         backgroundGradient.push({
           offset: idxPercentage,
-          color: 'grey'
+          color: 'ff0000' //red
         });
       }
     });
@@ -492,6 +502,39 @@ export class ChartPlotsComponent implements OnInit {
         backgroundGradient.push({
           offset: idxPercentage,
           color: 'white'
+        });
+      }
+    });
+    return backgroundGradient;
+  }
+
+  public setBackgroundGradientConfigsWindSpeed(backgroundMarker: any){
+    let backgroundGradient = new Array<any>();
+
+    backgroundMarker.forEach((ser, idx) => {
+      const idxPercentage = idx * 100 / backgroundMarker.length;
+
+    if(ser.val === null){
+      backgroundGradient.push({
+        offset: idxPercentage,
+        color: '#d8d8d8'
+      });
+    }
+      else if (ser.value < 25 ) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#0d0'
+        });
+      } 
+      else if (ser.value >= 25 && ser.value <= 50) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#ffff00'
+        });
+      }else if (ser.value > 50 ) {
+        backgroundGradient.push({
+          offset: idxPercentage,
+          color: '#ff0000'
         });
       }
     });
@@ -718,6 +761,45 @@ this.ForecastData.forecast.snowDepth.forEach((val, idx) => {
 snowDepthData.chartGradient = this.setBackgroundGradientConfigsSnowDepth(snowDepthData.displayData[0].series)
 
 this.Charts.push(snowDepthData);
+
+
+let windSpeedData = {
+  name: "Wind Speed",
+  displayData:[
+  {name: 'Wind Speed', series: []}
+],
+chartGradient: [],
+YtickFormat: this.FormatWindSpeedYAxisTicks.bind(this),
+yAxisTicks:  [0,25,50,75,100, 125, 150],
+yScaleMax: 150,
+yScaleMin:0,
+yUnits: this.speedMeasurement,
+
+}
+this.ForecastData.forecast.windSpeed.forEach((val, idx) => {
+  // if( val === "NaN"  ){
+  //   console.log("value is NaN setting to 0")
+  //   snowDepthData.displayData[0].series.push(
+  //     {   
+  //       value: 0,
+  //       // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
+  //       name: new Date(this.ForecastData.points[idx].absoluteSeconds * 1000)
+  //     }
+  //   );
+  // }
+  // else{
+    windSpeedData.displayData[0].series.push(
+      {   
+        value: Math.round(val),
+        // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
+        name: new Date(this.ForecastData.points[idx].absoluteSeconds * 1000)
+      }
+    );
+  // }
+});
+windSpeedData.chartGradient = this.setBackgroundGradientConfigsWindSpeed(windSpeedData.displayData[0].series)
+
+this.Charts.push(windSpeedData);
 
     // console.log('DATA AFTER CONVERT: ', this.Charts);
 
