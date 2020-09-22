@@ -42,7 +42,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('map')
   public set map(val: LcuMapsAzureMapElementComponent) {
     if (val && (this.Config && this.MapService.isLoaded)) {
-      debugger;
+      // debugger;
       this.Maper = val;
     }
   }
