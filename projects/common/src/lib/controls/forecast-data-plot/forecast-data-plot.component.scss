@@ -1,213 +1,114 @@
-@import '../../../assets/styles/tooltips.scss';
-
-// @include tooltip("hey");
 h6 {
   margin-bottom: 5px;
-  margin-left:40px;
+  margin-left: 40px;
 }
+.legend {
+  color: black;
+  padding: 5px;
+  width: 300px;
+  margin-left: 80px;
+}
+.legend-label{
+font-size: 8px;
+font-style: italic;
+}
+.legend-label-name{
+font-size: 12px;
+font-variant: all-small-caps;
+font-weight: bold;
+}
+
 
 .temp-legend {
   color: black;
   padding: 5px;
   width: 300px;
-  margin-left:35px;
-
-  .temp-gradient-ttb {
-    background: rgb(0,221,0);
-    background: linear-gradient(0deg, rgba(0,89,214,1) 0%, rgba(0,221,0,1) 33%, rgba(255,255,0,1) 66%, rgba(255,0,0,1) 100%);
-    height: 100px;
-    width: 20px;
-  }
-
-  .temp-gradient-ltr {
-    background: rgb(0,221,0);
-    background: linear-gradient(270deg, rgba(0,89,214,1) 0%, rgba(0,221,0,1) 33%, rgba(255,255,0,1) 66%, rgba(255,0,0,1) 100%);
-    height: 10px;
-    width: 100%;
-  }
-
-  .legend-item {
-    .temp-name {
-      font-size: 12px;
-      font-variant: all-small-caps;
-      font-weight: bold;
-    }
-
-    .temp-value {
-      font-size: 8px;
-      font-style: italic;
-    }
-  }
+  margin-left: 80px;
+}
+.legend .temp-gradient-ttb {
+  background: #0d0;
+  background: linear-gradient(0deg, #0059d6 0%, #0d0 33%, #ff0 66%, #f00 100%);
+  height: 100px;
+  width: 20px;
 }
 
-.condition-legend {
+.legend .temp-gradient-ltr {
+  background: #0d0;
+  background: linear-gradient(270deg, #0059d6 0%, #0d0 33%, #ff0 66%, #f00 100%);
+  height: 10px;
+  width: 100%;
+  opacity: .5;
+}
+
+.legend .condition-gradient-ttb {
+  background: #0d0;
+  background: linear-gradient(0deg, #0059d6 0%, #c764cf 50%, #0d0 100%);
+  height: 100px;
+  width: 20px;
+}
+.legend .condition-gradient-ltr {
+  background: #0d0;
+  background: linear-gradient(270deg, #0059d6 0%, #c764cf 50%, #0d0 100%);
+  height: 10px;
+  width: 100%;
+}
+
+.legend {
   color: black;
   padding: 5px;
   width: 300px;
-  margin-left:35px;
-
-  .condition-gradient-ttb {
-    background: rgb(0,221,0);
-    background: linear-gradient(0deg,  rgba(0,89,214,1) 0%, rgba(199,100,207,1)50%,  rgba(0,221,0,1)100%);
-    height: 100px;
-    width: 20px;
-  }
-
-  .condition-gradient-ltr {
-    background: rgb(0,221,0);
-    background: linear-gradient(270deg,  rgba(0,89,214,1) 0%, rgba(199,100,207,1)50%,  rgba(0,221,0,1)100%);
-    height: 10px;
-    width: 100%;
-  }
-
-  .condition-item {
-    .condition-name {
-      font-size: 12px;
-      font-variant: all-small-caps;
-      font-weight: bold;
-    }
-
-    .condition-value {
-      font-size: 8px;
-      font-style: italic;
-    }
-  }
+  margin-left: 80px;
+}
+.legend .delay-risk-gradient-ttb {
+  background: #0d0;
+  background: linear-gradient(0deg, #6E0000 0%, #f00 33%, #ff0 66%, #0d0 100%);
+  height: 100px;
+  width: 20px;
+}
+.legend .delay-risk-gradient-ltr {
+  background: #0d0;
+  background: linear-gradient(270deg, #6E0000 0%, #f00 33%, #ff0 66%, #0d0 100%);
+  height: 10px;
+  width: 100%;
 }
 
-.delay-risk-legend {
-  color: black;
-  padding: 5px;
-  width: 300px;
-  margin-left:35px;
-
-  .delay-risk-gradient-ttb {
-    background: rgb(0,221,0);
-    background: linear-gradient(0deg, rgba(110, 0, 0)0%, rgba(255,0,0,1) 33%,  rgba(255,255,0,1) 66%, rgb(0,221,0)100%);
-    height: 100px;
-    width: 20px;
-  }
-
-  .delay-risk-gradient-ltr {
-    background: rgb(0,221,0);
-    background: linear-gradient(270deg,rgba(110, 0, 0)0%, rgba(255,0,0,1) 33%,  rgba(255,255,0,1) 66%, rgb(0,221,0)100%);
-    height: 10px;
-    width: 100%;
-  }
-
-  .delay-risk-item {
-    .delay-risk-name {
-      font-size: 12px;
-      font-variant: all-small-caps;
-      font-weight: bold;
-    }
-
-    .delay-risk-value {
-      font-size: 8px;
-      font-style: italic;
-    }
-  }
+.legend .risk-gradient-ttb {
+  background: #0d0;
+  background: linear-gradient(0deg, #f00 0%, #ff0 50%, #0d0 100%);
+  height: 100px;
+  width: 20px;
 }
-.risk-legend {
-  color: black;
-  padding: 5px;
-  width: 300px;
-  margin-left:35px;
-
-  .risk-gradient-ttb {
-    background: rgb(0,221,0);
-    background: linear-gradient(0deg, rgba(255,0,0,1) 0%,  rgba(255,255,0,1) 50%, rgb(0,221,0)100%);
-    height: 100px;
-    width: 20px;
-  }
-
-  .risk-gradient-ltr {
-    background: rgb(0,221,0);
-    background: linear-gradient(270deg, rgba(255,0,0,1) 0%,  rgba(255,255,0,1) 50%, rgb(0,221,0)100%);
-    height: 10px;
-    width: 100%;
-  }
-
-  .risk-item {
-    .risk-name {
-      font-size: 12px;
-      font-variant: all-small-caps;
-      font-weight: bold;
-    }
-
-    .risk-value {
-      font-size: 8px;
-      font-style: italic;
-    }
-  }
+.legend .risk-gradient-ltr {
+  background: #0d0;
+  background: linear-gradient(270deg, #f00 0%, #ff0 50%, #0d0 100%);
+  height: 10px;
+  width: 100%;
 }
 
-
-
-.road-cond-legend {
-  color: black;
-  padding: 5px;
-  width: 300px;
-  margin-left:35px;
-
-  .road-cond-gradient-ttb {
-    background: rgb(0,221,0);
-    background: linear-gradient(0deg, #b80202 0%,  #670270 25%,#b760b7 50%,  #00dd00 75%, #ffffff 100%);
-    height: 100px;
-    width: 20px;
-  }
-
-  .road-cond-gradient-ltr {
-    background: rgb(0,221,0);
-    background: linear-gradient(270deg, #b80202 0%,  #670270 25%,#b760b7 50%,  #00dd00 75%, #ffffff 100%);
-    height: 10px;
-    width: 100%;
-  }
-
-  .road-cond-item {
-    .road-cond-name {
-      font-size: 12px;
-      font-variant: all-small-caps;
-      font-weight: bold;
-    }
-
-    .road-cond-value {
-      font-size: 8px;
-      font-style: italic;
-    }
-  }
+.legend .road-cond-gradient-ttb {
+  background: #0d0;
+  background: linear-gradient(0deg, #b80202 0%, #670270 25%, #b760b7 50%, #0d0 75%, #fff 100%);
+  height: 100px;
+  width: 20px;
+}
+.legend .road-cond-gradient-ltr {
+  background: #0d0;
+  background: linear-gradient(270deg, #b80202 0%, #670270 25%, #b760b7 50%, #0d0 75%, #fff 100%);
+  height: 10px;
+  width: 100%;
+  opacity: .5;
 }
 
-
-.precip-legend {
-  color: black;
-  padding: 5px;
-  width: 300px;
-  margin-left:35px;
-
-  .precip-gradient-ttb {
-    background: rgb(0,221,0);
-    background: linear-gradient(0deg, rgba(128, 10, 1)0%,rgba(112, 4, 112) 16.66%,rgba(135, 59, 135)33.33%, rgba(214, 141, 214)50%, rgba(255,0,0,1) 66.66%,  rgba(255,255,0,1) 83.33%, rgb(0,221,0)100%);
-    height: 100px;
-    width: 20px;
-  }
-
-  .precip-gradient-ltr {
-    background: rgb(0,221,0);
-    background: linear-gradient(270deg, rgba(128, 10, 1)0%,rgba(112, 4, 112) 16.66%,rgba(135, 59, 135)33.33%, rgba(214, 141, 214)50%, rgba(255,0,0,1) 66.66%,  rgba(255,255,0,1) 83.33%, rgb(0,221,0)100%);
-    height: 10px;
-    width: 100%;
-  }
-
-  .precip-item {
-    .precip-name {
-      font-size: 12px;
-      font-variant: all-small-caps;
-      font-weight: bold;
-    }
-
-    .precip-value {
-      font-size: 8px;
-      font-style: italic;
-    }
-  }
+.legend .precip-gradient-ttb {
+  background: #0d0;
+  background: linear-gradient(0deg, rgba(128, 10, 1, ) 0%, rgba(112, 4, 112, ) 16.66%, rgba(135, 59, 135, ) 33.33%, rgba(214, 141, 214, ) 50%, #f00 66.66%, #ff0 83.33%, #0d0 100%);
+  height: 100px;
+  width: 20px;
 }
+.legend .precip-gradient-ltr {
+  background: #0d0;
+  background: linear-gradient(270deg, rgba(128, 10, 1, 1.0) 0%, rgba(112, 4, 112,1.0 ) 16.66%, rgba(135, 59, 135,1.0 ) 33.33%, rgba(214, 141, 214,1.0 ) 50%, #f00 66.66%, #ff0 83.33%, #0d0 100%);
+  height: 10px;
+  width: 100%;
+}
+

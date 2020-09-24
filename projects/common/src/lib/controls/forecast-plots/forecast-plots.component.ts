@@ -34,7 +34,6 @@ export class ForecastPlotsComponent implements OnInit {
 
   // Life Cycle
   public ngOnInit() {
-    this.clearPlots();
     this.forecastPlotDataSubsription = this.notificationService.ForecastPlotDataChanged.subscribe(
       (data: ForecastDataModel) => {
         if (!data) {
@@ -143,9 +142,9 @@ export class ForecastPlotsComponent implements OnInit {
   /**
    * Clear plots
    */
-  protected clearPlots(): void {
-    if(this.plot){
-    this.plot.Clear();
-    }
-  }
+  // protected clearPlots(): void {
+  //   if(this.plot){
+  //   this.plot.Clear();
+  //   }
+  // }
 }
