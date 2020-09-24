@@ -5,7 +5,7 @@ import * as shape from 'd3-shape';
 @Injectable({
   providedIn: 'root'
 })
-export class ForecastDataService {
+export class ForecastPlotsService {
 
   private curves = {
     'Basis': shape.curveBasis,
@@ -31,6 +31,8 @@ export class ForecastDataService {
   protected speedMeasurement: string;
   protected precipMeasurement: string;
   protected precipMeasurementPerHour: string;
+  protected forecastDetailsMeasurement: string;
+  protected tempMeasurement: string;
 
   
 
@@ -40,12 +42,26 @@ export class ForecastDataService {
     this.speedMeasurement = 'km/hr';
     this.precipMeasurement = 'mm';
     this.precipMeasurementPerHour = 'mm/hr';
+    this.tempMeasurement = 'C';
+    this.SetForecastDetailsMeasurement("Metric");
+
+
   }
 
   protected setEnglishMeasurements(){
-    this.speedMeasurement = 'mi/hr';
+    this.speedMeasurement = 'mph';
     this.precipMeasurement = 'in';
     this.precipMeasurementPerHour = 'in/hr';
+    this.tempMeasurement = 'F';
+    this.SetForecastDetailsMeasurement("English");
+  }
+
+  public SetForecastDetailsMeasurement(msr: string){
+    this.forecastDetailsMeasurement = msr;
+  }
+
+  public GetForecastDetailsMeasurement(){
+    return this.forecastDetailsMeasurement;
   }
 
   public getCurve(curveType){
@@ -62,6 +78,10 @@ export class ForecastDataService {
 
   public getPrecipMeasurementPerHour(){
     return this.precipMeasurementPerHour;
+  }
+
+  public getTempMeasurements(){
+    return this.tempMeasurement;
   }
 
   public convertFtoC(val) {
@@ -118,27 +138,32 @@ export class ForecastDataService {
       yAxisTicks:  [0,30,70,100,120],
       yScaleMax:120,
       yScaleMin:0,
-      yUnits:'\u00B0',
+      yUnits: '\u00B0' + this.tempMeasurement,
      
     }
     ForecastData.forecast.surfaceTemperature.forEach((temp, idx) => {
 
+
       roadTempChartData.displayData[0].series.push(
         {
-          value: Math.round(TemperatureConversion.KelvinToFahrenheit(temp)),
+          value: Math.round(temp),
           name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
         }
       );
+     
     });
     ForecastData.forecast.roadTemperature.forEach((temp, idx) => {
+     
       roadTempChartData.displayData[1].series.push(
         {
-          value: Math.round(TemperatureConversion.KelvinToFahrenheit(temp)),
+          value: Math.round(temp),
           name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
         }
       );
     });
+  
     roadTempChartData.chartGradient = this.setBackgroundGradientConfigsTemp(roadTempChartData.displayData[0].series)
+    // console.log("roadtemp chart grad: ", roadTempChartData.chartGradient)
     this.Charts.push(roadTempChartData);
     let roadChartData = {
       name: "Road State",
@@ -159,7 +184,6 @@ export class ForecastDataService {
       roadChartData.displayData[0].series.push(
         {
           value: this.determineRoadState(state),
-          // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
           name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
         }
       );
@@ -187,7 +211,6 @@ export class ForecastDataService {
     delayRiskData.displayData[0].series.push(
       {
         value: state,
-        // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
         name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
       }
     );
@@ -203,7 +226,7 @@ export class ForecastDataService {
   ],
   chartGradient: [],
   YtickFormat: this.FormatCrosswindRiskYAxisTicks.bind(this),
-  yAxisTicks:  [0.0,0.5,1.0,1.5,2.0],
+  yAxisTicks:  [0,0.5,1,1.5,2],
   yScaleMax: 2,
   yScaleMin:0,
   formatTooltip: true,
@@ -215,7 +238,6 @@ ForecastData.forecast.crosswindRisk.forEach((state, idx) => {
   crosswindRiskData.displayData[0].series.push(
     {
       value: state,
-      // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
       name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
     }
   );
@@ -224,8 +246,6 @@ crosswindRiskData.chartGradient = this.setBackgroundGradientConfigsCrosswindRisk
 
 this.Charts.push(crosswindRiskData);
 
-//PRECIP RATE
-
 let precipRateData = {
   name: "Precipitation Rate",
   displayData:[
@@ -233,17 +253,16 @@ let precipRateData = {
 ],
 chartGradient: [],
 YtickFormat: this.FormatPrecipitationRateYAxisTicks.bind(this),
-yAxisTicks:  [0.0,0.25,0.50,0.75,1.0],
+yAxisTicks:  [0,.25,.5,.75,1],
 yScaleMax: 1,
 yScaleMin:0,
-yUnits:this.precipMeasurementPerHour,
+yUnits:this.precipMeasurementPerHour
 }
 ForecastData.forecast.precipitationRate.forEach((val, idx) => {
 precipRateData.displayData[0].series.push(
   {
     value: val,
     state: ForecastData.forecast.roadState[idx],
-    // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
     name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
   }
 );
@@ -270,7 +289,6 @@ ForecastData.forecast.snowDepth.forEach((val, idx) => {
     snowDepthData.displayData[0].series.push(
       {   
         value: 0,
-        // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
         name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
       }
     );
@@ -308,11 +326,9 @@ ForecastData.forecast.windSpeed.forEach((val, idx) => {
     windSpeedData.displayData[0].series.push(
       {   
         value: Math.round(val),
-        // name: new Date(this.ForecastData.points[idx].absoluteSeconds)
         name: new Date(ForecastData.points[idx].absoluteSeconds * 1000)
       }
     );
-  // }
 });
 windSpeedData.chartGradient = this.setBackgroundGradientConfigsWindSpeed(windSpeedData.displayData[0].series)
 
@@ -434,17 +450,17 @@ return this.Charts;
   }
 
   protected FormatPrecipitationRateYAxisTicks(val: any){
-    return val + " " + this.precipMeasurementPerHour;
+    return val;
   }
 
 
   protected FormatSnowDepthYAxisTicks(val: any){
-    return val + " " + this.precipMeasurement;
+    return val;
 
   }
 
   protected FormatWindSpeedYAxisTicks(val: any){
-    return val +  " " + this.speedMeasurement;
+    return val;
   }
 
 
@@ -457,26 +473,33 @@ return this.Charts;
       if (ser.value > 95) {
         backgroundGradient.push({
           offset: idxPercentage,
+          index: idx,
           color: 'red'
         });
       } else if (ser.value > 85) {
         backgroundGradient.push({
           offset: idxPercentage,
+          index: idx,
           color: 'yellow'
         });
       } 
       else if (ser.value > 32) {
         backgroundGradient.push({
           offset: idxPercentage,
+          index: idx,
           color: 'green'
         });
       }else {
         backgroundGradient.push({
           offset: idxPercentage,
+          index: idx,
           color: 'blue'
         });
       }
     });
+    // console.log("Temps backgroundGradient: ", backgroundGradient)
+    // console.log("Temps backgroundMarker: ", backgroundMarker)
+
     return backgroundGradient;
   }
 

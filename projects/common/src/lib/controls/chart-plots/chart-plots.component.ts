@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ForecastDataModel } from '../../models/forecast-data.model';
 import { NotificationService } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
 import { DateFormatModel, colorSets, ViewDimensions } from '@lowcodeunit/lcu-charts-common';
 import * as shape from 'd3-shape';
 import { TemperatureConversion } from '@lcu/common';
-import { ForecastDataService } from '../forecast-data.service';
+import { ForecastPlotsService } from '../../services/forecast-plots.service';
+import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 
 
 @Component({
@@ -15,6 +16,25 @@ import { ForecastDataService } from '../forecast-data.service';
 })
 export class ChartPlotsComponent implements OnInit {
 
+  // tslint:disable-next-line:no-input-rename
+
+   /**
+   * plot height
+   */
+  @Input('height')
+  public Height: number = 300;
+
+  /**
+   * plot width
+   */
+  @Input('width')
+  public Width: number = 400;
+
+  /**
+   * Should plot fit container
+   */
+  @Input('fit-container')
+  public FitContainer: boolean;
 
   public animations: boolean = true;
   public autoScale: boolean = false;
@@ -43,19 +63,13 @@ export class ChartPlotsComponent implements OnInit {
   public precipMeasurmentPerHour: string = 'mm/hr';
   public precipMeasurment: string = 'mm';
   public speedMeasurement: string ='mph';
-  // public weatherData: any[];
   public xAxisLabel: string = 'Time';
   public xScaleMax: any;
   public xScaleMin: any;
   public yAxisLabel: string = 'Temperature (F)';
-  
-  // public yScaleMax: number = 100;
-  // public yScaleMin: number;
-  // public yUnits: string = '\u00B0';
   public backgroundGradientConfigs: any[] = [];
   public showPercentage: boolean = false;
-  // public yAxisTickFormatting = this.FormatYAxisTicks.bind(this);
-  // public yAxisTicks: Array<any> = [0, 30, 50, 100];
+  
   public xAxisIsDate: boolean = true;
   public xAxisDateFormat: DateFormatModel = {
     DayOfWeek: true,
@@ -68,35 +82,36 @@ export class ChartPlotsComponent implements OnInit {
   public ForecastData: any;
   public Charts: Array<any>;
   public dims: ViewDimensions= {width:300, height: 200, xOffset:80}
+  public ManualHover: any;
 
   private colorSets: any;
   private curveType: string = 'Linear';
-  // private curves: any;
   private fitContainer: boolean = false;
-  private height: number = 300;
-  private width: number = 400;
+  
+ 
 
   public ChartData: any = [];
 
-  protected forecastPlotDataSubsription: Subscription;
+  public TempConverted: boolean = false;
+
+  protected forecastPlotDataSubscription: Subscription;
 
   constructor(protected notificationService: NotificationService,
-    protected forecastDataService: ForecastDataService) {
+    protected forecastPlotsService: ForecastPlotsService) {
     
     Object.assign(this, {
       colorSets,
-      // weatherData
     });
     this.setColorScheme('cool');
   }
 
   ngOnInit() {
-    
-    this.curve = this.forecastDataService.getCurve(this.curveType);
+    console.log("charts plot called")
+    this.curve = this.forecastPlotsService.getCurve(this.curveType);
     if (!this.fitContainer) {
       this.applyDimensions();
     }
-    this.forecastPlotDataSubsription = this.notificationService.ForecastPlotDataChanged.subscribe(
+    this.forecastPlotDataSubscription = this.notificationService.ForecastPlotDataChanged.subscribe(
       (data: ForecastDataModel) => {
         if (!data) {
           console.error('PlotDataSubscription - No data returned'); return;
@@ -104,17 +119,43 @@ export class ChartPlotsComponent implements OnInit {
         console.log('data from chart-plots: ', data);
         this.ForecastData = data;
         this.convertData();
+
+        // for (const chart of this.Charts) {
+        //  chart.chartMousemove.subscribe((e) => {
+        //     this.notificationService.OnChartMouseMove(e);
+        //   });
+        // }
       }
     );
   }
 
-  public hoveredVerticalChange(e) {
+  public hoveredXValue(e){
     // console.log('message from tooltip - the x value hover has changed to: ', e)
     this.ManualHover = e;
     // now send it back to the tooltip to manually show that vertical line
+
   }
 
-  public ManualHover: any;
+  public hoveredVerticalChange(e) {
+    //convert incomming string date to seconds
+    let seconds = Date.parse(e.value)/1000;
+    let point;
+
+    //find point from seconds
+    this.ForecastData.points.forEach(p => {
+      if(p.absoluteSeconds === seconds){
+        point = p;
+      }
+    });
+    //find index from point
+    let index = this.ForecastData.points.indexOf(point);
+    
+    let chartIndex = {Index: index, Value: point}
+    
+    this.notificationService.OnChartMouseMove(chartIndex);
+
+  }
+
 
   public onHoverChange(e) {
     this.ManualHover = e;
@@ -123,7 +164,7 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   private applyDimensions(): void {
-    this.view = [this.width, this.height];
+    this.view = [this.Width, this.Height];
   }
   private setColorScheme(name: string): void {
     this.colorScheme = this.colorSets.find(s => s.name === name);
@@ -145,8 +186,8 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   protected convertData() {
-    this.Charts = this.forecastDataService.BuildCharts(this.ForecastData, "Metric");
-
+    
+    this.Charts = this.forecastPlotsService.BuildCharts(this.ForecastData, "English");
   }
 
 }

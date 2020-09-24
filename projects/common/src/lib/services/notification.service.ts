@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SearchModel } from '../models/search.model';
 
@@ -8,7 +8,7 @@ import { SearchModel } from '../models/search.model';
 export class NotificationService {
 
   public DepartureTableChanged = new Subject<SearchModel>();
-  public ForecastPlotDataChanged = new Subject<any>();
+  public ForecastPlotDataChanged = new ReplaySubject<any>();
   public DelayRiskDataChanged = new Subject<any>();
   public GeofenceDrawingStarted = new Subject<SearchModel>();
   public ForecastDetailsCleared = new Subject();
@@ -28,7 +28,7 @@ export class NotificationService {
   public SearchRoute(params: SearchModel, searching: boolean): void {
     const data: SearchModel = { ...params };
     data.IsSearching = searching;
-    console.log("data for search routes: ", data)
+    // console.log("data for search routes: ", data)
     this.RouteChanged.next(data);
   }
 
