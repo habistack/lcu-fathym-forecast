@@ -1,0 +1,45 @@
+@import "../../../../../node_modules/@lcu/common/assets/theming/common-theme";
+
+$global-theme: fathym-ivy-theme(true);
+$primary: map-get($global-theme, primary);
+$accent: map-get($global-theme, accent);
+$warn: map-get($global-theme, warn);
+
+$logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
+$divider-size: 5px;
+$divider: mat-color($primary);
+$background: map-get(map-get($global-theme, 'background'), 'background');
+$background-fill: map-get($mat-grey, 900);
+$foreground: map-get(map-get($global-theme, 'foreground'), 'base');
+$primary-text: mat-color($primary);
+$secondary-text: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
+
+html, body {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0 !important;
+}
+
+.divider-fill-vert {
+    background-color: $divider;
+    top:10%;
+    bottom:10%;
+    min-width: $divider-size;
+}
+
+.background-fill {
+    background-color: $background-fill;
+}
+
+.divider-fill-hor {
+    background-color: $divider;
+    height: $divider-size;
+}
+
+a:not(.mat-button) {
+    color: map-get($primary, 500) !important;
+
+    &:hover {
+        color: map-get($accent, 200) !important;
+    }
+}

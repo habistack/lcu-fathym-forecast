@@ -453,21 +453,23 @@ export class SearchFormComponent implements OnInit {
 
   protected updateSearchTitle(): void {
 
-    if (this.GeofenceChecked) {
-        this.SearchTitle = 'Geofence';
+    // Comment this out unitl we go back to allowing these options - shannon
+    // if (this.GeofenceChecked) {
+    //     this.SearchTitle = 'Geofence';
 
-      } else if (this.DepartureChecked && !this.RouteChecked) {
-          this.SearchTitle = 'Search Depart Risk';
+    //   } else if (this.DepartureChecked && !this.RouteChecked) {
+    //       this.SearchTitle = 'Search Depart Risk';
 
-      } else if (this.RouteChecked && !this.DepartureChecked) {
-          this.SearchTitle = 'Search Route(s)';
+    //   } else if (this.RouteChecked && !this.DepartureChecked) {
+    //       this.SearchTitle = 'Search Route(s)';
 
-      } else if (this.DepartureChecked && this.RouteChecked) {
-          this.SearchTitle = 'Search Route(s) and Depart Risk';
+    //   } else if (this.DepartureChecked && this.RouteChecked) {
+    //       this.SearchTitle = 'Search Route(s) and Depart Risk';
 
-      } else if (!this.DepartureChecked && !this.RouteChecked && !this.GeofenceChecked) {
-          this.SearchTitle = 'Search Type';
-      }
+    //   } else if (!this.DepartureChecked && !this.RouteChecked && !this.GeofenceChecked) {
+    //       this.SearchTitle = 'Search Type';
+    //   }
+    this.SearchTitle = 'Search a Route';
     }
 
   /**

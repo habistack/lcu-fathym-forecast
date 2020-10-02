@@ -1,3 +1,21 @@
+@import '../../../../../common/src/assets/styles/common';
+
+$filterheight: 70px;
+
+.container {
+  height: calc(100% - #{$filterheight});
+}
+
+.filters {
+  // background-color: $background;
+  padding: 10px;
+  height: $filterheight;
+  // margin: 10px; 
+  // position: relative; 
+  // top: 0; 
+  // z-index: 1000;
+}
+
 .map-container {
     position: relative !important;
     min-width:100% !important;
@@ -33,13 +51,13 @@
   }
 
 .layer-dropdown {
-  position: absolute;
-  left: 31%;
-  top: 70px;
-  padding: 2px;
-  z-index: 1;
-  background-color: rgba(rgb(161, 161, 161), 0.9);
-  border-radius: 10px;
+  // position: absolute;
+  // left: 31%;
+  // top: 70px;
+  // padding: 2px;
+  // z-index: 1;
+  // background-color: rgba(rgb(161, 161, 161), 0.9);
+  // border-radius: 10px;
 }
 @media screen and (max-width: 960px) {
   .layer-dropdown {
