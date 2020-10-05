@@ -39,7 +39,7 @@ export class ForecastDetailsComponent implements OnInit {
   public roundDomains: boolean = false;
   public schemeType: string = 'ordinal';
   public showGridLines: boolean = true;
-  public showLegend: boolean = false;
+  public showLegend: boolean = true;
   public showXAxis: boolean = true;
   public showXAxisLabel: boolean = false;
   public showYAxis: boolean = true;
