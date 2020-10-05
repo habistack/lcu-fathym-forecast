@@ -1,27 +1,31 @@
 <div [className]="SelectedTheme" fxFlexFill>
-  <mat-card fxFlexFill style="padding: 0px !important">
-    <mat-card-content fxFlexFill>
+  <div fxFlexFill>
+    <div fxFlexFill>
       <div fxFlexFill fxLayoutGap="10" fxLayout="column">
         <div 
              fxFlexFill
              fxLayout.gt-md="row" 
              fxLayout.lt-md="column" 
              fxLayoutAlign="center">
-          <div fxFlex="auto" class="left-side-bar">
+          <div fxLayout="column" fxFlex="auto" fxLayoutGap="5px" class="left-side-bar">
             
-            <mat-card-header 
+            <div 
               fxLayout="row"
-              fxLayoutAlign="start center" 
+              fxLayoutGap="5px"
+              fxLayoutAlign="space-between center" 
               color="primary" 
-              class="header">
-              <div mat-card-avatar>
-                <div class="primary-logo" logo-alt="Fathym Logo"></div>
+              class="header background-fill">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <div>
+                  <div class="primary-logo" logo-alt="Fathym Logo"></div>
+                </div>
+                <div class="title primary-logo-text">
+                <h3> {{ Title }}</h3>
+                </div>
               </div>
-              <mat-card-title class="title primary-logo-text">
-               <h3> {{ Title }}</h3>
-              </mat-card-title>
-              <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle>
-            </mat-card-header>
+              <div class="divider-fill-vert"></div>
+              <!-- <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle> -->
+            </div>
 
             <lcu-search-form></lcu-search-form>
 
@@ -42,6 +46,6 @@
 
         <!-- <lcu-departure-table></lcu-departure-table> -->
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

@@ -7,13 +7,8 @@ $filterheight: 70px;
 }
 
 .filters {
-  // background-color: $background;
   padding: 10px;
   height: $filterheight;
-  // margin: 10px; 
-  // position: relative; 
-  // top: 0; 
-  // z-index: 1000;
 }
 
 .map-container {
@@ -51,6 +46,7 @@ $filterheight: 70px;
   }
 
 .layer-dropdown {
+  margin-left: 10px
   // position: absolute;
   // left: 31%;
   // top: 70px;
