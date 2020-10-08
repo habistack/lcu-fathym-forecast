@@ -1,45 +1,34 @@
-// @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-// @import '../../../node_modules/@lcu/common/assets/styles/branding/theme-colors/fathym-ivy-brand';
-// @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
-@import '../../../node_modules/@lcu/common/assets/theming/common-theme';
-
-/**
-* Can select a predefined theme
-*/
-$global-theme: fathym-ivy-theme(true);
-
-/**
-* Or, can call create-theme and pass in your own palatte colors
-*/
-// $global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
-$primary: map-get($global-theme, primary);
-$accent: map-get($global-theme, accent);
-$warn: map-get($global-theme, warn);
-
-$background: map-get(map-get($global-theme, 'background'), 'background');
-$logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
+@import '../../common/src/assets/styles/common';
 
 @mixin primary-logo($logo, $theme, $opacity) {
   .primary-logo {
-    background-image: fathym-logo($logo, $logo-color, $opacity);
-    background-size: 40px;
+    // background-image: fathym-logo($logo, mat-color($primary), $opacity);
+    background-image: fathym-logo($logo, white, $opacity);
+    background-size: 50px; 
+    height: 50px;
+    width: 50px;
+  }
+
+  .primary-logo-text {
+    color: white;
+  }
+
+  .secondary-text {
+    color: $secondary-text;
   }
   
 }
 
+/**
+* This overrides the theme-setup from @lcu/common 
+*/
 @include theme-setup($global-theme, false);
 @include primary-logo(thinky-circle, $global-theme, 1);
-
-body {
-  background-color: $background;
-}
 
 // @import '../../../node_modules/nvd3/build/nv.d3.css';
 .nvd3 .nv-background {
   fill-opacity: 1 !important;
 }
-
-
 
 /******************************************/
 /********* NVD3 Line Chart Styles *********/

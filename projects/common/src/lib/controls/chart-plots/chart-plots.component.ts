@@ -12,7 +12,7 @@ import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 @Component({
   selector: 'lcu-chart-plots',
   templateUrl: './chart-plots.component.html',
-  styleUrls: ['./chart-plots.component.css']
+  styleUrls: ['./chart-plots.component.scss']
 })
 export class ChartPlotsComponent implements OnInit {
 
@@ -98,7 +98,7 @@ export class ChartPlotsComponent implements OnInit {
 
   constructor(protected notificationService: NotificationService,
     protected forecastPlotsService: ForecastPlotsService) {
-    
+
     Object.assign(this, {
       colorSets,
     });
@@ -106,7 +106,7 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("charts plot called")
+    // console.log("charts plot called")
     this.curve = this.forecastPlotsService.getCurve(this.curveType);
     if (!this.fitContainer) {
       this.applyDimensions();
@@ -137,21 +137,21 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   public hoveredVerticalChange(e) {
-    //convert incomming string date to seconds
-    let seconds = Date.parse(e.value)/1000;
+    // convert incomming string date to seconds
+    const seconds = Date.parse(e.value)/1000;
     let point;
 
-    //find point from seconds
+    // find point from seconds
     this.ForecastData.points.forEach(p => {
       if(p.absoluteSeconds === seconds){
         point = p;
       }
     });
-    //find index from point
-    let index = this.ForecastData.points.indexOf(point);
-    
-    let chartIndex = {Index: index, Value: point}
-    
+    // find index from point
+    const index = this.ForecastData.points.indexOf(point);
+
+    const chartIndex = {Index: index, Value: point}
+
     this.notificationService.OnChartMouseMove(chartIndex);
 
   }
@@ -186,8 +186,7 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   protected convertData() {
-    
-    this.Charts = this.forecastPlotsService.BuildCharts(this.ForecastData, "English");
+    this.Charts = this.forecastPlotsService.BuildCharts(this.ForecastData, 'English');
   }
 
 }

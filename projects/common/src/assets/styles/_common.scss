@@ -1,0 +1,68 @@
+@import '../../../../../node_modules/@lcu/common/assets/theming/common-theme';
+
+$global-theme: fathym-ivy-theme(true);
+$primary: map-get($global-theme, primary);
+$accent: map-get($global-theme, accent);
+$warn: map-get($global-theme, warn);
+
+$logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
+$divider-size: 5px;
+$divider: mat-color($primary);
+$background: map-get(map-get($global-theme, 'background'), 'background');
+$background-fill: map-get($mat-grey, 900);
+$foreground: map-get(map-get($global-theme, 'foreground'), 'base');
+$primary-text: mat-color($primary);
+$secondary-text: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
+
+html, body {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0 !important;
+    background-color: $background;
+}
+
+.accent-primary-text {
+    color: mat-color($accent) !important;
+}
+
+.secondary-text {
+    color: $secondary-text;
+}
+
+.divider-fill-vert {
+    background-color: $divider;
+    height: 100%;
+    top:10%;
+    bottom:10%;
+    width: $divider-size;
+}
+
+.divider-fill-hor {
+    background-color: $divider;
+    height: $divider-size;
+    width: 90%;
+}
+
+.background-fill {
+    background-color: $background-fill;
+}
+
+.box-side-triangle {
+    // $path: polygon(90% 0%, 100% 10%, 90% 20%, 90% 100%, 0% 100%, 0% 0%, 90% 0);
+    // -webkit-clip-path: $path;
+    // clip-path: $path;
+  }
+
+a:not(.mat-button) {
+    color: map-get($primary, 500) !important;
+
+    &:hover {
+        color: map-get($accent, 200) !important;
+    }
+}
+
+.chart-container {
+    text {
+        fill: $secondary-text;
+    }
+}

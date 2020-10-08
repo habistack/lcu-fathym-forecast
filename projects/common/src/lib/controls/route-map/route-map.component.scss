@@ -1,3 +1,16 @@
+@import '../../../../../common/src/assets/styles/common';
+
+$filterheight: 70px;
+
+.container {
+  height: calc(100% - #{$filterheight});
+}
+
+.filters {
+  padding: 10px;
+  height: $filterheight;
+}
+
 .map-container {
     position: relative !important;
     min-width:100% !important;
@@ -33,13 +46,14 @@
   }
 
 .layer-dropdown {
-  position: absolute;
-  left: 31%;
-  top: 70px;
-  padding: 2px;
-  z-index: 1;
-  background-color: rgba(rgb(161, 161, 161), 0.9);
-  border-radius: 10px;
+  margin-left: 10px
+  // position: absolute;
+  // left: 31%;
+  // top: 70px;
+  // padding: 2px;
+  // z-index: 1;
+  // background-color: rgba(rgb(161, 161, 161), 0.9);
+  // border-radius: 10px;
 }
 @media screen and (max-width: 960px) {
   .layer-dropdown {
