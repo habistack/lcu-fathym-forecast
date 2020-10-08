@@ -1,5 +1,5 @@
-<mat-dialog-content>
-  <div fxLayout="row" fxLayoutAlign="space-between">
+<mat-dialog-content class="chart-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <h3>{{ RouteDisplayName }}</h3>
     <button mat-raised-button (click)="CloseModal()">
       <mat-icon>close</mat-icon>
@@ -19,133 +19,133 @@
 
     <!-- Temperature -->
     <div *ngIf="chart.name === 'Road Temperature'" class="legend" fxLayout="column">
-      <p>{{chart.name}}</p>
+      <p class="accent-primary-text">{{chart.name}}</p>
       <div class="temp-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
       <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Hot</span>
-          <span class="temp-value">&gt; 95&deg;</span>
+          <span class="legend-lable-name accent-primary-text">Hot</span>
+          <span class="temp-value accent-primary-text">&gt; 95&deg;</span>
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Warm</span>
-          <span class="temp-value">95&deg; - 85&deg;</span>
+          <span class="legend-lable-name accent-primary-text">Warm</span>
+          <span class="temp-value accent-primary-text">95&deg; - 85&deg;</span>
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Cool</span>
-          <span class="temp-value">85&deg; - 32&deg;</span>
+          <span class="legend-lable-name accent-primary-text">Cool</span>
+          <span class="temp-value accent-primary-text">85&deg; - 32&deg;</span>
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Cold</span>
-          <span class="temp-value">&lt; 32&deg;</span>
+          <span class="legend-lable-name accent-primary-text">Cold</span>
+          <span class="temp-value accent-primary-text">&lt; 32&deg;</span>
         </div>
       </div>
     </div>
 
     <!-- Road State -->
     <div *ngIf="chart.name === 'Road State' " class="legend" fxLayout="column">
-      <p>{{chart.name}}</p>
+      <p class="accent-primary-text">{{chart.name}}</p>
       <div class="road-cond-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
       <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Dry</span>
-          <!-- <span class="temp-value">&gt; 95&deg;</span> -->
+          <span class="legend-lable-name accent-primary-text">Dry</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Wet</span>
-          <!-- <span class="temp-value">&gt; 95&deg;</span> -->
+          <span class="legend-lable-name accent-primary-text">Wet</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Snow</span>
-          <!-- <span class="temp-value">&gt; 95&deg;</span> -->
+          <span class="legend-lable-name accent-primary-text">Snow</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Ice</span>
-          <!-- <span class="temp-value">&gt; 95&deg;</span> -->
+          <span class="legend-lable-name accent-primary-text">Ice</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Hail</span>
-          <!-- <span class="temp-value">&gt; 95&deg;</span> -->
+          <span class="legend-lable-name accent-primary-text">Hail</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
         </div>
       </div>
     </div>
 
     <!-- Delay Risk -->
     <div *ngIf="chart.name === 'Potential Delay Risk'" class="legend" fxLayout="column">
-      <p>{{chart.name}}</p>
+      <p class="accent-primary-text">{{chart.name}}</p>
       <div class="delay-risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
       <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Normal</span>
+          <span class="legend-lable-name accent-primary-text">Normal</span>
         </div>
         <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-        <span class="legend-label-name">Slight</span>
+        <span class="legend-lable-name accent-primary-text">Slight</span>
       </div> -->
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Moderate</span>
+          <span class="legend-lable-name accent-primary-text">Moderate</span>
         </div>
         <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-        <span class="legend-label-name">Heavy</span>
+        <span class="legend-lable-name accent-primary-text">Heavy</span>
       </div> -->
         <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-        <span class="legend-label-name">Severe</span>
+        <span class="legend-lable-name accent-primary-text">Severe</span>
       </div> -->
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Extreme</span>
+          <span class="legend-lable-name accent-primary-text">Extreme</span>
         </div>
       </div>
     </div>
 
     <!-- Crosswind Risk -->
     <div *ngIf="chart.name === 'Crosswind Risk' || chart.name === 'Wind Speed'" class="legend" fxLayout="column">
-      <p>{{chart.name}}</p>
+      <p class="accent-primary-text">{{chart.name}}</p>
       <div class="risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
       <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Low</span>
+          <span class="legend-lable-name accent-primary-text">Low</span>
         </div>
 
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Moderate</span>
+          <span class="legend-lable-name accent-primary-text">Moderate</span>
         </div>
 
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Severe</span>
+          <span class="legend-lable-name accent-primary-text">Severe</span>
         </div>
       </div>
     </div>
 
     <div *ngIf="chart.name === 'Precipitation Rate'" class="legend" fxLayout="column">
-      <p>{{chart.name}}</p>
+      <p class="accent-primary-text">{{chart.name}}</p>
       <div class="precip-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
       <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Rain</span>
+          <span class="legend-lable-name accent-primary-text">Rain</span>
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Snow</span>
+          <span class="legend-lable-name accent-primary-text">Snow</span>
         </div>
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">Hail</span>
+          <span class="legend-lable-name accent-primary-text">Hail</span>
         </div>
       </div>
     </div>
 
     <!-- snow depth -->
     <div *ngIf="chart.name === 'Snow Depth'" class="legend" fxLayout="column">
-      <p>{{chart.name}}</p>
+      <p class="accent-primary-text">{{chart.name}}</p>
       <div class="condition-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
       <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">&lt; 2 {{precipMeasurment}}</span>
+          <span class="legend-lable-name accent-primary-text">&lt; 2 {{precipMeasurment}}</span>
         </div>
 
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">2 - 4 {{precipMeasurment}}</span>
-          <!-- <span class="temp-value">0.25 - 0.50 {{precipMeasurment}}</span> -->
+          <span class="legend-lable-name accent-primary-text">2 - 4 {{precipMeasurment}}</span>
+          <!-- <span class="temp-value accent-primary-text">0.25 - 0.50 {{precipMeasurment}}</span> -->
         </div>
 
         <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
-          <span class="legend-label-name">&gt; 4 {{precipMeasurment}}</span>
+          <span class="legend-lable-name accent-primary-text">&gt; 4 {{precipMeasurment}}</span>
         </div>
       </div>
     </div>

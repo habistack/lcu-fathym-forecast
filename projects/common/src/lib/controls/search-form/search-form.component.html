@@ -1,31 +1,46 @@
-<mat-card class="form-container" fxFlex>
+<mat-card class="form-container background-fill box-side-triangle" style="margin-right: 5px">
   <form
     fxLayout="column"
-    fxLayoutGap="10px"
+    fxFlex="90"
+    fxLayoutGap="5px"
     [formGroup]="RouteInputForm"
     novalidate>
         <!-- <i class="fas fa-route"></i> -->
 <!--Search type checkboxes-->
-        <mat-card>
-            <span class="title mb-10 dis-block"><i [ngClass]="(GeofenceChecked) ? 'fa fa-pencil-square-o fa-2x' : 'fa fa-search fa-2x' "></i>
-              {{ SearchTitle }}
+        <!-- <mat-card> -->
+            <span class="plain-text dis-block">
+              <i [ngClass]="(GeofenceChecked) ? 'fa fa-pencil-square-o fa-2x' : 'fa fa-search fa-2x' "></i>
+              <div style="margin-left: 15px" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+                <mat-icon class="icon-display" color="primary">pageview</mat-icon>
+                <h3 style="font-size: 20px" class="plain-text">
+                  {{ SearchTitle }}
+                </h3>
+              </div>
             </span>
-          <mat-card-header>
+          <div class="divider-fill-hor"></div>
+          <!-- <mat-card-header> -->
             <!-- <mat-card-title><i class="fa fa-search fa-2x"></i> Search Type</mat-card-title>
             <mat-card-subtitle></mat-card-subtitle> -->
-          </mat-card-header>
-          <mat-card-content>
-            <div fxLayout="row" fxLayoutGap="10px" formGroupName="SearchTypeControls">
-              <mat-checkbox id="checkSearchRoutes" formControlName="checkSearchRoutes"  (change)="SearchTypeChanged($event)">Search Route(s)</mat-checkbox>
+          <!-- </mat-card-header>
+          <mat-card-content> -->
+
+            <!--Comment this out until we start allowing search options - shannon-->
+
+            <!-- <div fxLayout="row" fxLayoutGap="10px" formGroupName="SearchTypeControls">
+              <mat-checkbox 
+                id="checkSearchRoutes" 
+                formControlName="checkSearchRoutes"  
+                (change)="SearchTypeChanged($event)">Search Route(s)
+              </mat-checkbox> -->
               <!-- TODO: Once backend functionality is supported, remove below *ngIf="false" to display checkboxes -->
-              <mat-checkbox *ngIf="false" id="checkSearchDepart" formControlName="checkSearchDepart" color="primary" (change)="SearchTypeChanged($event)">Search Depart Risk</mat-checkbox>
+              <!-- <mat-checkbox *ngIf="false" id="checkSearchDepart" formControlName="checkSearchDepart" color="primary" (change)="SearchTypeChanged($event)">Search Depart Risk</mat-checkbox>
               <mat-checkbox *ngIf="false" id="checkSearchGeofence" formControlName="checkSearchGeofence" color="accent" (change)="SearchTypeChanged($event)">Create Geofence</mat-checkbox>
-            </div>
-            <mat-error class="mt-10" *ngIf="RouteInputForm.controls['SearchTypeControls'].hasError('requireCheckboxesToBeChecked')">
+            </div> -->
+            <!-- <mat-error class="mt-10" *ngIf="RouteInputForm.controls['SearchTypeControls'].hasError('requireCheckboxesToBeChecked')">
                 At least one checkbox is required
-            </mat-error>
-          </mat-card-content>
-        </mat-card>
+            </mat-error> -->
+          <!-- </mat-card-content>
+        </mat-card> -->
 
         <div formGroupName="SearchFormControls" fxLayout="column">
           <mat-form-field>
@@ -83,8 +98,6 @@
           <mat-hint *ngIf="DepartureTimes.valid">Selected Departure Time</mat-hint>
           <mat-error *ngIf="DepartureTimes.hasError('required')">A departure time is required</mat-error>
         </mat-dialog-content>
-      </div>
-
       <!--using lcu-select-->
       <div formGroupName="SearchConditions" fxLayout="column" fxFlex>
         <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
@@ -98,7 +111,7 @@
           <mat-error *ngIf="ConditionVariableNames.hasError('required') && ConditionVariableNames.value">Condition variables are required</mat-error>
         </mat-dialog-content>
       </div>
-
+    </div>
       <div formGroupName="SearchFormControls" fxLayout="column" fxFlex>
         <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
             <mat-dialog-content fxLayout="column">

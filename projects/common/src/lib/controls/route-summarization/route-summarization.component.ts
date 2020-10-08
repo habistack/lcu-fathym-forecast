@@ -11,7 +11,7 @@ import { ForecastPlotsService } from '../../services/forecast-plots.service';
 @Component({
   selector: 'lcu-route-summarization',
   templateUrl: './route-summarization.component.html',
-  styleUrls: ['./route-summarization.component.css']
+  styleUrls: ['./route-summarization.component.scss']
 })
 export class RouteSummarizationComponent implements OnInit, OnDestroy {
 
@@ -109,6 +109,7 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   }
 
   protected calculateAverageDelayRisk(): void {
+    debugger
     this.AverageDelayRisk = this.roundToFourDecimals(
       this.AllData.forecast.routeDelayRisk.reduce((a, b) => a + b, 0) /
       this.AllData.forecast.routeDelayRisk.length

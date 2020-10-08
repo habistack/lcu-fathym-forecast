@@ -16,7 +16,7 @@ import { ForecastPlotsService } from '../../services/forecast-plots.service';
 @Component({
   selector: 'lcu-forecast-details',
   templateUrl: './forecast-details.component.html',
-  styleUrls: ['./forecast-details.component.css']
+  styleUrls: ['./forecast-details.component.scss']
 })
 export class ForecastDetailsComponent implements OnInit {
 

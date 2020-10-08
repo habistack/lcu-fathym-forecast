@@ -1,26 +1,41 @@
-<div [className]="SelectedTheme" style="height: 100%">
-  <mat-card class="example-card">
-    <mat-card-header fxLayoutAlign="start center" color="primary">
-      <div mat-card-avatar class="example-header-image">
-        <!-- thinky logo here -->
-        <div class="primary-logo" logo-alt="Fathym Logo"></div>
-      </div>
-      <mat-card-title class="paragraph-title">{{ Title }}</mat-card-title>
-      <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div fxLayout="column" fxLayoutGap="10px">
-        <div fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"
-          class="primary-background parent-one padding-2">
-          <div fxFlex="1 1 auto" class="margin-right-1 left-side-bar" ngClass.lt-md="margin-bottom-1">
+<div [className]="SelectedTheme" fxFlexFill>
+  <div fxFlexFill>
+    <div fxFlexFill>
+      <div fxFlexFill fxLayoutGap="10" fxLayout="column">
+        <div 
+             fxFlexFill
+             fxLayout.gt-md="row" 
+             fxLayout.lt-md="column" 
+             fxLayoutAlign="center">
+          <div fxLayout="column" fxFlex="auto" fxLayoutGap="5px" class="left-side-bar">
+            
+            <div 
+              fxLayout="row"
+              fxLayoutGap="5px"
+              fxLayoutAlign="space-between center" 
+              color="primary" 
+              class="header background-fill">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <div>
+                  <div class="primary-logo" logo-alt="Fathym Logo"></div>
+                </div>
+                <div class="title primary-logo-text">
+                <h3> {{ Title }}</h3>
+                </div>
+              </div>
+              <div class="divider-fill-vert"></div>
+              <!-- <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle> -->
+            </div>
+
             <lcu-search-form></lcu-search-form>
+
             <!-- INSERT GRAPHS HERE -->
             <div #topOfSummarization></div>
             <lcu-route-summarization></lcu-route-summarization>
             <lcu-chart-plots></lcu-chart-plots>
             <!-- <lcu-forecast-plots></lcu-forecast-plots> -->
           </div>
-          <div fxFlex="1 1 70%" class="margin-right-1" ngClass.lt-md="margin-bottom-1" ngClass.sm="map-row-height">
+          <div fxFlex="70">
             <lcu-route-map></lcu-route-map>
           </div>
         </div>
@@ -31,6 +46,6 @@
 
         <!-- <lcu-departure-table></lcu-departure-table> -->
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>
