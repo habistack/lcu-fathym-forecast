@@ -1,5 +1,5 @@
-<mat-dialog-content>
-  <div fxLayout="row" fxLayoutAlign="space-between">
+<mat-dialog-content class="chart-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <h3>{{ RouteDisplayName }}</h3>
     <button mat-raised-button (click)="CloseModal()">
       <mat-icon>close</mat-icon>
@@ -15,8 +15,198 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
   <button class="json-download-button" mat-raised-button (click)="ExportToJson()">Download as JSON</button>
-  <div *ngFor="let config of PlotConfigs">
-    <lcu-variable-data-plot [valid-times]="ValidTimes" [forecast-data]="ForecastData" [plot]="config">
-    </lcu-variable-data-plot>
+  <div *ngFor="let chart of Charts" fxLayout="column">
+
+    <!-- Temperature -->
+    <div *ngIf="chart.name === 'Road Temperature'" class="legend" fxLayout="column">
+      <p class="accent-primary-text">{{chart.name}}</p>
+      <div class="temp-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+      <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Hot</span>
+          <span class="temp-value accent-primary-text">&gt; 95&deg;</span>
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Warm</span>
+          <span class="temp-value accent-primary-text">95&deg; - 85&deg;</span>
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Cool</span>
+          <span class="temp-value accent-primary-text">85&deg; - 32&deg;</span>
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Cold</span>
+          <span class="temp-value accent-primary-text">&lt; 32&deg;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Road State -->
+    <div *ngIf="chart.name === 'Road State' " class="legend" fxLayout="column">
+      <p class="accent-primary-text">{{chart.name}}</p>
+      <div class="road-cond-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+      <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Dry</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Wet</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Snow</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Ice</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Hail</span>
+          <!-- <span class="temp-value accent-primary-text">&gt; 95&deg;</span> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Delay Risk -->
+    <div *ngIf="chart.name === 'Potential Delay Risk'" class="legend" fxLayout="column">
+      <p class="accent-primary-text">{{chart.name}}</p>
+      <div class="delay-risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+      <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Normal</span>
+        </div>
+        <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+        <span class="legend-lable-name accent-primary-text">Slight</span>
+      </div> -->
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Moderate</span>
+        </div>
+        <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+        <span class="legend-lable-name accent-primary-text">Heavy</span>
+      </div> -->
+        <!-- <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+        <span class="legend-lable-name accent-primary-text">Severe</span>
+      </div> -->
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Extreme</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crosswind Risk -->
+    <div *ngIf="chart.name === 'Crosswind Risk' || chart.name === 'Wind Speed'" class="legend" fxLayout="column">
+      <p class="accent-primary-text">{{chart.name}}</p>
+      <div class="risk-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+      <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Low</span>
+        </div>
+
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Moderate</span>
+        </div>
+
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Severe</span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="chart.name === 'Precipitation Rate'" class="legend" fxLayout="column">
+      <p class="accent-primary-text">{{chart.name}}</p>
+      <div class="precip-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+      <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Rain</span>
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Snow</span>
+        </div>
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">Hail</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- snow depth -->
+    <div *ngIf="chart.name === 'Snow Depth'" class="legend" fxLayout="column">
+      <p class="accent-primary-text">{{chart.name}}</p>
+      <div class="condition-gradient-ltr" fxLayout="row" fxLayoutAlign="start start"></div>
+      <div class="legend-label" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">&lt; 2 {{precipMeasurment}}</span>
+        </div>
+
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">2 - 4 {{precipMeasurment}}</span>
+          <!-- <span class="temp-value accent-primary-text">0.25 - 0.50 {{precipMeasurment}}</span> -->
+        </div>
+
+        <div class="legend-label" fxLayout="column" fxLayoutAlign="center center">
+          <span class="legend-lable-name accent-primary-text">&gt; 4 {{precipMeasurment}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- <lcu-chart-plots 
+    [width]="PlotWidth" >
+    </lcu-chart-plots> -->
+    <lcu-charts-line-chart-simple class="chart-container" 
+      [animations]="animations" 
+      [autoScale]="autoScale"
+      [backgroundGradientConfigs]="chart.chartGradient" 
+      [curve]="curve" 
+      [gradient]="gradient"
+      [legendPosition]="legendPosition" 
+      [legendTitle]="legendTitle" 
+      [legend]="showLegend"
+      [maxXAxisTickLength]="maxXAxisTickLength"
+      [maxYAxisTickLength]="maxYAxisTickLength"
+      [rangeFillOpacity]="rangeFillOpacity" 
+      [results]="chart.displayData" 
+      [rotateXAxisTicks]="rotateXAxisTicks"
+      [roundDomains]="roundDomains" 
+      [schemeType]="schemeType" 
+      [scheme]="colorScheme" 
+      [showGridLines]="showGridLines"
+      [showPercentage]="showPercentage" 
+      [showXAxisLabel]="showXAxisLabel" 
+      [showYAxisLabel]="showYAxisLabel"
+      [timeline]="timeline" 
+      [tooltipDisabled]="tooltipDisabled" 
+      [trimXAxisTicks]="trimXAxisTicks"
+      [trimYAxisTicks]="trimYAxisTicks" 
+      [units]="chart.yUnits" 
+      [view]="view" 
+      [xAxisDateFormat]="xAxisDateFormat"
+      [xAxisIsDate]="xAxisIsDate" 
+      [xAxisLabel]="xAxisLabel" 
+      [xAxis]="showXAxis" 
+      [xScaleMax]="xScaleMax"
+      [xScaleMin]="xScaleMin" 
+      [yAxisLabel]="yAxisLabel" 
+      [yAxisTickFormatting]="chart.YtickFormat"
+      [yAxisTicks]="chart.yAxisTicks" 
+      [yAxis]="showYAxis" 
+      [dims]="dims" 
+      [yScaleMax]="chart.yScaleMax"
+      [yScaleMin]="chart.yScaleMin" 
+      [forceManualXHover]="ManualHover" 
+      [formatTooltip]="chart.formatTooltip"
+      (activate)="activate($event)" 
+      (deactivate)="deactivate($event)"
+      (HoveredVerticalChange)="hoveredVerticalChange($event)" 
+      (legendLabelClick)="onLegendLabelClick($event)"
+      (select)="select($event)">
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="tooltip-item" *ngIf="!chart.formatTooltip">
+          {{model.series}}: {{model.value}}{{chart.yUnits}}
+        </div>
+        <div class="tooltip-item" *ngIf="chart.formatTooltip">
+          {{model.series}}: {{chart.tooltipFormatting(model.value)}}
+        </div>
+      </ng-template>
+    </lcu-charts-line-chart-simple>
   </div>
 </mat-dialog-content>
