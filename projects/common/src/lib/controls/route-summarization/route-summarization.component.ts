@@ -6,11 +6,12 @@ import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { RoutePointModel } from '../../models/route-point.model';
 import { ForecastDetailsComponent } from '../forecast-details/forecast-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ForecastPlotsService } from '../../services/forecast-plots.service';
 
 @Component({
   selector: 'lcu-route-summarization',
   templateUrl: './route-summarization.component.html',
-  styleUrls: ['./route-summarization.component.css']
+  styleUrls: ['./route-summarization.component.scss']
 })
 export class RouteSummarizationComponent implements OnInit, OnDestroy {
 
@@ -26,6 +27,8 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   public Elevation: string;
   public WindSpeed: string;
   public Precipitation: string;
+  public TempUnits: string;
+  public SpeedUnits: string;
 
   protected forecastPlotDataSubscription: Subscription;
   protected chartMouseMovedSubsription: Subscription;
@@ -33,6 +36,7 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
 
   constructor(
     protected notificationService: NotificationService,
+    protected forecastPlotsService: ForecastPlotsService,
     public dialog: MatDialog) {
     this.DisplaySummarization = false;
   }
@@ -49,6 +53,8 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
         this.calculateRouteDuration();
         this.calculateAverageDelayRisk();
         this.DisplaySummarization = true;
+        this.SpeedUnits = this.forecastPlotsService.getSpeedMeasurement();
+        this.TempUnits = this.forecastPlotsService.getTempMeasurements();
       }
 
     );
@@ -64,10 +70,10 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
         if (this.ChartPointDetails.Index !== -1) {
           // assign point summary properties for when user moves mouse on the graph:
           this.DelayRisk = this.roundToTwoDecimals(forecast.routeDelayRisk[cpdIdx]);
-          this.RoadTemp = this.roundToTwoDecimals(forecast.roadTemperature[cpdIdx]) + ' F';
-          this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[cpdIdx]) + ' F';
+          this.RoadTemp = this.roundToTwoDecimals(forecast.roadTemperature[cpdIdx]) + ' F' ;
+          this.AirTemp = this.roundToTwoDecimals(forecast.surfaceTemperature[cpdIdx]) + ' F' ;
           // this.Elevation = forecast.roadTemperature[cpdIdx]; // assign this when elevation comes back
-          this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[cpdIdx]) + ' mph';
+          this.WindSpeed = this.roundToTwoDecimals(forecast.windSpeed[cpdIdx]) + " mph";
           this.Precipitation = this.roundToTwoDecimals(this.convertMMtoIN(forecast.precipitationRateMillisHr[cpdIdx])) + ' in/hr';
         }
       }
@@ -103,6 +109,7 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   }
 
   protected calculateAverageDelayRisk(): void {
+    debugger
     this.AverageDelayRisk = this.roundToFourDecimals(
       this.AllData.forecast.routeDelayRisk.reduce((a, b) => a + b, 0) /
       this.AllData.forecast.routeDelayRisk.length

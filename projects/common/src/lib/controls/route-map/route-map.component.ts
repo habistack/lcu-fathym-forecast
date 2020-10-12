@@ -16,6 +16,8 @@ import { LoadMapService, LcuMapsAzureMapElementComponent } from '@lowcodeunit/lc
 import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouteInfoModel } from '../../models/route-info.model';
+import { TemperatureConversion } from '@lcu/common';
+
 
 
 @Component({
@@ -42,7 +44,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('map')
   public set map(val: LcuMapsAzureMapElementComponent) {
     if (val && (this.Config && this.MapService.isLoaded)) {
-      debugger;
+      // debugger;
       this.Maper = val;
     }
   }
@@ -242,6 +244,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         if (!data) {
           console.error('mouse moved - No data returned'); return;
         }
+        // console.log("data in route map: ", data)
 
         // console.log('data', data);
         // setInterval(() => {
@@ -856,12 +859,25 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.DefaultRoute = this.determineDefaultRoute();
     this.changeSelectedRoute(this.DefaultRoute);
     this.nameRoutes();
+    this.convertKelvinTemp();
     this.moveSelectedRouteToEnd();
     // update plot and delay risk data
     this.notificationService.UpdateForecastPlotData(this.DefaultRoute);
     this.displayRoute(this.Routes);
 
   }
+  protected convertKelvinTemp(): void{
+    this.Routes.forEach((route: any) =>{
+      // console.log("route here: ", route)
+      route.forecast.surfaceTemperature = route.forecast.surfaceTemperature.map(x => {
+        return Math.round(TemperatureConversion.KelvinToFahrenheit(x));
+      });
+      route.forecast.roadTemperature = route.forecast.roadTemperature.map(x => {
+        return Math.round(TemperatureConversion.KelvinToFahrenheit(x));
+      });
+    })
+  }
+
   /**gives route a name  */
   protected nameRoutes(): void {
     let i = 0;
@@ -999,6 +1015,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   protected setCurrentMarker(index: number) {
     // setInterval(() => {
+      // console.log("setting current marker: ", index)
     this.Maper.map.removeLayers(['currentMark']);
 
     // }, 500)
