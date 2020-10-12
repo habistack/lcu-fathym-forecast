@@ -139,7 +139,6 @@ export class ForecastDetailsComponent implements OnInit {
   public onHoverChange(e) {
     this.ManualHover = e;
     // console.log('on hover change...: ', e)
-    this.ManualHover = e;
   }
 
   public activate(data: any): void {
