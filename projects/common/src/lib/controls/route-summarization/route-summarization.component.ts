@@ -109,7 +109,7 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   }
 
   protected calculateAverageDelayRisk(): void {
-    debugger
+    // debugger
     this.AverageDelayRisk = this.roundToFourDecimals(
       this.AllData.forecast.routeDelayRisk.reduce((a, b) => a + b, 0) /
       this.AllData.forecast.routeDelayRisk.length

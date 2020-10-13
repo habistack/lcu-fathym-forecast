@@ -544,7 +544,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public MapLoaded(evt?: Event) {
-    debugger;
+    // debugger;
     if (this.Maper && this.MapService.isLoaded) {
       console.log('Map loaded', evt);
       this.setUpDefaultLayer();
