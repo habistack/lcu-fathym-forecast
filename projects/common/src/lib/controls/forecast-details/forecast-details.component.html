@@ -196,6 +196,7 @@
       [formatTooltip]="chart.formatTooltip"
       (activate)="activate($event)" 
       (deactivate)="deactivate($event)"
+      (pixelValueXChanged)="onHoverChange($event)"
       (HoveredVerticalChange)="hoveredVerticalChange($event)" 
       (legendLabelClick)="onLegendLabelClick($event)"
       (select)="select($event)">

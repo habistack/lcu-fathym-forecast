@@ -138,6 +138,8 @@ export class ChartPlotsComponent implements OnInit {
 
   public hoveredVerticalChange(e) {
     // convert incomming string date to seconds
+    // console.log('chart value ', e)
+
     const seconds = Date.parse(e.value)/1000;
     let point;
 
