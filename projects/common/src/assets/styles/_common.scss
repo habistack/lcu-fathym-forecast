@@ -9,6 +9,9 @@ $primary: map-get($global-theme, primary);
 $accent: map-get($global-theme, accent);
 $warn: map-get($global-theme, warn);
 
+$orange-accent: map-get($mat-orange, 500);
+$green-accent: map-get($mat-green, 500);
+
 $logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
 $divider-size: 5px;
 $divider: mat-color($primary);
@@ -32,6 +35,14 @@ html, body {
 
 .secondary-text {
     color: $secondary-text;
+}
+
+.orange-accent {
+    background-color: $orange-accent;
+}
+
+.green-accent {
+    background-color: $green-accent;
 }
 
 .divider-fill-vert {
