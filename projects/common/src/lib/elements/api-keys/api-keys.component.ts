@@ -144,6 +144,7 @@ public get secondaryKeyControl(): AbstractControl {
 
   protected stateChanged() {
     if (this.State.APIKeys) {
+      debugger;
       this.APIKeyTypes = Object.keys(this.State.APIKeys);
     } else {
       this.APIKeyTypes = [];
