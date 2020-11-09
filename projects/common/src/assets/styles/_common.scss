@@ -13,7 +13,7 @@ $logo-color: map-get(map-get($global-theme, 'foreground'), 'icon');
 $divider-size: 5px;
 $divider: mat-color($primary);
 $background: map-get(map-get($global-theme, 'background'), 'background');
-$background-fill: map-get($mat-grey, 900);
+$background-fill: rgba(map-get($mat-grey, 900), .75);
 $foreground: map-get(map-get($global-theme, 'foreground'), 'base');
 $primary-text: mat-color($primary);
 $secondary-text: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
