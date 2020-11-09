@@ -1,7 +1,363 @@
-<div class="spread" *ngIf="!State.Loading">
-  <h2>Fathym Forecast API Keys</h2>
+<div 
+  class="spread" 
+  *ngIf="!State.Loading">
+  <div 
+    fxLayout="column" 
+    fxLayoutGap="5px">
+    <div 
+      fxLayout="row" 
+      fxLayoutGap="5px">
+      <div
+        fxFlex="75"
+        fxLayoutAlign="start end"
+        class="welcome-bg background-fill">
+        <div class="welcome-index" 
+             fxLayout="row" 
+             fxLayoutGap="30px">
+          <div fxFlex="30">
+            <h1 fxLayout="column">
+              <span class="plain-text">{{ Title }}</span>
+            </h1>
+          </div>
+          
+          <div class="divider-fill-vert"></div>
 
-  <ng-container *ngIf="!State.HasAccess">
+          <div fxLayout="column" fxLayoutAlign="end start">
+            <h2 class="plain-text theme-accent-text" fxFlex="100%">
+              {{ PageDescription }}
+            </h2>
+            <p class="paragraph-title">
+              {{ PageDescriptionDetails }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div fxFlex class="background-fill blank-header"></div>
+    </div>
+
+    <div fxLayout="row">
+      <div 
+        fxFlexFill 
+        fxLayout="row" 
+        fxLayoutGap="5px">
+
+        <!--Sidebar-->
+        <div
+          fxFlex="25"
+          fxLayout="row"
+          fxLayoutAlign="start start"
+          style="padding-left: 50px; padding-right: 50px;"
+          class="background-fill box-side-triangle"
+        >
+          <!-- <div fxLayout="column" fxFlex="90" style="padding-top: 100px">
+            <div class="divider-fill-hor"></div>
+
+            <h3 style="font-size: 20px" class="plain-text whats-next-text">
+              What's Next?
+            </h3>
+            <p>
+              Use the Journeys below to familiarize yourself with the rest of
+              what you can do with Fathym!
+            </p>
+
+            <div class="divider-fill-hor"></div>
+
+            <p>
+              <a mat-button href="https://www.fathym-it.com/framework" target="_blank" color="accent">Framework Documentation</a>
+            </p>
+
+            <div class="divider-fill-hor"></div>
+          </div> -->
+        </div>
+
+        <!--Content-->
+        <div 
+          fxFlex
+          fxLayout="column" 
+          fxLayoutGap="30px" 
+          class="background-fill padding-3">
+          <!-- Start API Keys -->
+          <div 
+            fxLayout="column" 
+            fxLayoutGap="15px"
+            class="margin-4">
+            <h3 class="plain-text-bold whats-next-text">
+              API Keys
+            </h3>
+            <div class="margin-2">
+              <form
+                fxLayout="column"
+                fxLayoutGap="10px"
+                novalidate>
+                <div 
+                  fxLayout="row" 
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="10px">
+                  <mat-form-field 
+                    fxFlex="50">
+                    <mat-label>Primary Key</mat-label>
+                    <input 
+                      [type]="HidePrimaryKey ? 'password' : 'text'" 
+                      matInput 
+                      formControlName="primaryKeyControl">
+                    <mat-error *ngIf="primaryKeyControl.hasError('required')">
+                      Primary Key <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-icon
+                      matBadgePosition="below after"
+                      matBadgeColor="primary"
+                      matBadgeOverlap="false"
+                      color="accent"
+                      matSuffix
+                      (click)="HidePrimaryKey = !HidePrimaryKey"
+                      class="cursor-pointer"
+                    >
+                    {{ HidePrimaryKey ? "visibility_off" : "visibility" }}
+                  </mat-icon>
+                  <span>|</span>
+                  <button mat-button color="primary">Regenerate</button>
+                </div>
+                <div 
+                  fxLayout="row" 
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="10px">
+                  <mat-form-field
+                    fxFlex="50">
+                    <mat-label>Secondary Key</mat-label>
+                    <input 
+                      [type]="HideSecondaryKey ? 'password' : 'text'" 
+                      matInput 
+                      formControlName="secondaryKeyControl">
+                    <mat-error *ngIf="secondaryKeyControl.hasError('required')">
+                      Secondary Key <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-icon
+                      matBadgePosition="below after"
+                      matBadgeColor="primary"
+                      matBadgeOverlap="false"
+                      color="accent"
+                      matSuffix
+                      (click)="HideSecondaryKey = !HideSecondaryKey"
+                      class="cursor-pointer"
+                    >
+                    {{ HideSecondaryKey ? "visibility_off" : "visibility" }}
+                  </mat-icon>
+                  <span>|</span>
+                  <button mat-button color="primary">Regenerate</button>
+                </div>
+              </form>
+            </div>
+            <div 
+              fxLayout="row"
+              fxLayoutGap="10px">
+                <button 
+                  mat-raised-button 
+                  color="primary"
+                  (click)="Demo()">
+                  <mat-icon>
+                    launch
+                  </mat-icon> 
+                  Demo
+                </button>
+                <button 
+                  mat-raised-button 
+                  color="primary"
+                  (click)="Description()">
+                  <mat-icon>
+                    description
+                  </mat-icon> 
+                  Documentation
+                </button>
+            </div>
+            <div class="divider-fill-hor"></div>
+          </div>
+          <!-- End API Keys -->
+
+          <!-- Start Try It Out-->
+          <div 
+            fxLayout="column"
+            fxLayoutGap="15px"
+            class="margin-4">
+            <h3 class="plain-text-bold whats-next-text">
+              Try It
+            </h3>
+            <span class="plain-text margin-bottom-5">
+              Note: The following links will open in a new tab and may require you to sign in to Microsoft.
+            </span>
+
+            <div 
+              class="margin-3"
+              fxLayout="column" 
+              fxLayoutGap="10px">
+
+              <div 
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign="start center">
+                <button 
+                  mat-raised-button 
+                  color="accent"
+                  (click)="TryItOut('get')">
+                  Get
+                </button>
+                <span class="plain-text"> 
+                  List of weather variables supported via the API
+                </span>
+                <button mat-button>
+                  <mat-icon>launch</mat-icon>
+                </button>
+              </div>
+
+              <div 
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign="start center">
+                <button 
+                  mat-raised-button 
+                  color="accent"
+                  (click)="TryItOut('get')">
+                  Get
+                </button>
+                <span class="plain-text"> 
+                  Fetch a maptile image for a give variable, time, zoom level, x, and y
+                </span>
+                <button mat-button>
+                  <mat-icon>launch</mat-icon>
+                </button>
+              </div>
+
+              <div 
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign="start center">
+                <button 
+                  mat-raised-button 
+                  color="accent"
+                  (click)="TryItOut('get')">
+                  Get
+                </button>
+                <span class="plain-text"> 
+                  List of available timely maptiles
+                </span>
+                <button mat-button>
+                  <mat-icon>launch</mat-icon>
+                </button>
+              </div>
+
+              <div 
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign="start center">
+                <button 
+                  mat-raised-button 
+                  color="primary"
+                  (click)="TryItOut('post')">
+                  Post
+                </button>
+                <span class="plain-text"> 
+                  Query a sequence of variables across a lat/long/time set
+                </span>
+                <button mat-button>
+                  <mat-icon>launch</mat-icon>
+                </button>
+              </div>
+          </div>
+            <div class="divider-fill-hor"></div>
+          </div>
+          <!-- End Try It Out -->
+
+          <!-- Start Usage / Health -->
+          <div 
+            fxLayout="column" 
+            fxLayoutGap="15px" 
+            class="margin-4">
+            <h3 class="plain-text-bold whats-next-text">
+              Usage/Health
+            </h3>
+            <div class="margin-3">
+              <button mat-raised-button color="primary">
+                <mat-icon>assessment</mat-icon>
+                Analytics Reports
+              </button>
+            </div>
+
+            <div class="divider-fill-hor"></div>
+          </div>
+          <!-- End Usage / Health -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- <div fxFlexFill>
+    <div fxFlexFill>
+      <div fxFlexFill>
+        <div fxFlexFill fxLayoutGap="10" fxLayout="column">
+          <div 
+                fxFlexFill
+                fxLayout.gt-md="row" 
+                fxLayout.lt-md="column" 
+                fxLayoutAlign="center"
+                fxLayoutGap="10px">
+            <div fxLayout="column" fxFlex="auto" fxLayoutGap="5px" class="left-side-bar">
+              
+
+              <div 
+                fxLayout="row"
+                fxLayoutGap="5px"
+                fxLayoutAlign="space-between center" 
+                color="primary" 
+                class="header background-fill">
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <div class="title primary-logo-text">
+                  <h3> {{ Title }}</h3>
+                  <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle>
+                  </div>
+                </div>
+                <div class="divider-fill-vert"></div>
+              </div>
+
+
+            </div>
+            <div 
+              fxFlex="70"
+              class="background-fill">
+              sdfasfd
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <ng-container *ngIf="!State.HasAccess">
     <h3>
       You do not currently have access to the Fathym Forecast, please visit:
     </h3>
@@ -40,9 +396,9 @@
     >
       Developer Portal
     </a>
-  </div>
+  </div> -->
 </div>
-<!-- <app-css-theme></app-css-theme> -->
+
 <div class="spread" *ngIf="State.Loading">
   <mat-spinner></mat-spinner>
 </div>

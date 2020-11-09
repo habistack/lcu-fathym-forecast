@@ -1,6 +1,10 @@
 @import '../../../../../node_modules/@lcu/common/assets/theming/common-theme';
+@import '../../../../../node_modules/@lcu/common/assets/styles/utils/margins-padding';
+@import '../../../../../node_modules/@lcu/common/assets/styles/utils/fathym-cursors';
+
 
 $global-theme: fathym-ivy-theme(true);
+
 $primary: map-get($global-theme, primary);
 $accent: map-get($global-theme, accent);
 $warn: map-get($global-theme, warn);
@@ -19,6 +23,7 @@ html, body {
     height: 100%;
     margin: 0 !important;
     background-color: $background;
+    color: white;
 }
 
 .accent-primary-text {
@@ -31,10 +36,10 @@ html, body {
 
 .divider-fill-vert {
     background-color: $divider;
-    height: 100%;
+    min-height: 100%;
     top:10%;
     bottom:10%;
-    width: $divider-size;
+    min-width: $divider-size;
 }
 
 .divider-fill-hor {
