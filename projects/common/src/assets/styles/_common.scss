@@ -39,10 +39,12 @@ html, body {
 
 .orange-accent {
     background-color: $orange-accent;
+    color: map-get(map-get($mat-orange, contrast), 600);
 }
 
 .green-accent {
     background-color: $green-accent;
+    color: map-get(map-get($mat-green, contrast), 600);
 }
 
 .divider-fill-vert {
