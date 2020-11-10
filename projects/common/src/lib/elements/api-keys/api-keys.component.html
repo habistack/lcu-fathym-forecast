@@ -86,9 +86,9 @@
             </h3>
             <div class="margin-2">
               <form
+                [formGroup]="KeysFormGroup"
                 fxLayout="column"
                 fxLayoutGap="10px"
-                [formGroup]="KeysFormGroup"
                 novalidate>
                 <div 
                   fxLayout="row" 
@@ -100,8 +100,8 @@
                     <input 
                       [type]="HidePrimaryKey ? 'password' : 'text'" 
                       matInput 
-                      formControlName="primaryKeyControl">
-                    <mat-error *ngIf="primaryKeyControl.hasError('required')">
+                      formControlName="primaryKeyControl"/>
+                    <mat-error *ngIf="PrimaryKeyControl.hasError('required')">
                       Primary Key <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
@@ -127,10 +127,10 @@
                     fxFlex="50">
                     <mat-label>Secondary Key</mat-label>
                     <input 
+                      formControlName="secondaryKeyControl"
                       [type]="HideSecondaryKey ? 'password' : 'text'" 
-                      matInput 
-                      formControlName="secondaryKeyControl">
-                    <mat-error *ngIf="secondaryKeyControl.hasError('required')">
+                      matInput />
+                    <mat-error *ngIf="SecondaryKeyControl.hasError('required')">
                       Secondary Key <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
@@ -200,15 +200,15 @@
                 <button 
                   mat-raised-button 
                   class="orange-accent"
-                  (click)="TryItOut('get')">
+                  (click)="ExternalLink('https://lcu-prd.portal.azure-api.net/docs/services/fathym-weather-api/operations/get-api-v0-maptile-fetch-variable-t-z-y-x')">
                   Get
                 </button>
                 <span class="plain-text"> 
                   List of weather variables supported via the API
                 </span>
-                <button mat-button>
+                <!-- <button mat-button>
                   <mat-icon color="accent">launch</mat-icon>
-                </button>
+                </button> -->
               </div>
 
               <div 
@@ -218,15 +218,15 @@
                 <button 
                   mat-raised-button 
                   class="orange-accent"
-                  (click)="TryItOut('get')">
+                  (click)="ExternalLink('https://lcu-prd.portal.azure-api.net/docs/services/fathym-weather-api/operations/get-api-v0-maptile-manifest?')">
                   Get
                 </button>
                 <span class="plain-text"> 
                   Fetch a maptile image for a give variable, time, zoom level, x, and y
                 </span>
-                <button mat-button>
+                <!-- <button mat-button>
                   <mat-icon color="accent">launch</mat-icon>
-                </button>
+                </button> -->
               </div>
 
               <div 
@@ -236,15 +236,15 @@
                 <button 
                   mat-raised-button 
                   class="orange-accent"
-                  (click)="TryItOut('get')">
+                  (click)="ExternalLink('https://lcu-prd.portal.azure-api.net/docs/services/fathym-weather-api/operations/get-api-v0-api-variables?')">
                   Get
                 </button>
                 <span class="plain-text"> 
                   List of available timely maptiles
                 </span>
-                <button mat-button>
+                <!-- <button mat-button>
                   <mat-icon color="accent">launch</mat-icon>
-                </button>
+                </button> -->
               </div>
 
               <div 
@@ -254,15 +254,15 @@
                 <button 
                   mat-raised-button 
                   class="green-accent"
-                  (click)="TryItOut('post')">
+                  (click)="ExternalLink('https://lcu-prd.portal.azure-api.net/docs/services/fathym-weather-api/operations/post-api-v0-point-query?')">
                   Post
                 </button>
                 <span class="plain-text"> 
                   Query a sequence of variables across a lat/long/time set
                 </span>
-                <button mat-button>
+                <!-- <button mat-button>
                   <mat-icon color="accent">launch</mat-icon>
-                </button>
+                </button> -->
               </div>
           </div>
             <div class="divider-fill-hor"></div>
@@ -278,7 +278,10 @@
               Usage/Health
             </h3>
             <div class="margin-3">
-              <button mat-raised-button color="primary">
+              <button 
+                mat-raised-button 
+                color="primary"
+                (click)="ExternalLink('https://lcu-prd.portal.azure-api.net/Developer/Analytics')">
                 <mat-icon>assessment</mat-icon>
                 Analytics Reports
               </button>

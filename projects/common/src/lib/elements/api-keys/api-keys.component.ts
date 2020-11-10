@@ -15,10 +15,6 @@ export class LcuFathymForecastApiKeysContext extends LCUElementContext<
 export const SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT =
   'lcu-fathym-forecast-api-keys-element';
 
-// Types - just testing, depending on state data for this - shannon
-type TryItOut = 'get' | 'post';
-
-
 @Component({
   selector: SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
   templateUrl: './api-keys.component.html',
@@ -33,14 +29,14 @@ export class LcuFathymForecastApiKeysElementComponent
 /**
  * Access primaryKeyControl field within the form group
  */
-public get primaryKeyControl(): AbstractControl {
+public get PrimaryKeyControl(): AbstractControl {
   return this.KeysFormGroup.get('primaryKeyControl');
 }
 
 /**
  * Access secondaryKeyControl field within the form group
  */
-public get secondaryKeyControl(): AbstractControl {
+public get SecondaryKeyControl(): AbstractControl {
   return this.KeysFormGroup.get('secondaryKeyControl');
 }
 
@@ -102,6 +98,8 @@ public get secondaryKeyControl(): AbstractControl {
   public ngOnInit() {
     super.ngOnInit();
 
+    this.setupForm();
+
     this.forecastCtxt.Context.subscribe((state) => {
       this.State = state;
 
@@ -109,11 +107,13 @@ public get secondaryKeyControl(): AbstractControl {
         this.stateChanged();
       }
     });
-
-    this.setupKeysFormGroup();
   }
 
   //  API Methods
+
+  public ExternalLink(val: string): void {
+    window.open(val, '_blank');
+  }
 
   public Demo(): void {
 
@@ -123,12 +123,8 @@ public get secondaryKeyControl(): AbstractControl {
 
   }
 
-  public TryItOut(val: TryItOut): void {
-
-  }
-
   //  Helpers
-  protected setupKeysFormGroup(): void {
+  protected setupForm(): void {
     this.KeysFormGroup = new FormGroup({
       primaryKeyControl: new FormControl('', {validators: Validators.required}),
       secondaryKeyControl: new FormControl('', {validators: Validators.required})
@@ -142,12 +138,29 @@ public get secondaryKeyControl(): AbstractControl {
     this.HidePrimaryKey = this.HideSecondaryKey = true;
   }
 
+  /**
+   * Listen for state changes
+   */
   protected stateChanged() {
+    debugger;
     if (this.State.APIKeys) {
-      debugger;
       this.APIKeyTypes = Object.keys(this.State.APIKeys);
     } else {
       this.APIKeyTypes = [];
     }
+    this.updateKeyValues();
+  }
+
+  /**
+   * Update API Key values
+   */
+  protected updateKeyValues(): void {
+    this.PrimaryKeyControl.setValue(
+      this.State.APIKeys.primaryKey || ''
+    );
+
+    this.SecondaryKeyControl.setValue(
+      this.State.APIKeys.secondaryKey || ''
+    );
   }
 }
