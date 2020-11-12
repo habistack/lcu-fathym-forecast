@@ -29,6 +29,10 @@ html, body {
     color: white;
 }
 
+.no-access {
+    background-color: rgba(mat-color($warn), .5);
+}
+
 .accent-primary-text {
     color: mat-color($accent) !important;
 }

@@ -1,7 +1,9 @@
 <div 
+  fxFlexFill
   class="spread" 
   *ngIf="!State.Loading">
   <div 
+    fxFlexFill
     fxLayout="column" 
     fxLayoutGap="5px">
     <div 
@@ -23,7 +25,7 @@
           <div class="divider-fill-vert"></div>
 
           <div fxLayout="column" fxLayoutAlign="end start">
-            <h2 class="plain-text theme-accent-text" fxFlex="100%">
+            <h2 class="plain-text theme-accent-text" >
               {{ PageDescription }}
             </h2>
             <p class="paragraph-title">
@@ -35,7 +37,22 @@
       <div fxFlex class="background-fill blank-header"></div>
     </div>
 
-    <div fxLayout="row">
+  <!--Start No Access-->
+  <div [ngClass]="{'no-access' : !State.HasAccess}">
+    <!-- <div fxLayout="row" class="background-fill"> -->
+      <div 
+        fxFlex="25"
+        *ngIf="State.HasAccess == false"
+        class="margin-5">
+        <lcu-fathym-forecast-no-access-element></lcu-fathym-forecast-no-access-element>
+      </div>
+    <!-- </div> -->
+  </div>
+  <!--End No Access-->
+
+    <div 
+      fxLayout="column" 
+      fxFlex>
       <div 
         fxFlexFill 
         fxLayout="row" 
@@ -49,33 +66,17 @@
           style="padding-left: 50px; padding-right: 50px;"
           class="background-fill box-side-triangle"
         >
-          <!-- <div fxLayout="column" fxFlex="90" style="padding-top: 100px">
-            <div class="divider-fill-hor"></div>
-
-            <h3 style="font-size: 20px" class="plain-text whats-next-text">
-              What's Next?
-            </h3>
-            <p>
-              Use the Journeys below to familiarize yourself with the rest of
-              what you can do with Fathym!
-            </p>
-
-            <div class="divider-fill-hor"></div>
-
-            <p>
-              <a mat-button href="https://www.fathym-it.com/framework" target="_blank" color="accent">Framework Documentation</a>
-            </p>
-
-            <div class="divider-fill-hor"></div>
-          </div> -->
         </div>
 
         <!--Content-->
-        <div 
+        <div  
           fxFlex
           fxLayout="column" 
           fxLayoutGap="30px" 
           class="background-fill padding-3">
+
+        <!--Has Access-->
+        <div *ngIf="State.HasAccess == true">
           <!-- Start API Keys -->
           <div 
             fxLayout="column" 
@@ -117,7 +118,11 @@
                     {{ HidePrimaryKey ? "visibility_off" : "visibility" }}
                   </mat-icon>
                   <span>|</span>
-                  <button mat-button color="primary">Regenerate</button>
+                  <button 
+                    (click)="ExternalLink(LinkRegen)"
+                    mat-button color="primary">
+                    Regenerate
+                  </button>
                 </div>
                 <div 
                   fxLayout="row" 
@@ -146,7 +151,12 @@
                     {{ HideSecondaryKey ? "visibility_off" : "visibility" }}
                   </mat-icon>
                   <span>|</span>
-                  <button mat-button color="primary">Regenerate</button>
+                  <button 
+                    (click)="ExternalLink(LinkRegen)"
+                    mat-button 
+                    color="primary">
+                    Regenerate
+                  </button>
                 </div>
               </form>
             </div>
@@ -156,7 +166,7 @@
                 <button 
                   mat-raised-button 
                   color="primary"
-                  (click)="Demo()">
+                  (click)="ExternalLink('https://www.fathym-it.com/forecast/')">
                   <mat-icon>
                     launch
                   </mat-icon> 
@@ -165,7 +175,7 @@
                 <button 
                   mat-raised-button 
                   color="primary"
-                  (click)="Description()">
+                  (click)="ExternalLink(LinkDocumentation)">
                   <mat-icon>
                     description
                   </mat-icon> 
@@ -206,9 +216,6 @@
                 <span class="plain-text"> 
                   List of weather variables supported via the API
                 </span>
-                <!-- <button mat-button>
-                  <mat-icon color="accent">launch</mat-icon>
-                </button> -->
               </div>
 
               <div 
@@ -224,9 +231,6 @@
                 <span class="plain-text"> 
                   Fetch a maptile image for a give variable, time, zoom level, x, and y
                 </span>
-                <!-- <button mat-button>
-                  <mat-icon color="accent">launch</mat-icon>
-                </button> -->
               </div>
 
               <div 
@@ -242,9 +246,6 @@
                 <span class="plain-text"> 
                   List of available timely maptiles
                 </span>
-                <!-- <button mat-button>
-                  <mat-icon color="accent">launch</mat-icon>
-                </button> -->
               </div>
 
               <div 
@@ -260,9 +261,6 @@
                 <span class="plain-text"> 
                   Query a sequence of variables across a lat/long/time set
                 </span>
-                <!-- <button mat-button>
-                  <mat-icon color="accent">launch</mat-icon>
-                </button> -->
               </div>
           </div>
             <div class="divider-fill-hor"></div>
@@ -294,113 +292,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-  <!-- <div fxFlexFill>
-    <div fxFlexFill>
-      <div fxFlexFill>
-        <div fxFlexFill fxLayoutGap="10" fxLayout="column">
-          <div 
-                fxFlexFill
-                fxLayout.gt-md="row" 
-                fxLayout.lt-md="column" 
-                fxLayoutAlign="center"
-                fxLayoutGap="10px">
-            <div fxLayout="column" fxFlex="auto" fxLayoutGap="5px" class="left-side-bar">
-              
-
-              <div 
-                fxLayout="row"
-                fxLayoutGap="5px"
-                fxLayoutAlign="space-between center" 
-                color="primary" 
-                class="header background-fill">
-                <div fxLayout="row" fxLayoutGap="10px">
-                  <div class="title primary-logo-text">
-                  <h3> {{ Title }}</h3>
-                  <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle>
-                  </div>
-                </div>
-                <div class="divider-fill-vert"></div>
-              </div>
-
-
-            </div>
-            <div 
-              fxFlex="70"
-              class="background-fill">
-              sdfasfd
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
-  </div>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- <ng-container *ngIf="!State.HasAccess">
-    <h3>
-      You do not currently have access to the Fathym Forecast, please visit:
-    </h3>
-
-    <a mat-raised-button color="primary" href="/billing/forecast">
-      Get your Fathym Forecast License Now
-    </a>
-  </ng-container>
-
-  <ng-container *ngIf="State.HasAccess">
-    <h3>Use the following keys to connect with the Fathym Forecast API:</h3>
-
-    <div class="spread" *ngFor="let apiKeyType of APIKeyTypes">
-      <mat-form-field class="mat-full-width">
-        <input
-          matInput
-          [placeholder]="apiKeyType"
-          [value]="State.APIKeys[apiKeyType]"
-          disabled
-        />
-      </mat-form-field>
-    </div>
-  </ng-container>
-
-  <div class="spread">
-    <h4>
-      Visit our developer portal for more information on the API, and to try it
-      out against your new keys.
-    </h4>
-
-    <a
-      mat-raised-button
-      color="accent"
-      [href]="State?.APISiteURL"
-      target="_blank"
-    >
-      Developer Portal
-    </a>
-  </div> -->
 </div>
 
 <div class="spread" *ngIf="State.Loading">

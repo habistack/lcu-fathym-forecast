@@ -58,6 +58,10 @@ public get SecondaryKeyControl(): AbstractControl {
    */
   public KeysFormGroup: FormGroup;
 
+  public LinkRegen: string;
+
+  public LinkDocumentation: string;
+
   /**
    * Forecast state
    */
@@ -90,6 +94,8 @@ public get SecondaryKeyControl(): AbstractControl {
     this.PageDescriptionDetails = 'The Fathym Forecaster combines the world\'s best weather \
                                    forecasts with statistics-based, machine-learning techniques \
                                    to tackle the largest datasets. including road weather.';
+    this.LinkRegen = 'https://lcu-prd.portal.azure-api.net/developer#';
+    this.LinkDocumentation = 'https://support.fathym.com/docs/fathym-forecast-api';
 
     this.setFieldToggles();
   }
@@ -115,10 +121,6 @@ public get SecondaryKeyControl(): AbstractControl {
     window.open(val, '_blank');
   }
 
-  public Demo(): void {
-
-  }
-
   public Description(): void {
 
   }
@@ -142,13 +144,12 @@ public get SecondaryKeyControl(): AbstractControl {
    * Listen for state changes
    */
   protected stateChanged() {
-    debugger;
     if (this.State.APIKeys) {
       this.APIKeyTypes = Object.keys(this.State.APIKeys);
+      this.updateKeyValues();
     } else {
       this.APIKeyTypes = [];
     }
-    this.updateKeyValues();
   }
 
   /**
