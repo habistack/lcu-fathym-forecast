@@ -39,6 +39,8 @@ export class LcuFathymForecastRoutingElementComponent extends
     protected routerHelperService: RouterHelpersService,
     protected route: ActivatedRoute) {
     super(injector);
+
+    this.ShowPage = '';
   }
 
   ngOnDestroy(): void {
@@ -80,7 +82,7 @@ export class LcuFathymForecastRoutingElementComponent extends
 
     if (length > 0) {
       for (const key in val) {
-        if (key.toUpperCase() === 'PAGE') {
+        if (key.toUpperCase() === 'ROUTE') {
           this.ShowPage = val[key].toUpperCase();
         }
       }
