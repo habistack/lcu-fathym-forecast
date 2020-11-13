@@ -23,7 +23,7 @@
 * This overrides the theme-setup from @lcu/common 
 */
 @include theme-setup($global-theme, false);
-@include primary-logo(thinky-circle, $global-theme, 1);
+// @include primary-logo(thinky-circle, $global-theme, 1);
 
 // @import '../../../node_modules/nvd3/build/nv.d3.css';
 .nvd3 .nv-background {
