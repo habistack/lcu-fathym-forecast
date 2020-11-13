@@ -178,6 +178,7 @@ export class SearchFormComponent implements OnInit {
   /**
    * Search title value
    */
+  
   public SearchTitle: string = 'Search Type';
 
   public GeofenceChecked: boolean;
