@@ -85,7 +85,7 @@ export class LcuFathymForecastRoutingElementComponent extends
         }
       }
     } else {
-      this.ShowPage = '';
+      this.ShowPage = 'API';
     }
   }
 }

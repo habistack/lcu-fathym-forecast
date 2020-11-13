@@ -12,7 +12,11 @@ export class RouterGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (route.params['page'].toUpperCase() === 'DEMO') {
-            this.route.navigate(['/page-route'], {queryParams: { page: 'demo' }});
+                this.route.navigate(['/page-route'], 
+                {
+                    queryParams: { page: route.params['page']
+                }
+            });
             return true;
         }
         return false;
