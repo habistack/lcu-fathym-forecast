@@ -30,6 +30,8 @@ import { CSSThemeModule } from './css-theme/css-theme.module';
 import { lightTheme } from './css-theme/light-theme';
 import { darkTheme } from './css-theme/dark-theme';
 import { CssThemeComponent } from './components/css-theme.component';
+import { LcuFathymForecastNoAccessComponent } from './elements/no-access/no-access.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
-    CssThemeComponent
+    CssThemeComponent,
+    LcuFathymForecastNoAccessComponent
   ],
   imports: [
     CommonModule,
@@ -87,7 +90,8 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuFathymForecastRoutingElementComponent,
     LcuMapsModule,
     DirectiveModule,
-    CssThemeComponent
+    CssThemeComponent,
+    LcuFathymForecastNoAccessComponent
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -102,7 +106,8 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
-    CssThemeComponent
+    CssThemeComponent,
+    LcuFathymForecastNoAccessComponent
   ],
   providers: [
     DisplayDateFormatPipe,
