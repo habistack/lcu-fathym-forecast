@@ -38,16 +38,14 @@
     </div>
 
   <!--Start No Access-->
-  <div [ngClass]="{'no-access' : !State.HasAccess}">
-    <!-- <div fxLayout="row" class="background-fill"> -->
+  <!-- <div [ngClass]="{'no-access' : !State.HasAccess}">
       <div 
         fxFlex="25"
         *ngIf="State.HasAccess == false"
         class="margin-5">
         <lcu-fathym-forecast-no-access-element></lcu-fathym-forecast-no-access-element>
       </div>
-    <!-- </div> -->
-  </div>
+  </div> -->
   <!--End No Access-->
 
     <div 
