@@ -5,6 +5,7 @@ import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-f
 import { FathymForecastState } from '../../state/fathym-forecast/fathym-forecast.state';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 export class LcuFathymForecastApiKeysElementState {}
 
@@ -85,6 +86,7 @@ public get SecondaryKeyControl(): AbstractControl {
   //  Constructors
   constructor(
     protected injector: Injector,
+    protected route: Router,
     protected forecastCtxt: FathymForecastStateContext
   ) {
     super(injector);
@@ -109,9 +111,7 @@ public get SecondaryKeyControl(): AbstractControl {
     this.forecastCtxt.Context.subscribe((state) => {
       this.State = state;
 
-      if (this.State) {
-        this.stateChanged();
-      }
+      this.stateChanged();
     });
   }
 
