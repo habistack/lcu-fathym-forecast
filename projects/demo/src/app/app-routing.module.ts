@@ -18,10 +18,6 @@ const routes: Routes = [
     path: 'page-route/:route',
     component: LcuFathymForecastRoutingElementComponent,
     canActivate: [RouterGuard]
-  },
-  {
-    path: 'route-search',
-    component: LcuFathymForecastFathymForecastElementComponent
   }
 ];
 

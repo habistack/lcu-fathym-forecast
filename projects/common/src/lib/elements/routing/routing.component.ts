@@ -29,12 +29,9 @@ export class LcuFathymForecastRoutingElementComponent extends
 
   protected routeSubscription: Subscription;
 
-
-
   //  Constructors
   constructor(
     protected injector: Injector,
-    protected routerHelperService: RouterHelpersService,
     protected route: ActivatedRoute) {
     super(injector);
 
@@ -53,14 +50,6 @@ export class LcuFathymForecastRoutingElementComponent extends
     this.routeSubscription = this.route.queryParams.subscribe((params: any) => {
      this.queryParamCallback(params);
     });
-
-    // this.forecastCtxt.Context.subscribe((state) => {
-    //   this.State = state;
-
-    //   if (this.State) {
-    //     this.stateChanged();
-    //   }
-    // });
   }
 
   //  API Methods
