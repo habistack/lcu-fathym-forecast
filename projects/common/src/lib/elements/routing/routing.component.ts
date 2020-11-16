@@ -29,7 +29,6 @@ export class LcuFathymForecastRoutingElementComponent extends
 
   //  Constructors
   constructor(protected injector: Injector,
-    protected forecastCtxt: FathymForecastStateContext,
     protected route: ActivatedRoute) {
     super(injector);
   }
