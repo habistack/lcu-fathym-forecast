@@ -108,11 +108,11 @@ public get SecondaryKeyControl(): AbstractControl {
 
     this.setupForm();
 
-    // this.forecastCtxt.Context.subscribe((state) => {
-    //   this.State = state;
+    this.forecastCtxt.Context.subscribe((state) => {
+      this.State = state;
 
-    //   this.stateChanged();
-    // });
+      this.stateChanged();
+    });
   }
 
   //  API Methods
@@ -120,7 +120,7 @@ public get SecondaryKeyControl(): AbstractControl {
   public ExternalLink(val: string): void {
     window.open(val, '_blank');
   }
-
+  
   public Description(): void {
 
   }

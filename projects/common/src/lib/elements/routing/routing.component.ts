@@ -47,8 +47,16 @@ export class LcuFathymForecastRoutingElementComponent extends
   public ngOnInit() {
     super.ngOnInit();
 
-    // this.routeSubscription = this.route.queryParams.subscribe((params: any) => {
-    //  this.queryParamCallback(params);
+    this.routeSubscription = this.route.queryParams.subscribe((params: any) => {
+     this.queryParamCallback(params);
+    });
+
+    // this.forecastCtxt.Context.subscribe((state) => {
+    //   this.State = state;
+
+    //   if (this.State) {
+    //     this.stateChanged();
+    //   }
     // });
   }
 
@@ -66,7 +74,7 @@ export class LcuFathymForecastRoutingElementComponent extends
    */
   protected queryParamCallback(val: object): void {
     const length: number = Object.keys(val).length;
-    debugger;
+
     if (length > 0) {
       for (const key in val) {
         if (key.toUpperCase() === 'ROUTE') {

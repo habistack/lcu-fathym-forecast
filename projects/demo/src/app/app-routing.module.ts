@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
-  LcuFathymForecastApiKeysElementComponent,
          LcuFathymForecastFathymForecastElementComponent,
          LcuFathymForecastRoutingElementComponent, 
          RouterGuard} from '@habistack/lcu-fathym-forecast-common';
@@ -22,7 +21,7 @@ const routes: Routes = [
   // },
   {
     path: 'api-keys',
-    component: LcuFathymForecastApiKeysElementComponent
+    component: LcuFathymForecastRoutingElementComponent
   },
   {
     path: 'demo',

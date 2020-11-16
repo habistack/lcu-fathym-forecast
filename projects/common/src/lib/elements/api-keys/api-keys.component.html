@@ -37,9 +37,10 @@
     </div>
 
   <!--Start No Access-->
-  <div >
+  <div [ngClass]="{'no-access' : !State.HasAccess}">
       <div 
         fxFlex="25"
+        *ngIf="State.HasAccess == false"
         class="margin-5">
         <lcu-fathym-forecast-no-access-element></lcu-fathym-forecast-no-access-element>
       </div>
@@ -72,7 +73,7 @@
           class="background-fill padding-3">
 
         <!--Has Access-->
-        <div >
+        <div *ngIf="State.HasAccess == true">
           <!-- Start API Keys -->
           <div 
             fxLayout="column" 
