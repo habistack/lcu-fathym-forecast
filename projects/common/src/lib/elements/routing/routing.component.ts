@@ -1,8 +1,9 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { LCUElementContext, LcuElementComponent } from '@lcu/common';
+import { LCUElementContext, LcuElementComponent, RouterHelpersService } from '@lcu/common';
 import { FathymForecastState } from './../../state/fathym-forecast/fathym-forecast.state';
 import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
+import { ActivatedRoute } from '@angular/router';
 
 export class LcuFathymForecastRoutingElementState {}
 
@@ -27,7 +28,10 @@ export class LcuFathymForecastRoutingElementComponent extends
   protected routeSubscription: Subscription;
 
   //  Constructors
-  constructor(protected injector: Injector) {
+  constructor(protected injector: Injector,
+    protected forecastCtxt: FathymForecastStateContext,
+    protected routerHelperService: RouterHelpersService,
+    protected route: ActivatedRoute) {
     super(injector);
   }
 
