@@ -86,8 +86,7 @@ public get SecondaryKeyControl(): AbstractControl {
   //  Constructors
   constructor(
     protected injector: Injector,
-    protected route: Router,
-    protected forecastCtxt: FathymForecastStateContext
+    protected route: Router
   ) {
     super(injector);
 
@@ -108,11 +107,11 @@ public get SecondaryKeyControl(): AbstractControl {
 
     this.setupForm();
 
-    this.forecastCtxt.Context.subscribe((state) => {
-      this.State = state;
+    // this.forecastCtxt.Context.subscribe((state) => {
+    //   this.State = state;
 
-      this.stateChanged();
-    });
+    //   this.stateChanged();
+    // });
   }
 
   //  API Methods

@@ -20,20 +20,20 @@ const routes: Routes = [
   //   component: LcuFathymForecastRoutingElementComponent,
   //   canActivate: [RouterGuard]
   // },
-  // {
-  //   path: 'api-keys',
-  //   component: LcuFathymForecastApiKeysElementComponent
-  // },
-  // {
-  //   path: 'demo',
-  //   component: LcuFathymForecastFathymForecastElementComponent
-  // },
-  // {
-  //   path: '', redirectTo: 'api-keys', pathMatch: 'full'
-  // },
-  // {
-  //   path: '**', redirectTo: 'api-keys', pathMatch: 'full'
-  // }
+  {
+    path: 'api-keys',
+    component: LcuFathymForecastApiKeysElementComponent
+  },
+  {
+    path: 'demo',
+    component: LcuFathymForecastFathymForecastElementComponent
+  },
+  {
+    path: '', redirectTo: 'api-keys', pathMatch: 'full'
+  },
+  {
+    path: '**', redirectTo: 'api-keys', pathMatch: 'full'
+  }
 ];
 
 @NgModule({
