@@ -86,7 +86,8 @@ public get SecondaryKeyControl(): AbstractControl {
   //  Constructors
   constructor(
     protected injector: Injector,
-    protected route: Router
+    protected route: Router,
+    protected forecastCtxt: FathymForecastStateContext
   ) {
     super(injector);
 
