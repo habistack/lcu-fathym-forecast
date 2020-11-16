@@ -47,9 +47,9 @@ export class LcuFathymForecastRoutingElementComponent extends
   public ngOnInit() {
     super.ngOnInit();
 
-    this.routeSubscription = this.route.queryParams.subscribe((params: any) => {
-     this.queryParamCallback(params);
-    });
+    // this.routeSubscription = this.route.queryParams.subscribe((params: any) => {
+    //  this.queryParamCallback(params);
+    // });
   }
 
   //  API Methods
