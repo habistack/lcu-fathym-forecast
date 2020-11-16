@@ -1,7 +1,6 @@
 <div 
   fxFlexFill
-  class="spread" 
-  *ngIf="!State.Loading">
+  class="spread" >
   <div 
     fxFlexFill
     fxLayout="column" 
@@ -38,14 +37,14 @@
     </div>
 
   <!--Start No Access-->
-  <!-- <div [ngClass]="{'no-access' : !State.HasAccess}">
+  <div [ngClass]="{'no-access' : !State.HasAccess}">
       <div 
         fxFlex="25"
         *ngIf="State.HasAccess == false"
         class="margin-5">
         <lcu-fathym-forecast-no-access-element></lcu-fathym-forecast-no-access-element>
       </div>
-  </div> -->
+  </div>
   <!--End No Access-->
 
     <div 
