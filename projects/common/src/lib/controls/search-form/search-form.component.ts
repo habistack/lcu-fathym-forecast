@@ -20,6 +20,10 @@ import { RouteResultsModel } from '../../models/route-results.model';
 import { DataService } from '../../services/data.service';
 import { DisplayDateFormatPipe } from '../../utils/pipes/ff-pipes';
 
+import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
+import { FathymForecastState } from '../../state/fathym-forecast/fathym-forecast.state';
+
+
 @Component({
   selector: 'lcu-search-form',
   templateUrl: './search-form.component.html',
@@ -213,7 +217,8 @@ export class SearchFormComponent implements OnInit {
     protected notificationService: NotificationService,
     protected toastrDisplayService: ToastrDisplayService,
     protected locationService: LocationSearchService,
-    protected displayDatePipe: DisplayDateFormatPipe
+    protected displayDatePipe: DisplayDateFormatPipe,
+    protected forecastCtxt: FathymForecastStateContext
   ) {
 
     this.DestinationControl = new FormControl();
@@ -296,6 +301,10 @@ export class SearchFormComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit(): void {
+
+    this.forecastCtxt.Context.subscribe((state) => {
+      
+    });
 
     // this.ffConfigCtx.Loading.subscribe(loading => this.Loading.Set(loading));
 
