@@ -11,7 +11,6 @@ export class RouterGuard implements CanActivate {
     constructor(protected route: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        debugger;
         if (route.params['route'].toUpperCase() === 'DEMO') {
                 this.route.navigate(['/page-route'], 
                 {
