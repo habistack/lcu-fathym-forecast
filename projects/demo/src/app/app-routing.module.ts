@@ -1,11 +1,8 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {
-  LcuFathymForecastApiKeysElementComponent,
-         LcuFathymForecastFathymForecastElementComponent,
-         LcuFathymForecastRoutingElementComponent, 
-         RouterGuard} from '@habistack/lcu-fathym-forecast-common';
+import { LcuFathymForecastApiKeysElementComponent, LcuFathymForecastFathymForecastElementComponent } from '@habistack/lcu-fathym-forecast-common';
+
 
 const routes: Routes = [
   // {
