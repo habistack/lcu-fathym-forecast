@@ -108,11 +108,11 @@ public get SecondaryKeyControl(): AbstractControl {
 
     this.setupForm();
 
-    // this.forecastCtxt.Context.subscribe((state) => {
-    //   this.State = state;
+    this.forecastCtxt.Context.subscribe((state) => {
+      this.State = state;
 
-    //   this.stateChanged();
-    // });
+      this.stateChanged();
+    });
   }
 
   //  API Methods
