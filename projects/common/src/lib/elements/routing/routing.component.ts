@@ -1,10 +1,8 @@
 import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { LCUElementContext, LcuElementComponent, RouterHelpersService } from '@lcu/common';
 import { FathymForecastState } from './../../state/fathym-forecast/fathym-forecast.state';
-// import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-// import { filter } from 'rxjs/operators';
 
 export class LcuFathymForecastRoutingElementState {}
 

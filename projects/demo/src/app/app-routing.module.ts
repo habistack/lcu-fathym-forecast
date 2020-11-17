@@ -29,7 +29,7 @@ const routes: Routes = [
     path: '', redirectTo: 'api-keys', pathMatch: 'full'
   },
   {
-    path: '**', redirectTo: 'api-keys', pathMatch: 'full'
+    path: '**', redirectTo: 'api-keys'
   }
 ];
 

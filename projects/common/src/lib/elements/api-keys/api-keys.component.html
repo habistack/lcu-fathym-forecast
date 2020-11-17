@@ -37,13 +37,14 @@
     </div>
 
   <!--Start No Access-->
-  <div [ngClass]="{'no-access' : !State.HasAccess}">
+  <div>
+    <!-- <div fxLayout="row" class="background-fill"> -->
       <div 
         fxFlex="25"
-        *ngIf="State.HasAccess == false"
         class="margin-5">
         <lcu-fathym-forecast-no-access-element></lcu-fathym-forecast-no-access-element>
       </div>
+    <!-- </div> -->
   </div>
   <!--End No Access-->
 
@@ -73,7 +74,7 @@
           class="background-fill padding-3">
 
         <!--Has Access-->
-        <div *ngIf="State.HasAccess == true">
+        <div>
           <!-- Start API Keys -->
           <div 
             fxLayout="column" 
@@ -160,11 +161,10 @@
             <div 
               fxLayout="row"
               fxLayoutGap="10px">
-              <!--'demo' points to app-routing.module demo path-->
                 <button 
                   mat-raised-button 
                   color="primary"
-                  (click)="ExternalLink('demo')">
+                  (click)="ExternalLink('https://www.fathym-it.com/forecast/')">
                   <mat-icon>
                     launch
                   </mat-icon> 
@@ -292,6 +292,6 @@
   </div>
 </div>
 
-<div class="spread" *ngIf="State.Loading">
+<!-- <div class="spread" *ngIf="State.Loading">
   <mat-spinner></mat-spinner>
-</div>
+</div> -->
