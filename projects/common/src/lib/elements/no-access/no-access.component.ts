@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
 
 export const SELECTOR_LCU_FATHYM_FORECAST_NO_ACCESS_ELEMENT =
   'lcu-fathym-forecast-no-access-element';
@@ -10,7 +11,7 @@ export const SELECTOR_LCU_FATHYM_FORECAST_NO_ACCESS_ELEMENT =
 })
 export class LcuFathymForecastNoAccessComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected forecastCtxt: FathymForecastStateContext) { }
 
   ngOnInit(): void {
   }
