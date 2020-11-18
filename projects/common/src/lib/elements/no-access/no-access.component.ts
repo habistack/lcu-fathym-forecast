@@ -11,7 +11,7 @@ export const SELECTOR_LCU_FATHYM_FORECAST_NO_ACCESS_ELEMENT =
 })
 export class LcuFathymForecastNoAccessComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected forecastCtxt: FathymForecastStateContext) { }
 
   ngOnInit(): void {
   }
