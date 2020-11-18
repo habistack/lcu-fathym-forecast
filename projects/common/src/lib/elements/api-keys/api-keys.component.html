@@ -116,8 +116,9 @@
                   </mat-icon>
                   <span>|</span>
                   <button 
-                    (click)="ExternalLink(LinkRegen)"
-                    mat-button color="primary">
+                    (click)="RegenerateAPIKey('Primary')"
+                    mat-button 
+                    color="primary">
                     Regenerate
                   </button>
                 </div>
@@ -149,7 +150,7 @@
                   </mat-icon>
                   <span>|</span>
                   <button 
-                    (click)="ExternalLink(LinkRegen)"
+                    (click)="RegenerateAPIKey('Secondary')"
                     mat-button 
                     color="primary">
                     Regenerate

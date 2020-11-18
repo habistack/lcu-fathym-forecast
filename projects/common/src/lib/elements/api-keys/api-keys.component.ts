@@ -120,7 +120,20 @@ public get SecondaryKeyControl(): AbstractControl {
   public ExternalLink(val: string): void {
     window.open(val, '_blank');
   }
-  
+
+  /**
+   * Regenerate API Key
+   *
+   * @param key API Key to regenerate
+   */
+  public RegenerateAPIKey(key: string): void {
+    if (
+        confirm(`Are you sure you want to regenerate ${ key } key`)
+      ) {
+        this.ExternalLink(this.LinkRegen);
+    }
+  }
+
   public Description(): void {
 
   }
