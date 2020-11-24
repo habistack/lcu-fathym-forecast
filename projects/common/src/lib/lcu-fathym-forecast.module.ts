@@ -115,10 +115,17 @@ import { LcuFathymForecastNoAccessComponent } from './elements/no-access/no-acce
   ]
 })
 export class LcuFathymForecastModule {
-  static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
+  public static forRoot(environment: any): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
-      providers: [LoadMapService]
+      providers:
+      [
+        LoadMapService,
+        {
+          provide: 'env',
+          useValue: environment
+        }
+      ]
     };
   }
  }

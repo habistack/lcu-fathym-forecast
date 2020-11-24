@@ -1,11 +1,11 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { Component, OnInit, Injector } from '@angular/core';
-import { LCUElementContext, LcuElementComponent } from '@lcu/common';
-import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
-import { FathymForecastState } from '../../state/fathym-forecast/fathym-forecast.state';
+import { Component, OnInit, Injector, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LCUElementContext, LcuElementComponent } from '@lcu/common';
+import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
+import { FathymForecastState } from '../../state/fathym-forecast/fathym-forecast.state';
 
 export class LcuFathymForecastApiKeysElementState {}
 
@@ -59,9 +59,20 @@ public get SecondaryKeyControl(): AbstractControl {
    */
   public KeysFormGroup: FormGroup;
 
+  /**
+   * External links
+   */
+  public LinkDocumentation: string;
+
+  public LinkMapTileGivenVariable: string;
+
+  public LinkMapTileTimely: string;
+
   public LinkRegen: string;
 
-  public LinkDocumentation: string;
+  public LinkSequenceVariables: string;
+
+  public LinkWeatherVariables: string;
 
   /**
    * Forecast state
@@ -87,7 +98,8 @@ public get SecondaryKeyControl(): AbstractControl {
   constructor(
     protected injector: Injector,
     protected route: Router,
-    protected forecastCtxt: FathymForecastStateContext
+    protected forecastCtxt: FathymForecastStateContext,
+    @Inject('env') protected env
   ) {
     super(injector);
 
@@ -96,9 +108,8 @@ public get SecondaryKeyControl(): AbstractControl {
     this.PageDescriptionDetails = 'The Fathym Forecaster combines the world\'s best weather \
                                    forecasts with statistics-based, machine-learning techniques \
                                    to tackle the largest datasets. including road weather.';
-    this.LinkRegen = 'https://lcu-prd.portal.azure-api.net/developer#';
-    this.LinkDocumentation = 'https://support.fathym.com/docs/fathym-forecast-api';
 
+    this.setupExternalLinks();
     this.setFieldToggles();
   }
 
@@ -120,9 +131,24 @@ public get SecondaryKeyControl(): AbstractControl {
   public ExternalLink(val: string): void {
     window.open(val, '_blank');
   }
-  
+
   public Description(): void {
 
+  }
+
+  /**
+   * Setup external links, will probably be getting these
+   * from the State, but for now, doing this
+   */
+  protected setupExternalLinks(): void {
+    const prefix: string = this.env.production ? 'prd' : 'int';
+
+    this.LinkRegen = 'https://lcu-'+ prefix +'.portal.azure-api.net/developer#';
+    this.LinkDocumentation = 'https://support.fathym.com/docs/fathym-forecast-api';
+    this.LinkWeatherVariables = 'https://lcu-'+ prefix +'.portal.azure-api.net/docs/services/fathym-weather-api/operations/get-api-v0-api-variables?';
+    this.LinkMapTileGivenVariable = 'https://lcu-'+ prefix +'.portal.azure-api.net/docs/services/fathym-weather-api/operations/get-api-v0-maptile-fetch-variable-t-z-y-x';
+    this.LinkMapTileTimely = 'https://lcu-'+ prefix +'.portal.azure-api.net/docs/services/fathym-weather-api/operations/get-api-v0-maptile-manifest?';
+    this.LinkSequenceVariables = 'https://lcu-'+ prefix +'.portal.azure-api.net/docs/services/fathym-weather-api/operations/post-api-v0-point-query?';
   }
 
   //  Helpers
