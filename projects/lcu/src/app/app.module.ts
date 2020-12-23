@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu/common';
-import { environment } from '../environments/environment';
 import {
   LcuFathymForecastModule,
   LcuFathymForecastFathymForecastElementComponent,
-  SelectorLcuFathymForecastFathymForecastElement, 
-  LcuFathymForecastApiKeysElementComponent, 
-  SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, 
-  LcuFathymForecastAnalyticsElementComponent, 
-  SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT
+  SelectorLcuFathymForecastFathymForecastElement,
+  LcuFathymForecastApiKeysElementComponent,
+  SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
+  LcuFathymForecastAnalyticsElementComponent,
+  SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT,
+  DisplayDateFormatPipe,
+  ImageDateFormatPipe,
 } from '@habistack/lcu-fathym-forecast-common';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [],
@@ -21,15 +23,17 @@ import {
     BrowserModule,
     BrowserAnimationsModule,
     FathymSharedModule,
-    LcuFathymForecastModule
+    LcuFathymForecastModule.forRoot(environment),
   ],
   providers: [
+    DisplayDateFormatPipe,
+    ImageDateFormatPipe,
     {
       provide: LCUServiceSettings,
-      useValue: FathymSharedModule.DefaultServiceSettings(environment)
-    }
+      useValue: FathymSharedModule.DefaultServiceSettings(environment),
+    },
   ],
-  exports: [LcuFathymForecastModule]
+  exports: [LcuFathymForecastModule],
 })
 export class AppModule implements DoBootstrap {
   //  Constructors
@@ -47,12 +51,24 @@ export class AppModule implements DoBootstrap {
       cfgMgr
     );
 
-		const apiKeys = createCustomElement(LcuFathymForecastApiKeysElementComponent, { injector: this.injector });
+    const apiKeys = createCustomElement(
+      LcuFathymForecastApiKeysElementComponent,
+      { injector: this.injector }
+    );
 
-		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT, apiKeys);
+    customElements.define(
+      SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT,
+      apiKeys
+    );
 
-		const analytics = createCustomElement(LcuFathymForecastAnalyticsElementComponent, { injector: this.injector });
+    const analytics = createCustomElement(
+      LcuFathymForecastAnalyticsElementComponent,
+      { injector: this.injector }
+    );
 
-		customElements.define(SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT, analytics);
-	}
+    customElements.define(
+      SELECTOR_LCU_FATHYM_FORECAST_ANALYTICS_ELEMENT,
+      analytics
+    );
+  }
 }
