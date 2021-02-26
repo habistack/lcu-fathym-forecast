@@ -1,10 +1,6 @@
 {
   "name": "@habistack/lcu-fathym-forecast",
-<<<<<<< HEAD
   "version": "0.0.27",
-=======
-  "version": "0.0.26",
->>>>>>> origin/feature/8812-angular11
   "scripts": {
     "build:common": "ng build common",
     "build:demo": "ng build demo --prod",
