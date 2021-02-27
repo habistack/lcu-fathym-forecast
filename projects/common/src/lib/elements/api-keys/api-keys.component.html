@@ -1,298 +1,52 @@
-<div 
-  fxFlexFill
-  class="spread">
-  <div 
-    fxFlexFill
-    fxLayout="column" 
-    fxLayoutGap="5px">
-    <div 
-      fxLayout="row" 
-      fxLayoutGap="5px">
-      <div
-        fxFlex="75"
-        fxLayoutAlign="start end"
-        class="welcome-bg background-fill">
-        <div class="welcome-index" 
-             fxLayout="row" 
-             fxLayoutGap="30px">
-          <div fxFlex="30">
-            <h1 fxLayout="column">
-              <span class="plain-text">{{ Title }}</span>
-            </h1>
-          </div>
-          
-          <div class="divider-fill-vert"></div>
-
-          <div fxLayout="column" fxLayoutAlign="end start">
-            <h2 class="plain-text theme-accent-text" >
-              {{ PageDescription }}
-            </h2>
-            <p class="paragraph-title">
-              {{ PageDescriptionDetails }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div fxFlex class="background-fill blank-header"></div>
-    </div>
-
-  <!--Start No Access-->
-  <div [ngClass]="{'no-access' : !State.HasAccess}">
-    <!-- <div fxLayout="row" class="background-fill"> -->
-      <div 
-        fxFlex="25"
-        *ngIf="State.HasAccess == false"
-        class="margin-5">
-        <lcu-fathym-forecast-no-access-element></lcu-fathym-forecast-no-access-element>
-      </div>
-    <!-- </div> -->
-  </div>
-  <!--End No Access-->
-
-    <div 
-      fxLayout="column" 
-      fxFlex>
-      <div 
-        fxFlexFill 
-        fxLayout="row" 
-        fxLayoutGap="5px">
-
-        <!--Sidebar-->
-        <div
-          fxFlex="25"
-          fxLayout="row"
-          fxLayoutAlign="start start"
-          style="padding-left: 50px; padding-right: 50px;"
-          class="background-fill box-side-triangle"
+<div class="manage" *ngIf="Context?.State">
+  <ng-container *ngIf="!Context.State.Loading">
+    <!-- Storage Access -->
+    <app-host-dashboard-card-element
+      class="storage-access section"
+      [context]="{ Title: 'Forecast Access', Icon: 'storage' }"
+    >
+      <nav>
+        <a
+          href="https://www.habistack.com/docs/getting-started/ground-weather-forecast"
+          target="_blank"
+          lcuEvent="click"
+          label="Ground Weather Forecast"
+          category="help"
         >
+          <mat-icon matTooltip="More info">help_outline</mat-icon>
+        </a>
+      </nav>
+
+      <div *ngIf="Context?.State?.APIKeys?.length > 0">
+        <div class="margin-left-5 margin-top-2">
+          Use the API keys to access point queries to augment your data with
+          ground weather forecasts.
         </div>
 
-        <!--Content-->
-        <div  
-          fxFlex
-          fxLayout="column" 
-          fxLayoutGap="30px" 
-          class="background-fill padding-3">
-
-        <!--Has Access-->
-        <div *ngIf="State.HasAccess == true">
-          <!-- Start API Keys -->
-          <div 
-            fxLayout="column" 
-            fxLayoutGap="15px"
-            class="margin-4">
-            <h3 class="plain-text-bold whats-next-text">
-              API Keys
-            </h3>
-            <div class="margin-2">
-              <form
-                [formGroup]="KeysFormGroup"
-                fxLayout="column"
-                fxLayoutGap="10px"
-                novalidate>
-                <div 
-                  fxLayout="row" 
-                  fxLayoutAlign="start center"
-                  fxLayoutGap="10px">
-                  <mat-form-field 
-                    fxFlex="50">
-                    <mat-label>Primary Key</mat-label>
-                    <input 
-                      [type]="HidePrimaryKey ? 'password' : 'text'" 
-                      matInput 
-                      formControlName="primaryKeyControl"/>
-                    <mat-error *ngIf="PrimaryKeyControl.hasError('required')">
-                      Primary Key <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-icon
-                      matBadgePosition="below after"
-                      matBadgeColor="primary"
-                      matBadgeOverlap="false"
-                      color="accent"
-                      matSuffix
-                      (click)="HidePrimaryKey = !HidePrimaryKey"
-                      class="cursor-pointer"
-                    >
-                    {{ HidePrimaryKey ? "visibility_off" : "visibility" }}
-                  </mat-icon>
-                  <span>|</span>
-                  <button 
-                    (click)="ExternalLink(LinkRegen)"
-                    mat-button color="primary">
-                    Regenerate
-                  </button>
-                </div>
-                <div 
-                  fxLayout="row" 
-                  fxLayoutAlign="start center"
-                  fxLayoutGap="10px">
-                  <mat-form-field
-                    fxFlex="50">
-                    <mat-label>Secondary Key</mat-label>
-                    <input 
-                      formControlName="secondaryKeyControl"
-                      [type]="HideSecondaryKey ? 'password' : 'text'" 
-                      matInput />
-                    <mat-error *ngIf="SecondaryKeyControl.hasError('required')">
-                      Secondary Key <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-icon
-                      matBadgePosition="below after"
-                      matBadgeColor="primary"
-                      matBadgeOverlap="false"
-                      color="accent"
-                      matSuffix
-                      (click)="HideSecondaryKey = !HideSecondaryKey"
-                      class="cursor-pointer"
-                    >
-                    {{ HideSecondaryKey ? "visibility_off" : "visibility" }}
-                  </mat-icon>
-                  <span>|</span>
-                  <button 
-                    (click)="ExternalLink(LinkRegen)"
-                    mat-button 
-                    color="primary">
-                    Regenerate
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div 
-              fxLayout="row"
-              fxLayoutGap="10px">
-                <button 
-                  mat-raised-button 
-                  color="primary"
-                  (click)="ExternalLink('https://www.fathym-it.com/forecast/')">
-                  <mat-icon>
-                    launch
-                  </mat-icon> 
-                  Demo
-                </button>
-                <button 
-                  mat-raised-button 
-                  color="primary"
-                  (click)="ExternalLink(LinkDocumentation)">
-                  <mat-icon>
-                    description
-                  </mat-icon> 
-                  Documentation
-                </button>
-            </div>
-            <div class="divider-fill-hor"></div>
-          </div>
-          <!-- End API Keys -->
-
-          <!-- Start Try It Out-->
-          <div 
-            fxLayout="column"
-            fxLayoutGap="15px"
-            class="margin-4">
-            <h3 class="plain-text-bold whats-next-text">
-              Try It
-            </h3>
-            <span class="plain-text margin-bottom-5">
-              Note: The following links will open in a new tab and may require you to sign in to Microsoft.
-            </span>
-
-            <div 
-              class="margin-3"
-              fxLayout="column" 
-              fxLayoutGap="10px">
-
-              <div 
-                fxLayout="row"
-                fxLayoutGap="10px"
-                fxLayoutAlign="start center">
-                <button 
-                  mat-raised-button 
-                  class="orange-accent"
-                  (click)="ExternalLink(LinkWeatherVariables)">
-                  Get
-                </button>
-                <span class="plain-text"> 
-                  List of weather variables supported via the API
-                </span>
-              </div>
-
-              <div 
-                fxLayout="row"
-                fxLayoutGap="10px"
-                fxLayoutAlign="start center">
-                <button 
-                  mat-raised-button 
-                  class="orange-accent"
-                  (click)="ExternalLink(LinkMapTileGivenVariable)">
-                  Get
-                </button>
-                <span class="plain-text"> 
-                  Fetch a maptile image for a give variable, time, zoom level, x, and y
-                </span>
-              </div>
-
-              <div 
-                fxLayout="row"
-                fxLayoutGap="10px"
-                fxLayoutAlign="start center">
-                <button 
-                  mat-raised-button 
-                  class="orange-accent"
-                  (click)="ExternalLink(LinkMapTileTimely)">
-                  Get
-                </button>
-                <span class="plain-text"> 
-                  List of available timely maptiles
-                </span>
-              </div>
-
-              <div 
-                fxLayout="row"
-                fxLayoutGap="10px"
-                fxLayoutAlign="start center">
-                <button 
-                  mat-raised-button 
-                  class="green-accent"
-                  (click)="ExternalLink(LinkSequenceVariables)">
-                  Post
-                </button>
-                <span class="plain-text"> 
-                  Query a sequence of variables across a lat/long/time set
-                </span>
-              </div>
-          </div>
-            <div class="divider-fill-hor"></div>
-          </div>
-          <!-- End Try It Out -->
-
-          <!-- Start Usage / Health -->
-          <div 
-            fxLayout="column" 
-            fxLayoutGap="15px" 
-            class="margin-4">
-            <h3 class="plain-text-bold whats-next-text">
-              Usage/Health
-            </h3>
-            <div class="margin-3">
-              <button 
-                mat-raised-button 
-                color="primary"
-                (click)="ExternalLink('https://lcu-prd.portal.azure-api.net/Developer/Analytics')">
-                <mat-icon>assessment</mat-icon>
-                Analytics Reports
-              </button>
-            </div>
-
-            <div class="divider-fill-hor"></div>
-          </div>
-          <!-- End Usage / Health -->
-        </div>
+        <lcu-api-access
+          title="Try It"
+          description="Here we have embedded Swagger so that you can see the parameters available for the Forecast APIs, as well as test to see the responses."
+          [api-keys]="Context.State?.APIKeys"
+          [open-api-source]="Context.State?.OpenAPISource"
+          (regenerated)="RegenerateAPIKey($event)"
+        ></lcu-api-access>
       </div>
+    </app-host-dashboard-card-element>
+    <!--^^^ Storage Access ^^^-->
+  </ng-container>
+
+  <!-- Loading -->
+  <div>
+    <lcu-loader [loading]="Context.State?.Loading"></lcu-loader>
+
+    <div *ngIf="Context.State?.Loading" class="margin-3 center">
+      <p *ngIf="!Context.State.UserEnterpriseLookup">
+        Setting up your Dashboard and preparing your APIs...
+      </p>
+
+      <p *ngIf="Context.State.UserEnterpriseLookup">
+        Loading your Dashboard...
+      </p>
     </div>
   </div>
-</div>
-
-<div class="spread" *ngIf="State.Loading">
-  <mat-spinner></mat-spinner>
 </div>

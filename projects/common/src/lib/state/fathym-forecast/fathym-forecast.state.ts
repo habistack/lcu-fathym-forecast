@@ -1,14 +1,23 @@
-export class FathymForecastState {
-  public APIKeys?: { [name: string]: string };
+import { APIAccessKeyData } from '@lowcodeunit/app-host-common';
 
-  public APISiteURL?: string;
+export class FathymForecastState {
+  public AccessLicenseType?: string;
+
+  public AccessPlanGroup?: string;
+
+  public APIKeys?: APIAccessKeyData[];
 
   public HasAccess?: boolean;
 
   public Loading?: boolean;
 
+  public MaxPointQueries?: number;
+
+  public OpenAPISource?: string;
+
   public UsageState?: UsageStateTypes;
 
+  public UserEnterpriseLookup?: string;
 }
 
 export enum UsageStateTypes {

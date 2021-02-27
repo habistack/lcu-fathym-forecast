@@ -1,32 +1,14 @@
 
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LcuFathymForecastApiKeysElementComponent, LcuFathymForecastFathymForecastElementComponent } from '@habistack/lcu-fathym-forecast-common';
+import { HomeComponent } from './controls/home/home.component';
 
 
 const routes: Routes = [
-  // {
-  //   path: 'page-route',
-  //   component: LcuFathymForecastRoutingElementComponent
-  // },
-  // {
-  //   path: '', redirectTo: 'page-route', pathMatch: 'full'
-  // },
-  // {
-  //   path: 'page-route/:route',
-  //   component: LcuFathymForecastRoutingElementComponent,
-  //   canActivate: [RouterGuard]
-  // },
   {
-    path: 'api-keys',
-    component: LcuFathymForecastApiKeysElementComponent
-  },
-  {
-    path: 'demo',
-    component: LcuFathymForecastFathymForecastElementComponent
-  },
-  {
-    path: '', redirectTo: 'api-keys', pathMatch: 'full'
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
   },
   {
     path: '**', redirectTo: 'api-keys'
@@ -35,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 
 export class AppRoutingModule { }

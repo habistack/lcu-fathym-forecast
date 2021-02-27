@@ -18,21 +18,6 @@ export class FathymForecastStateContext extends StateContext<FathymForecastState
   }
 
   //  API Methods
-  public CreateAPISubscription() {
-    this.Execute({
-      Arguments: {},
-      Type: 'CreateAPISubscription',
-    });
-  }
-
-  public GenerateAPIKeys(keyType: string) {
-    this.Execute({
-      Arguments: {
-        KeyType: keyType
-      },
-      Type: 'GenerateAPIKeys',
-    });
-  }
 
   //  Helpers
   protected defaultValue() {
