@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
-import { FathymSharedModule, LCUServiceSettings } from '@lcu/common';
+import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
 import {
   LcuFathymForecastModule,
   LcuFathymForecastFathymForecastElementComponent,
@@ -16,14 +16,23 @@ import {
   ImageDateFormatPipe,
 } from '@habistack/lcu-fathym-forecast-common';
 import { environment } from '../environments/environment';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { LazyElementModule } from '@lowcodeunit/lazy-element';
 
 @NgModule({
   declarations: [],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     FathymSharedModule,
     LcuFathymForecastModule.forRoot(environment),
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    LazyElementModule.forRoot()
   ],
   providers: [
     DisplayDateFormatPipe,
