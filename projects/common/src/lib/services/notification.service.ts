@@ -27,6 +27,7 @@ export class NotificationService {
 
   public SearchRoute(params: SearchModel, searching: boolean): void {
     const data: SearchModel = { ...params };
+    
     data.IsSearching = searching;
     // console.log("data for search routes: ", data)
     this.RouteChanged.next(data);
