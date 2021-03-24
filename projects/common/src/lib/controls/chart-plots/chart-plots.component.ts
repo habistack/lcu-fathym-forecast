@@ -188,7 +188,7 @@ export class ChartPlotsComponent implements OnInit {
   }
 
   protected convertData() {
-    debugger;
+  
     this.Charts = this.forecastPlotsService.BuildCharts(this.ForecastData, 'English');
   }
 
