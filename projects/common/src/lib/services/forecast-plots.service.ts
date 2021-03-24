@@ -142,8 +142,7 @@ export class ForecastPlotsService {
      
     }
     ForecastData.forecast.surfaceTemperature.forEach((temp, idx) => {
-
-
+      
       roadTempChartData.displayData[0].series.push(
         {
           value: Math.round(temp),
