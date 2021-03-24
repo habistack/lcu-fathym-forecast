@@ -55,6 +55,27 @@ export class SearchFormComponent implements OnInit {
   }
 
   /**
+   * Access CheckSearchRoutes checkbox
+   */
+  public get SearchTypeRouteCheck(): AbstractControl {
+    return this.RouteInputForm.get('SearchTypeControls.checkSearchRoutes');
+  }
+
+  /**
+   * Access CheckSearchDepart checkbox
+   */
+  public get SearchTypeDepartCheck(): AbstractControl {
+    return this.RouteInputForm.get('SearchTypeControls.checkSearchDepart');
+  }
+
+  /**
+   * Access CheckSearchGeofence checkbox
+   */
+  public get SearchTypeGeofenceCheck(): AbstractControl {
+    return this.RouteInputForm.get('SearchTypeControls.checkSearchGeofence');
+  }
+
+  /**
    * Access DepartureTimes field
    */
   public get DepartureTimes(): AbstractControl {
@@ -203,6 +224,8 @@ export class SearchFormComponent implements OnInit {
 
     this.OriginOptions = [];
 
+    // this.Loading = new Loading();
+
     this.RouteInputForm = new FormGroup({
       SearchFormControls: new FormGroup({
         origin: new FormControl({value: '', disabled: false}, [Validators.required, this.validateOriginLatLong]),
@@ -210,6 +233,12 @@ export class SearchFormComponent implements OnInit {
         includeAlts: new FormControl(false),
         forecastModelType: new FormControl('', {validators: Validators.required})
       }),
+    //   SearchTypeControls: new FormGroup({
+    //     checkSearchGeofence: new FormControl(false),
+    //     checkSearchDepart: new FormControl(false),
+    //     checkSearchRoutes: new FormControl(true),
+    //   }, RequiredCheckedValidator()
+    // ),
     SearchConditions: new FormGroup({
       conditionVariables: new FormControl('', {validators: Validators.required}),
       departureTimes: new FormControl('', {validators: Validators.required})
@@ -260,11 +289,13 @@ export class SearchFormComponent implements OnInit {
     this.onChanges();
   }
 
-  /**
-   * Utility for finding invalid controls
-   */
-  protected onChanges(): void {
+  // public ConditionVariablesChanged(evt: Event): void {
+  //   debugger;
+  //   console.log('selection changed');
+  // }
 
+  protected onChanges(): void {
+    
     this.RouteInputForm.valueChanges
     .subscribe((val: any) => {
       // console.log('Invalid Controls', this.findInvalidControls());
@@ -284,12 +315,20 @@ export class SearchFormComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit(): void {
+
+    // this.ffConfigCtx.Loading.subscribe(loading => this.Loading.Set(loading));
+
+    // this.ffConfigCtx.Context.subscribe(ctxt => (this.FathymForecastConfig = ctxt));
+
+    // this.RouteChecked = this.SearchTypeRouteCheck.value;
+    // this.DepartureChecked = this.SearchTypeDepartCheck.value;
+    // this.GeofenceChecked = this.SearchTypeGeofenceCheck.value;
     this.defaultSelects();
     this.updateSearchTitle();
   }
 
   public ngOnDestroy() {
-
+    // this.RouteData = null;
     this.DestinationRoute = null;
     this.OriginRoute = null;
 
@@ -356,8 +395,8 @@ export class SearchFormComponent implements OnInit {
     if (this.RouteInputForm && this.RouteInputForm.get('SearchFormControls.includeAlts').value) {
       showAlternatives = this.RouteInputForm.get('SearchFormControls.includeAlts').value;
       console.log('Show alts =', showAlternatives);
-      if(showAlternatives === 'true'){
-        // TODO do something
+      if(showAlternatives === "true"){
+        //TODO do something
       }
     }
 
@@ -389,6 +428,48 @@ export class SearchFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Setting search types from checkboxes, this will be used to simplify the searching process
+   *
+   * @param evt MatCheckboxChange event
+   */
+  public SearchTypeChanged(evt: MatCheckboxChange): void {
+    switch (evt.source.id.toUpperCase()) {
+      case 'CHECKSEARCHGEOFENCE':
+        this.GeofenceChecked = !this.GeofenceChecked;
+        this.DepartureChecked = this.RouteChecked = false;
+
+        if (this.GeofenceChecked) {
+          this.enableGeofenceSearch();
+        } else {
+          this.clearGeofence();
+        }
+
+      break;
+      case 'CHECKSEARCHDEPART':
+        this.DepartureChecked = !this.DepartureChecked;
+        this.GeofenceChecked = false;
+
+        if (!this.DepartureChecked) {
+          this.clearDepartureTable();
+        }
+
+      break;
+      case 'CHECKSEARCHROUTES':
+        this.RouteChecked = !this.RouteChecked;
+        this.GeofenceChecked = false;
+
+        if (!this.RouteChecked) {
+          this.clearRoutes();
+        }
+      break;
+    }
+
+    this.enableSearchTypeCheckboxes();
+    this.updateSearchTitle();
+
+  }
+
   protected updateSearchTitle(): void {
 
     if (this.GeofenceChecked) {
@@ -409,6 +490,15 @@ export class SearchFormComponent implements OnInit {
     }
 
   /**
+   * Toggle search type checkboxes
+   */
+  protected enableSearchTypeCheckboxes(): void {
+    this.RouteInputForm.get('SearchFormControls')[this.disabledState(this.GeofenceChecked)]();
+    // this.SearchTypeGeofenceCheck[this.disabledState(this.RouteChecked || this.DepartureChecked)]();
+    // this.SearchTypeDepartCheck[this.disabledState(this.GeofenceChecked)]();
+    // this.SearchTypeRouteCheck[this.disabledState(this.GeofenceChecked)]();
+  }
+  /**
    * Set disabled state of formControls
    *
    * @param state value to test
@@ -421,14 +511,35 @@ export class SearchFormComponent implements OnInit {
    * Running a search using search buttons
    */
   public Search(): void {
+   // if (this.GeofenceChecked) {
+    // this.startGeofenceDrawing();
+   // }
 
+   // if (this.DepartureChecked) {
+   //   this.searchDepartureTable('DEPARTURE_TABLE');
+   // }
+
+    // if (this.RouteChecked) {
       this.SearchRoutes('ROUTES');
+   // }
   }
 
   /**
    * Clear search form
    */
   public ClearSearchForm(): void {
+    if (this.GeofenceChecked) {
+      this.clearGeofence();
+    }
+
+    if (this.DepartureChecked) {
+      this.clearDepartureTable();
+    }
+
+    if (this.RouteChecked) {
+      this.clearRoutes();
+    }
+
     this.ResetSearchForm();
   }
 
@@ -438,6 +549,7 @@ export class SearchFormComponent implements OnInit {
    * @param searchType search type
    */
   protected searchDepartureTable(searchType: string): void {
+   // const searching: boolean = this.isSearchingDepartTable = !this.isSearchingDepartTable;
 
     this.notificationService.UpdateDepartureTable(this.getFormValues(searchType), true);
   }
@@ -449,13 +561,22 @@ export class SearchFormComponent implements OnInit {
     this.notificationService.UpdateDepartureTable(null, false);
   }
 
+  // public ConditionVariableNameChanged(event: boolean): void {
+
+  //   // if open event is false (closed)
+  //   if (!event) {
+  //     this.enableGeofenceSearch();
+  //   }
+  // }
+
   /**
    * Searching routes
    *
    * @param searchType search type
    */
   public SearchRoutes(searchType: string): void {
-
+   // const searching: boolean = this.isSearchingRoute = !this.isSearchingRoute;
+    // console.log('search type = ', searchType);
       this.notificationService.SearchRoute(this.getFormValues(searchType), true);
   }
 
@@ -514,6 +635,46 @@ export class SearchFormComponent implements OnInit {
 
     return this.DisableSearchButton();
   }
+
+  /**
+   * Set initial variable name selections
+   */
+  // protected initialSelectionOptions(): void {
+  //   this.SelectAllOption.select();
+  //   this.SelectAllHandler();
+  // }
+
+  /**
+   * Select or deselect select all option
+   */
+  // public ToggleSelectionsHandler(evt: Event, name: string): void {
+
+  //   if (this.SelectAllOption.selected) {
+  //     this.SelectAllOption.deselect();
+  //   }
+
+  //   if (this.ConditionVariableNames.value.length === this.ConditionVariablesNameList.length) {
+  //     this.SelectAllOption.select();
+  //   }
+  // }
+
+  /**
+   * Select all values
+   */
+  // public SelectAllHandler(evt?: Event, name?: string): void {
+
+  //   if (this.SelectAllOption.selected) {
+  //     // make a new copy of var names array
+  //     const arr: Array<any> = [...this.ConditionVariablesNameList];
+  //     // add select all option to the front of the variable names array
+  //     arr.unshift(this.SelectAllObj);
+
+  //     // update varNames value
+  //      this.ConditionVariableNames.patchValue(arr);
+  //   } else {
+  //     this.ConditionVariableNames.patchValue([]);
+  //   }
+  // }
 
   /**
    * Get departure times
@@ -630,16 +791,27 @@ export class SearchFormComponent implements OnInit {
    * Reset search form back to defautls
    */
   public ResetSearchForm(): void {
-
+    this.resetSearchTypes();
     this.RouteInputForm.reset();
     this.RouteInputForm.markAsPristine();
     this.RouteInputForm.markAsUntouched();
-
-    // this.ConditionVariableNames.setValue(this.ConditionsConfig.Source);
-
+    debugger;
+    this.ConditionVariableNames.setValue(this.ConditionsConfig.Source);
+    // this.RouteInputForm.controls.SearchTypeControls.reset();
     this.RouteInputForm.controls.SearchConditions.reset();
 
     this.defaultSelects();
+  }
+
+  /**
+   * Reset search type checkboxes
+   */
+  protected resetSearchTypes(): void {
+    this.RouteChecked = false;
+    this.GeofenceChecked = false;
+    this.DepartureChecked = false;
+
+    this.enableSearchTypeCheckboxes();
   }
 
   /**
