@@ -55,6 +55,7 @@
     "d3": "^6.1.1",
     "ng2-file-upload": "^1.4.0",
     "ngx-build-plus": "^11.0.0",
+    "ngx-monaco-editor": "^10.0.0-beta.1",
     "ngx-toastr": "13.2.1",
     "rxjs": "~6.6.7",
     "terser": "^5.6.1",
