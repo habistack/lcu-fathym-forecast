@@ -46,6 +46,7 @@
     "@lowcodeunit/data-grid": "^1.20.236",
     "@lowcodeunit/lazy-element": "^1.21.68",
     "@lowcodeunit/lcu-charts-common": "^1.10.51",
+    "@lowcodeunit/lcu-icons-common": "^1.2.56",
     "@lowcodeunit/lcu-maps-common": "^1.8.51",
     "@lowcodeunit/lcu-select-common": "1.3.34",
     "@types/d3": "^6.3.0",
