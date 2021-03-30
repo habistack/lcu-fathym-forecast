@@ -1,43 +1,54 @@
-<div 
-  *ngIf="DisplaySummarization" 
-  fxLayout="column" 
+<div
+  *ngIf="DisplaySummarization"
+  fxLayout="column"
   fxFlex="100"
   id="route-summarization-container"
-  class="container background-fill"  
-  style="margin: 0 5px 5px 0;">
-  <div fxLayout="row" fxLayoutAlign="space-between" style="margin: 10px">
+  class="container background-fill"
+  style="margin: 0 5px 5px 0"
+>
+  <div fxLayout="row" fxLayoutAlign="space-between" class="margin-1">
     <p class="secondary-text plain-text-bold">{{ RouteName }}</p>
     <p class="accent-primary-text plain-text-bold">{{ RouteDuration }}</p>
   </div>
-  <div fxLayout="column" fxLayoutGap="5px" class="chart-summarization-data" style="margin: 10px">
-    <div fxLayout="column" fxLayoutGap="20px">
-      <div fxLayout="column" fxLayoutGap="5px">
-        <div fxLayout="row" fxLayoutAlign="space-between">
+
+  <div fxLayout="column" class="chart-summarization-data margin-1">
+    <div fxLayout="column" class="margin-1">
+      <div fxLayout="column" class="margin-2">
+        <div fxLayout="row" fxLayoutAlign="space-between" class="margin-1">
           <span class="secondary-text plain-text">Average delay risk:</span>
           <span class="accent-primary-text">{{ AverageDelayRisk }}</span>
         </div>
-        <!-- <div fxLayout="row" fxLayoutAlign="space-between"> add back in if they want it
-          <span>Point delay risk:</span><span>{{ DelayRisk }}</span>
-        </div> -->
-        <div fxLayout="row" fxLayoutAlign="space-between">
+
+        <div fxLayout="row" fxLayoutAlign="space-between" class="margin-1">
           <span class="secondary-text plain-text">Road temp:</span>
           <span class="accent-primary-text">{{ RoadTemp }}</span>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
+
+        <div fxLayout="row" fxLayoutAlign="space-between" class="margin-1">
           <span class="secondary-text plain-text">Air temp:</span>
           <span class="accent-primary-text">{{ AirTemp }}</span>
         </div>
-        <!-- <div fxLayout="row" fxLayoutAlign="space-between"><span>Elev:</span><span>{{ Elevation }}</span></div> -->
-        <div fxLayout="row" fxLayoutAlign="space-between">
+
+        <div fxLayout="row" fxLayoutAlign="space-between" class="margin-1">
           <span class="secondary-text plain-text">Wind Speed:</span>
           <span class="accent-primary-text">{{ WindSpeed }}</span>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
+
+        <div fxLayout="row" fxLayoutAlign="space-between" class="margin-1">
           <span class="secondary-text plain-text">Precip:</span>
           <span class="accent-primary-text">{{ Precipitation }}</span>
         </div>
       </div>
-      <button id="forecast-details-button" mat-raised-button color="accent" (click)="OpenDetailsModal()">Forecast Details</button>
+
+      <button
+        id="forecast-details-button"
+        mat-raised-button
+        color="accent"
+        class="margin-1"
+        (click)="OpenDetailsModal()"
+      >
+        Forecast Details
+      </button>
     </div>
   </div>
 </div>
