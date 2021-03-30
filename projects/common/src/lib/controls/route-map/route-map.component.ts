@@ -527,7 +527,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       tileUrl: url,
       tileSize: 256
     }
-    this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
+    this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'), 'currentMark');
   }
 
   protected getLayerFromFathymAPI(layer: any, timeIndex?: number) {
@@ -536,7 +536,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
       opacity: 0.7,
       tileSize: 256
-    }, 'maptiles'));
+    }, 'maptiles'), 'currentMark');
   }
 
   protected getLayerFromAzure(layer: any) {
@@ -658,7 +658,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     // this.routeNames = [];
     routes.forEach(route => {
 
-      // console.log('route name = ', route.displayName);
+      console.log('route name = ', route.displayName);
       // for (let i = route.pointsArr.length-1; i >=0; i--) {
       // for (let i = 0; i <route.pointsArr.length; i++) {
 
@@ -736,14 +736,21 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       this.Maper.map.addLinestrings([fline], {
         name: routeName,
         width: routeWidth,
-        color: routeColor
+        color: routeColor,
+        
       });
 
-      /** */
-      // dataSource.add([new atlas.data.LineString(points)]);
+     
+      dataSource.add([new atlas.data.LineString(points)]);
 
-      // this.Maper.map.layers.add(line, 'labels');
-      // /** */
+      // this.Maper.map.layers.add(line, 'routes');
+
+      this.Maper.map.layers.add(new atlas.layer.LineLayer(dataSource, 'currentMark', {
+        name: routeName,
+        strokeColor: routeColor,
+        strokeWidth: routeWidth
+      }));
+      
 
 
 
