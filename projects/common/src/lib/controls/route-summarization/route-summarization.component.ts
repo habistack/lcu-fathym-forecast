@@ -44,6 +44,7 @@ export class RouteSummarizationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.forecastPlotDataSubscription = this.notificationService.ForecastPlotDataChanged.subscribe(
       (data: ForecastDataModel) => {
+      
         if (!data) {
           console.error('PlotDataSubscription - No data returned'); return;
         }

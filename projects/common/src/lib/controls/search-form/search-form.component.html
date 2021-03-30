@@ -99,9 +99,11 @@
           <mat-error *ngIf="DepartureTimes.hasError('required')">A departure time is required</mat-error>
         </mat-dialog-content>
       <!--using lcu-select-->
-      <div fxLayout="column" fxFlex>
-        <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
-            <mat-dialog-content fxLayout="column">
+      
+    </div>
+    <div formGroupName="SearchConditions" fxLayout="column" fxFlex>
+      <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
+        <mat-dialog-content fxLayout="column">
           <lcu-select
             formControlName="conditionVariables"
             [Config]="ConditionsConfig"
@@ -109,8 +111,7 @@
           </lcu-select>
           <mat-hint *ngIf="ConditionVariableNames.valid">Selected Condition Variables</mat-hint>
           <mat-error *ngIf="ConditionVariableNames.hasError('required') && ConditionVariableNames.value">Condition variables are required</mat-error>
-        </mat-dialog-content>
-      </div>
+      </mat-dialog-content>
     </div>
       <div formGroupName="SearchFormControls" fxLayout="column" fxFlex>
         <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
