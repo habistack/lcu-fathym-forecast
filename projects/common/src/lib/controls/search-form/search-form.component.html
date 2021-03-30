@@ -140,8 +140,10 @@
       </mat-dialog-content>
 
       <!--using lcu-select-->
-      <div fxLayout="column" fxFlex>
-        <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
+
+    </div>
+    <div formGroupName="SearchConditions" fxLayout="column" fxFlex>
+      <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->
         <mat-dialog-content fxLayout="column">
           <lcu-select
             formControlName="conditionVariables"
@@ -151,18 +153,9 @@
             "
           >
           </lcu-select>
-          <mat-hint *ngIf="ConditionVariableNames.valid"
-            >Selected Condition Variables</mat-hint
-          >
-          <mat-error
-            *ngIf="
-              ConditionVariableNames.hasError('required') &&
-              ConditionVariableNames.value
-            "
-            >Condition variables are required</mat-error
-          >
-        </mat-dialog-content>
-      </div>
+          <mat-hint *ngIf="ConditionVariableNames.valid">Selected Condition Variables</mat-hint>
+          <mat-error *ngIf="ConditionVariableNames.hasError('required') && ConditionVariableNames.value">Condition variables are required</mat-error>
+      </mat-dialog-content>
     </div>
     <div formGroupName="SearchFormControls" fxLayout="column" fxFlex>
       <!-- <mat-dialog-content fxLayout="column" style="width:100%;"> -->

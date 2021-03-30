@@ -1,9 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import {
-  DataGridConfigModel,
-  ColumnDefinitionModel,
-  DataGridFeaturesModel,
-} from '@lowcodeunit/data-grid';
+import { DataGridConfigModel, ColumnDefinitionModel, DataGridFeaturesModel } from '@lowcodeunit/data-grid';
+import { DataPipeConstants } from '@lcu/common';
 
 import { FathymForecastConditionIcons } from '../../utils/weather-conditions-icons.utils';
 import { DataService } from '../../services/data.service';
@@ -28,8 +25,42 @@ export class DepartureTableComponent implements OnInit {
   }
 
   public get GridParameters(): DataGridConfigModel {
-    return this._gridParameters;
+    return this. _gridParameters;
   }
+
+   /**
+    * Grid features, such as: Pagination, Filtering, Loader, etc.
+    */
+ protected _gridFeatures: DataGridFeaturesModel;
+ public get GridFeatures(): DataGridFeaturesModel {
+   return this._gridFeatures;
+ }
+
+ public set GridFeatures(val: DataGridFeaturesModel) {
+   this._gridFeatures = val;
+ }
+
+  protected apiKey: string = 'fathym';
+   /**
+    * String for continuation
+    */
+   public Continuation: string;
+
+   /**
+    * List of devices
+    */
+   public Devices: Array<any>;
+
+   /**
+    * array for grid
+    */
+   // public GridItems: Array<DeviceGridModel>;
+
+   protected columnDefs: Array<ColumnDefinitionModel> = [];
+
+  constructor(
+    protected ffService: DataService,
+  ) {}
 
   /**
    * Grid features, such as: Pagination, Filtering, Loader, etc.
@@ -69,69 +100,72 @@ export class DepartureTableComponent implements OnInit {
     this.GridData();
   }
 
+//   new ColumnDefinitionModel({
+//     ColType: 'copy',
+//     ColWidth: '10px',
+//     Title: '',
+//     ShowValue: false,
+//     ShowIcon: true,
+//     IconColor: 'orange-accent-text',
+//     IconConfigFunc: (keyData) => {
+//         return keyData.$IsCopySuccessIcon ? 'done' : 'content_copy';
+//     },
+//     Action: {
+//         ActionHandler: this.CopyClick.bind(this),
+//         ActionType: 'button',
+//         ActionTooltip: 'Copy SAS Token',
+//     },
+// })
+
   protected setGridParameters(): void {
-    // this.columnDefs = [
-    //   new ColumnDefinitionModel(
-    //     'VtimesStart', // columnType
-    //     'Departure Time', // header title
-    //     true, // show value
-    //     false, // show icon
-    //     false, // sortable
-    //     PipeConstants.PIPE_EPOCH, // use pipe
-    //     null, // icon function
-    //     null // action
-    //   ),
-    //   new ColumnDefinitionModel(
-    //     'TempMin',
-    //     'Temp Min',
-    //     true,
-    //     true,
-    //     false,
-    //     null,
-    //     null, // FathymForecastConditionIcons,
-    //     null
-    //   ),
-    //   new ColumnDefinitionModel(
-    //     'TempMax',
-    //     'Temp Max',
-    //     true,
-    //     true,
-    //     false,
-    //     PipeConstants.PIPE_TEMP_FAHRENHEIT,
-    //     null, // FathymForecastConditionIcons,
-    //     null
-    //   ),
-    //   new ColumnDefinitionModel(
-    //     'PrecipMax',
-    //     'Precipitation',
-    //     true,
-    //     true,
-    //     false,
-    //     null,
-    //     null, // FathymForecastConditionIcons,
-    //     null
-    //   ),
-    //   new ColumnDefinitionModel(
-    //     'WindSpdMax',
-    //     'Wind Speed',
-    //     true,
-    //     true,
-    //     false,
-    //     PipeConstants.PIPE_MPH,
-    //     null, // FathymForecastConditionIcons,
-    //     null
-    //   ),
-    //   new ColumnDefinitionModel(
-    //     'WindGustMax',
-    //     'Wind Gust',
-    //     true,
-    //     true,
-    //     false,
-    //     PipeConstants.PIPE_MPH,
-    //     null, // FathymForecastConditionIcons,
-    //     null
-    //   ),
-    // ];
+    this.columnDefs = [
+      new ColumnDefinitionModel({
+        ColType: 'VtimesStart', // columnType
+        Title: 'Departure Time', // header title
+        ShowValue: true, // show value
+        ShowIcon: false, // show icon
+        Sortable: false, // sortable
+        Pipe: DataPipeConstants.PIPE_EPOCH, // use pipe
+      }),
+      new ColumnDefinitionModel({
+        ColType: 'TempMin',
+        Title: 'Temp Min',
+        ShowValue: true,
+        ShowIcon: true,
+        Sortable: false,
+      }),
+      new ColumnDefinitionModel({
+        ColType: 'TempMax',
+        Title: 'Temp Max',
+        ShowValue: true,
+        ShowIcon: true,
+        Sortable: false,
+        Pipe: DataPipeConstants.PIPE_TEMP_FAHRENHEIT,
+      }),
+      new ColumnDefinitionModel({
+        ColType: 'PrecipMax',
+        Title: 'Precipitation',
+        ShowValue: true,
+        ShowIcon: true,
+        Sortable: false,
+      }),
+      new ColumnDefinitionModel({
+        ColType: 'WindSpdMax',
+        Title: 'Wind Speed',
+        ShowValue: true,
+        ShowIcon: true,
+        Sortable: false,
+        Pipe: DataPipeConstants.PIPE_MPH
+      }),
+      new ColumnDefinitionModel({
+        ColType: 'WindGustMax',
+        Title: 'Wind Gust',
+        ShowValue: true,
+        ShowIcon: true,
+        Sortable: false,
+        Pipe: DataPipeConstants.PIPE_MPH,
+      })
+    ];
 
     this.setGridFeatures();
 
@@ -167,17 +201,11 @@ export class DepartureTableComponent implements OnInit {
     const includeAlts = true;
     const departTime = '1566503558';
 
-    // this.GridParameters = {
-    //   ColumnDefs: this.ffService.GetDepartureTableData(
-    //     this.apiKey,
-    //     origin,
-    //     destination,
-    //     departTime,
-    //     includeAlts
-    //   ),
-    //   ColumnDefs: this.columnDefs,
-    //   Features: this.GridFeatures
-    //   };
-    console.log('grid params', this.GridParameters);
+    this.GridParameters = new DataGridConfigModel(
+        this.ffService.GetDepartureTableData(this.apiKey, origin, destination, departTime, includeAlts),
+        this.columnDefs,
+        this.GridFeatures
+      );
+      console.log("grid params", this.GridParameters)
   }
 }
