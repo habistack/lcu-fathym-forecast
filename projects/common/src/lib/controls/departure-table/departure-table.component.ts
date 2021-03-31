@@ -58,39 +58,9 @@ export class DepartureTableComponent implements OnInit {
 
    protected columnDefs: Array<ColumnDefinitionModel> = [];
 
-  constructor(
-    protected ffService: DataService,
-  ) {}
-
-  /**
-   * Grid features, such as: Pagination, Filtering, Loader, etc.
-   */
-  protected _gridFeatures: DataGridFeaturesModel;
-  public get GridFeatures(): DataGridFeaturesModel {
-    return this._gridFeatures;
-  }
-
-  public set GridFeatures(val: DataGridFeaturesModel) {
-    this._gridFeatures = val;
-  }
-
-  protected apiKey = 'fathym';
-  /**
-   * String for continuation
-   */
-  public Continuation: string;
-
-  /**
-   * List of devices
-   */
-  public Devices: Array<any>;
-
   /**
    * array for grid
    */
-  // public GridItems: Array<DeviceGridModel>;
-
-  protected columnDefs: Array<ColumnDefinitionModel> = [];
 
   constructor(protected ffService: DataService) {}
 
