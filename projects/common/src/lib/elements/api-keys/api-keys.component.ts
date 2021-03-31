@@ -1,13 +1,13 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Injector, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { FathymForecastStateContext } from '../../state/fathym-forecast/fathym-forecast-state.context';
 import { FathymForecastState } from '../../state/fathym-forecast/fathym-forecast.state';
 
-export class LcuFathymForecastApiKeysElementState {}
-
-export class LcuFathymForecastApiKeysContext extends LCUElementContext<
-  LcuFathymForecastApiKeysElementState
-> {}
+export class LcuFathymForecastApiKeysContext extends LCUElementContext<FathymForecastState> {}
 
 export const SELECTOR_LCU_FATHYM_FORECAST_API_KEYS_ELEMENT =
   'lcu-fathym-forecast-api-keys-element';
@@ -23,9 +23,6 @@ export class LcuFathymForecastApiKeysElementComponent
   //  Fields
 
   //  Properties
-  public APIKeyTypes: string[];
-
-  public State: FathymForecastState;
 
   //  Constructors
   constructor(
@@ -40,22 +37,25 @@ export class LcuFathymForecastApiKeysElementComponent
     super.ngOnInit();
 
     this.forecastCtxt.Context.subscribe((state) => {
-      this.State = state;
+      this.Context = {
+        ...(this.Context || {}),
+        State: state,
+      };
 
-      if (this.State) {
-        this.stateChanged();
-      }
+      this.stateChanged();
     });
   }
 
   //  API Methods
+  public RegenerateAPIKey(keyName: string) {
+    // this.State.Loading = true;
+
+    alert('Implement regenerate: ' + keyName);
+    // this.iotEnsCtxt.RegenerateAPIKey(keyName);
+  }
 
   //  Helpers
   protected stateChanged() {
-    if (this.State.APIKeys) {
-      this.APIKeyTypes = Object.keys(this.State.APIKeys);
-    } else {
-      this.APIKeyTypes = [];
-    }
+    console.log(this.Context);
   }
 }

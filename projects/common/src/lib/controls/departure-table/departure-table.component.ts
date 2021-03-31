@@ -8,13 +8,13 @@ import { DataService } from '../../services/data.service';
 @Component({
   selector: 'lcu-departure-table',
   templateUrl: './departure-table.component.html',
-  styleUrls: ['./departure-table.component.css']
+  styleUrls: ['./departure-table.component.css'],
 })
 export class DepartureTableComponent implements OnInit {
- /**
+  /**
    * datagrid component
    */
- // @ViewChild('Datagrid', {static: false}) dataGrid: DataGridComponent;
+  // @ViewChild('datagrid', {static: false}) dataGrid: DataGridComponent;
 
   /**
    * Parameters needed for the grid
@@ -23,11 +23,11 @@ export class DepartureTableComponent implements OnInit {
   public set GridParameters(val: DataGridConfigModel) {
     this._gridParameters = val;
   }
- 
+
   public get GridParameters(): DataGridConfigModel {
     return this. _gridParameters;
   }
- 
+
    /**
     * Grid features, such as: Pagination, Filtering, Loader, etc.
     */
@@ -35,36 +35,36 @@ export class DepartureTableComponent implements OnInit {
  public get GridFeatures(): DataGridFeaturesModel {
    return this._gridFeatures;
  }
- 
+
  public set GridFeatures(val: DataGridFeaturesModel) {
    this._gridFeatures = val;
  }
- 
+
   protected apiKey: string = 'fathym';
    /**
     * String for continuation
     */
    public Continuation: string;
- 
+
    /**
     * List of devices
     */
    public Devices: Array<any>;
- 
+
    /**
     * array for grid
     */
    // public GridItems: Array<DeviceGridModel>;
- 
+
    protected columnDefs: Array<ColumnDefinitionModel> = [];
- 
-  constructor(
-    protected ffService: DataService,
-  ) {}
+
+  /**
+   * array for grid
+   */
+
+  constructor(protected ffService: DataService) {}
 
   ngOnInit() {
-
-
     this.setGridParameters();
 
     this.GridData();
@@ -141,24 +141,20 @@ export class DepartureTableComponent implements OnInit {
 
     // showing grid column headers
     this.GridParameters = this.defaultGridConfig();
-}
+  }
 
+  public DoubleClick(): void {
+    console.log('double');
+  }
 
-public DoubleClick(): void {
-  console.log('double');
-}
+  /**
+   * Setting up grid data, columns, and features
+   */
 
-/**
- * Setting up grid data, columns, and features
- */
-
- 
-
- /**
+  /**
    * Setting up grid features
    */
   protected setGridFeatures(): void {
-
     this.GridParameters = this.defaultGridConfig();
   }
 

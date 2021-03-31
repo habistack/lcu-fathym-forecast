@@ -27,3 +27,6 @@ export * from './lib/elements/api-keys/api-keys.component';
 export * from './lib/elements/analytics/analytics.component';
 export * from './lib/elements/routing/routing.component';
 export * from './lib/components/css-theme.component';
+export * from './lib/guards/router.guard';
+export * from './lib/elements/no-access/no-access.component';
+export * from './lib/elements/api-keys/api-keys.component';
