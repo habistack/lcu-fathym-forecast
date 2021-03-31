@@ -43,6 +43,7 @@ export class ChartPlotsComponent implements OnInit {
   public gradient: boolean = false;
   public legendPosition: string = 'right';
   public legendTitle: string = '';
+  public legendWidth: any = "130px";
   public maxXAxisTickLength: number = 16;
   public maxYAxisTickLength: number = 16;
   public rangeFillOpacity: number = 0.15;
@@ -50,7 +51,7 @@ export class ChartPlotsComponent implements OnInit {
   public roundDomains: boolean = false;
   public schemeType: string = 'ordinal';
   public showGridLines: boolean = true;
-  public showLegend: boolean = false;
+  public showLegend: boolean = true;
   public showXAxis: boolean = true;
   public showXAxisLabel: boolean = false;
   public showYAxis: boolean = true;

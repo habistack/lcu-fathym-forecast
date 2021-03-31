@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChildren, QueryList, EventEmitter } from '@angular/core';
-import { Plot } from '../plots/plots';
-import { VariableDataPlotComponent } from '../variable-data-plot/variable-data-plot.component';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 import { DateFormatModel, colorSets, ViewDimensions } from '@lowcodeunit/lcu-charts-common';
 import { ForecastPlotsService } from '../../services/forecast-plots.service';
@@ -67,7 +65,7 @@ export class ForecastDataPlotComponent {
   public roundDomains: boolean = false;
   public schemeType: string = 'ordinal';
   public showGridLines: boolean = true;
-  public showLegend: boolean = false;
+  public showLegend: boolean = true;
   public showXAxis: boolean = true;
   public showXAxisLabel: boolean = false;
   public showYAxis: boolean = true;

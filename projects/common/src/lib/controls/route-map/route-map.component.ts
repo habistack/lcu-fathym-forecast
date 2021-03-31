@@ -694,27 +694,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if (llon > this.maxLong) { this.maxLong = llon; }
       }
-
-
-      const start: atlas.data.Position = decodedPath[0];
-      const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
-
-
-      /**
-       * Set route start and end points
-       */
-      this.startMarker = new atlas.data.Feature(new atlas.data.Point(start));
-
-      this.Maper.map.addPins([this.startMarker], {
-        name: 'routeStart'
-      });
-
-      this.endMarker = new atlas.data.Feature(new atlas.data.Point(end));
-
-      this.Maper.map.addPins([this.endMarker], {
-        name: 'routeEnd'
-      });
-
+      
       /**
        * Build line(s) for route(s)
        */
@@ -735,7 +715,39 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         strokeColor: routeColor,
         strokeWidth: routeWidth
       }));
-      console.log("DataSource: ", dataSource);
+
+
+      /**
+       * Set route start and end points
+       */
+       const start: atlas.data.Position = decodedPath[0];
+       const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
+
+       console.log("index: ", this.Routes.indexOf(route))
+       if(this.Routes.indexOf(route) === this.Routes.length -1){
+ 
+         this.startMarker = new atlas.data.Feature(new atlas.data.Point(start));
+ 
+         this.Maper.map.addPins([this.startMarker], {
+           name: 'routeStart',
+           title: routeName,
+           fontSize: 25,
+           fontColor: '#006400',
+           textOffset: [0,-20]
+         });
+ 
+         this.endMarker = new atlas.data.Feature(new atlas.data.Point(end));
+        
+         this.Maper.map.addPins([this.endMarker], {
+          name: 'routeEnd',
+          title: "End",
+          fontSize: 25,
+          fontColor: '#962938',
+          textOffset: [0,-20]
+         });
+ 
+       }
+ 
       
       const sw = new atlas.data.Position(this.minLong - 0.75, this.minLat - 0.75);
 
