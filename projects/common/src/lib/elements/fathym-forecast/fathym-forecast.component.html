@@ -1,40 +1,47 @@
 <div [className]="SelectedTheme" fxFlexFill>
   <div fxFlexFill>
     <div fxFlexFill>
-      <div fxFlexFill fxLayoutGap="10" fxLayout="column">
-        <div 
-             fxFlexFill
-             fxLayout.gt-md="row" 
-             fxLayout.lt-md="column" 
-             fxLayoutAlign="center">
-          <div fxLayout="column" fxFlex="auto" fxLayoutGap="5px" class="left-side-bar">
-            
-            <div 
+      <div fxFlexFill fxLayout="column">
+        <div
+          fxFlexFill
+          fxLayout.gt-md="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="center"
+          class="margin-2"
+        >
+          <div fxLayout="column" fxFlex="auto" class="left-side-bar">
+            <div
               fxLayout="row"
-              fxLayoutGap="5px"
-              fxLayoutAlign="space-between center" 
-              color="primary" 
-              class="header background-fill">
-              <div fxLayout="row" fxLayoutGap="10px">
-                <div>
+              fxLayoutAlign="space-between center"
+              color="primary"
+              class="header background-fill margin-1"
+            >
+              <div fxLayout="row" class="margin-1">
+                <div class="margin-1">
                   <div class="primary-logo" logo-alt="Fathym Logo"></div>
                 </div>
-                <div class="title primary-logo-text">
-                <h3> {{ Title }}</h3>
+
+                <div class="title primary-logo-text margin-1">
+                  <h3>{{ Title }}</h3>
                 </div>
               </div>
+
               <div class="divider-fill-vert"></div>
+
               <!-- <mat-card-subtitle class="plain-text">{{ SubTitle }}</mat-card-subtitle> -->
             </div>
 
-            <lcu-search-form></lcu-search-form>
+            <lcu-search-form class="margin-1"></lcu-search-form>
 
             <!-- INSERT GRAPHS HERE -->
-            <div #topOfSummarization></div>
-            <lcu-route-summarization></lcu-route-summarization>
-            <lcu-chart-plots></lcu-chart-plots>
+            <div #topOfSummarization class="margin-1"></div>
+
+            <lcu-route-summarization class="margin-1"></lcu-route-summarization>
+
+            <lcu-chart-plots class="margin-1"></lcu-chart-plots>
             <!-- <lcu-forecast-plots></lcu-forecast-plots> -->
           </div>
+
           <div fxFlex="70">
             <lcu-route-map></lcu-route-map>
           </div>
@@ -42,7 +49,7 @@
       </div>
       <!-- WHEN GRAPHS READY, REMOVE THE FOLLOWING GRAPH AND MOVE TO SIDE BAR ABOVE -->
       <div>
-          <!-- <lcu-forecast-plots></lcu-forecast-plots> -->
+        <!-- <lcu-forecast-plots></lcu-forecast-plots> -->
 
         <!-- <lcu-departure-table></lcu-departure-table> -->
       </div>

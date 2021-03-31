@@ -1,7 +1,13 @@
 import { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders, HttpUrlEncodingCodec } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpParams,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpUrlEncodingCodec,
+} from '@angular/common/http';
 import { map, retry, catchError } from 'rxjs/operators';
 import { WeatherModel } from '../models/weather.model';
 import { Observable } from 'rxjs/internal/Observable';
@@ -13,24 +19,26 @@ import { HttpUrlEncoder } from '../utils/http/http-url-encoder.utils';
 // import { FathymForecastConfigContext } from '../contexts/ff-config.context';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
   //  Fields
-  protected apiRoot: string = 'https://wxlb01.fathym.com';
-  protected subscriptionKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
-  protected azureMapsKey: string = 'MSrrKthFlRDpZE_OEEAn2Mlya4Qw7Fy_2zxU3G8YF10';
-  protected forecastAPIKey: string = 'dedc205ffda64e5c91f922a9b0ddacb5';
+  protected apiRoot = 'https://wxlb01.fathym.com';
+  protected subscriptionKey = 'dedc205ffda64e5c91f922a9b0ddacb5';
+  protected azureMapsKey =
+    'MSrrKthFlRDpZE_OEEAn2Mlya4Qw7Fy_2zxU3G8YF10';
+  protected forecastAPIKey = 'dedc205ffda64e5c91f922a9b0ddacb5';
 
   // tslint:disable-next-line:max-line-length
-  protected forecastWrapper: string = 'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
+  protected forecastWrapper =
+    'https://flw-rd.azurewebsites.net/api/ForecastWrapperAPIFunction?code=eLPC6WXunKwh8fKMaT/phsUAbbdSQ72kqbFSCp34BOeZmBOJQ5CWww==';
 
-// protected oldCallForRoutes: string 
-// https://wxlb01.fathym.com/route?
-// origin=32.7499,-97.33034&
-// destination=40.58897,-105.08246&
-// includeAlts=true&token=fathym&
-// var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
+  // protected oldCallForRoutes: string
+  // https://wxlb01.fathym.com/route?
+  // origin=32.7499,-97.33034&
+  // destination=40.58897,-105.08246&
+  // includeAlts=true&token=fathym&
+  // var_names=t,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate
 
   protected ffConfig: FathymForecastConfig;
 
@@ -38,7 +46,7 @@ export class DataService {
 
   //  Constructors
   // constructor(protected http: HttpClient, protected ffConfigCtxt: FathymForecastConfigContext) {
-    constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient) {
     // this.ffConfigCtxt.Context.subscribe(res => {
     //   this.ffConfig = res;
     // });
@@ -48,14 +56,14 @@ export class DataService {
   public Blend() {
     if (this.ffConfig && this.ffConfig.ServerURL) {
       console.log('public Blend - need to uncomment this - shannon');
-     // const url = this.ffConfig.ServerURL + '/blend/times';
-     const url = this.ffConfig.ServerURL;
+      // const url = this.ffConfig.ServerURL + '/blend/times';
+      const url = this.ffConfig.ServerURL;
 
       return this.http.get(url).pipe(
-        map(response => {
+        map((response: any) => {
           return {
-            ImageVarNames: response['var_names'],
-            ImageValidTimes: response['valid_times']
+            ImageVarNames: response.var_names,
+            ImageValidTimes: response.valid_times,
           };
         })
       );
@@ -72,12 +80,12 @@ export class DataService {
    * @param includeAlts include alternative routes
    */
   public GetDepartureTableData(
-     apiKey: string,
-     origin: string,
-     destination: string,
-     departTime: string,
-     includeAlts: boolean): Observable<any[]> {
-
+    apiKey: string,
+    origin: string,
+    destination: string,
+    departTime: string,
+    includeAlts: boolean
+  ): Observable<any[]> {
     if (!apiKey) {
       console.warn('An API Key is needed for the departure table');
       return;
@@ -102,7 +110,10 @@ export class DataService {
 
     let headers = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');
-    headers = headers.append('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    headers = headers.append(
+      'Access-Control-Allow-Methods',
+      'PUT, GET, POST, DELETE, OPTIONS'
+    );
     headers = headers.append('Access-Control-Allow-Headers', 'Content-Type');
 
     // return this.http.get<any[]>(`${this.apiRoot}/departtimes`, { params: httpParams }).pipe(
@@ -112,22 +123,27 @@ export class DataService {
     //   })
     // );
     // debugger;
-    return this.http.get<any[]>(`${this.forecastWrapper}`, {headers: headers, params: httpParams })
-    .pipe(
-      map(res => {
-        return res;
+    return this.http
+      .get<any[]>(`${this.forecastWrapper}`, {
+        headers,
+        params: httpParams,
       })
-    );
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
   }
 
   public RouteData(search: SearchModel): Observable<object> {
-    const url: string = 'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
+    const url =
+      'https://azure-maps-router-int.azurewebsites.net/api/routeforecast';
 
     let httpParams = new HttpParams();
     httpParams = httpParams.append('origin', search.Origin);
     httpParams = httpParams.append('destination', search.Destination);
-    httpParams = httpParams.append('departAt', search.DepartureTime);    
-    httpParams = httpParams.append('includeAlts', search.IncludeAlts);    
+    httpParams = httpParams.append('departAt', search.DepartureTime);
+    httpParams = httpParams.append('includeAlts', search.IncludeAlts);
 
     httpParams = httpParams.append('azureMapsKey', this.azureMapsKey);
     httpParams = httpParams.append('forecastAPIKey', this.forecastAPIKey);
@@ -170,7 +186,7 @@ export class DataService {
     // if (search.SearchDatasourceType.VarNames) {
     //   httpParams = httpParams.append('var_names', search.SearchDatasourceType.VarNames);
     // }
-    const url: string = 'https://wxlb01.fathym.com/route';
+    const url = 'https://wxlb01.fathym.com/route';
 
     return this.http.get(url, { params: httpParams });
   }
@@ -186,11 +202,13 @@ export class DataService {
 
     headers = headers.set('Ocp-Apim-Subscription-Key', lbsKey);
 
-    const url = 'https://atlas.microsoft.com/search/address/json?api-version=1&typeahead=true&query=' + text;
+    const url =
+      'https://atlas.microsoft.com/search/address/json?api-version=1&typeahead=true&query=' +
+      text;
 
-    return this.http.get(url, { headers: headers }).pipe(
+    return this.http.get(url, { headers }).pipe(
       map((response: any) => {
-        return <any[]>response.results;
+        return response.results as any[];
       })
     );
   }
@@ -204,8 +222,8 @@ export class DataService {
         URLPrefix: '/fcst',
         FcstCfg: 'hrrr_config',
         Host: 'http://fathymwx.westus.cloudapp.azure.com',
-        VarNames: ''
-       // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
+        VarNames: '',
+        // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
         // Host: (this.ffConfig ? this.ffConfig.ServerURL : ''),
         // VarNames: (this.ffConfig ? this.ffConfig.VariableNames : ''),
       },
@@ -214,8 +232,8 @@ export class DataService {
         URLPrefix: '/fcst',
         FcstCfg: 'gfs_config',
         Host: 'http://fathymwx.westus.cloudapp.azure.com',
-        VarNames: ''
-       // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
+        VarNames: '',
+        // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
         // Host: (this.ffConfig ? this.ffConfig.ServerURL : ''),
         // VarNames: (this.ffConfig ? this.ffConfig.VariableNames : ''),
       },
@@ -224,8 +242,8 @@ export class DataService {
         URLPrefix: '/blend',
         FcstCfg: null,
         Host: 'http://fathymwx.westus.cloudapp.azure.com',
-        VarNames: ''
-       // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
+        VarNames: '',
+        // VarNames: 't,sfc_t,prate,ptype,wspd,gust,cloudcover,rad,vis,rt,primary_roadstate,elev'
         // Host: (this.ffConfig ? this.ffConfig.ServerURL : ''),
         // VarNames: (this.ffConfig ? this.ffConfig.VariableNames : ''),
       },
@@ -234,8 +252,8 @@ export class DataService {
         URLPrefix: '/fcst',
         FcstCfg: 'mwave_config',
         Host: 'http://localhost',
-        VarNames: null
-      }
+        VarNames: null,
+      },
     ];
   }
 
@@ -246,12 +264,15 @@ export class DataService {
    *
    * @param points array of lat/long values that represent each point of the shape
    */
-  public ShapeRegion(points: Array<Array<number>>, searchData: SearchModel): any {
-
-    const url: string = 'http://fathymwx.westus.cloudapp.azure.com/fcst/fcstpoly';
+  public ShapeRegion(
+    points: Array<Array<number>>,
+    searchData: SearchModel
+  ): any {
+    const url =
+      'http://fathymwx.westus.cloudapp.azure.com/fcst/fcstpoly';
     // const url: string = 'http://fathymwx.westus.cloudapp.azure.com/blend/routefcst';
     let pointArr: Array<string> = [];
-    let pointStr: string = '';
+    let pointStr = '';
 
     pointArr = points.map((item: Array<number>) => {
       // lat / long values come in backwards, so they need to be reveresed
@@ -261,7 +282,7 @@ export class DataService {
     pointStr = pointArr.toString();
 
     let httpParams = new HttpParams({
-     encoder: new HttpUrlEncoder()
+      encoder: new HttpUrlEncoder(),
     });
 
     httpParams = httpParams.append('latlons', '[' + pointStr + ']');
@@ -269,15 +290,20 @@ export class DataService {
     httpParams = httpParams.append('departTime', searchData.DepartureTime);
 
     if (searchData.SearchDatasourceType.VarNames) {
-      httpParams = httpParams.append('var_names', searchData.SearchDatasourceType.VarNames);
+      httpParams = httpParams.append(
+        'var_names',
+        searchData.SearchDatasourceType.VarNames
+      );
     }
 
-    return this.http.get<any>(url, { params: httpParams }).pipe(
-      map(res => {
-        console.log(res);
-        return res;
-      })
-    );
+    return this.http
+      .get<any>(url, { params: httpParams })
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
 
   /**
@@ -287,7 +313,7 @@ export class DataService {
    */
   private remapData(val: any): Array<WeatherModel> {
     const arr: Array<WeatherModel> = [];
-    const element = val['data'][0];
+    const element = val.data[0];
     Object.keys(element).forEach((key, index) => {
       const item = {} as WeatherModel;
       Object.keys(element[key]).forEach((childKey, childIndex) => {

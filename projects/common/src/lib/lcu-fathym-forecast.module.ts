@@ -10,8 +10,15 @@ import { ToastrModule } from 'ngx-toastr';
 import 'd3';
 
 import { DataGridModule } from '@lowcodeunit/data-grid';
-import { DisplayDateFormatPipe, ImageDateFormatPipe } from './utils/pipes/ff-pipes';
-import { FathymSharedModule, MaterialModule, DirectiveModule } from '@lcu/common';
+import {
+  DisplayDateFormatPipe,
+  ImageDateFormatPipe,
+} from './utils/pipes/ff-pipes';
+import {
+  FathymSharedModule,
+  MaterialModule,
+  DirectiveModule,
+} from '@lcu/common';
 import { LcuSelectModule } from '@lowcodeunit/lcu-select-common';
 import { DepartureTableComponent } from './controls/departure-table/departure-table.component';
 import { SearchFormComponent } from './controls/search-form/search-form.component';
@@ -22,7 +29,7 @@ import { ForecastPlotsComponent } from './controls/forecast-plots/forecast-plots
 import { RouteSummarizationComponent } from './controls/route-summarization/route-summarization.component';
 import { ForecastDetailsComponent } from './controls/forecast-details/forecast-details.component';
 import { LcuFathymForecastFathymForecastElementComponent } from './elements/fathym-forecast/fathym-forecast.component';
-import { LcuChartsModule} from '@lowcodeunit/lcu-charts-common';
+import { LcuChartsModule } from '@lowcodeunit/lcu-charts-common';
 import { ChartPlotsComponent } from './controls/chart-plots/chart-plots.component';
 import { LcuFathymForecastApiKeysElementComponent } from './elements/api-keys/api-keys.component';
 import { LcuFathymForecastAnalyticsElementComponent } from './elements/analytics/analytics.component';
@@ -30,6 +37,8 @@ import { CSSThemeModule } from './css-theme/css-theme.module';
 import { lightTheme } from './css-theme/light-theme';
 import { darkTheme } from './css-theme/dark-theme';
 import { CssThemeComponent } from './components/css-theme.component';
+import { LcuFathymForecastNoAccessComponent } from './elements/no-access/no-access.component';
+import { AppHostModule } from '@lowcodeunit/app-host-common';
 
 @NgModule({
   declarations: [
@@ -49,7 +58,8 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
-    CssThemeComponent
+    CssThemeComponent,
+    LcuFathymForecastNoAccessComponent,
   ],
   imports: [
     CommonModule,
@@ -64,10 +74,11 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuChartsModule,
     LcuMapsModule.forRoot(),
     DirectiveModule,
+    AppHostModule,
     CSSThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
-      active: 'light'
-    })
+      active: 'light',
+    }),
   ],
   exports: [
     DepartureTableComponent,
@@ -85,9 +96,11 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
+    AppHostModule,
     LcuMapsModule,
     DirectiveModule,
-    CssThemeComponent
+    CssThemeComponent,
+    LcuFathymForecastNoAccessComponent,
   ],
   entryComponents: [
     DepartureTableComponent,
@@ -102,19 +115,24 @@ import { CssThemeComponent } from './components/css-theme.component';
     LcuFathymForecastApiKeysElementComponent,
     LcuFathymForecastAnalyticsElementComponent,
     LcuFathymForecastRoutingElementComponent,
-    CssThemeComponent
+    CssThemeComponent,
+    LcuFathymForecastNoAccessComponent,
   ],
-  providers: [
-    DisplayDateFormatPipe,
-    ImageDateFormatPipe,
-    CssThemeService
-  ]
+  providers: [DisplayDateFormatPipe, ImageDateFormatPipe, CssThemeService],
 })
 export class LcuFathymForecastModule {
-  static forRoot(): ModuleWithProviders<LcuFathymForecastModule> {
+  public static forRoot(
+    environment: any
+  ): ModuleWithProviders<LcuFathymForecastModule> {
     return {
       ngModule: LcuFathymForecastModule,
-      providers: [LoadMapService]
+      providers: [
+        LoadMapService,
+        {
+          provide: 'env',
+          useValue: environment,
+        },
+      ],
     };
   }
- }
+}

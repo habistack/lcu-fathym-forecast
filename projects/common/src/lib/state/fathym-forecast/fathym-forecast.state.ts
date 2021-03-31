@@ -1,22 +1,29 @@
-import { Status } from '@lcu/common';
+import { APIAccessKeyData } from '@lowcodeunit/app-host-common';
 
 export class FathymForecastState {
-  public APIKeys?: { [name: string]: string };
+  public AccessLicenseType?: string;
 
-  public APISiteURL?: string;
+  public AccessPlanGroup?: string;
+
+  public APIKeys?: APIAccessKeyData[];
 
   public HasAccess?: boolean;
 
   public Loading?: boolean;
 
+  public MaxPointQueries?: number;
+
+  public OpenAPISource?: string;
+
   public UsageState?: UsageStateTypes;
 
+  public UserEnterpriseLookup?: string;
 }
 
 export enum UsageStateTypes {
-  Active = "Active",
-  Inactive = "Inactive",
-  Overage = "Overage",
-  Revoked = "Revoked",
-  Warning = "Warning",
+  Active = 'Active',
+  Inactive = 'Inactive',
+  Overage = 'Overage',
+  Revoked = 'Revoked',
+  Warning = 'Warning',
 }
