@@ -513,6 +513,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         this.getLayerFromAzure(layer);
       }
     }
+    this.displayRoute(this.Routes);
   }
 
   protected getLayerFromIowaAPI(layer: any) {
@@ -525,9 +526,10 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     // }
     const options = {
       tileUrl: url,
-      tileSize: 256
+      tileSize: 256,
+      opacity: 0.7
     }
-    this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'), 'currentMark');
+    this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
   }
 
   protected getLayerFromFathymAPI(layer: any, timeIndex?: number) {
@@ -536,7 +538,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       tileUrl: `https://fathym-forecast-int.azure-api.net/api/v0/maptile-fetch/${layer.value}/${t}/{z}/{x}/{y}.png?subscription-key=${this.subscriptionKey}`,
       opacity: 0.7,
       tileSize: 256
-    }, 'maptiles'), 'currentMark');
+    }, 'maptiles'));
   }
 
   protected getLayerFromAzure(layer: any) {
@@ -627,15 +629,6 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     /**
-     * Colors for route lines
-     * TODO: make this dynamic for unknown number of routes
-     */
-    // const routeProps: Array<object> = [
-    //   { strokeColor: '#0000CD', strokeWidth: 5 },
-    //   { strokeColor: '#00FF00', strokeWidth: 5 },
-    //   { strokeColor: '#FF007F', strokeWidth: 5 }];
-
-    /**
      * Remove any routes on the map
      */
     this.clearRoutes();
@@ -677,12 +670,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       /**
        * Set colors for each route line
        */
-
-      // const routeColor: string = routeProps[i]['strokeColor'];
-      // const routeWidth: number = routeProps[i]['strokeWidth'];
-
       const routeColor: string = route.color;
-      // console.log('route color: ', route.color);
       const routeWidth: number = 5;
 
       /**
@@ -736,24 +724,19 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       this.Maper.map.addLinestrings([fline], {
         name: routeName,
         width: routeWidth,
-        color: routeColor,
-        
+        color: routeColor
       });
 
      
       dataSource.add([new atlas.data.LineString(points)]);
-
-      // this.Maper.map.layers.add(line, 'routes');
 
       this.Maper.map.layers.add(new atlas.layer.LineLayer(dataSource, 'currentMark', {
         name: routeName,
         strokeColor: routeColor,
         strokeWidth: routeWidth
       }));
+      console.log("DataSource: ", dataSource);
       
-
-
-
       const sw = new atlas.data.Position(this.minLong - 0.75, this.minLat - 0.75);
 
       const ne = new atlas.data.Position(this.maxLong + 0.75, this.maxLat + 0.75);
@@ -767,6 +750,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       this.Route = points;
       // }
     })
+    // this.Maper.map.layers.add(new atlas.layer.LineLayer(dataSource, routeName, {
+    //   name: routeName,
+    //   strokeColor: routeColor,
+    //   strokeWidth: routeWidth
+    // }));
 
   }
 
