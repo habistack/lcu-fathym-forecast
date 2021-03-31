@@ -638,22 +638,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
      */
     this.Maper.map.removeLayers(['currentMark']);
 
-    // if (this.routeNames && this.routeNames.length > 0) {
-    //   for (let i = 0; i < this.routeNames.length; i++) {
-    //     this.Maper.map.removeLayers([this.routeNames[i]]);
-    //     this.Maper.map.removeLayers(['routeStart', 'routeEnd']);
-    //   }
-    // }
-
-    // /**
-    //  * Clear routeNames array
-    //  */
-    // this.routeNames = [];
     routes.forEach(route => {
 
-      console.log('route name = ', route.displayName);
-      // for (let i = route.pointsArr.length-1; i >=0; i--) {
-      // for (let i = 0; i <route.pointsArr.length; i++) {
+      // console.log('route name = ', route.displayName);
 
       /**
        * Set new data source to the map
@@ -677,14 +664,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
        * Points to plot
        */
       const points = route.pointsArr;
-      // console.log('points here: ', points)
       const decodedPath = points;
       for (let j = 0; j < decodedPath.length; j++) {
         const llat = decodedPath[j][1];
-        // console.log('llat: ', llat);
 
         const llon = decodedPath[j][0];
-        // console.log('llon: ', llon);
 
         if (llat < this.minLat) { this.minLat = llat; }
 
@@ -723,7 +707,6 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
        const start: atlas.data.Position = decodedPath[0];
        const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
 
-       console.log("index: ", this.Routes.indexOf(route))
        if(this.Routes.indexOf(route) === this.Routes.length -1){
  
          this.startMarker = new atlas.data.Feature(new atlas.data.Point(start));
