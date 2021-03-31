@@ -1,4 +1,11 @@
-import { Component, OnInit, Injector, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Injector,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
@@ -6,9 +13,7 @@ import { NotificationService } from '../../services/notification.service';
 
 export class LcuFathymForecastFathymForecastElementState {}
 
-export class LcuFathymForecastFathymForecastContext extends LCUElementContext<
-  LcuFathymForecastFathymForecastElementState
-> {}
+export class LcuFathymForecastFathymForecastContext extends LCUElementContext<LcuFathymForecastFathymForecastElementState> {}
 
 export const SelectorLcuFathymForecastFathymForecastElement =
   'lcu-fathym-forecast-fathym-forecast-element';
@@ -16,11 +21,15 @@ export const SelectorLcuFathymForecastFathymForecastElement =
 @Component({
   selector: SelectorLcuFathymForecastFathymForecastElement,
   templateUrl: './fathym-forecast.component.html',
-  styleUrls: ['./fathym-forecast.component.scss']
+  styleUrls: ['./fathym-forecast.component.scss'],
 })
 export class LcuFathymForecastFathymForecastElementComponent
   extends LcuElementComponent<LcuFathymForecastFathymForecastContext>
   implements OnInit, OnDestroy {
+  //  Fields
+  protected forecastPlotDataSubscription: Subscription;
+
+  //  Properties
   /**
    * Title Icon
    */
@@ -47,8 +56,9 @@ export class LcuFathymForecastFathymForecastElementComponent
   public Title: string;
 
   @ViewChild('topOfSummarization', { static: false })
-  TopOfSummarization: ElementRef;
+  public TopOfSummarization: ElementRef;
 
+  //  Constructors
   constructor(
     protected injector: Injector,
     protected overlayContainer: OverlayContainer,
@@ -61,21 +71,28 @@ export class LcuFathymForecastFathymForecastElementComponent
     this.SubTitle = '';
     this.Icon = 'drive_eta';
   }
-  protected forecastPlotDataSubscription: Subscription;
+
+  //  Life Cycle
+  public ngOnDestroy() {
+    this.forecastPlotDataSubscription.unsubscribe();
+  }
 
   public ngOnInit(): void {
     this.resetTheme();
     this.forecastPlotDataSubscription = this.notificationService.ForecastPlotDataChanged.subscribe(
-      data => {
-        setTimeout(x => {
+      (data) => {
+        setTimeout((x) => {
           this.TopOfSummarization.nativeElement.scrollIntoView({
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         }, 0);
       }
     );
   }
 
+  //  API Methods
+
+  //  Helpers
   /**
    * Set default theme
    */
@@ -99,9 +116,5 @@ export class LcuFathymForecastFathymForecastElementComponent
 
     // update favicon when theme changes
     // this.changeFavicon(this.SelectedTheme);
-  }
-
-  ngOnDestroy() {
-    this.forecastPlotDataSubscription.unsubscribe();
   }
 }

@@ -1,48 +1,52 @@
-<div class="spread" *ngIf="!State.Loading">
-  <h2>Fathym Forecast API Keys</h2>
-
-  <ng-container *ngIf="!State.HasAccess">
-    <h3>
-      You do not currently have access to the Fathym Forecast, please visit:
-    </h3>
-
-    <a mat-raised-button color="primary" href="/billing/forecast">
-      Get your Fathym Forecast License Now
-    </a>
-  </ng-container>
-
-  <ng-container *ngIf="State.HasAccess">
-    <h3>Use the following keys to connect with the Fathym Forecast API:</h3>
-
-    <div class="spread" *ngFor="let apiKeyType of APIKeyTypes">
-      <mat-form-field class="mat-full-width">
-        <input
-          matInput
-          [placeholder]="apiKeyType"
-          [value]="State.APIKeys[apiKeyType]"
-          disabled
-        />
-      </mat-form-field>
-    </div>
-  </ng-container>
-
-  <div class="spread">
-    <h4>
-      Visit our developer portal for more information on the API, and to try it
-      out against your new keys.
-    </h4>
-
-    <a
-      mat-raised-button
-      color="accent"
-      [href]="State?.APISiteURL"
-      target="_blank"
+<div class="manage" *ngIf="Context?.State">
+  <ng-container *ngIf="!Context.State.Loading">
+    <!-- Storage Access -->
+    <app-host-dashboard-card-element
+      class="storage-access section"
+      [context]="{ Title: 'Forecast Access', Icon: 'storage' }"
     >
-      Developer Portal
-    </a>
+      <nav>
+        <a
+          href="https://www.habistack.com/docs/getting-started/ground-weather-forecast"
+          target="_blank"
+          lcuEvent="click"
+          label="Ground Weather Forecast"
+          category="help"
+        >
+          <mat-icon matTooltip="More info">help_outline</mat-icon>
+        </a>
+      </nav>
+
+      <div *ngIf="Context?.State?.APIKeys?.length > 0">
+        <div class="margin-left-5 margin-top-2">
+          Use the API keys to access point queries to augment your data with
+          ground weather forecasts.
+        </div>
+
+        <lcu-api-access
+          title="Try It"
+          description="Here we have embedded Swagger so that you can see the parameters available for the Forecast APIs, as well as test to see the responses."
+          [api-keys]="Context.State?.APIKeys"
+          [open-api-source]="Context.State?.OpenAPISource"
+          (regenerated)="RegenerateAPIKey($event)"
+        ></lcu-api-access>
+      </div>
+    </app-host-dashboard-card-element>
+    <!--^^^ Storage Access ^^^-->
+  </ng-container>
+
+  <!-- Loading -->
+  <div>
+    <lcu-loader [loading]="Context.State?.Loading"></lcu-loader>
+
+    <div *ngIf="Context.State?.Loading" class="margin-3 center">
+      <p *ngIf="!Context.State.UserEnterpriseLookup">
+        Setting up your Dashboard and preparing your APIs...
+      </p>
+
+      <p *ngIf="Context.State.UserEnterpriseLookup">
+        Loading your Dashboard...
+      </p>
+    </div>
   </div>
-</div>
-<!-- <app-css-theme></app-css-theme> -->
-<div class="spread" *ngIf="State.Loading">
-  <mat-spinner></mat-spinner>
 </div>

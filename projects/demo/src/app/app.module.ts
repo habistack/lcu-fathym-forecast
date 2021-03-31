@@ -31,7 +31,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     FlexLayoutModule,
     FathymSharedModule,
-    LcuFathymForecastModule,
+    LcuFathymForecastModule.forRoot(environment),
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
