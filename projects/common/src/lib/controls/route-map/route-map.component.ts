@@ -513,6 +513,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         this.getLayerFromAzure(layer);
       }
     }
+    this.displayRoute(this.Routes);
   }
 
   protected getLayerFromIowaAPI(layer: any) {
@@ -525,7 +526,8 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     // }
     const options = {
       tileUrl: url,
-      tileSize: 256
+      tileSize: 256,
+      opacity: 0.7
     }
     this.Maper.map.layers.add(new atlas.layer.TileLayer(options, 'maptiles'));
   }
@@ -627,15 +629,6 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     /**
-     * Colors for route lines
-     * TODO: make this dynamic for unknown number of routes
-     */
-    // const routeProps: Array<object> = [
-    //   { strokeColor: '#0000CD', strokeWidth: 5 },
-    //   { strokeColor: '#00FF00', strokeWidth: 5 },
-    //   { strokeColor: '#FF007F', strokeWidth: 5 }];
-
-    /**
      * Remove any routes on the map
      */
     this.clearRoutes();
@@ -645,22 +638,9 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
      */
     this.Maper.map.removeLayers(['currentMark']);
 
-    // if (this.routeNames && this.routeNames.length > 0) {
-    //   for (let i = 0; i < this.routeNames.length; i++) {
-    //     this.Maper.map.removeLayers([this.routeNames[i]]);
-    //     this.Maper.map.removeLayers(['routeStart', 'routeEnd']);
-    //   }
-    // }
-
-    // /**
-    //  * Clear routeNames array
-    //  */
-    // this.routeNames = [];
     routes.forEach(route => {
 
       // console.log('route name = ', route.displayName);
-      // for (let i = route.pointsArr.length-1; i >=0; i--) {
-      // for (let i = 0; i <route.pointsArr.length; i++) {
 
       /**
        * Set new data source to the map
@@ -677,26 +657,18 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       /**
        * Set colors for each route line
        */
-
-      // const routeColor: string = routeProps[i]['strokeColor'];
-      // const routeWidth: number = routeProps[i]['strokeWidth'];
-
       const routeColor: string = route.color;
-      // console.log('route color: ', route.color);
       const routeWidth: number = 5;
 
       /**
        * Points to plot
        */
       const points = route.pointsArr;
-      // console.log('points here: ', points)
       const decodedPath = points;
       for (let j = 0; j < decodedPath.length; j++) {
         const llat = decodedPath[j][1];
-        // console.log('llat: ', llat);
 
         const llon = decodedPath[j][0];
-        // console.log('llon: ', llon);
 
         if (llat < this.minLat) { this.minLat = llat; }
 
@@ -706,27 +678,7 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if (llon > this.maxLong) { this.maxLong = llon; }
       }
-
-
-      const start: atlas.data.Position = decodedPath[0];
-      const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
-
-
-      /**
-       * Set route start and end points
-       */
-      this.startMarker = new atlas.data.Feature(new atlas.data.Point(start));
-
-      this.Maper.map.addPins([this.startMarker], {
-        name: 'routeStart'
-      });
-
-      this.endMarker = new atlas.data.Feature(new atlas.data.Point(end));
-
-      this.Maper.map.addPins([this.endMarker], {
-        name: 'routeEnd'
-      });
-
+      
       /**
        * Build line(s) for route(s)
        */
@@ -739,14 +691,47 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
         color: routeColor
       });
 
-      /** */
-      // dataSource.add([new atlas.data.LineString(points)]);
+     
+      dataSource.add([new atlas.data.LineString(points)]);
 
-      // this.Maper.map.layers.add(line, 'labels');
-      // /** */
+      this.Maper.map.layers.add(new atlas.layer.LineLayer(dataSource, 'currentMark', {
+        name: routeName,
+        strokeColor: routeColor,
+        strokeWidth: routeWidth
+      }));
 
 
+      /**
+       * Set route start and end points
+       */
+       const start: atlas.data.Position = decodedPath[0];
+       const end: atlas.data.Position = decodedPath[decodedPath.length - 1];
 
+       if(this.Routes.indexOf(route) === this.Routes.length -1){
+ 
+         this.startMarker = new atlas.data.Feature(new atlas.data.Point(start));
+ 
+         this.Maper.map.addPins([this.startMarker], {
+           name: 'routeStart',
+           title: routeName,
+           fontSize: 25,
+           fontColor: '#006400',
+           textOffset: [0,-20]
+         });
+ 
+         this.endMarker = new atlas.data.Feature(new atlas.data.Point(end));
+        
+         this.Maper.map.addPins([this.endMarker], {
+          name: 'routeEnd',
+          title: "End",
+          fontSize: 25,
+          fontColor: '#962938',
+          textOffset: [0,-20]
+         });
+ 
+       }
+ 
+      
       const sw = new atlas.data.Position(this.minLong - 0.75, this.minLat - 0.75);
 
       const ne = new atlas.data.Position(this.maxLong + 0.75, this.maxLat + 0.75);
@@ -760,6 +745,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
       this.Route = points;
       // }
     })
+    // this.Maper.map.layers.add(new atlas.layer.LineLayer(dataSource, routeName, {
+    //   name: routeName,
+    //   strokeColor: routeColor,
+    //   strokeWidth: routeWidth
+    // }));
 
   }
 
