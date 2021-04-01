@@ -5,11 +5,13 @@ import {
   OnDestroy,
   ElementRef,
   ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
+import { TooltipService } from '@lowcodeunit/lcu-charts-common';
 
 export class LcuFathymForecastFathymForecastElementState {}
 
@@ -62,7 +64,9 @@ export class LcuFathymForecastFathymForecastElementComponent
   constructor(
     protected injector: Injector,
     protected overlayContainer: OverlayContainer,
-    protected notificationService: NotificationService
+    protected notificationService: NotificationService,
+    private chartToolTipService : TooltipService, 
+    private viewContainerRef: ViewContainerRef
   ) {
     super(injector);
 
@@ -78,6 +82,7 @@ export class LcuFathymForecastFathymForecastElementComponent
   }
 
   public ngOnInit(): void {
+    this.chartToolTipService.injectionService.setRootViewContainer(this.viewContainerRef);
     this.resetTheme();
     this.forecastPlotDataSubscription = this.notificationService.ForecastPlotDataChanged.subscribe(
       (data) => {
