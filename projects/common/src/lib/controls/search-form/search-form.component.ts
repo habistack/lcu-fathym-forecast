@@ -157,7 +157,7 @@ export class SearchFormComponent implements OnInit {
   /**
    * Search title value
    */
-  public SearchTitle: string = 'Search Type';
+  public SearchTitle: string = 'Route Search';
 
   public GeofenceChecked: boolean;
 
@@ -404,7 +404,7 @@ export class SearchFormComponent implements OnInit {
           this.SearchTitle = 'Search Route(s) and Depart Risk';
 
       } else if (!this.DepartureChecked && !this.RouteChecked && !this.GeofenceChecked) {
-          this.SearchTitle = 'Search Type';
+          this.SearchTitle = 'Route Search';
       }
     }
 

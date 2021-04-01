@@ -3,13 +3,18 @@
 h6 {
     margin-bottom: 5px;
     margin-left: 40px;
-  }
-  .legend {
-    color: black;
-    padding: 5px;
-    width: 300px;
-    margin-left: 80px;
-  }
+}
+
+::ng-deep .chart-legend .legend-labels{
+  width:130px !important;
+}
+
+.legend {
+  color: black;
+  padding: 5px;
+  width: 300px;
+  margin-left: 80px;
+}
 .legend-label{
   font-size: 8px;
   font-style: italic;
