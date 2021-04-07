@@ -410,13 +410,23 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   protected setUpLayers() {
     this.getManifestJson().subscribe(res => {
       this.manifestJson = res;
+      this.pushDefaultLayer();
       // console.log(res)
       this.pushRadarOptions();
       this.pushFathymAPIOptions();
       // this.pushTerrainOptions();
     });
   }
+protected pushDefaultLayer(){
 
+  this.layerOptions.push(
+    {
+      displayName: 'None',
+      value: 'None',
+      optionType: 'default'
+    })
+
+}
   protected pushFathymAPIOptions() {
     if (this.manifestJson !== {}) {
       Object.keys(this.manifestJson).forEach(key => {
@@ -499,7 +509,11 @@ export class RouteMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public LayerChosen(layer: any) {
+    // console.log("Layer: ", layer);
     if (layer) {
+      if(layer.optionType === 'default'){
+        this.Maper.map.layers.remove('maptiles');
+      }
       if (layer.optionType === 'ff-api') {
         this.currentForecastLayer = layer;
       } else {

@@ -9,6 +9,10 @@ h6 {
   width:130px !important;
 }
 
+::ng-deep .chart-container text{
+  fill: $secondary-text;
+}
+
 .legend {
   color: black;
   padding: 5px;
