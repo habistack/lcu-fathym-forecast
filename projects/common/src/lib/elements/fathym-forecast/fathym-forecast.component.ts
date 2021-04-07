@@ -52,6 +52,8 @@ export class LcuFathymForecastFathymForecastElementComponent
    */
   public SubTitle: string;
 
+  public WindowHeight: any;
+
   /**
    * Title
    */
@@ -82,6 +84,8 @@ export class LcuFathymForecastFathymForecastElementComponent
   }
 
   public ngOnInit(): void {
+    this.WindowHeight = window.screen.height - 20 +'px';
+    console.log("height", this.WindowHeight)
     this.chartToolTipService.injectionService.setRootViewContainer(this.viewContainerRef);
     this.resetTheme();
     this.forecastPlotDataSubscription = this.notificationService.ForecastPlotDataChanged.subscribe(
