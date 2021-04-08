@@ -3,10 +3,7 @@ import { ForecastDataModel } from '../../models/forecast-data.model';
 import { NotificationService } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
 import { DateFormatModel, colorSets, ViewDimensions } from '@lowcodeunit/lcu-charts-common';
-import * as shape from 'd3-shape';
-import { TemperatureConversion } from '@lcu/common';
 import { ForecastPlotsService } from '../../services/forecast-plots.service';
-import { ChartMouseMoveModel } from '../../models/chart-mouse-move.model';
 
 
 @Component({
