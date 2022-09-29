@@ -2,13 +2,13 @@ name: NPM - Release
 
 on:
   push:
-    branches: [main,integration,feature/**,bug/**,hotfix/**]
+    branches: [master,integration,feature/**,bug/**,hotfix/**]
   pull_request:
-    branches: [main,integration,feature/**,bug/**,hotfix/**]
+    branches: [master,integration,feature/**,bug/**,hotfix/**]
 
 env:
-  Branches: main,integration,feature/**,bug/**,hotfix/**
-  MainBranch: main
+  Branches: master,integration,feature/**,bug/**,hotfix/**
+  MainBranch: master
   NPMRegistry: https://registry.npmjs.org/
   InstallCommand: npm ci
   DeployCommand: npm run deploy
